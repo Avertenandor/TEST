@@ -1,0 +1,269 @@
+/**
+ * GENESIS 1.1 - PWA Visibility Fix
+ * Исправление проблем видимости для PWA режима
+ */
+
+/* Фиксы для PWA режима */
+@media all and (display-mode: standalone) {
+    /* Убираем лишние отступы в PWA */
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    
+    /* Фикс для элементов с фиксированным позиционированием */
+    .genesis-header {
+        top: env(safe-area-inset-top);
+    }
+    
+    .genesis-cache-controls {
+        bottom: calc(1rem + env(safe-area-inset-bottom));
+    }
+    
+    /* Notifications в PWA */
+    .genesis-notifications-container {
+        top: calc(1rem + env(safe-area-inset-top));
+    }
+}
+
+/* Фиксы для полноэкранного режима */
+@media all and (display-mode: fullscreen) {
+    /* Скрываем элементы управления браузера */
+    .genesis-cache-controls {
+        display: none;
+    }
+    
+    /* Адаптация header */
+    .genesis-header {
+        background: rgba(22, 27, 34, 0.95);
+        backdrop-filter: blur(10px);
+    }
+}
+
+/* iOS PWA специфичные фиксы */
+@supports (-webkit-touch-callout: none) {
+    @media all and (display-mode: standalone) {
+        /* Status bar для iOS PWA */
+        .genesis-app::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: env(safe-area-inset-top);
+            background: var(--bg-primary);
+            z-index: 1000;
+        }
+        
+        /* Корректировка скролла */
+        .genesis-terminal-body,
+        .cabinet-main {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        
+        /* Фикс для клавиатуры */
+        .genesis-form-input:focus {
+            position: relative;
+            z-index: 1;
+        }
+    }
+}
+
+/* Android PWA специфичные фиксы */
+@media all and (display-mode: standalone) and (min-width: 0) {
+    /* Фикс для Android навигационной панели */
+    .genesis-app {
+        padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    
+    /* Улучшение touch targets */
+    .btn, .genesis-btn {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Фиксы видимости элементов */
+.genesis-app {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+/* Предотвращение скрытия элементов при изменении размера viewport */
+@media screen and (max-height: 500px) {
+    .genesis-terminal {
+        max-height: 200px;
+    }
+    
+    .genesis-brand-title {
+        font-size: 1.5rem;
+    }
+    
+    .genesis-auth-instruction {
+        display: none;
+    }
+}
+
+/* Фикс для избежания перекрытия элементов */
+.genesis-section {
+    position: relative;
+    z-index: 1;
+}
+
+.genesis-terminal {
+    position: relative;
+    z-index: 10;
+}
+
+.genesis-notifications-container {
+    z-index: 1000;
+}
+
+/* Улучшение видимости при малой высоте экрана */
+@media (max-height: 600px) {
+    .genesis-section {
+        padding: 2rem 0;
+    }
+    
+    .stats-grid {
+        gap: 0.75rem;
+    }
+    
+    .stats-card {
+        padding: 1rem;
+    }
+}
+
+/* Фикс для landscape ориентации на мобильных */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+    .genesis-header {
+        position: relative;
+        top: 0;
+    }
+    
+    .genesis-brand-header {
+        display: none;
+    }
+    
+    .genesis-auth-instruction {
+        margin: 1rem 0;
+        padding: 1rem;
+    }
+}
+
+/* Обеспечение видимости критических элементов */
+.genesis-form-input,
+.genesis-btn,
+.btn {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Фикс для модальных окон в PWA */
+.modal, .dialog {
+    position: fixed;
+    top: env(safe-area-inset-top, 0);
+    bottom: env(safe-area-inset-bottom, 0);
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+/* Улучшение контрастности в PWA */
+@media all and (display-mode: standalone) {
+    :root {
+        --text-primary: #ffffff;
+        --text-secondary: #a8b2c1;
+        --border-color: #3a3f4b;
+    }
+}
+
+/* Фикс для проблем с прокруткой в PWA */
+html, body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.genesis-terminal-body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+}
+
+/* Предотвращение bounce эффекта на iOS */
+@supports (-webkit-touch-callout: none) {
+    .genesis-app {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Обеспечение видимости при виртуальной клавиатуре */
+@media (max-height: 500px) {
+    .genesis-form-input:focus {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        z-index: 9999;
+    }
+}
+
+/* Dark mode adjustments для PWA */
+@media (prefers-color-scheme: dark) and (display-mode: standalone) {
+    :root {
+        --bg-primary: #000000;
+        --bg-secondary: #0d1117;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: #ffffff;
+        --text-secondary: #e0e0e0;
+        --border-color: #ffffff;
+        --bg-primary: #000000;
+        --bg-secondary: #1a1a1a;
+    }
+    
+    .btn, .genesis-btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Фикс для notch на iPhone */
+@supports (padding: max(0px)) {
+    .genesis-header {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+    
+    .genesis-container {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+}
+
+/* Улучшение производительности анимаций в PWA */
+@media all and (display-mode: standalone) {
+    * {
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000;
+    }
+    
+    .genesis-brand-title,
+    .stats-card,
+    .genesis-info-card {
+        will-change: transform;
+    }
+}

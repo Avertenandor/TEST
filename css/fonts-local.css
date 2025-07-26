@@ -1,0 +1,112 @@
+/**
+ * GENESIS 1.1 - Локальные шрифты (fallback)
+ * Используется когда Google Fonts недоступны
+ */
+
+/* Orbitron fallback */
+@font-face {
+    font-family: 'Orbitron';
+    src: local('Orbitron'),
+         local('Arial Black'),
+         local('Impact');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Orbitron';
+    src: local('Orbitron-Bold'),
+         local('Arial Black'),
+         local('Impact');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Orbitron';
+    src: local('Orbitron-Black'),
+         local('Arial Black'),
+         local('Impact');
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* Rajdhani fallback */
+@font-face {
+    font-family: 'Rajdhani';
+    src: local('Rajdhani-Light'),
+         local('Arial'),
+         local('Helvetica');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rajdhani';
+    src: local('Rajdhani'),
+         local('Arial'),
+         local('Helvetica');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rajdhani';
+    src: local('Rajdhani-Medium'),
+         local('Arial'),
+         local('Helvetica');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rajdhani';
+    src: local('Rajdhani-SemiBold'),
+         local('Arial Bold'),
+         local('Helvetica Bold');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rajdhani';
+    src: local('Rajdhani-Bold'),
+         local('Arial Bold'),
+         local('Helvetica Bold');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* JetBrains Mono fallback */
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: local('JetBrains Mono'),
+         local('Consolas'),
+         local('Monaco'),
+         local('Courier New');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: local('JetBrains Mono-Medium'),
+         local('Consolas'),
+         local('Monaco'),
+         local('Courier New');
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Fallback для случаев полной недоступности Google Fonts */
+.fonts-fallback {
+    font-family: 'Orbitron', 'Arial Black', 'Impact', sans-serif;
+}
+
+.fonts-fallback-body {
+    font-family: 'Rajdhani', 'Arial', 'Helvetica', sans-serif;
+}
+
+.fonts-fallback-mono {
+    font-family: 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+} 

@@ -1,0 +1,144 @@
+/* Принудительные исправления для QR-секции */
+.genesis-qr-section {
+    max-width: 600px !important;
+    margin: 2rem auto !important;
+    padding: 2rem !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1.5rem !important;
+    box-sizing: border-box !important;
+    width: auto !important;
+    position: relative !important;
+    z-index: 1 !important;
+    overflow: visible !important;
+}
+
+.genesis-qr-section h3 {
+    font-size: 1.5rem !important;
+    color: var(--primary-color) !important;
+    margin: 0 !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+    width: 100% !important;
+}
+
+.genesis-qr-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 1.5rem !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+    border: 1px solid rgba(255,107,53,0.2) !important;
+    margin: 1rem 0 !important;
+    width: fit-content !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+#genesis-qr-code {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-width: 200px !important;
+    min-height: 200px !important;
+    max-width: 200px !important;
+    max-height: 200px !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+#genesis-qr-code canvas,
+#genesis-qr-code img {
+    border-radius: 10px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    max-width: 200px !important;
+    max-height: 200px !important;
+    width: auto !important;
+    height: auto !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.genesis-qr-hint {
+    font-size: 1rem !important;
+    color: var(--text-secondary) !important;
+    margin: 0 !important;
+    text-align: center !important;
+    max-width: 400px !important;
+    line-height: 1.5 !important;
+    opacity: 0.9 !important;
+}
+
+/* Возвращаем нормальные отступы между секциями */
+.genesis-section {
+    margin-bottom: 3rem !important;
+}
+
+.genesis-container {
+    margin-bottom: 2rem !important;
+}
+
+/* Мобильные исправления */
+@media (max-width: 768px) {
+    .genesis-qr-section {
+        max-width: 100% !important;
+        padding: 1.5rem 1rem !important;
+        margin: 1.5rem auto !important;
+    }
+    
+    .genesis-qr-section h3 {
+        font-size: 1.3rem !important;
+    }
+    
+    .genesis-qr-container {
+        padding: 0.75rem !important;
+        margin: 0.5rem 0 !important;
+    }
+    
+    #genesis-qr-code {
+        min-width: 180px !important;
+        min-height: 180px !important;
+        max-width: 180px !important;
+        max-height: 180px !important;
+    }
+    
+    #genesis-qr-code canvas,
+    #genesis-qr-code img {
+        max-width: 180px !important;
+        max-height: 180px !important;
+    }
+    
+    .genesis-qr-hint {
+        font-size: 0.9rem !important;
+        max-width: 300px !important;
+    }
+}
+
+/* Принудительное исправление для всех браузеров */
+.genesis-qr-section.force-visible {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Исправление для WebKit браузеров */
+@supports (-webkit-appearance: none) {
+    .genesis-qr-section {
+        -webkit-transform: none !important;
+        transform: none !important;
+    }
+}
+
+/* Исправление для Firefox */
+@supports (-moz-appearance: none) {
+    .genesis-qr-section {
+        -moz-transform: none !important;
+        transform: none !important;
+    }
+} 

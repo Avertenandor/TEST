@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0099cc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#006699;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Main content area -->
+  <g transform="translate(600,315)">
+    <!-- Logo -->
+    <g transform="scale(2)" filter="url(#glow)">
+      <path d="M-40,-60 C-40,-80 -20,-100 0,-100 C20,-100 40,-80 40,-60 L40,-40 L20,-40 L20,-20 L40,-20 L40,0 C40,20 20,40 0,40 C-20,40 -40,20 -40,0 Z" 
+            fill="url(#logoGradient)" 
+            stroke="url(#logoGradient)" 
+            stroke-width="2"/>
+      <path d="M10,-30 L30,-30 L30,30 L50,30 L50,50 L-10,50 L-10,30 L10,30 Z" 
+            fill="url(#logoGradient)" 
+            opacity="0.8"/>
+    </g>
+    
+    <!-- Title -->
+    <text x="0" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="url(#logoGradient)">
+      GENESIS 1
+    </text>
+    
+    <!-- Subtitle -->
+    <text x="0" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" fill="#ffffff" opacity="0.8">
+      Future Trading Platform
+    </text>
+    
+    <!-- Description -->
+    <text x="0" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#ffffff" opacity="0.6">
+      Передовая торговая платформа для работы с криптовалютами
+    </text>
+  </g>
+  
+  <!-- Decorative elements -->
+  <circle cx="150" cy="100" r="5" fill="#00d4ff" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1050" cy="100" r="5" fill="#00d4ff" opacity="0.6">
+    <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="150" cy="530" r="5" fill="#00d4ff" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1050" cy="530" r="5" fill="#00d4ff" opacity="0.6">
+    <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

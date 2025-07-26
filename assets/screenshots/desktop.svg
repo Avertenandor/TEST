@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(18, 24, 38, 0.8);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(25, 25, 50, 0.8);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bgGradient)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1280" height="80" fill="rgba(13, 17, 23, 0.95)"/>
+  <text x="40" y="50" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#00d4ff">GENESIS 1.1</text>
+  <text x="1100" y="50" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Доступ активен: 15 дней</text>
+  
+  <!-- Main content area -->
+  <g transform="translate(40, 120)">
+    <!-- Balance cards -->
+    <rect x="0" y="0" width="300" height="150" rx="15" fill="url(#cardGradient)" stroke="#00d4ff" stroke-width="1"/>
+    <text x="20" y="35" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Общий баланс</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#00d4ff">$4,285.75</text>
+    <text x="20" y="105" font-family="Arial, sans-serif" font-size="14" fill="#888">↗ +12.5% за месяц</text>
+    
+    <rect x="320" y="0" width="300" height="150" rx="15" fill="url(#cardGradient)" stroke="#00d4ff" stroke-width="1"/>
+    <text x="340" y="35" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Активные депозиты</text>
+    <text x="340" y="75" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#00d4ff">3</text>
+    <text x="340" y="105" font-family="Arial, sans-serif" font-size="14" fill="#888">Доходность: 12.5%</text>
+    
+    <rect x="640" y="0" width="300" height="150" rx="15" fill="url(#cardGradient)" stroke="#00d4ff" stroke-width="1"/>
+    <text x="660" y="35" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">PLEX баланс</text>
+    <text x="660" y="75" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#00d4ff">3,125.50</text>
+    <text x="660" y="105" font-family="Arial, sans-serif" font-size="14" fill="#888">≈ $3,125.50</text>
+    
+    <!-- Chart area -->
+    <rect x="0" y="180" width="600" height="300" rx="15" fill="url(#cardGradient)" stroke="#00d4ff" stroke-width="1"/>
+    <text x="20" y="210" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">Динамика доходности</text>
+    <polyline points="50,400 150,350 250,320 350,340 450,300 550,280" stroke="#00d4ff" stroke-width="3" fill="none"/>
+    
+    <!-- Deposits list -->
+    <rect x="640" y="180" width="560" height="300" rx="15" fill="url(#cardGradient)" stroke="#00d4ff" stroke-width="1"/>
+    <text x="660" y="210" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">Активные депозиты</text>
+    
+    <!-- Deposit items -->
+    <rect x="660" y="230" width="520" height="60" rx="8" fill="rgba(255, 255, 255, 0.05)"/>
+    <text x="680" y="255" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Стартовый депозит</text>
+    <text x="680" y="275" font-family="Arial, sans-serif" font-size="14" fill="#888">100 USDT → 125.50 PLEX</text>
+    <text x="1080" y="265" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#00ff88">+25.5%</text>
+    
+    <rect x="660" y="300" width="520" height="60" rx="8" fill="rgba(255, 255, 255, 0.05)"/>
+    <text x="680" y="325" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Профессиональный</text>
+    <text x="680" y="345" font-family="Arial, sans-serif" font-size="14" fill="#888">500 USDT → 575.25 PLEX</text>
+    <text x="1080" y="335" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#00ff88">+15.05%</text>
+    
+    <rect x="660" y="370" width="520" height="60" rx="8" fill="rgba(255, 255, 255, 0.05)"/>
+    <text x="680" y="395" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">VIP депозит</text>
+    <text x="680" y="415" font-family="Arial, sans-serif" font-size="14" fill="#888">1000 USDT → 1200.75 PLEX</text>
+    <text x="1080" y="405" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#00ff88">+20.08%</text>
+  </g>
+  
+  <!-- Navigation tabs -->
+  <rect x="40" y="520" width="1200" height="50" fill="rgba(0, 0, 0, 0.3)"/>
+  <rect x="40" y="520" width="150" height="50" fill="#00d4ff"/>
+  <text x="115" y="550" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">Депозиты</text>
+  <text x="265" y="550" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle">Награды</text>
+  <text x="415" y="550" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle">История</text>
+  <text x="565" y="550" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle">Аналитика</text>
+  <text x="715" y="550" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle">Рефералы</text>
+  
+  <!-- Footer with additional info -->
+  <text x="40" y="650" font-family="Arial, sans-serif" font-size="14" fill="#888">Последнее обновление: 25 июня 2025, 14:30</text>
+  <text x="40" y="680" font-family="Arial, sans-serif" font-size="14" fill="#888">Статус сети: Подключено • Версия: 2.1.0</text>
+  
+</svg>

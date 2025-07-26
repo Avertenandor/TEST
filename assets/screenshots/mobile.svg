@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 375 812" width="375" height="812">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(18, 24, 38, 0.8);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(25, 25, 50, 0.8);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="375" height="812" fill="url(#bgGradient)"/>
+  
+  <!-- Status bar -->
+  <rect x="0" y="0" width="375" height="44" fill="rgba(0, 0, 0, 0.9)"/>
+  <text x="20" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">9:41</text>
+  <text x="320" y="30" font-family="Arial, sans-serif" font-size="14" fill="#ffffff">100%</text>
+  
+  <!-- Header -->
+  <rect x="0" y="44" width="375" height="70" fill="rgba(13, 17, 23, 0.95)"/>
+  <text x="20" y="85" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#00d4ff">GENESIS 1.1</text>
+  <text x="20" y="105" font-family="Arial, sans-serif" font-size="12" fill="#888">Личный кабинет</text>
+  
+  <!-- Balance card -->
+  <rect x="20" y="130" width="335" height="120" rx="12" fill="url(#cardGradient)" stroke="#00d4ff" stroke-width="1"/>
+  <text x="35" y="155" font-family="Arial, sans-serif" font-size="14" fill="#ffffff">Общий баланс</text>
+  <text x="35" y="185" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#00d4ff">$4,285.75</text>
+  <text x="35" y="210" font-family="Arial, sans-serif" font-size="12" fill="#888">↗ +12.5% за месяц</text>
+  <text x="35" y="235" font-family="Arial, sans-serif" font-size="12" fill="#888">PLEX: 3,125.50 • USDT: 285.75</text>
+  
+  <!-- Quick actions -->
+  <text x="20" y="285" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff">Быстрые действия</text>
+  
+  <rect x="20" y="300" width="160" height="80" rx="8" fill="url(#cardGradient)" stroke="#00d4ff" stroke-width="1"/>
+  <text x="100" y="325" font-family="Arial, sans-serif" font-size="24" fill="#00d4ff" text-anchor="middle">💎</text>
+  <text x="100" y="350" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">Новый</text>
+  <text x="100" y="365" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">депозит</text>
+  
+  <rect x="195" y="300" width="160" height="80" rx="8" fill="url(#cardGradient)" stroke="#00d4ff" stroke-width="1"/>
+  <text x="275" y="325" font-family="Arial, sans-serif" font-size="24" fill="#00d4ff" text-anchor="middle">💸</text>
+  <text x="275" y="350" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">Вывод</text>
+  <text x="275" y="365" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">средств</text>
+  
+  <!-- Deposits list -->
+  <text x="20" y="415" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff">Активные депозиты</text>
+  
+  <rect x="20" y="430" width="335" height="70" rx="8" fill="rgba(255, 255, 255, 0.05)"/>
+  <text x="35" y="450" font-family="Arial, sans-serif" font-size="14" fill="#ffffff">Стартовый депозит</text>
+  <text x="35" y="470" font-family="Arial, sans-serif" font-size="12" fill="#888">100 USDT → 125.50 PLEX</text>
+  <text x="35" y="485" font-family="Arial, sans-serif" font-size="11" fill="#888">Срок: 30 дней • Осталось: 15 дней</text>
+  <text x="320" y="465" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#00ff88">+25.5%</text>
+  
+  <rect x="20" y="510" width="335" height="70" rx="8" fill="rgba(255, 255, 255, 0.05)"/>
+  <text x="35" y="530" font-family="Arial, sans-serif" font-size="14" fill="#ffffff">Профессиональный</text>
+  <text x="35" y="550" font-family="Arial, sans-serif" font-size="12" fill="#888">500 USDT → 575.25 PLEX</text>
+  <text x="35" y="565" font-family="Arial, sans-serif" font-size="11" fill="#888">Срок: 60 дней • Осталось: 42 дня</text>
+  <text x="320" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#00ff88">+15.05%</text>
+  
+  <rect x="20" y="590" width="335" height="70" rx="8" fill="rgba(255, 255, 255, 0.05)"/>
+  <text x="35" y="610" font-family="Arial, sans-serif" font-size="14" fill="#ffffff">VIP депозит</text>
+  <text x="35" y="630" font-family="Arial, sans-serif" font-size="12" fill="#888">1000 USDT → 1200.75 PLEX</text>
+  <text x="35" y="645" font-family="Arial, sans-serif" font-size="11" fill="#888">Срок: 90 дней • Осталось: 67 дней</text>
+  <text x="320" y="625" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#00ff88">+20.08%</text>
+  
+  <!-- Navigation tabs -->
+  <rect x="0" y="720" width="375" height="60" fill="rgba(0, 0, 0, 0.8)"/>
+  <text x="37.5" y="745" font-family="Arial, sans-serif" font-size="10" fill="#00d4ff" text-anchor="middle">💎</text>
+  <text x="37.5" y="760" font-family="Arial, sans-serif" font-size="10" fill="#00d4ff" text-anchor="middle">Депозиты</text>
+  
+  <text x="112.5" y="745" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">🎁</text>
+  <text x="112.5" y="760" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">Награды</text>
+  
+  <text x="187.5" y="745" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">📊</text>
+  <text x="187.5" y="760" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">История</text>
+  
+  <text x="262.5" y="745" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">📈</text>
+  <text x="262.5" y="760" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">Аналитика</text>
+  
+  <text x="337.5" y="745" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">👥</text>
+  <text x="337.5" y="760" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">Рефералы</text>
+  
+  <!-- Home indicator -->
+  <rect x="137.5" y="795" width="100" height="4" rx="2" fill="rgba(255, 255, 255, 0.3)"/>
+  
+</svg>
