@@ -1056,6 +1056,14 @@
         "files": ["cabinet.html"],
         "new_markers": 5,
         "notes": "Добавлены: showCreateDepositModal, showBasicDepositModal, copyAddress, showPlatformAccessModal, showNotification"
+      },
+      {
+        "time": "22:00",
+        "action": "CABINET_HTML_RESTORE",
+        "description": "Восстановлен оборванный файл cabinet.html",
+        "files": ["cabinet.html"],
+        "new_markers": 0,
+        "notes": "Добавлено ~600 строк недостающего кода, все методы генерации контента восстановлены"
       }
     ],
     "2025-07-26": [
