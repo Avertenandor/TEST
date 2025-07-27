@@ -57,6 +57,7 @@
             --primary-color: #ff6b35;
             --secondary-color: #00d4ff;
             --secondary-hover: #00b8e6;
+            --secondary-hover: #00b8e6;
             --success-color: #00ff41;
             --warning-color: #ffa726;
             --error-color: #ff4757;
@@ -2754,6 +2755,16 @@
                             window.GENESIS_TECH_INFO.init();
                         }
                         break;
+                    case 'portfolio':
+                        // Обновляем прогресс-бары после рендеринга
+                        setTimeout(() => {
+                            const progressBars = document.querySelectorAll('.progress-bar[data-progress]');
+                            progressBars.forEach(bar => {
+                                const progress = parseFloat(bar.getAttribute('data-progress')) || 0;
+                                bar.style.width = progress + '%';
+                            });
+                        }, 100);
+                        break;
                 }
             },
             
@@ -3573,15 +3584,15 @@
                                                     <span style="color: var(--text-primary); font-size: 0.9rem;">${daysPassed}/${plan.days} дней</span>
                                                 </div>
                                                 <div style="background: var(--bg-primary); border-radius: 8px; overflow: hidden;">
-                                                    <div class="progress-bar" style="width: ${Math.min(progress, 100)}%;"></div>
+                                                    <div class="progress-bar" data-progress="${Math.min(progress, 100)}" style="width: 0%;"></div>
                                                 </div>
                                             </div>
                                             
                                             <div style="display: flex; gap: 0.5rem;">
-                                                <button class="btn-secondary" style="flex: 1; font-size: 0.9rem; padding: 0.5rem;" onclick="window.CabinetApp.showDepositDetails(${deposit.id})">
+                                                <button class="btn-secondary" style="flex: 1; font-size: 0.9rem; padding: 0.5rem;" onclick="window.CabinetApp.showDepositDetails('${deposit.id}')">
                                                     📊 Детали
                                                 </button>
-                                                <button class="btn-outline" style="flex: 1; font-size: 0.9rem; padding: 0.5rem;" onclick="window.CabinetApp.reinvestDeposit(${deposit.id})">
+                                                <button class="btn-outline" style="flex: 1; font-size: 0.9rem; padding: 0.5rem;" onclick="window.CabinetApp.reinvestDeposit('${deposit.id}')">
                                                     🔄 Реинвестировать
                                                 </button>
                                             </div>
@@ -3619,11 +3630,11 @@
                                         background: var(--bg-secondary);
                                         padding: 1.5rem;
                                         border-radius: 12px;
-                                        border: 2px solid ${isPurchased ? 'var(--success-color)' : isAvailable ? 'var(--primary-color)' : 'var(--border-color)'}; ${isPurchased ? 'var(--success-color)' : isAvailable ? 'var(--primary-color)' : 'var(--border-color)'};
+                                        border: 2px solid ${isPurchased ? 'var(--success-color)' : isAvailable ? 'var(--primary-color)' : 'var(--border-color)'};
                                         opacity: ${isLocked ? '0.6' : '1'};
                                         position: relative;
                                         transition: all 0.3s ease;
-                                        ${!isLocked ? 'cursor: pointer;' : ''}
+                                        ${!isLocked ? 'cursor: pointer;' : ''};
                                     " ${!isLocked ? `onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''"` : ''}>
                                         ${isLocked ? `
                                             <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
