@@ -57,7 +57,6 @@
             --primary-color: #ff6b35;
             --secondary-color: #00d4ff;
             --secondary-hover: #00b8e6;
-            --secondary-hover: #00b8e6;
             --success-color: #00ff41;
             --warning-color: #ffa726;
             --error-color: #ff4757;
@@ -298,7 +297,7 @@
         }
         
         .btn-secondary:hover {
-            background: #00b8e6;
+            background: var(--secondary-hover);
             transform: translateY(-1px);
         }
         
@@ -511,16 +510,7 @@
             }
         }
         
-        @keyframes notificationSlideIn {
-            from {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+        /* @keyframes notificationSlideIn удален - дубликат (определен выше) */
         
         @keyframes notificationSlideOut {
             from {
@@ -1173,19 +1163,117 @@
         }
         
         /* Утилитарные классы для замены inline стилей */
-        .text-center { text-align: center; }
-        .auth-test-info { margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary); }
-        .auth-test-code { background: var(--bg-tertiary); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; }
-        .access-status-hidden { display: none; }
-        .color-warning { color: var(--warning-color); }
-        .flex-gap { display: flex; gap: 1rem; }
-        .padding-medium { padding: 1rem; }
-        .margin-bottom-large { margin-bottom: 2rem; }
-        .modal-medium { max-width: 500px; }
-        .btn-secondary { background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
-        .btn-secondary:hover { background: var(--secondary-hover); transform: translateY(-2px); }
-        .btn-outline { background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
-        .btn-outline:hover { background: var(--primary-color); color: white; transform: translateY(-2px); }
+        .opacity-50 {
+            opacity: 0.5;
+        }
+        
+        .position-absolute {
+            position: absolute;
+        }
+        
+        .top-1 {
+            top: 1rem;
+        }
+        
+        .right-1 {
+            right: 1rem;
+        }
+        
+        .font-weight-bold {
+            font-weight: bold;
+        }
+        
+        .font-weight-600 {
+            font-weight: 600;
+        }
+        
+        .max-width-60 {
+            max-width: 60%;
+        }
+        
+        .align-items-flex-start {
+            align-items: flex-start;
+        }
+        
+        .flex-shrink-0 {
+            flex-shrink: 0;
+        }
+        
+        .gap-1-5 {
+            gap: 1.5rem;
+        }
+        
+        .gap-0-7 {
+            gap: 0.7rem;
+        }
+        
+        .min-width-220 {
+            min-width: 220px;
+        }
+        
+        .max-width-320 {
+            max-width: 320px;
+        }
+        
+        .border-2 {
+            border-width: 2px;
+        }
+        
+        .box-shadow-none {
+            box-shadow: none;
+        }
+        
+        .scale-103 {
+            transform: scale(1.03);
+        }
+        
+        .text-decoration-none {
+            text-decoration: none;
+        }
+        
+        .text-decoration-underline {
+            text-decoration: underline;
+        }
+        
+        .transition-color-02s {
+            transition: color 0.2s;
+        }
+        
+        .transition-background-03s {
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .transition-all-03s {
+            transition: all 0.3s ease;
+        }
+        
+        .outline-none {
+            outline: none;
+        }
+        
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        
+        .align-self-center {
+            align-self: center;
+        }
+        
+        .grid-template-columns-1fr {
+            grid-template-columns: 1fr;
+        }
+        
+        .flex-direction-column {
+            flex-direction: column;
+        }
+        
+        .align-items-flex-start {
+            align-items: flex-start;
+        }
+        
+        .gap-025rem {
+            gap: 0.25rem;
+        }
         
         /* Стили для информационной сетки устройства */
         .genesis-info-grid {
@@ -1573,10 +1661,259 @@
 
         /* Стиль для прогресс-бара */
         .progress-bar {
+            width: 0;
             height: 6px;
             background: linear-gradient(90deg, var(--success-color), var(--primary-color));
             transition: width 0.5s ease;
             border-radius: 3px;
+        }
+
+        /* Утилитарные CSS классы для замены inline стилей */
+        /* Отступы */
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-0-5 { margin-bottom: 0.5rem; }
+        .mt-2 { margin-top: 2rem; }
+        .p-1-5 { padding: 1.5rem; }
+        .p-2 { padding: 2rem; }
+        .p-0-5 { padding: 0.5rem; }
+
+        /* Flex утилиты */
+        .flex { display: flex; }
+        .flex-space-between { justify-content: space-between; }
+        .flex-center { align-items: center; }
+        .flex-gap { gap: 1rem; }
+        .flex-gap-0-5 { gap: 0.5rem; }
+        .flex-1 { flex: 1; }
+        .flex-wrap { flex-wrap: wrap; }
+
+        /* Грид утилиты */
+        .grid { display: grid; }
+        .grid-auto-fit { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-auto-fit-280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-1fr-1fr { grid-template-columns: 1fr 1fr; }
+
+        /* Текстовые утилиты */
+        .text-center { text-align: center; }
+        .text-primary { color: var(--text-primary); }
+        .text-secondary { color: var(--text-secondary); }
+        .text-success { color: var(--success-color); }
+        .font-weight-600 { font-weight: 600; }
+        .font-size-1-2 { font-size: 1.2rem; }
+        .font-size-0-9 { font-size: 0.9rem; }
+        .font-size-1-5 { font-size: 1.5rem; }
+        .font-size-2 { font-size: 2rem; }
+
+        /* Фон и границы */
+        .bg-secondary { background: var(--bg-secondary); }
+        .bg-primary { background: var(--bg-primary); }
+        .border-radius-12 { border-radius: 12px; }
+        .border-radius-8 { border-radius: 8px; }
+        .border-radius-6 { border-radius: 6px; }
+        .border-radius-4 { border-radius: 4px; }
+        .border-success { border: 1px solid var(--success-color); }
+
+        /* Позиционирование */
+        .position-relative { position: relative; }
+        .position-absolute { position: absolute; }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Размеры */
+        .w-0 { width: 0%; }
+        .overflow-hidden { overflow: hidden; }
+
+        /* Статус карточки депозита */
+        .deposit-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--success-color);
+        }
+
+        .deposit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .deposit-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .deposit-status-active {
+            background: var(--success-color);
+            color: var(--bg-primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .deposit-status-purchased {
+            background: var(--success-color);
+            color: var(--bg-primary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .deposit-status-available {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .deposit-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .deposit-progress {
+            margin-bottom: 1rem;
+        }
+
+        .deposit-progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .deposit-progress-bar {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .deposit-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .plan-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .plan-card-locked {
+            opacity: 0.6;
+        }
+
+        .plan-card-available {
+            cursor: pointer;
+        }
+
+        .plan-details {
+            margin-bottom: 1rem;
+        }
+
+        .plan-detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-total-profit {
+            background: var(--bg-primary);
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .plan-total-profit-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Информационные блоки */
+        .info-block {
+            margin-top: 2rem;
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .notification-warning-static {
+            position: static !important;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Последняя активность */
+        .last-activity {
+            margin-top: 2rem;
+        }
+
+        .last-activity-title {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .last-activity-content {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        /* Быстрые действия */
+        .quick-actions {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Статистика */
+        .stats-mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        /* Активные депозиты */
+        .active-deposits {
+            margin-bottom: 2rem;
+        }
+
+        .active-deposits-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .active-deposits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Планы депозитов */
+        .plans-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
         }
     </style>
 </head>
@@ -3402,9 +3739,9 @@
                     </div>
                     
                     <!-- Recent Activity -->
-                    <div style="margin-top: 2rem;">
-                        <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Последняя активность</h3>
-                        <div class="empty-state" style="background: var(--bg-secondary); border-radius: 12px; padding: 2rem;">
+                    <div class="last-activity">
+                        <h3 class="last-activity-title">Последняя активность</h3>
+                        <div class="empty-state last-activity-content">
                             <div class="empty-icon">📊</div>
                             <h3>Нет активности</h3>
                             <p>Здесь будет отображаться ваша последняя активность</p>
@@ -3465,7 +3802,7 @@
                     </div>
                     
                     <!-- Статистика портфеля -->
-                    <div class="stats-grid" style="margin-bottom: 2rem;">
+                    <div class="stats-grid stats-mb-2">
                         <div class="stats-card">
                             <div class="stats-header">
                                 <span class="stats-title">Инвестировано</span>
@@ -3504,7 +3841,7 @@
                     </div>
                     
                     <!-- Кнопки быстрых действий -->
-                    <div style="margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <div class="quick-actions">
                         <button class="btn btn-secondary" onclick="window.CabinetApp.showCreateDepositModal()" ${!hasAccess || nextAvailablePlanId > 13 ? 'disabled' : ''}>
                             💰 Создать новый депозит
                         </button>
@@ -3518,9 +3855,9 @@
                     
                     <!-- Активные депозиты -->
                     ${activeDeposits.length > 0 ? `
-                        <div style="margin-bottom: 2rem;">
-                            <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🟢 Активные депозиты</h3>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                        <div class="active-deposits">
+                            <h3 class="active-deposits-title">🟢 Активные депозиты</h3>
+                            <div class="active-deposits-grid">
                                 ${activeDeposits.map(deposit => {
                                     const plan = depositPlans.find(p => p.id === deposit.planId);
                                     const daysPassed = Math.floor((Date.now() - deposit.startDate) / (1000 * 60 * 60 * 24));
@@ -3528,41 +3865,41 @@
                                     const earned = deposit.amount * plan.percent / 100 * daysPassed;
                                     
                                     return `
-                                        <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--success-color);">
-                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                                <h4 style="display: flex; align-items: center; gap: 0.5rem;">
-                                                    <span style="font-size: 1.5rem;">${plan.icon}</span>
-                                                    <span style="color: var(--text-primary);">${plan.name}</span>
+                                        <div class="deposit-card">
+                                            <div class="deposit-header">
+                                                <h4 class="deposit-title">
+                                                    <span class="font-size-1-5">${plan.icon}</span>
+                                                    <span class="text-primary">${plan.name}</span>
                                                 </h4>
-                                                <span style="background: var(--success-color); color: var(--bg-primary); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.8rem;">Активен</span>
+                                                <span class="deposit-status-active">Активен</span>
                                             </div>
                                             
-                                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                            <div class="deposit-stats">
                                                 <div>
-                                                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Инвестировано</div>
-                                                    <div style="font-size: 1.2rem; font-weight: 600;">${deposit.amount}</div>
+                                                    <div class="text-secondary font-size-0-9">Инвестировано</div>
+                                                    <div class="font-size-1-2 font-weight-600">${deposit.amount}</div>
                                                 </div>
                                                 <div>
-                                                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Заработано</div>
-                                                    <div style="font-size: 1.2rem; font-weight: 600; color: var(--success-color);">${earned.toFixed(2)}</div>
+                                                    <div class="text-secondary font-size-0-9">Заработано</div>
+                                                    <div class="font-size-1-2 font-weight-600 text-success">${earned.toFixed(2)}</div>
                                                 </div>
                                             </div>
                                             
-                                            <div style="margin-bottom: 1rem;">
-                                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                                    <span style="color: var(--text-secondary); font-size: 0.9rem;">Прогресс</span>
-                                                    <span style="color: var(--text-primary); font-size: 0.9rem;">${daysPassed}/${plan.days} дней</span>
+                                            <div class="deposit-progress">
+                                                <div class="deposit-progress-header">
+                                                    <span class="text-secondary font-size-0-9">Прогресс</span>
+                                                    <span class="text-primary font-size-0-9">${daysPassed}/${plan.days} дней</span>
                                                 </div>
-                                                <div style="background: var(--bg-primary); border-radius: 8px; overflow: hidden;">
-                                                    <div class="progress-bar" data-progress="${Math.min(progress, 100)}" style="width: 0%;"></div>
+                                                <div class="deposit-progress-bar">
+                                                    <div class="progress-bar" data-progress="${Math.min(progress, 100)}"></div>
                                                 </div>
                                             </div>
                                             
-                                            <div style="display: flex; gap: 0.5rem;">
-                                                <button class="btn-secondary" style="flex: 1; font-size: 0.9rem; padding: 0.5rem;" onclick="window.CabinetApp.showDepositDetails('${deposit.id}')">
+                                            <div class="deposit-actions">
+                                                <button class="btn-secondary flex-1 font-size-0-9 p-0-5" onclick="window.CabinetApp.showDepositDetails('${deposit.id}')">
                                                     📊 Детали
                                                 </button>
-                                                <button class="btn-outline" style="flex: 1; font-size: 0.9rem; padding: 0.5rem;" onclick="window.CabinetApp.reinvestDeposit('${deposit.id}')">
+                                                <button class="btn-outline flex-1 font-size-0-9 p-0-5" onclick="window.CabinetApp.reinvestDeposit('${deposit.id}')">
                                                     🔄 Реинвестировать
                                                 </button>
                                             </div>
@@ -3575,9 +3912,9 @@
                     
                     <!-- Доступные планы депозитов -->
                     <div>
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">💎 Планы депозитов</h3>
+                        <h3 class="plans-title">💎 Планы депозитов</h3>
                         ${!hasAccess ? `
-                            <div class="notification warning" style="position: static; margin-bottom: 1.5rem;">
+                            <div class="notification warning notification-warning-static">
                                 <div class="notification-icon">⚠️</div>
                                 <div class="notification-content">
                                     <h4>Требуется доступ к платформе</h4>
@@ -3589,7 +3926,7 @@
                             </div>
                         ` : ''}
                         
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                        <div class="plans-grid">
                             ${depositPlans.map(plan => {
                                 const isPurchased = userDeposits.some(d => d.planId === plan.id);
                                 const isAvailable = plan.id === nextAvailablePlanId && hasAccess;
@@ -3670,7 +4007,7 @@
                     </div>
                     
                     <!-- Информационный блок -->
-                    <div style="margin-top: 2rem; background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-color);">
+                    <div class="info-block">
                         <h4 style="color: var(--primary-color); margin-bottom: 1rem;">💡 Важная информация</h4>
                         <ul style="list-style: none; padding: 0; margin: 0;">
                             <li style="margin-bottom: 0.5rem; color: var(--text-secondary);">✅ Покупка планов доступна только по порядку (от STARTER к ULTIMATE)</li>
@@ -4732,7 +5069,7 @@
                     
                     <div style="margin-top: 2rem;">
                         <h3 style="color: var(--text-primary); margin-bottom: 1rem;">PWA функции</h3>
-                        <button class="btn btn-secondary" onclick="window.cabinetApp.installPWA()">
+                        <button class="btn btn-secondary" onclick="window.CabinetApp.installPWA()">
                             📱 Установить как приложение
                         </button>
                     </div>
