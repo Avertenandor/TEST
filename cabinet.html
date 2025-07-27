@@ -1731,6 +1731,7 @@
 
         /* Размеры */
         .w-0 { width: 0%; }
+        .w-100 { width: 100%; }
         .overflow-hidden { overflow: hidden; }
 
         /* Статус карточки депозита */
@@ -1854,6 +1855,26 @@
             border-left: 4px solid var(--primary-color);
         }
 
+        .info-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list-item {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .info-list-item:last-child {
+            margin-bottom: 0;
+        }
+
         .notification-warning-static {
             position: static !important;
             margin-bottom: 1.5rem;
@@ -1914,6 +1935,75 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1rem;
+        }
+
+        /* Бонусы */
+        .bonus-section {
+            margin-bottom: 2rem;
+        }
+
+        .bonus-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .bonus-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .bonus-item {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .bonus-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .bonus-item-title {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .bonus-item-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .bonus-icon {
+            font-size: 2rem;
+        }
+
+        .bonus-reward {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .bonus-reward-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     </style>
 </head>
@@ -3961,42 +4051,42 @@
                                             ` : ''}
                                         </div>
                                         
-                                        <div style="margin-bottom: 1rem;">
-                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                                <span style="color: var(--text-secondary);">Сумма:</span>
-                                                <span style="color: var(--primary-color); font-weight: 600;">${plan.amount}</span>
+                                        <div class="plan-details">
+                                            <div class="plan-detail-row">
+                                                <span class="text-secondary">Сумма:</span>
+                                                <span style="color: var(--primary-color);" class="font-weight-600">${plan.amount}</span>
                                             </div>
-                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                                <span style="color: var(--text-secondary);">Доход в день:</span>
-                                                <span style="color: var(--success-color); font-weight: 600;">${plan.percent}%</span>
+                                            <div class="plan-detail-row">
+                                                <span class="text-secondary">Доход в день:</span>
+                                                <span class="text-success font-weight-600">${plan.percent}%</span>
                                             </div>
-                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                                <span style="color: var(--text-secondary);">Срок:</span>
-                                                <span style="color: var(--text-primary); font-weight: 600;">${plan.days} дней</span>
+                                            <div class="plan-detail-row">
+                                                <span class="text-secondary">Срок:</span>
+                                                <span class="text-primary font-weight-600">${plan.days} дней</span>
                                             </div>
-                                            <div style="display: flex; justify-content: space-between;">
-                                                <span style="color: var(--text-secondary);">Валюта:</span>
-                                                <span style="color: var(--secondary-color); font-weight: 600;">${plan.currency}</span>
+                                            <div class="flex flex-space-between">
+                                                <span class="text-secondary">Валюта:</span>
+                                                <span style="color: var(--secondary-color);" class="font-weight-600">${plan.currency}</span>
                                             </div>
                                         </div>
                                         
-                                        <div style="background: var(--bg-primary); padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem;">
-                                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                                <span style="color: var(--text-secondary); font-size: 0.9rem;">Общий доход:</span>
+                                        <div class="plan-total-profit">
+                                            <div class="plan-total-profit-content">
+                                                <span class="text-secondary font-size-0-9">Общий доход:</span>
                                                 <span style="color: var(--gold-color); font-weight: 700; font-size: 1.1rem;">${(plan.amount * plan.percent / 100 * plan.days).toFixed(2)}</span>
                                             </div>
                                         </div>
                                         
                                         ${isAvailable ? `
-                                            <button class="btn" style="width: 100%;" onclick="window.CabinetApp.createDeposit(${plan.id})">
+                                            <button class="btn w-100" onclick="window.CabinetApp.createDeposit(${plan.id})">
                                                 💰 Создать депозит
                                             </button>
                                         ` : isPurchased ? `
-                                            <button class="btn-secondary" style="width: 100%;" onclick="window.CabinetApp.viewDepositHistory(${plan.id})">
+                                            <button class="btn-secondary w-100" onclick="window.CabinetApp.viewDepositHistory(${plan.id})">
                                                 📊 История
                                             </button>
                                         ` : `
-                                            <button class="btn" style="width: 100%;" disabled>
+                                            <button class="btn w-100" disabled>
                                                 🔒 Недоступен
                                             </button>
                                         `}
@@ -4008,13 +4098,13 @@
                     
                     <!-- Информационный блок -->
                     <div class="info-block">
-                        <h4 style="color: var(--primary-color); margin-bottom: 1rem;">💡 Важная информация</h4>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="margin-bottom: 0.5rem; color: var(--text-secondary);">✅ Покупка планов доступна только по порядку (от STARTER к ULTIMATE)</li>
-                            <li style="margin-bottom: 0.5rem; color: var(--text-secondary);">✅ Планы 1-10 оплачиваются только в USDT</li>
-                            <li style="margin-bottom: 0.5rem; color: var(--text-secondary);">✅ Планы 11-13 можно оплатить в PLEX или USDT</li>
-                            <li style="margin-bottom: 0.5rem; color: var(--text-secondary);">✅ Все транзакции проверяются через BSCScan</li>
-                            <li style="color: var(--text-secondary);">✅ Выплаты производятся ежедневно на ваш кошелек</li>
+                        <h4 class="info-title">💡 Важная информация</h4>
+                        <ul class="info-list">
+                            <li class="info-list-item">✅ Покупка планов доступна только по порядку (от STARTER к ULTIMATE)</li>
+                            <li class="info-list-item">✅ Планы 1-10 оплачиваются только в USDT</li>
+                            <li class="info-list-item">✅ Планы 11-13 можно оплатить в PLEX или USDT</li>
+                            <li class="info-list-item">✅ Все транзакции проверяются через BSCScan</li>
+                            <li class="info-list-item">✅ Выплаты производятся ежедневно на ваш кошелек</li>
                         </ul>
                     </div>
                 `;
@@ -4070,7 +4160,7 @@
                     </div>
                     
                     <!-- Общая статистика бонусов -->
-                    <div class="stats-grid" style="margin-bottom: 2rem;">
+                    <div class="stats-grid stats-mb-2">
                         <div class="stats-card">
                             <div class="stats-header">
                                 <span class="stats-title">Баланс USDT</span>
@@ -4145,10 +4235,10 @@
                     </div>
                     
                     <!-- Категории бонусов -->
-                    <div style="margin-bottom: 2rem;">
+                    <div class="bonus-section">
                         
                         <!-- 1. Бонусы за привлечение партнеров -->
-                        <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 16px; margin-bottom: 2rem; border: 1px solid var(--border-color);">
+                        <div class="bonus-card">
                             <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;">
                                 <span style="font-size: 1.5rem;">👥</span>
                                 Бонусы за привлечение партнеров
