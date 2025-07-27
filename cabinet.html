@@ -1569,6 +1569,14 @@
                 gap: 0.25rem;
             }
         }
+
+        /* Стиль для прогресс-бара */
+        .progress-bar {
+            height: 6px;
+            background: linear-gradient(90deg, var(--success-color), var(--primary-color));
+            transition: width 0.5s ease;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
@@ -3565,7 +3573,7 @@
                                                     <span style="color: var(--text-primary); font-size: 0.9rem;">${daysPassed}/${plan.days} дней</span>
                                                 </div>
                                                 <div style="background: var(--bg-primary); border-radius: 8px; overflow: hidden;">
-                                                    <div style="background: linear-gradient(90deg, var(--success-color), var(--primary-color)); height: 6px; width: ${progress}%; transition: width 0.5s ease;"></div>
+                                                    <div class="progress-bar" style="width: ${Math.min(progress, 100)}%;"></div>
                                                 </div>
                                             </div>
                                             
