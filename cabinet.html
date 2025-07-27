@@ -1686,18 +1686,22 @@
         .flex-gap-0-5 { gap: 0.5rem; }
         .flex-1 { flex: 1; }
         .flex-wrap { flex-wrap: wrap; }
+        .flex-column { flex-direction: column; }
 
         /* Грид утилиты */
         .grid { display: grid; }
         .grid-auto-fit { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
         .grid-auto-fit-280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-auto-fit-150 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
         .grid-1fr-1fr { grid-template-columns: 1fr 1fr; }
+        .grid-col-span-2 { grid-column: span 2; }
 
         /* Текстовые утилиты */
         .text-center { text-align: center; }
         .text-primary { color: var(--text-primary); }
         .text-secondary { color: var(--text-secondary); }
         .text-success { color: var(--success-color); }
+        .font-weight-500 { font-weight: 500; }
         .font-weight-600 { font-weight: 600; }
         .font-size-1-2 { font-size: 1.2rem; }
         .font-size-0-9 { font-size: 0.9rem; }
@@ -2006,6 +2010,73 @@
             align-items: center;
         }
 
+        /* Специальные элементы */
+        .bonus-item-special {
+            background: linear-gradient(135deg, var(--bg-primary), rgba(255, 107, 53, 0.1));
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .bonus-special-title {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .gap-1 { gap: 1rem; }
+        .gap-1-5 { gap: 1.5rem; }
+
+        /* Статистические карточки */
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .stat-sublabel {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+        }
+
+        /* Специальные карточки экосистемы */
+        .ecosystem-card {
+            background: var(--bg-secondary);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .ecosystem-value {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .ecosystem-desc {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .ecosystem-subdesc {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+        }
+
         /* Дополнительные утилиты для бонусов */
         .bonus-item-simple {
             background: var(--bg-primary);
@@ -2053,6 +2124,8 @@
         .mt-0-3 { margin-top: 0.3rem; }
         .mb-0-3 { margin-bottom: 0.3rem; }
         .mb-0-5 { margin-bottom: 0.5rem; }
+        .mt-0-5 { margin-top: 0.5rem; }
+        .font-size-0-75 { font-size: 0.75rem; }
         .mt-1 { margin-top: 1rem; }
         .p-0-5 { padding: 0.8rem; }
     </style>
@@ -4282,12 +4355,12 @@
                         
                         <!-- 1. Бонусы за привлечение партнеров -->
                         <div class="bonus-card">
-                            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;">
-                                <span style="font-size: 1.5rem;">👥</span>
+                            <h3 class="bonus-title">
+                                <span class="bonus-icon">👥</span>
                                 Бонусы за привлечение партнеров
                             </h3>
                             
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                            <div class="bonus-grid">
                                 <!-- Бонус за 3 партнеров -->
                                 <div class="bonus-item"
                                      onmouseover="this.style.borderColor='var(--primary-color)';this.style.transform='translateY(-2px)'"
@@ -4312,10 +4385,10 @@
                                 </div>
                                 
                                 <!-- Бонус за 7 партнеров -->
-                                <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px; border: 2px solid var(--border-color); transition: all 0.3s ease;"
+                                <div class="bonus-item"
                                      onmouseover="this.style.borderColor='var(--primary-color)';this.style.transform='translateY(-2px)'"
                                      onmouseout="this.style.borderColor='var(--border-color)';this.style.transform=''">
-                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                    <div class="bonus-item-header">
                                         <div>
                                             <h4 class="bonus-item-title">Опытный наставник</h4>
                                             <p class="bonus-item-desc">Пригласите 7 партнеров</p>
@@ -4338,15 +4411,15 @@
                                 <div class="bonus-item"
                                      onmouseover="this.style.borderColor='var(--primary-color)';this.style.transform='translateY(-2px)'"
                                      onmouseout="this.style.borderColor='var(--border-color)';this.style.transform=''">
-                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                    <div class="bonus-item-header">
                                         <div>
-                                            <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Мастер рекрутинга</h4>
-                                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Пригласите 15 партнеров</p>
+                                            <h4 class="bonus-item-title">Мастер рекрутinга</h4>
+                                            <p class="bonus-item-desc">Пригласите 15 партнеров</p>
                                         </div>
-                                        <span style="font-size: 2rem;">🥇</span>
+                                        <span class="bonus-icon">🥇</span>
                                     </div>
-                                    <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <div class="bonus-reward">
+                                        <div class="flex flex-column flex-gap-0-5">
                                             <div class="bonus-reward-content">
                                                 <span class="text-secondary">Множитель:</span>
                                                 <span class="text-success font-weight-600">x0.88 на 12 часов</span>
@@ -4420,40 +4493,40 @@
                                             <span class="text-success font-weight-600">Два множителя x0.31</span>
                                             <span class="text-secondary font-size-0-8">на 54 часа</span>
                                         </div>
-                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <div class="flex flex-center flex-gap-0-5">
                                             <span style="color: var(--primary-color);">•</span>
                                             <span style="color: var(--primary-color); font-weight: 600;">Множитель x4.12</span>
-                                            <span style="color: var(--text-secondary); font-size: 0.8rem;">на 5 часов</span>
+                                            <span class="text-secondary font-size-0-8">на 5 часов</span>
                                         </div>
-                                        <div style="color: var(--text-secondary); font-size: 0.75rem; margin-top: 0.5rem; font-style: italic;">Однократные множители доходности</div>
+                                        <div class="text-secondary font-size-0-8 mt-0-5" style="font-style: italic;">Однократные множители доходности</div>
                                     </div>
                                 </div>
                                 
                                 <!-- Все депозиты -->
-                                <div style="background: linear-gradient(135deg, var(--bg-primary), rgba(255, 107, 53, 0.1)); padding: 1.5rem; border-radius: 12px; border: 2px solid var(--primary-color); transition: all 0.3s ease; grid-column: span 2;"
+                                <div class="bonus-item-special grid-col-span-2"
                                      onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(255,107,53,0.3)'"
                                      onmouseout="this.style.transform='';this.style.boxShadow=''">
-                                    <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <h4 class="bonus-special-title">
                                         <span>👑</span> Легенда GENESIS
                                     </h4>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">За покупку всех 13 депозитов</p>
-                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
-                                        <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; text-align: center;">
-                                            <div style="color: var(--gold-color); font-weight: 700; font-size: 1.2rem;">50,000</div>
-                                            <div style="color: var(--text-secondary); font-size: 0.8rem;">монет</div>
+                                    <p class="bonus-item-desc mb-1">За покупку всех 13 депозитов</p>
+                                    <div class="grid grid-auto-fit-150 gap-1">
+                                        <div class="stat-card">
+                                            <div class="stat-value" style="color: var(--gold-color);">50,000</div>
+                                            <div class="stat-label">монет</div>
                                         </div>
-                                        <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; text-align: center;">
-                                            <div style="color: var(--success-color); font-weight: 700; font-size: 1.2rem;">x7.17</div>
-                                            <div style="color: var(--text-secondary); font-size: 0.8rem;">множитель</div>
-                                            <div style="color: var(--text-secondary); font-size: 0.7rem;">на 29 часов</div>
+                                        <div class="stat-card">
+                                            <div class="stat-value" style="color: var(--success-color);">x7.17</div>
+                                            <div class="stat-label">множитель</div>
+                                            <div class="stat-sublabel">на 29 часов</div>
                                         </div>
-                                        <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; text-align: center;">
-                                            <div style="color: var(--secondary-color); font-weight: 700; font-size: 1.2rem;">50,000</div>
-                                            <div style="color: var(--text-secondary); font-size: 0.8rem;">стажа</div>
+                                        <div class="stat-card">
+                                            <div class="stat-value" style="color: var(--secondary-color);">50,000</div>
+                                            <div class="stat-label">стажа</div>
                                         </div>
-                                        <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; text-align: center;">
-                                            <div style="color: var(--accent-color); font-weight: 700; font-size: 1.2rem;">120</div>
-                                            <div style="color: var(--text-secondary); font-size: 0.8rem;">монет ранга</div>
+                                        <div class="stat-card">
+                                            <div class="stat-value" style="color: var(--accent-color);">120</div>
+                                            <div class="stat-label">монет ранга</div>
                                         </div>
                                     </div>
                                 </div>
@@ -4461,24 +4534,24 @@
                         </div>
                         
                         <!-- 3. Бонусы за участие в экосистеме -->
-                        <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 16px; margin-bottom: 2rem; border: 1px solid var(--border-color);">
-                            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;">
-                                <span style="font-size: 1.5rem;">🌐</span>
+                        <div class="bonus-card">
+                            <h3 class="bonus-title">
+                                <span class="bonus-icon">🌐</span>
                                 Бонусы за участие в инструментах экосистемы
                             </h3>
                             
-                            <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px;">
-                                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Получайте множитель доходности за каждый используемый инструмент экосистемы GENESIS</p>
-                                <div style="display: flex; align-items: center; gap: 1rem;">
-                                    <div style="background: var(--bg-secondary); padding: 1rem 1.5rem; border-radius: 8px; border: 2px solid var(--secondary-color);">
-                                        <div style="color: var(--secondary-color); font-weight: 600; font-size: 1.1rem;">x0.077</div>
-                                        <div style="color: var(--text-secondary); font-size: 0.8rem;">множитель доходности</div>
-                                        <div style="color: var(--text-secondary); font-size: 0.7rem;">на 37 часов</div>
+                            <div class="bonus-item-simple">
+                                <p class="text-secondary mb-1">Получайте множитель доходности за каждый используемый инструмент экосистемы GENESIS</p>
+                                <div class="flex flex-center gap-1">
+                                    <div class="ecosystem-card">
+                                        <div class="ecosystem-value">x0.077</div>
+                                        <div class="ecosystem-desc">множитель доходности</div>
+                                        <div class="ecosystem-subdesc">на 37 часов</div>
                                     </div>
-                                    <div style="color: var(--text-secondary);">
-                                        <div style="font-weight: 500;">За каждый инструмент:</div>
-                                        <div style="font-size: 0.85rem;">• Однократный множитель</div>
-                                        <div style="font-size: 0.85rem;">• Применяется автоматически</div>
+                                    <div class="text-secondary">
+                                        <div class="font-weight-500">За каждый инструмент:</div>
+                                        <div class="font-size-0-85">• Однократный множитель</div>
+                                        <div class="font-size-0-85">• Применяется автоматически</div>
                                     </div>
                                 </div>
                             </div>
