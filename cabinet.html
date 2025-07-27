@@ -2897,36 +2897,6 @@
                 `;
             },
             
-            getGiftsContent: function() {
-                return `
-                    <div class="page-header">
-                        <h2 class="page-title">🎈 Подарки</h2>
-                        <p class="page-subtitle">Специальные предложения для вас</p>
-                    </div>
-                    
-                    <div class="empty-state">
-                        <div class="empty-icon">🎈</div>
-                        <h3>Подарки будут доступны позже</h3>
-                        <p>Следите за обновлениями</p>
-                    </div>
-                `;
-            },
-            
-            getReferralsContent: function() {
-                return `
-                    <div class="page-header">
-                        <h2 class="page-title">👥 Рефералы</h2>
-                        <p class="page-subtitle">Партнерская программа</p>
-                    </div>
-                    
-                    <div class="empty-state">
-                        <div class="empty-icon">👥</div>
-                        <h3>Реферальная программа</h3>
-                        <p>Будет доступна в следующем обновлении</p>
-                    </div>
-                `;
-            },
-            
             getMultipliersContent: function() {
                 return `
                     <div class="page-header">
@@ -3630,7 +3600,7 @@
                                         background: var(--bg-secondary);
                                         padding: 1.5rem;
                                         border-radius: 12px;
-                                        border: 2px solid ${isPurchased ? 'var(--success-color)' : isAvailable ? 'var(--primary-color)' : 'var(--border-color)'};
+                                        border: 2px solid ${isPurchased ? 'var(--success-color)' : (isAvailable ? 'var(--primary-color)' : 'var(--border-color)')};
                                         opacity: ${isLocked ? '0.6' : '1'};
                                         position: relative;
                                         transition: all 0.3s ease;
@@ -5198,21 +5168,6 @@
                 `;
                 
                 modal.classList.remove('hidden');
-            },
-            
-            // Пустой раздел подарки
-            getGiftsContent: function() {
-                return `
-                    <div class="page-header">
-                        <h2 class="page-title">🎁 Подарки</h2>
-                        <p class="page-subtitle">Здесь будут отображаться ваши подарки и специальные предложения</p>
-                    </div>
-                    <div class="empty-state">
-                        <div class="empty-icon">🎁</div>
-                        <h3>Подарков пока нет</h3>
-                        <p>Следите за обновлениями и акциями!</p>
-                    </div>
-                `;
             },
             
             // MCP-MARKER:METHOD:CABINET:GET_EXPERIENCE_CONTENT - Генерация контента стажа
