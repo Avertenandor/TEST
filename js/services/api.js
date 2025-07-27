@@ -479,19 +479,19 @@ window.GenesisAPI = {
         }
     },
     
-    // Проверить платежи за доступ - специализированный ключ
+    // MCP-MARKER:METHOD:CHECK_ACCESS_PAYMENTS - Проверить платежи за доступ - специализированный ключ
     async checkAccessPayments(userAddress) {
         const accessAddress = window.GENESIS_CONFIG.addresses.access;
         const usdtAddress = window.GENESIS_CONFIG.usdt.address;
         const config = window.GENESIS_CONFIG;
         
         try {
+            // MCP-CHANGE:2025-07-27:FIXED - Исправлена критическая ошибка: теперь проверяем транзакции С адреса пользователя
             // Используем специализированный ключ для подписки
-            // ИСПРАВЛЕНО: проверяем транзакции НА кошелек подписки
             const transactions = await this.bscRequest({
                 module: 'account',
                 action: 'tokentx',
-                address: accessAddress,  // Кошелек подписки принимает платежи
+                address: userAddress,  // Проверяем транзакции ПОЛЬЗОВАТЕЛЯ
                 contractaddress: usdtAddress,  // USDT контракт
                 startblock: 0,
                 endblock: 99999999,
@@ -510,8 +510,8 @@ window.GenesisAPI = {
             
             // Фильтруем транзакции ОТ пользователя К кошельку подписки
             const userPayments = transactions.result.filter(tx => {
-                if (tx.from.toLowerCase() !== userAddress.toLowerCase() ||
-                    tx.to.toLowerCase() !== accessAddress.toLowerCase()) {
+                // Проверяем что это транзакция на адрес подписки
+                if (tx.to.toLowerCase() !== accessAddress.toLowerCase()) {
                     return false;
                 }
                 
@@ -520,7 +520,7 @@ window.GenesisAPI = {
                     window.GenesisUtils.weiToUSDT(tx.value) : 
                     parseFloat(tx.value) / 1e18;
                 const minAmount = 10 * (1 - config.plexPrice.tolerance); // 9.5 USDT
-                const maxAmount = 20 * (1 + config.plexPrice.tolerance); // 21.0 USDT
+                const maxAmount = 100 * (1 + config.plexPrice.tolerance); // 105.0 USDT (учитываем возможность пополнения на большую сумму)
                 
                 return usdtAmount >= minAmount && usdtAmount <= maxAmount;
             });
