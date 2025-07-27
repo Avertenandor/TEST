@@ -56,6 +56,7 @@
         :root {
             --primary-color: #ff6b35;
             --secondary-color: #00d4ff;
+            --secondary-hover: #00b8e6;
             --success-color: #00ff41;
             --warning-color: #ffa726;
             --error-color: #ff4757;
@@ -1904,6 +1905,12 @@
     <script src="js/services/mining-rent.js"></script>
     <script src="js/services/multipliers.js"></script>
     
+    <!-- PWA установка -->
+    <script src="js/services/pwa-install.js"></script>
+    
+    <!-- Расширение страницы устройства -->
+    <script src="js/services/device-page-extension.js"></script>
+    
     <!-- Исправление модальных окон депозитов -->
     <script src="fixes/fix-deposit-modal.js"></script>
     
@@ -2699,6 +2706,595 @@
                         break;
                     case 'multipliers':
                         content = this.getMultipliersContent();
+                        break;
+                    case 'mining-rent':
+                        content = this.getMiningRentContent();
+                        break;
+                    case 'my-device':
+                        content = this.getMyDeviceContent();
+                        break;
+                    case 'plex-coin':
+                        content = this.getPlexCoinContent();
+                        break;
+                    case 'settings':
+                        content = this.getSettingsContent();
+                        break;
+                    case 'experience':
+                        content = this.getExperienceContent();
+                        break;
+                    case 'rank':
+                        content = this.getRankContent();
+                        break;
+                    case 'how-it-works':
+                        content = this.getHowItWorksContent();
+                        break;
+                    default:
+                        content = this.getDashboardContent();
+                }
+                
+                contentContainer.innerHTML = content;
+                
+                // Инициализация специфичных для страницы скриптов
+                this.initPageSpecificScripts(page);
+            },
+            
+            // Инициализация скриптов для конкретной страницы
+            initPageSpecificScripts: function(page) {
+                switch(page) {
+                    case 'my-device':
+                        if (window.GENESIS_TECH_INFO) {
+                            window.GENESIS_TECH_INFO.init();
+                        }
+                        break;
+                }
+            },
+            
+            // Методы генерации контента для каждой страницы
+            getDashboardContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">📊 Панель управления</h2>
+                        <p class="page-subtitle">Обзор вашей активности в системе GENESIS 1.1</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Общий баланс</span>
+                                <span class="stats-icon">💰</span>
+                            </div>
+                            <div class="stats-value">0.00</div>
+                            <div class="stats-change">USDT</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Активные депозиты</span>
+                                <span class="stats-icon">📈</span>
+                            </div>
+                            <div class="stats-value">0</div>
+                            <div class="stats-change">штук</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Общий доход</span>
+                                <span class="stats-icon">🚀</span>
+                            </div>
+                            <div class="stats-value">0.00</div>
+                            <div class="stats-change">USDT</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Доход за сегодня</span>
+                                <span class="stats-icon">📅</span>
+                            </div>
+                            <div class="stats-value">0.00</div>
+                            <div class="stats-change">USDT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="margin-bottom-large">
+                        <h3 class="color-text-primary margin-bottom-medium">Быстрые действия</h3>
+                        <div class="flex-gap flex-wrap">
+                            <button class="btn btn-secondary" onclick="window.CabinetApp.showCreateDepositModal()">
+                                💰 Создать депозит
+                            </button>
+                            <button class="btn btn-outline" onclick="window.CabinetApp.showPlatformAccessModal()">
+                                🔑 Пополнить доступ
+                            </button>
+                            <button class="btn btn-outline" onclick="window.CabinetApp.navigateTo('analytics')">
+                                📊 Аналитика
+                            </button>
+                            <button class="btn btn-outline" onclick="window.CabinetApp.navigateTo('settings')">
+                                ⚙️ Настройки
+                            </button>
+                        </div>
+                    </div>
+                `;
+            },
+            
+            getPortfolioContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">💼 Портфель</h2>
+                        <p class="page-subtitle">Управление вашими инвестициями</p>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">📊</div>
+                        <h3>Нет активных депозитов</h3>
+                        <p>Создайте свой первый депозит для начала инвестирования</p>
+                        <button class="btn margin-bottom-medium" onclick="window.CabinetApp.showCreateDepositModal()">
+                            💰 Создать депозит
+                        </button>
+                    </div>
+                `;
+            },
+            
+            getTransactionsContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">📋 Транзакции</h2>
+                        <p class="page-subtitle">История всех операций</p>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">📄</div>
+                        <h3>Нет транзакций</h3>
+                        <p>История транзакций пока пуста</p>
+                    </div>
+                `;
+            },
+            
+            getAnalyticsContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">📈 Аналитика</h2>
+                        <p class="page-subtitle">Детальная статистика вашей активности</p>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">📊</div>
+                        <h3>Недостаточно данных</h3>
+                        <p>Создайте депозиты для отображения аналитики</p>
+                    </div>
+                `;
+            },
+            
+            getBonusesContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">🎁 Бонусы</h2>
+                        <p class="page-subtitle">Дополнительные возможности заработка</p>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">🎁</div>
+                        <h3>Бонусы будут доступны позже</h3>
+                        <p>Следите за обновлениями</p>
+                    </div>
+                `;
+            },
+            
+            getGiftsContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">🎈 Подарки</h2>
+                        <p class="page-subtitle">Специальные предложения для вас</p>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">🎈</div>
+                        <h3>Подарки будут доступны позже</h3>
+                        <p>Следите за обновлениями</p>
+                    </div>
+                `;
+            },
+            
+            getReferralsContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">👥 Рефералы</h2>
+                        <p class="page-subtitle">Партнерская программа</p>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">👥</div>
+                        <h3>Реферальная программа</h3>
+                        <p>Будет доступна в следующем обновлении</p>
+                    </div>
+                `;
+            },
+            
+            getMultipliersContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">⚡ Множители</h2>
+                        <p class="page-subtitle">Увеличьте доходность ваших депозитов</p>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">⚡</div>
+                        <h3>Множители будут доступны позже</h3>
+                        <p>Следите за обновлениями</p>
+                    </div>
+                `;
+            },
+            
+            getMiningRentContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">💻 Аренда мощностей</h2>
+                        <p class="page-subtitle">Сдавайте мощности вашего устройства в аренду</p>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">💻</div>
+                        <h3>Майнинг будет доступен позже</h3>
+                        <p>Следите за обновлениями</p>
+                    </div>
+                `;
+            },
+            
+            getMyDeviceContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">📱 Мое устройство</h2>
+                        <p class="page-subtitle">Информация о вашем устройстве и системе</p>
+                    </div>
+                    
+                    <div id="device-info-container">
+                        <div class="empty-state">
+                            <div class="empty-icon">⏳</div>
+                            <h3>Загрузка информации...</h3>
+                            <p>Получение данных о вашем устройстве</p>
+                        </div>
+                    </div>
+                `;
+            },
+            
+            getPlexCoinContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">🪙 PLEX Монета</h2>
+                        <p class="page-subtitle">Внутренняя валюта платформы GENESIS</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Баланс PLEX</span>
+                                <span class="stats-icon">🪙</span>
+                            </div>
+                            <div class="stats-value">0.00</div>
+                            <div class="stats-change">PLEX</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Курс PLEX/USDT</span>
+                                <span class="stats-icon">📊</span>
+                            </div>
+                            <div class="stats-value">0.10</div>
+                            <div class="stats-change">USDT</div>
+                        </div>
+                    </div>
+                `;
+            },
+            
+            getSettingsContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">⚙️ Настройки</h2>
+                        <p class="page-subtitle">Управление вашим аккаунтом</p>
+                    </div>
+                    
+                    <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">Основные настройки</h3>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; color: var(--text-secondary); margin-bottom: 0.5rem;">BSC Адрес:</label>
+                            <div style="font-family: monospace; background: var(--bg-tertiary); padding: 1rem; border-radius: 6px; word-break: break-all;">
+                                ${this.state.userAddress || 'Не указан'}
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-outline" onclick="window.logout()">
+                            🚪 Выйти из аккаунта
+                        </button>
+                    </div>
+                `;
+            },
+            
+            getExperienceContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">📅 Стаж</h2>
+                        <p class="page-subtitle">Ваш опыт работы с платформой</p>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-header">
+                            <span class="stats-title">Дней на платформе</span>
+                            <span class="stats-icon">📅</span>
+                        </div>
+                        <div class="stats-value">0</div>
+                        <div class="stats-change">дней</div>
+                    </div>
+                `;
+            },
+            
+            getRankContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">🏅 Ранг</h2>
+                        <p class="page-subtitle">Ваш статус в системе</p>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-header">
+                            <span class="stats-title">Текущий ранг</span>
+                            <span class="stats-icon">🏅</span>
+                        </div>
+                        <div class="stats-value" style="font-size: 1.5rem;">Новичок</div>
+                        <div class="stats-change color-text-secondary">Начальный уровень</div>
+                    </div>
+                `;
+            },
+            
+            getHowItWorksContent: function() {
+                return `
+                    <div class="page-header">
+                        <h2 class="page-title">🛠️ Как все устроено</h2>
+                        <p class="page-subtitle">Подробное руководство по работе с платформой GENESIS 1.1</p>
+                    </div>
+                    
+                    <div class="margin-bottom-large">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🌟 Добро пожаловать в GENESIS 1.1</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+                            GENESIS 1.1 - это современная DeFi платформа для управления цифровыми активами, построенная на блокчейне BSC (Binance Smart Chain). 
+                            Наша платформа предоставляет возможность создавать депозиты и получать пассивный доход от инвестиций.
+                        </p>
+                    </div>
+                    
+                    <div class="info-banner">
+                        <div class="info-icon">ℹ️</div>
+                        <div class="info-content">
+                            <h3>Основные принципы работы</h3>
+                            <p>Платформа работает полностью децентрализованно, без серверной части. Все транзакции проходят через смарт-контракты в блокчейне BSC.</p>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">📋 Пошаговая инструкция</h3>
+                    
+                    <div class="steps-container">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>🔑 Оплата доступа к платформе</h4>
+                                <p>Первым делом необходимо оплатить доступ к платформе. Стоимость: $1 в день, минимальное пополнение $10 USDT.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>💰 Создание депозитов</h4>
+                                <p>После оплаты доступа вы можете создавать депозиты. Доступно 13 планов от $25 до $2500. Депозиты создаются последовательно - от меньшего к большему.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>📈 Получение дохода</h4>
+                                <p>Каждый депозит приносит ежедневный доход согласно выбранному плану. Доходность варьируется от 0.3% до 1.5% в день.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>💸 Вывод средств</h4>
+                                <p>Заработанные средства можно вывести на ваш BSC кошелек в любое время. Минимальная сумма вывода: $10 USDT.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-banner">
+                        <div class="warning-icon">⚠️</div>
+                        <div class="warning-content">
+                            <h4>Важная информация</h4>
+                            <ul>
+                                <li>Все операции проводятся в криптовалюте USDT (сеть BSC)</li>
+                                <li>Для планов 11-13 доступна оплата в PLEX токенах</li>
+                                <li>Транзакции необратимы - внимательно проверяйте адреса</li>
+                                <li>Сохраняйте приватные ключи от вашего кошелька</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">🏗️ Архитектура платформы</h3>
+                    
+                    <div class="architecture-info">
+                        <div class="arch-card">
+                            <div class="arch-icon">🔗</div>
+                            <div class="arch-content">
+                                <h4>Блокчейн BSC</h4>
+                                <p>Все транзакции проходят через блокчейн Binance Smart Chain, обеспечивая прозрачность и безопасность.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="arch-card">
+                            <div class="arch-icon">📱</div>
+                            <div class="arch-content">
+                                <h4>PWA приложение</h4>
+                                <p>Платформа работает как Progressive Web App - можно установить на любое устройство.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="arch-card">
+                            <div class="arch-icon">🔒</div>
+                            <div class="arch-content">
+                                <h4>Безопасность</h4>
+                                <p>Отсутствие серверной части исключает возможность взлома централизованной базы данных.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">⚡ Система множителей</h3>
+                    
+                    <div class="multiplier-explanation">
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            Множители - это специальные бонусы, которые увеличивают доходность ваших депозитов. 
+                            Они активируются за дополнительную плату и действуют ограниченное время.
+                        </p>
+                        
+                        <div class="multiplier-card">
+                            <div class="multiplier-icon">🚀</div>
+                            <div class="multiplier-content">
+                                <h4>Виды множителей</h4>
+                                <ul style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary);">
+                                    <li>x1.5 - увеличение дохода на 50%</li>
+                                    <li>x2.0 - удвоение дохода</li>
+                                    <li>x3.0 - утроение дохода</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="example-card">
+                            <h4>💡 Пример расчета</h4>
+                            <div class="calculation">
+                                <div class="calc-step">
+                                    <span class="calc-label">Базовый доход:</span>
+                                    <span class="calc-value">$10/день</span>
+                                </div>
+                                <div class="calc-step">
+                                    <span class="calc-label">Множитель x2:</span>
+                                    <span class="calc-value">×2</span>
+                                </div>
+                                <div class="calc-divider"></div>
+                                <div class="calc-step multiplier-example">
+                                    <span class="calc-label">Итоговый доход:</span>
+                                    <span class="calc-value">$20/день</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="success-banner">
+                        <div class="success-icon">✅</div>
+                        <div class="success-content">
+                            <h4>Готовы начать?</h4>
+                            <p>Теперь вы знаете как работает платформа. Начните с пополнения доступа и создания первого депозита!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons margin-bottom-large">
+                        <button class="btn btn-secondary" onclick="window.CabinetApp.showPlatformAccessModal()">
+                            🔑 Пополнить доступ
+                        </button>
+                        <button class="btn btn-outline" onclick="window.CabinetApp.showCreateDepositModal()">
+                            💰 Создать депозит
+                        </button>
+                    </div>
+                `;
+            },
+            
+            // Вспомогательные методы
+            showLoadingScreen: function() {
+                document.getElementById('loading-screen').classList.remove('hidden');
+                document.getElementById('auth-screen').classList.add('hidden');
+                document.getElementById('cabinet-app').classList.add('hidden');
+            },
+            
+            checkAuth: function() {
+                const savedAddress = localStorage.getItem('genesis_user_address');
+                if (savedAddress) {
+                    this.state.userAddress = savedAddress;
+                    this.state.isAuthenticated = true;
+                    this.showCabinet();
+                } else {
+                    this.showAuthScreen();
+                }
+            },
+            
+            setupAuthHandler: function() {
+                const authButton = document.getElementById('auth-button');
+                const walletInput = document.getElementById('wallet-address');
+                
+                console.log('🔧 setupAuthHandler вызван');
+                console.log('Auth button:', authButton);
+                console.log('Wallet input:', walletInput);
+                
+                if (authButton) {
+                    authButton.onclick = () => {
+                        console.log('🖱️ Клик на кнопке авторизации');
+                        this.handleAuth();
+                    };
+                    console.log('✅ Обработчик onclick установлен');
+                }
+                
+                if (walletInput) {
+                    walletInput.onkeypress = (e) => {
+                        if (e.key === 'Enter') {
+                            console.log('⌨️ Enter нажат в поле ввода');
+                            this.handleAuth();
+                        }
+                    };
+                    console.log('✅ Обработчик onkeypress установлен');
+                }
+            },
+            
+            updateDeviceInfo: function() {
+                // Обновление информации об устройстве
+                const browserElement = document.getElementById('device-browser');
+                const platformElement = document.getElementById('device-platform');
+                const languageElement = document.getElementById('device-language');
+                const cookiesElement = document.getElementById('device-cookies');
+                const onlineElement = document.getElementById('device-online');
+                const javaElement = document.getElementById('device-java');
+                const screenElement = document.getElementById('device-screen');
+                const colorDepthElement = document.getElementById('device-color-depth');
+                const pixelRatioElement = document.getElementById('device-pixel-ratio');
+                const touchElement = document.getElementById('device-touch');
+                
+                if (browserElement) browserElement.textContent = navigator.userAgent.split(' ')[0];
+                if (platformElement) platformElement.textContent = navigator.platform;
+                if (languageElement) languageElement.textContent = navigator.language;
+                if (cookiesElement) cookiesElement.textContent = navigator.cookieEnabled ? 'Включены' : 'Отключены';
+                if (onlineElement) onlineElement.textContent = navigator.onLine ? 'Онлайн' : 'Офлайн';
+                if (javaElement) javaElement.textContent = navigator.javaEnabled && navigator.javaEnabled() ? 'Включена' : 'Отключена';
+                if (screenElement) screenElement.textContent = `${screen.width} x ${screen.height}`;
+                if (colorDepthElement) colorDepthElement.textContent = `${screen.colorDepth} бит`;
+                if (pixelRatioElement) pixelRatioElement.textContent = window.devicePixelRatio || '1';
+                if (touchElement) touchElement.textContent = 'ontouchstart' in window ? 'Поддерживается' : 'Не поддерживается';
+            },
+            
+            startSessionTimer: function() {
+                const startTime = Date.now();
+                
+                setInterval(() => {
+                    const elapsed = Date.now() - startTime;
+                    const seconds = Math.floor(elapsed / 1000) % 60;
+                    const minutes = Math.floor(elapsed / 60000) % 60;
+                    const hours = Math.floor(elapsed / 3600000);
+                    
+                    const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    const element = document.getElementById('device-session-time');
+                    if (element) element.textContent = timeString;
+                }, 1000);
+            }
+        };
+        
+        // Запуск приложения
+        window.CabinetApp.init();
+    </script>
+</body>
+</html>ent();
                         break;
                     case 'mining-rent':
                         content = this.getMiningRentContent();
@@ -4492,29 +5088,6 @@
                 }
             },
             
-            // Активация множителя
-            activateMultiplier: function(type) {
-                let multiplierName = '';
-                let cost = '';
-                
-                switch(type) {
-                    case 'turbo':
-                        multiplierName = 'Турбо x2.0';
-                        cost = '$25 или 500 PLEX';
-                        break;
-                    case 'lightning':
-                        multiplierName = 'Молния x4.0';
-                        cost = '$45 или 900 PLEX';
-                        break;
-                    case 'super':
-                        multiplierName = 'Супер x7.5';
-                        cost = '$85 или 1700 PLEX';
-                        break;
-                }
-                
-                this.showNotification('Множитель', `Активация "${multiplierName}" - стоимость: ${cost}`, 'info');
-            },
-            
             // Экспорт сессии
             exportSession: function() {
                 const session = localStorage.getItem('genesis_session');
@@ -4553,10 +5126,6 @@
                     return;
                 }
                 
-                // Здесь будет реальная активация через блокчейн
-                this.showNotification('Информация', `Множитель ${multiplier.name} будет активирован после интеграции с блокчейном!`, 'info');
-                
-                // Модальное окно подтверждения
                 this.showMultiplierConfirmModal(type, multiplier);
             },
             
