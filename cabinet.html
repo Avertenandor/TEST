@@ -1671,7 +1671,9 @@
         /* Утилитарные CSS классы для замены inline стилей */
         /* Отступы */
         .mb-1 { margin-bottom: 1rem; }
+        .mb-1-5 { margin-bottom: 1.5rem; }
         .mb-2 { margin-bottom: 2rem; }
+        .mb-0-3 { margin-bottom: 0.3rem; }
         .mb-0-5 { margin-bottom: 0.5rem; }
         .mt-2 { margin-top: 2rem; }
         .p-1 { padding: 1rem; }
@@ -1692,8 +1694,9 @@
         /* Грид утилиты */
         .grid { display: grid; }
         .grid-auto-fit { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-        .grid-auto-fit-280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
         .grid-auto-fit-150 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+        .grid-auto-fit-200 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        .grid-auto-fit-280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
         .grid-1fr-1fr { grid-template-columns: 1fr 1fr; }
         .grid-col-span-2 { grid-column: span 2; }
 
@@ -2142,6 +2145,145 @@
             padding: 1rem;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
+        }
+
+        /* Множители */
+        .multiplier-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .multiplier-card {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border: 2px solid;
+        }
+
+        .multiplier-card-active {
+            border-color: var(--success-color);
+        }
+
+        .multiplier-card-secondary {
+            border-color: var(--secondary-color);
+        }
+
+        .multiplier-card-warning {
+            border-color: var(--warning-color);
+        }
+
+        .multiplier-card-default {
+            border-color: var(--border-color);
+        }
+
+        .multiplier-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .multiplier-title {
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .multiplier-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .multiplier-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .multiplier-progress {
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .multiplier-progress-bar {
+            height: 4px;
+        }
+
+        .effect-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .effect-item {
+            text-align: center;
+        }
+
+        .effect-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .effect-value {
+            font-size: 1.2rem;
+        }
+
+        .available-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .multiplier-shop-card {
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+        }
+
+        .multiplier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .multiplier-name {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .multiplier-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--bg-primary);
+        }
+
+        .multiplier-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .multiplier-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .multiplier-cost {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        .multiplier-alt {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
         }
 
         /* Дополнительные утилиты для бонусов */
@@ -4801,117 +4943,117 @@
                         <p class="page-subtitle">Активируйте бонусные множители для увеличения доходности</p>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div class="multiplier-grid">
                         <div>
-                            <div class="stats-card" style="margin-bottom: 2rem;">
-                                <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <div class="stats-card mb-2">
+                                <h3 class="bonus-title">
                                     <span>⚡</span> Активные множители
                                 </h3>
                                 
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-                                    <div style="text-align: center; padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 2px solid var(--success-color);">
-                                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔥</div>
-                                        <h5 style="color: var(--text-primary); margin-bottom: 0.3rem;">Огненный</h5>
-                                        <div style="font-size: 1.8rem; font-weight: 700; color: var(--success-color); margin-bottom: 0.3rem;">x2.5</div>
-                                        <div style="color: var(--text-secondary); font-size: 0.8rem;">Осталось: 4ч 23м</div>
-                                        <div style="background: var(--bg-secondary); border-radius: 6px; overflow: hidden; margin-top: 0.5rem;">
-                                            <div style="background: var(--success-color); height: 4px; width: 72%;"></div>
+                                <div class="grid grid-auto-fit-200 gap-1 mb-2">
+                                    <div class="multiplier-card multiplier-card-active">
+                                        <div class="multiplier-icon">🔥</div>
+                                        <h5 class="multiplier-title">Огненный</h5>
+                                        <div class="multiplier-value" style="color: var(--success-color);">x2.5</div>
+                                        <div class="multiplier-time">Осталось: 4ч 23м</div>
+                                        <div class="multiplier-progress">
+                                            <div class="multiplier-progress-bar" style="background: var(--success-color); width: 72%;"></div>
                                         </div>
                                     </div>
                                     
-                                    <div style="text-align: center; padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 2px solid var(--secondary-color);">
-                                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">💎</div>
-                                        <h5 style="color: var(--text-primary); margin-bottom: 0.3rem;">Алмазный</h5>
-                                        <div style="font-size: 1.8rem; font-weight: 700; color: var(--secondary-color); margin-bottom: 0.3rem;">x1.8</div>
-                                        <div style="color: var(--text-secondary); font-size: 0.8rem;">Осталось: 12ч 45м</div>
-                                        <div style="background: var(--bg-secondary); border-radius: 6px; overflow: hidden; margin-top: 0.5rem;">
-                                            <div style="background: var(--secondary-color); height: 4px; width: 53%;"></div>
+                                    <div class="multiplier-card multiplier-card-secondary">
+                                        <div class="multiplier-icon">💎</div>
+                                        <h5 class="multiplier-title">Алмазный</h5>
+                                        <div class="multiplier-value" style="color: var(--secondary-color);">x1.8</div>
+                                        <div class="multiplier-time">Осталось: 12ч 45м</div>
+                                        <div class="multiplier-progress">
+                                            <div class="multiplier-progress-bar" style="background: var(--secondary-color); width: 53%;"></div>
                                         </div>
                                     </div>
                                     
-                                    <div style="text-align: center; padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 2px solid var(--warning-color);">
-                                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">⭐</div>
-                                        <h5 style="color: var(--text-primary); margin-bottom: 0.3rem;">Звездный</h5>
-                                        <div style="font-size: 1.8rem; font-weight: 700; color: var(--warning-color); margin-bottom: 0.3rem;">x3.2</div>
-                                        <div style="color: var(--text-secondary); font-size: 0.8rem;">Осталось: 23ч 17м</div>
-                                        <div style="background: var(--bg-secondary); border-radius: 6px; overflow: hidden; margin-top: 0.5rem;">
-                                            <div style="background: var(--warning-color); height: 4px; width: 97%;"></div>
+                                    <div class="multiplier-card multiplier-card-warning">
+                                        <div class="multiplier-icon">⭐</div>
+                                        <h5 class="multiplier-title">Звездный</h5>
+                                        <div class="multiplier-value" style="color: var(--warning-color);">x3.2</div>
+                                        <div class="multiplier-time">Осталось: 23ч 17м</div>
+                                        <div class="multiplier-progress">
+                                            <div class="multiplier-progress-bar" style="background: var(--warning-color); width: 97%;"></div>
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
-                                    <h4 style="color: var(--text-primary); margin-bottom: 1rem;">📊 Эффект множителей</h4>
+                                <div class="bg-primary p-1-5 border-radius-12 mb-2">
+                                    <h4 class="bonus-item-title mb-1">📊 Эффект множителей</h4>
                                     
-                                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-                                        <div style="text-align: center;">
-                                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Базовая доходность</div>
-                                            <div style="font-size: 1.2rem; color: var(--text-primary);">$45.20/день</div>
+                                    <div class="effect-grid">
+                                        <div class="effect-item">
+                                            <div class="effect-label">Базовая доходность</div>
+                                            <div class="effect-value text-primary">$45.20/день</div>
                                         </div>
-                                        <div style="text-align: center;">
-                                            <div style="color: var(--text-secondary); font-size: 0.9rem;">С множителями</div>
-                                            <div style="font-size: 1.2rem; color: var(--success-color);">$247.83/день</div>
+                                        <div class="effect-item">
+                                            <div class="effect-label">С множителями</div>
+                                            <div class="effect-value text-success">$247.83/день</div>
                                         </div>
-                                        <div style="text-align: center;">
-                                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Суммарный множитель</div>
-                                            <div style="font-size: 1.2rem; color: var(--primary-color);">x5.48</div>
+                                        <div class="effect-item">
+                                            <div class="effect-label">Суммарный множитель</div>
+                                            <div class="effect-value" style="color: var(--primary-color);">x5.48</div>
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">🛒 Доступные множители</h4>
+                                <h4 class="bonus-item-title mb-1">🛒 Доступные множители</h4>
                                 
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-                                    <div style="padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 2px solid var(--border-color);">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                                <span style="font-size: 1.5rem;">🚀</span>
-                                                <h5 style="color: var(--text-primary);">Турбо x2.0</h5>
+                                <div class="available-grid">
+                                    <div class="multiplier-shop-card">
+                                        <div class="multiplier-header">
+                                            <div class="multiplier-name">
+                                                <span class="font-size-1-5">🚀</span>
+                                                <h5 class="bonus-item-title">Турбо x2.0</h5>
                                             </div>
-                                            <span style="background: var(--success-color); color: var(--bg-primary); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">6 часов</span>
+                                            <span class="multiplier-badge" style="background: var(--success-color);">6 часов</span>
                                         </div>
-                                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Удваивает доходность от всех источников на 6 часов</p>
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                            <span style="color: var(--success-color); font-weight: 600;">Стоимость: $25</span>
-                                            <span style="color: var(--text-secondary); font-size: 0.8rem;">или 500 PLEX</span>
+                                        <p class="multiplier-description">Удваивает доходность от всех источников на 6 часов</p>
+                                        <div class="multiplier-price">
+                                            <span class="multiplier-cost">Стоимость: $25</span>
+                                            <span class="multiplier-alt">или 500 PLEX</span>
                                         </div>
-                                        <button class="btn" onclick="window.CabinetApp.activateMultiplier('turbo')" style="width: 100%;">
+                                        <button class="btn w-100" onclick="window.CabinetApp.activateMultiplier('turbo')">
                                             🚀 Активировать
                                         </button>
                                     </div>
                                     
-                                    <div style="padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 2px solid var(--border-color);">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                                <span style="font-size: 1.5rem;">⚡</span>
-                                                <h5 style="color: var(--text-primary);">Молния x4.0</h5>
+                                    <div class="multiplier-shop-card">
+                                        <div class="multiplier-header">
+                                            <div class="multiplier-name">
+                                                <span class="font-size-1-5">⚡</span>
+                                                <h5 class="bonus-item-title">Молния x4.0</h5>
                                             </div>
-                                            <span style="background: var(--primary-color); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">3 часа</span>
+                                            <span class="multiplier-badge" style="background: var(--primary-color); color: white;">3 часа</span>
                                         </div>
-                                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Увеличивает доходность в 4 раза на 3 часа</p>
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                            <span style="color: var(--success-color); font-weight: 600;">Стоимость: $45</span>
-                                            <span style="color: var(--text-secondary); font-size: 0.8rem;">или 900 PLEX</span>
+                                        <p class="multiplier-description">Увеличивает доходность в 4 раза на 3 часа</p>
+                                        <div class="multiplier-price">
+                                            <span class="multiplier-cost">Стоимость: $45</span>
+                                            <span class="multiplier-alt">или 900 PLEX</span>
                                         </div>
-                                        <button class="btn" onclick="window.CabinetApp.activateMultiplier('lightning')" style="width: 100%;">
+                                        <button class="btn w-100" onclick="window.CabinetApp.activateMultiplier('lightning')">
                                             ⚡ Активировать
                                         </button>
                                     </div>
                                     
-                                    <div style="padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 2px solid var(--warning-color);">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                                <span style="font-size: 1.5rem;">🌟</span>
-                                                <h5 style="color: var(--text-primary);">Супер x7.5</h5>
+                                    <div class="multiplier-shop-card" style="border-color: var(--warning-color);">
+                                        <div class="multiplier-header">
+                                            <div class="multiplier-name">
+                                                <span class="font-size-1-5">🌟</span>
+                                                <h5 class="bonus-item-title">Супер x7.5</h5>
                                             </div>
-                                            <span style="background: var(--warning-color); color: var(--bg-primary); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">1 час</span>
+                                            <span class="multiplier-badge" style="background: var(--warning-color);">1 час</span>
                                         </div>
-                                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Максимальный множитель - увеличение в 7.5 раз на час</p>
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                            <span style="color: var(--success-color); font-weight: 600;">Стоимость: $85</span>
-                                            <span style="color: var(--text-secondary); font-size: 0.8rem;">или 1700 PLEX</span>
+                                        <p class="multiplier-description">Максимальный множитель - увеличение в 7.5 раз на час</p>
+                                        <div class="multiplier-price">
+                                            <span class="multiplier-cost">Стоимость: $85</span>
+                                            <span class="multiplier-alt">или 1700 PLEX</span>
                                         </div>
-                                        <button class="btn" onclick="window.CabinetApp.activateMultiplier('super')" style="width: 100%;">
+                                        <button class="btn w-100" onclick="window.CabinetApp.activateMultiplier('super')">
                                             🌟 Активировать
                                         </button>
                                     </div>
@@ -4920,27 +5062,27 @@
                         </div>
                         
                         <div>
-                            <div class="stats-card" style="margin-bottom: 1.5rem;">
-                                <h3 style="color: var(--secondary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <div class="stats-card mb-1-5">
+                                <h3 class="bonus-title" style="color: var(--secondary-color);">
                                     <span>📊</span> Статистика
                                 </h3>
                                 
-                                <div style="margin-bottom: 1rem;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Активировано сегодня:</span>
-                                        <span style="color: var(--success-color); font-weight: 600;">3</span>
+                                <div class="mb-1">
+                                    <div class="flex flex-space-between mb-0-5">
+                                        <span class="text-secondary">Активировано сегодня:</span>
+                                        <span class="font-weight-600" style="color: var(--success-color);">3</span>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Всего за месяц:</span>
-                                        <span style="color: var(--text-primary); font-weight: 600;">47</span>
+                                    <div class="flex flex-space-between mb-0-5">
+                                        <span class="text-secondary">Всего за месяц:</span>
+                                        <span class="text-primary font-weight-600">47</span>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Дополнительно заработано:</span>
-                                        <span style="color: var(--primary-color); font-weight: 600;">$2,847</span>
+                                    <div class="flex flex-space-between mb-0-5">
+                                        <span class="text-secondary">Дополнительно заработано:</span>
+                                        <span class="font-weight-600" style="color: var(--primary-color);">$2,847</span>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <span style="color: var(--text-secondary);">Потрачено PLEX:</span>
-                                        <span style="color: var(--warning-color); font-weight: 600;">15,680</span>
+                                    <div class="flex flex-space-between">
+                                        <span class="text-secondary">Потрачено PLEX:</span>
+                                        <span class="font-weight-600" style="color: var(--warning-color);">15,680</span>
                                     </div>
                                 </div>
                             </div>
