@@ -1041,6 +1041,14 @@
         "files": ["cabinet.html"],
         "fixes": 3,
         "notes": "Удалены дубликаты, добавлены утилитарные классы"
+      },
+    {
+        "time": "01:00",
+        "action": "AUTH_UI_FIXES",
+        "description": "Исправлены проблемы с авторизацией и UI по инструкции",
+        "files": ["cabinet.html"],
+        "fixes": 15,
+        "notes": "Добавлены: handleAuth, window.onload, toggleSidebar, aria-label, focus стили"
       }
     ],
     "2025-07-27": [
