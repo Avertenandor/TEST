@@ -4168,25 +4168,18 @@
                     contentContainer.style.opacity = '1';
                 }, 10);
             },
-                    
-                    <div class="stats-grid">
-                        <div class="stats-card">
-                            <div class="stats-header">
-                                <span class="stats-title">Общий баланс</span>
-                                <span class="stats-icon">💰</span>
-                            </div>
-                            <div class="stats-value">0.00</div>
-                            <div class="stats-change">USDT</div>
-                        </div>
-                        
-                        <div class="stats-card">
-                            <div class="stats-header">
-                                <span class="stats-title">Активные депозиты</span>
-                                <span class="stats-icon">📈</span>
-                            </div>
-                            <div class="stats-value">0</div>
-                            <div class="stats-change">штук</div>
-                        </div>
+            
+            // Вспомогательные методы для проверки поддержки технологий
+            checkWebGLSupport: function() {
+                try {
+                    const canvas = document.createElement('canvas');
+                    return canvas.getContext('webgl') || canvas.getContext('experimental-webgl') ? '✅ Поддерживается' : '❌ Не поддерживается';
+                } catch (e) {
+                    return '❌ Не поддерживается';
+                }
+            },
+            
+            checkWebRTCSupport: function() {
                         
                         <div class="stats-card">
                             <div class="stats-header">
