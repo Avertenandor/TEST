@@ -4162,55 +4162,7 @@
             },
             
             checkWebRTCSupport: function() {
-                        
-                        <div class="stats-card">
-                            <div class="stats-header">
-                                <span class="stats-title">Общий доход</span>
-                                <span class="stats-icon">🚀</span>
-                            </div>
-                            <div class="stats-value">0.00</div>
-                            <div class="stats-change">USDT</div>
-                        </div>
-                        
-                        <div class="stats-card">
-                            <div class="stats-header">
-                                <span class="stats-title">Доход за сегодня</span>
-                                <span class="stats-icon">📅</span>
-                            </div>
-                            <div class="stats-value">0.00</div>
-                            <div class="stats-change">USDT</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quick Actions -->
-                    <div class="margin-bottom-large">
-                        <h3 class="color-text-primary margin-bottom-medium">Быстрые действия</h3>
-                        <div class="flex-gap flex-wrap">
-                            <button class="btn btn-secondary" onclick="window.CabinetApp.showCreateDepositModal()">
-                                💰 Создать депозит
-                            </button>
-                            <button class="btn btn-outline" onclick="window.CabinetApp.showPlatformAccessModal()">
-                                🔑 Пополнить доступ
-                            </button>
-                            <button class="btn btn-outline" onclick="window.CabinetApp.navigateTo('analytics')">
-                                📊 Аналитика
-                            </button>
-                            <button class="btn btn-outline" onclick="window.CabinetApp.navigateTo('settings')">
-                                ⚙️ Настройки
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Recent Activity -->
-                    <div class="last-activity">
-                        <h3 class="last-activity-title">Последняя активность</h3>
-                        <div class="empty-state last-activity-content">
-                            <div class="empty-icon">📊</div>
-                            <h3>Нет активности</h3>
-                            <p>Здесь будет отображаться ваша последняя активность</p>
-                        </div>
-                    </div>
-                `;
+                return (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) ? '✅ Поддерживается' : '❌ Не поддерживается';
             },
             
             // Контент для портфеля
