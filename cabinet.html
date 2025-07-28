@@ -2286,6 +2286,92 @@
             font-size: 0.8rem;
         }
 
+        /* Акции и промо */
+        .promo-card {
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border-left: 4px solid;
+            margin-bottom: 1rem;
+        }
+
+        .promo-card-success {
+            border-left-color: var(--success-color);
+        }
+
+        .promo-card-secondary {
+            border-left-color: var(--secondary-color);
+        }
+
+        .promo-title {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .promo-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .promo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .promo-timer {
+            font-size: 0.8rem;
+        }
+
+        .promo-permanent {
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+        }
+
+        .promo-btn {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+        }
+
+        /* Рекорды и статистика */
+        .records-grid {
+            margin-bottom: 1rem;
+        }
+
+        .record-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .record-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .record-label {
+            color: var(--text-secondary);
+        }
+
+        .record-value {
+            font-weight: 600;
+        }
+
+        /* Стандартные контейнеры */
+        .standard-container {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .device-info-container {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
         /* Дополнительные утилиты для бонусов */
         .bonus-item-simple {
             background: var(--bg-primary);
@@ -4882,12 +4968,12 @@
                                 <span class="bonus-check">✓</span>
                                 <span>Однократные множители активируются сразу после получения</span>
                             </li>
-                            <li style="margin-bottom: 0.8rem; color: var(--text-secondary); display: flex; align-items: start; gap: 0.5rem;">
-                                <span style="color: var(--success-color);">✓</span>
+                            <li class="bonus-list-item">
+                                <span class="bonus-check">✓</span>
                                 <span>Несколько множителей могут работать одновременно</span>
                             </li>
-                            <li style="color: var(--text-secondary); display: flex; align-items: start; gap: 0.5rem;">
-                                <span style="color: var(--success-color);">✓</span>
+                            <li class="bonus-list-item">
+                                <span class="bonus-check">✓</span>
                                 <span>Прогресс по всем достижениям сохраняется автоматически</span>
                             </li>
                         </ul>
@@ -5087,44 +5173,44 @@
                                 </div>
                             </div>
                             
-                            <div class="stats-card" style="margin-bottom: 1.5rem;">
-                                <h3 style="color: var(--warning-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <div class="stats-card mb-1-5">
+                                <h3 class="bonus-title" style="color: var(--warning-color);">
                                     <span>🎁</span> Акции
                                 </h3>
                                 
-                                <div style="padding: 1rem; background: var(--bg-primary); border-radius: 8px; border-left: 4px solid var(--success-color); margin-bottom: 1rem;">
-                                    <h5 style="color: var(--text-primary); margin-bottom: 0.5rem;">🔥 Горящее предложение!</h5>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.8rem;">Купи 3 множителя - получи 4-й бесплатно!</p>
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span style="color: var(--success-color); font-size: 0.8rem;">Осталось: 2ч 45м</span>
-                                        <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">🔥 Участвовать</button>
+                                <div class="promo-card promo-card-success">
+                                    <h5 class="promo-title">🔥 Горящее предложение!</h5>
+                                    <p class="promo-description">Купи 3 множителя - получи 4-й бесплатно!</p>
+                                    <div class="promo-footer">
+                                        <span class="promo-timer" style="color: var(--success-color);">Осталось: 2ч 45м</span>
+                                        <button class="btn-secondary promo-btn">🔥 Участвовать</button>
                                     </div>
                                 </div>
                                 
-                                <div style="padding: 1rem; background: var(--bg-primary); border-radius: 8px; border-left: 4px solid var(--secondary-color);">
-                                    <h5 style="color: var(--text-primary); margin-bottom: 0.5rem;">💎 VIP бонус</h5>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.8rem;">Скидка 20% на все множители для VIP пользователей</p>
-                                    <span style="color: var(--secondary-color); font-size: 0.8rem;">Постоянно активно</span>
+                                <div class="promo-card promo-card-secondary">
+                                    <h5 class="promo-title">💎 VIP бонус</h5>
+                                    <p class="promo-description">Скидка 20% на все множители для VIP пользователей</p>
+                                    <span class="promo-permanent">Постоянно активно</span>
                                 </div>
                             </div>
                             
                             <div class="stats-card">
-                                <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <h3 class="bonus-title" style="color: var(--primary-color);">
                                     <span>🏆</span> Рекорды
                                 </h3>
                                 
-                                <div style="margin-bottom: 1rem;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Максимальный множитель:</span>
-                                        <span style="color: var(--warning-color); font-weight: 600;">x12.5</span>
+                                <div class="records-grid">
+                                    <div class="record-item">
+                                        <span class="record-label">Максимальный множитель:</span>
+                                        <span class="record-value" style="color: var(--warning-color);">x12.5</span>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Самая долгая активация:</span>
-                                        <span style="color: var(--text-primary); font-weight: 600;">72 часа</span>
+                                    <div class="record-item">
+                                        <span class="record-label">Самая долгая активация:</span>
+                                        <span class="record-value text-primary">72 часа</span>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <span style="color: var(--text-secondary);">Рекордный заработок:</span>
-                                        <span style="color: var(--success-color); font-weight: 600;">$847/час</span>
+                                    <div class="record-item">
+                                        <span class="record-label">Рекордный заработок:</span>
+                                        <span class="record-value text-success">$847/час</span>
                                     </div>
                                 </div>
                             </div>

@@ -1033,7 +1033,25 @@
     }
   },
   "breadcrumbs": {
+    "2025-07-28": [
+      {
+        "time": "00:00",
+        "action": "CSS_ERRORS_FIXED",
+        "description": "Полностью исправлены все CSS ошибки в cabinet.html",
+        "files": ["cabinet.html"],
+        "fixes": 3,
+        "notes": "Удалены дубликаты, добавлены утилитарные классы"
+      }
+    ],
     "2025-07-27": [
+      {
+        "time": "23:45",
+        "action": "CSS_ERRORS_FIXED",
+        "description": "Исправлены CSS ошибки в cabinet.html",
+        "files": ["cabinet.html"],
+        "fixes": 3,
+        "notes": "Удалены дублирования CSS переменных и классов"
+      },
       {
         "time": "18:30",
         "action": "INDEX_UPDATE",
