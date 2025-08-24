@@ -77,10 +77,30 @@
 
   // 3) Автоинициализация UI после готовности DOM (чтобы терминал работал на главной без действий)
   if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', () => { ensureUI(); });
+    document.addEventListener('DOMContentLoaded', () => { ensureUI(); startLandingStatsSync(); });
   } else {
     // DOM уже готов
     ensureUI();
+    startLandingStatsSync();
   }
 
 })();
+
+// Синхронизация статистики лендинга с модульным терминалом (не мешает, если DOM-элементов нет)
+function startLandingStatsSync(){
+  try {
+    const update = () => {
+      const t = window.CabinetTerminal;
+      if (!t) return;
+      const msgEl = document.getElementById('messageCount');
+      if (msgEl) msgEl.textContent = String(t.stats?.messageCount ?? t.messages?.length ?? 0);
+      const upEl = document.getElementById('uptime');
+      if (upEl && typeof t.getSessionTime === 'function') upEl.textContent = t.getSessionTime();
+      const memEl = document.getElementById('memoryUsage');
+      if (memEl && performance && 'memory' in performance) {
+        const m = performance.memory; memEl.textContent = `${Math.round(m.usedJSHeapSize/1024/1024)}MB`;
+      }
+    };
+    setInterval(update, 1000);
+  } catch {}
+}
