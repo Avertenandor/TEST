@@ -14,8 +14,10 @@ export default class HomeModule {
         this.context = context;
         this.container = context.container;
         try {
-            await this.loadTemplate();
+            // 1) Стили подключаем раньше, чтобы избежать "мигания" без стилей
             await this.loadStyles();
+            // 2) Грузим шаблон (при отсутствии собственного — извлекаем из актуального index.html)
+            await this.loadTemplate();
             this.bindInteractions();
             return this;
         } catch (err) {
@@ -56,13 +58,40 @@ export default class HomeModule {
     }
 
     async loadStyles() {
-        // Подключаем стили модуля при наличии
-        if (!document.querySelector('link[data-module="home"]')) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = './modules/home/home.styles.css';
-            link.dataset.module = 'home';
-            document.head.appendChild(link);
+        // Базовые стили модуля
+        const ensureLink = (href, dataKey) => {
+            if (!document.querySelector(`link[data-module="${dataKey}"]`)) {
+                const l = document.createElement('link');
+                l.rel = 'stylesheet';
+                l.href = href;
+                l.dataset.module = dataKey;
+                document.head.appendChild(l);
+            }
+        };
+
+        // 1) Стили лендинга (аутентичный вид)
+        ensureLink('./css/styles.css', 'home-styles');
+        ensureLink('./css/mobile.css', 'home-mobile');
+        ensureLink('./css/pwa-visibility-fix.css', 'home-pwa-fix');
+
+        // 2) Локальные стили модуля (тонкая правка без влияния на другие страницы)
+        ensureLink('./modules/home/home.styles.css', 'home-local');
+
+        // 3) Шрифты: preconnect (безопасно, если уже есть — дубликатов не будет)
+        if (!document.querySelector('link[data-module="fonts-preconnect-1"]')) {
+            const f1 = document.createElement('link');
+            f1.rel = 'preconnect';
+            f1.href = 'https://fonts.googleapis.com';
+            f1.dataset.module = 'fonts-preconnect-1';
+            document.head.appendChild(f1);
+        }
+        if (!document.querySelector('link[data-module="fonts-preconnect-2"]')) {
+            const f2 = document.createElement('link');
+            f2.rel = 'preconnect';
+            f2.href = 'https://fonts.gstatic.com';
+            f2.crossOrigin = 'anonymous';
+            f2.dataset.module = 'fonts-preconnect-2';
+            document.head.appendChild(f2);
         }
     }
 
@@ -87,6 +116,8 @@ export default class HomeModule {
 
             // Пробуем найти крупные контейнеры контента
             const candidates = [
+                // приоритет: актуальная верстка проекта
+                '#genesis-app',
                 '#main', '#root', 'main', '#content', '.landing', '.page', '.wrapper'
             ];
             for (const sel of candidates) {

@@ -1,6 +1,132 @@
 // modules/terminal/terminal.module.js
 // Модуль терминала на основе кода с главной страницы
 
+// Глобальный перехватчик (устанавливается один раз на весь сайт)
+(function installGlobalInterceptors(){
+    try {
+        if (window.__terminalInterceptorsInstalled) return;
+        window.__terminalInterceptorsInstalled = true;
+
+        // Ранний буфер логов до инициализации UI
+        window.__terminalBuffer = window.__terminalBuffer || [];
+
+        const levels = ['trace','debug','log','info','warn','error'];
+        const originalConsole = {};
+        levels.forEach(l => { originalConsole[l] = console[l]; });
+
+        // Перехват console.*
+        levels.forEach(level => {
+            console[level] = function(...args){
+                try { originalConsole[level].apply(console, args); } catch {}
+                try {
+                    const entry = { ts: Date.now(), level, source:'console', message: args.map(a => {
+                        try { return typeof a === 'string' ? a : JSON.stringify(a); } catch { return String(a); }
+                    }).join(' ')};
+                    window.__terminalBuffer.push(entry);
+                    if (window.CabinetTerminal?.logFromInterceptor) {
+                        window.CabinetTerminal.logFromInterceptor(entry);
+                    }
+                } catch {}
+            };
+        });
+
+        // window.onerror
+        window.addEventListener('error', function(e){
+            try {
+                const isResource = e.target && (e.target.tagName === 'IMG' || e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK');
+                const entry = isResource ? {
+                    ts: Date.now(), level:'error', source:'resource',
+                    message: `Resource load error: <${e.target.tagName.toLowerCase()}> ${e.target.src||e.target.href||''}`
+                } : {
+                    ts: Date.now(), level:'error', source:'onerror',
+                    message: e.message || 'Unhandled error', details: { filename: e.filename, lineno: e.lineno, colno: e.colno }
+                };
+                window.__terminalBuffer.push(entry);
+                window.CabinetTerminal?.logFromInterceptor?.(entry);
+            } catch {}
+        }, true);
+
+        // unhandledrejection
+        window.addEventListener('unhandledrejection', function(e){
+            try {
+                const reason = e.reason;
+                const msg = (reason && (reason.message || reason.toString && reason.toString())) || 'Unhandled promise rejection';
+                const entry = { ts: Date.now(), level:'error', source:'unhandledrejection', message: String(msg) };
+                window.__terminalBuffer.push(entry);
+                window.CabinetTerminal?.logFromInterceptor?.(entry);
+            } catch {}
+        });
+
+        // fetch
+        const originalFetch = window.fetch?.bind(window);
+        if (originalFetch) {
+            window.fetch = async function(input, init){
+                const start = performance.now();
+                let url = '';
+                try { url = typeof input === 'string' ? input : (input?.url || ''); } catch {}
+                const method = (init && init.method) || 'GET';
+                try {
+                    const resp = await originalFetch(input, init);
+                    const dur = Math.round(performance.now() - start);
+                    const entry = { ts: Date.now(), level: (resp.ok?'log':'warn'), source:'fetch', message:`${method} ${url} -> ${resp.status} (${dur}ms)` };
+                    window.__terminalBuffer.push(entry);
+                    window.CabinetTerminal?.logFromInterceptor?.(entry);
+                    return resp;
+                } catch (err) {
+                    const dur = Math.round(performance.now() - start);
+                    const entry = { ts: Date.now(), level:'error', source:'fetch', message:`${method} ${url} -> network error (${dur}ms): ${err?.message||err}` };
+                    window.__terminalBuffer.push(entry);
+                    window.CabinetTerminal?.logFromInterceptor?.(entry);
+                    throw err;
+                }
+            };
+        }
+
+        // XHR
+        const XHR = window.XMLHttpRequest;
+        if (XHR) {
+            const open = XHR.prototype.open;
+            const send = XHR.prototype.send;
+            XHR.prototype.open = function(method, url){
+                this.__terminal = { method, url, start: 0 };
+                return open.apply(this, arguments);
+            };
+            XHR.prototype.send = function(body){
+                if (this.__terminal) this.__terminal.start = performance.now();
+                this.addEventListener('loadend', () => {
+                    try {
+                        const t = this.__terminal || { method:'GET', url:'' };
+                        const dur = t.start ? Math.round(performance.now() - t.start) : 0;
+                        const entry = { ts: Date.now(), level:(this.status>=400?'warn':'log'), source:'xhr', message:`${t.method} ${t.url} -> ${this.status} (${dur}ms)` };
+                        window.__terminalBuffer.push(entry);
+                        window.CabinetTerminal?.logFromInterceptor?.(entry);
+                    } catch {}
+                });
+                return send.apply(this, arguments);
+            };
+        }
+
+        // Формы: submit/invalid
+        window.addEventListener('submit', (e) => {
+            try {
+                const form = e.target;
+                const prevented = e.defaultPrevented;
+                const entry = { ts: Date.now(), level: prevented ? 'warn':'info', source:'form', message:`form submit${prevented?' (prevented)':''}: ${form?.name||form?.id||form?.action||''}` };
+                window.__terminalBuffer.push(entry);
+                window.CabinetTerminal?.logFromInterceptor?.(entry);
+            } catch {}
+        }, true);
+        window.addEventListener('invalid', (e) => {
+            try {
+                const el = e.target;
+                const entry = { ts: Date.now(), level:'warn', source:'form', message:`invalid field: ${el?.name||el?.id||el?.tagName}` };
+                window.__terminalBuffer.push(entry);
+                window.CabinetTerminal?.logFromInterceptor?.(entry);
+            } catch {}
+        }, true);
+    } catch {}
+})();
+
 window.CabinetTerminal = {
     // Конфигурация
     config: {
@@ -16,7 +142,8 @@ window.CabinetTerminal = {
         }
     },
 
-    // Статистика
+    // Буфер и статистика
+    messages: [],
     stats: {
         messageCount: 0, errorCount: 0, warningCount: 0, successCount: 0,
         apiCalls: 0, transactions: 0, startTime: Date.now(),
@@ -94,8 +221,13 @@ window.CabinetTerminal = {
 
         this.bindElements();
         this.attachEventListeners();
+    this.enableDragAndResize();
+    this.installInterceptors();
         this.displayWelcomeMessage();
         this.startUpdateLoop();
+        
+    // Публичный алиас для совместимости: window.GenesisTerminal
+    window.GenesisTerminal = this.getPublicAPI();
         
         this.state.isInitialized = true;
         this.log('🚀 GENESIS Terminal v2.0 initialized', 'system');
@@ -126,6 +258,70 @@ window.CabinetTerminal = {
                 this.state.autoScroll = scrollTop + clientHeight >= scrollHeight - 10;
             });
         }
+    },
+
+    enableDragAndResize() {
+        try {
+            const root = this.elements.container;
+            const header = root?.querySelector('.genesis-terminal-header');
+            if (!root || !header) return;
+            root.style.position = 'fixed';
+            root.style.right = '12px';
+            root.style.bottom = '12px';
+            root.style.maxWidth = '90vw';
+            root.style.maxHeight = '90vh';
+            root.style.resize = 'both';
+            root.style.overflow = 'auto';
+
+            let dragging = false, startX=0, startY=0, startLeft=0, startTop=0;
+            header.style.cursor = 'move';
+            header.addEventListener('mousedown', (e)=>{
+                dragging = true;
+                startX = e.clientX; startY = e.clientY;
+                const rect = root.getBoundingClientRect();
+                startLeft = rect.left; startTop = rect.top;
+                e.preventDefault();
+            });
+            window.addEventListener('mousemove', (e)=>{
+                if (!dragging) return;
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                root.style.left = Math.max(0, startLeft + dx) + 'px';
+                root.style.top = Math.max(0, startTop + dy) + 'px';
+                root.style.right = 'auto';
+                root.style.bottom = 'auto';
+            });
+            window.addEventListener('mouseup', ()=> dragging=false);
+        } catch {}
+    },
+
+    installInterceptors() {
+        // Дренируем ранний буфер в UI
+        try {
+            if (Array.isArray(window.__terminalBuffer)) {
+                window.__terminalBuffer.forEach(e => this.logFromInterceptor(e));
+                // не чистим буфер — пусть накапливается для сторонних слушателей
+            }
+        } catch {}
+    },
+
+    // Паблик API для других частей приложения
+    getPublicAPI() {
+        return {
+            clear: () => this.clear(),
+            copyAll: () => this.copyAll(),
+            exportLogs: () => this.exportLogs(),
+            minimize: () => this.minimize(),
+            toggleFullscreen: () => this.toggleFullscreen(),
+            toggleStats: () => this.toggleStats(),
+            toggleTheme: () => this.toggleTheme(),
+            search: (q) => this.search(q),
+            toggleFilter: (k) => this.toggleFilter(k),
+            handleInput: (e) => this.handleInput(e),
+            handleAutocomplete: (v) => this.handleAutocomplete(v),
+            log: (m,t,d) => this.log(m,t,d),
+            get errorCount(){ return window.CabinetTerminal?.stats?.errorCount || 0; }
+        };
     },
 
     // Обработка ввода
@@ -225,7 +421,8 @@ window.CabinetTerminal = {
         if (!this.elements.body) return;
 
         const messageDiv = document.createElement('div');
-        messageDiv.className = `terminal-message terminal-${type}`;
+    messageDiv.className = `terminal-message terminal-${type}`;
+    messageDiv.dataset.level = type;
 
         const timestamp = new Date().toLocaleTimeString();
         const icon = this.getTypeIcon(type);
@@ -238,6 +435,8 @@ window.CabinetTerminal = {
         `;
 
         this.elements.body.appendChild(messageDiv);
+    // сохраняем в массив
+    this.messages.push({ ts: Date.now(), type, message, data });
         this.stats.messageCount++;
         this.stats.typeCounts[type]++;
 
@@ -257,7 +456,18 @@ window.CabinetTerminal = {
                 firstMessage.remove();
                 this.stats.messageCount--;
             }
+            if (this.messages.length > this.config.maxMessages) {
+                this.messages.shift();
+            }
         }
+    },
+
+    // Приём из глобальных перехватчиков
+    logFromInterceptor(entry){
+        const levelMap = { trace:'debug', debug:'debug', log:'info', info:'info', warn:'warning', error:'error' };
+        const t = levelMap[entry.level] || 'info';
+        const src = entry.source ? ` [${entry.source}]` : '';
+        this.log(`${src} ${entry.message}`, t, entry.details);
     },
 
     // Получение иконки для типа сообщения
@@ -273,6 +483,107 @@ window.CabinetTerminal = {
             transaction: '💸'
         };
         return icons[type] || 'ℹ️';
+    },
+
+    // Системные действия
+    clear() {
+        if (this.elements.body) this.elements.body.innerHTML = '';
+        this.messages = [];
+        this.stats.messageCount = 0; this.stats.errorCount = 0; this.stats.warningCount = 0; this.stats.successCount = 0;
+        Object.keys(this.stats.typeCounts).forEach(k => this.stats.typeCounts[k]=0);
+        this.updateStats?.();
+    },
+
+    async copyAll() {
+        try {
+            const text = this.messages.map(m => {
+                const ts = new Date(m.ts).toISOString();
+                return `[${ts}] ${m.type.toUpperCase()} ${m.message}${m.data? ' '+JSON.stringify(m.data):''}`;
+            }).join('\n');
+            await navigator.clipboard.writeText(text);
+            this.log('📋 Logs copied to clipboard', 'success');
+        } catch (e) {
+            this.log('❌ Failed to copy logs', 'error', { error: String(e) });
+        }
+    },
+
+    exportLogs() {
+        try {
+            const blob = new Blob([JSON.stringify(this.messages, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = `genesis-logs-${Date.now()}.json`;
+            document.body.appendChild(a); a.click(); a.remove();
+            URL.revokeObjectURL(url);
+            this.log('📥 Logs exported', 'success');
+        } catch (e) { this.log('❌ Export failed', 'error'); }
+    },
+
+    minimize() {
+        const root = this.elements.container; if (!root) return;
+        root.classList.toggle('is-minimized');
+        const body = this.elements.body;
+        const inputWrap = root.querySelector('.genesis-terminal-input-wrapper');
+        const toolbar = root.querySelector('.genesis-terminal-toolbar');
+        const info = root.querySelector('.terminal-info-panels');
+        const quick = root.querySelector('.terminal-quick-commands');
+        const show = !root.classList.contains('is-minimized');
+        [body, inputWrap, toolbar, info, quick].forEach(el => { if (el) el.style.display = show ? '' : 'none'; });
+    },
+
+    toggleFullscreen() {
+        const root = this.elements.container; if (!root) return;
+        root.classList.toggle('is-fullscreen');
+        if (root.classList.contains('is-fullscreen')) {
+            root.style.left='0'; root.style.top='0'; root.style.right='0'; root.style.bottom='0';
+            root.style.width='100vw'; root.style.height='100vh';
+        }
+    },
+
+    toggleStats() {
+        this.state.isStatsVisible = !this.state.isStatsVisible;
+        if (this.elements.statsPanel) {
+            this.elements.statsPanel.style.display = this.state.isStatsVisible ? 'block' : 'none';
+        }
+    },
+
+    toggleTheme() {
+        const idx = this.config.themes.indexOf(this.config.currentTheme);
+        const next = this.config.themes[(idx+1)%this.config.themes.length];
+        this.setTheme(next);
+    },
+
+    setTheme(theme){
+        this.config.currentTheme = theme;
+        const root = this.elements.container;
+        if (!root) return;
+        this.config.themes.forEach(t => root.classList.remove(`theme-${t}`));
+        root.classList.add(`theme-${theme}`);
+    },
+
+    toggleAutoScroll(){ this.state.autoScroll = !this.state.autoScroll; },
+    toggleTimestamps(){ this.state.timestamps = !this.state.timestamps; },
+    toggleSound(){ this.state.soundNotifications = !this.state.soundNotifications; },
+    playNotificationSound(){ /* опционально добавить звук */ },
+
+    search(query){
+        const q = (query||'').toLowerCase();
+        if (!this.elements.body) return;
+        Array.from(this.elements.body.children).forEach(row => {
+            const text = row.textContent?.toLowerCase()||'';
+            row.style.display = q && !text.includes(q) ? 'none' : '';
+        });
+    },
+
+    toggleFilter(level){
+        this.config.filters[level] = !this.config.filters[level];
+        if (!this.elements.body) return;
+        Array.from(this.elements.body.children).forEach(row => {
+            const lv = row.dataset.level;
+            if (lv && this.config.filters.hasOwnProperty(lv)) {
+                row.style.display = this.config.filters[lv] ? '' : 'none';
+            }
+        });
     },
 
     // Команды
