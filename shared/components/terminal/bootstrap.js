@@ -75,4 +75,12 @@
     toggleFilter: (k) => { if (window.CabinetTerminal) window.CabinetTerminal.toggleFilter(k); }
   };
 
+  // 3) Автоинициализация UI после готовности DOM (чтобы терминал работал на главной без действий)
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', () => { ensureUI(); });
+  } else {
+    // DOM уже готов
+    ensureUI();
+  }
+
 })();
