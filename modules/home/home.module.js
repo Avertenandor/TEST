@@ -68,12 +68,12 @@ export default class HomeModule {
 
     bindInteractions() {
         // Примеры: плавной прокрутки к секциям, клики по CTA
-        const cta = this.container.querySelector('[data-action="open-app"]');
+    const cta = this.container.querySelector('[data-action="open-app"]');
         if (cta) {
             cta.addEventListener('click', (e) => {
                 e.preventDefault();
                 // Перейти в приложение (dashboard)
-                if (window.router) window.router.navigate('/');
+        if (window.router) window.router.navigate('/dashboard');
             });
         }
     }

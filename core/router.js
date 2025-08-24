@@ -11,8 +11,9 @@ export class Router {
         
         // Routes mapping from config
         this.routes = {
-            '/': 'dashboard',
+            '/': 'home',
             '/home': 'home',
+            '/dashboard': 'dashboard',
             '/dashboard': 'dashboard',
             '/auth': 'auth',
             '/deposits': 'deposits',
