@@ -408,21 +408,54 @@ if (typeof window !== 'undefined') {
     };
 
     // Шим для совместимости: если кто-то вызывает QRCode.toCanvas на DIV — перенаправим на canvas
-    if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
-        const origToCanvas = window.QRCode.toCanvas.bind(window.QRCode);
-        window.QRCode.toCanvas = function(target, text, options, cb) {
-            let canvasTarget = target;
-            try {
-                if (target && target.tagName && target.tagName.toLowerCase() !== 'canvas') {
-                    const canvas = document.createElement('canvas');
-                    target.innerHTML = '';
-                    target.appendChild(canvas);
-                    canvasTarget = canvas;
-                }
-            } catch {}
-            return origToCanvas(canvasTarget, text, options, cb);
-        };
+    const installToCanvasShim = () => {
+        if (!window.QRCode || typeof window.QRCode.toCanvas !== 'function') return false;
+        if (window.__QR_TO_CANVAS_SHIMMED__) return true;
+        try {
+            const origToCanvas = window.QRCode.toCanvas.bind(window.QRCode);
+            window.QRCode.toCanvas = function(target, text, options, cb) {
+                let canvasTarget = target;
+                try {
+                    if (target && target.tagName && target.tagName.toLowerCase() !== 'canvas') {
+                        const canvas = document.createElement('canvas');
+                        target.innerHTML = '';
+                        target.appendChild(canvas);
+                        canvasTarget = canvas;
+                    }
+                } catch {}
+                return origToCanvas(canvasTarget, text, options, cb);
+            };
+            window.__QR_TO_CANVAS_SHIMMED__ = true;
+            return true;
+        } catch { return false; }
+    };
+    // Пытаемся установить сразу и повторно, если QRCode появится позже
+    if (!installToCanvasShim()) {
+        const shimTimer = setInterval(() => {
+            if (installToCanvasShim()) clearInterval(shimTimer);
+        }, 300);
+        // Безопасная остановка через 10 секунд
+        setTimeout(() => clearInterval(shimTimer), 10000);
     }
+
+    // Перепривязываем мост после полной загрузки, на случай, если legacy перезаписал функцию
+    window.addEventListener('DOMContentLoaded', () => {
+        const bridge = window.generateQRCode;
+        window.generateQRCode = async function(container, data) {
+            try {
+                // если другой код заменил мост, всё равно используем наш QRGenerator
+                return await window.QRGenerator.generatePaymentQR && typeof data === 'object'
+                    ? (await window.QRGenerator.generatePaymentQR({ container, ...data }), true)
+                    : (await (bridge ? bridge(container, data) : window.QRGenerator.copyAddress(container)), true);
+            } catch (e) {
+                try { window.QRGenerator.showFallback(container, data?.address || '', data?.amount || '', data?.token || ''); } catch {}
+                return false;
+            }
+        };
+    });
+
+    // Метка версии моста для отладки
+    window.QR_BRIDGE_VERSION = '2.1';
 }
 
 // Создаем глобальный экземпляр
