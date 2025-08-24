@@ -8818,7 +8818,47 @@
     <!-- MCP-MARKER:SCRIPT:TERMINАЛ_SERVICE - Отключено на главной -->
     
     <!-- MCP-MARKER:SCRIPT:TERMINAL_HOTKEYS - Отключено на главной -->
-    
+
+    <!-- MCP-MARKER:LANDING:BOOTSTRAP - Лёгкий bootstrap для лендинга (без app.js) -->
+    <script>
+        (function landingBootstrap(){
+            function revealLanding(){
+                if (window._landingReadyDone) return;
+                window._landingReadyDone = true;
+                try {
+                    const appEl = document.getElementById('genesis-app');
+                    if (appEl) appEl.classList.remove('hidden-initially');
+                    const loading = document.getElementById('genesis-loading');
+                    if (loading){
+                        loading.style.opacity = '0';
+                        setTimeout(() => { loading.style.display = 'none'; }, 300);
+                    }
+                    const statusEl = document.getElementById('loading-status');
+                    if (statusEl) statusEl.textContent = 'Готово';
+                } catch {}
+            }
+
+            function maybeReveal(){
+                if (window._landingReadyDone) return;
+                if (document.readyState !== 'loading'){
+                    revealLanding();
+                }
+            }
+
+            // Когда библиотеки готовы — тоже раскрываем
+            document.addEventListener('librariesReady', () => revealLanding(), { once: true });
+
+            if (document.readyState === 'loading'){
+                document.addEventListener('DOMContentLoaded', () => maybeReveal(), { once: true });
+            } else {
+                maybeReveal();
+            }
+
+            // Fallback на случай задержек
+            setTimeout(maybeReveal, 1500);
+        })();
+    </script>
+
     <!-- MCP-MARKER:DOCUMENT:END_BODY - Конец тела документа -->
     </body>
 <!-- MCP-MARKER:DOCUMENT:END_HTML - Конец HTML документа -->
