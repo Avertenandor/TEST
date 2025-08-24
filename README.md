@@ -128,25 +128,34 @@ npm run build
 
 ```
 GENESIS-Website-Clean/
-├── index.html              # Landing page
-├── cabinet.html            # Main application
-├── manifest.json           # PWA manifest
-├── sw.js                   # Service Worker
-├── js/                     # JavaScript files
-│   ├── config.js          # Platform configuration
-│   ├── app.js             # Main application
-│   ├── models.js          # Data models
-│   └── services/          # Service modules
-├── cabinet/               # Modular cabinet system
-│   └── js/
-│       ├── core/          # Core modules
-│       ├── components/    # UI components
-│       └── sections/      # Page sections
-├── css/                   # Stylesheets
-├── assets/                # Images and media
-├── tests/                 # Test files
-└── docs/                  # Documentation
+├── index.html                # Landing page (маркетинг)
+├── app.html                  # SPA контейнер (модульная архитектура)
+├── manifest.json             # PWA manifest
+├── sw.js                     # Service Worker
+├── core/                     # Ядро SPA
+│   ├── bootstrap.js         # Инициализация приложения
+│   ├── router.js            # Роутер модулей
+│   ├── module-loader.js     # Динамическая загрузка модулей
+│   ├── event-bus.js         # Шина событий
+│   └── store.js             # Глобальное состояние
+├── modules/                  # ES6-модули разделов
+│   ├── home/                # Главная (landing) в SPA
+│   ├── dashboard/           # Панель управления
+│   ├── deposits/            # Депозиты
+│   └── ...                  # Другие разделы
+├── shared/                   # Общие компоненты/сервисы/стили
+├── css/                      # Статические стили
+├── assets/                   # Изображения и медиа
+└── tests/                    # Тесты
 ```
+
+### 🧱 Modular Architecture (SPA)
+- Точка входа: `app.html`
+- Маршруты SPA: управляются `core/router.js`
+- Разделы вынесены в модули (`/modules/<name>`), загрузка — динамическая
+- Новый маршрут: `/home` (модуль `modules/home`) — главная в SPA без потери контента
+
+Примечание: публичная главная `index.html` остаётся для SEO и маркетинга; SPA-доступ — через `/home` или пункт меню «Главная».
 
 ## 🔧 Configuration
 

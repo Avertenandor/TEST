@@ -17,7 +17,7 @@
         "success_rate": "56.2%",
         "auth_test": "successful",
         "navigation_elements": 67,
-        "modules_tested": ["auth", "dashboard"],
+  "modules_tested": ["auth", "dashboard", "home"],
         "api_integration": "working_with_test_mode"
       },
       "features": [
