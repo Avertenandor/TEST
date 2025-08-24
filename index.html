@@ -6343,78 +6343,7 @@
         <section id="genesis-terminal-section" class="genesis-section" role="region" aria-label="Терминал системы">
             <div class="genesis-container">
                 <div id="genesis-terminal" class="genesis-terminal genesis-panel-glass" role="log" aria-label="GENESIS TERMINAL v2.0">
-                        <!-- MCP-MARKER:UI:TERMINAL_HEADER - Заголовок терминала -->
-                        <div class="genesis-terminal-header">
-                            <!-- MCP-MARKER:BRANDING:TERMINAL_TITLE - Название терминала -->
-                            <div class="terminal-title">
-                                <span>⚡</span>
-                                <span>GENESIS TERMINAL v2.0</span>
-                            </div>
-                            
-                            <!-- MCP-MARKER:UI:TERMINAL_STATUS - Статус терминала -->
-                            <div class="terminal-status" aria-hidden="true">
-                                <!-- MCP-MARKER:MONITORING:TERMINAL_STATS - Статистика терминала -->
-                                <div class="terminal-stats">
-                                    <div class="terminal-stat">
-                                        <span>📝</span>
-                                        <span id="messageCount">0</span>
-                                    </div>
-                                    <div class="terminal-stat">
-                                        <span>⏱️</span>
-                                        <span id="uptime">00:00:00</span>
-                                    </div>
-                                    <div class="terminal-stat">
-                                        <span>💾</span>
-                                        <span id="memoryUsage">0KB</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- MCP-MARKER:UI:TERMINAL_CONTROLS - Управление терминалом -->
-                            <div class="terminal-controls" role="toolbar" aria-label="Управление терминалом">
-                                <button class="terminal-btn" onclick="window.GenesisTerminal.toggleTheme()" title="Сменить тему" aria-label="Сменить тему">
-                                    🎨
-                                    <span class="tooltip">Темы</span>
-                                </button>
-                                <button class="terminal-btn" onclick="window.GenesisTerminal.toggleStats()" title="Статистика" aria-label="Показать статистику">
-                                    📊
-                                    <span class="tooltip">Статистика</span>
-                                </button>
-                                <button class="terminal-btn" onclick="window.GenesisTerminal.toggleSound()" title="Звук" aria-label="Переключить звук">
-                                    🔊
-                                    <span class="tooltip">Звук вкл/выкл</span>
-                                </button>
-                                <button class="terminal-btn" onclick="window.GenesisTerminal.copyAll()" title="Копировать все" aria-label="Копировать все логи">
-                                    📋
-                                    <span class="tooltip">Копировать все логи</span>
-                                </button>
-                                <button class="terminal-btn" onclick="window.GenesisTerminal.exportLogs()" title="Экспорт" aria-label="Экспортировать логи">
-                                    📥
-                                    <span class="tooltip">Экспорт логов</span>
-                                </button>
-                                <button class="terminal-btn" onclick="window.GenesisTerminal.toggleFullscreen()" title="Полный экран" aria-label="Полноэкранный режим">
-                                    ⛶
-                                    <span class="tooltip">Полный экран</span>
-                                </button>
-                                <button class="terminal-btn" onclick="window.GenesisTerminal.minimize()" title="Свернуть" aria-label="Свернуть терминал">
-                                    —
-                                    <span class="tooltip">Свернуть</span>
-                                </button>
-                                <button class="terminal-btn" onclick="window.GenesisTerminal.clear()" title="Очистить" aria-label="Очистить терминал">
-                                    🗑️
-                                    <span class="tooltip">Очистить</span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- MCP-MARKER:UI:TERMINAL_TOOLBAR - Панель инструментов терминала -->
-                        <!-- Панель инструментов -->
-                        <div class="genesis-terminal-toolbar">
-                            <!-- MCP-MARKER:FEATURE:TERMINAL_SEARCH - Поиск в терминале -->
-                            <div class="terminal-search">
-                                <span>🔍</span>
-                                <input type="text" placeholder="Поиск в логах..." onkeyup="window.GenesisTerminal.search(this.value)" aria-label="Поиск в логах">
-                            </div>
+                        <!-- Удалён встроенный старый терминал: теперь используется модульный UI через shared/components/terminal/bootstrap.js -->
                             
                             <!-- MCP-MARKER:FEATURE:LOG_FILTERS - Фильтры логов -->
                             <div class="terminal-filters" role="group" aria-label="Фильтры сообщений">
@@ -8623,7 +8552,7 @@
         }
         
         // MCP-MARKER:FUNCTION:CLOSE_DEPOSIT_FORM - Закрытие формы депозита
-        function closeDepositForm() {
+    function closeDepositForm() {
             const formContainer = document.getElementById('deposit-form-container');
             if (formContainer) {
                 formContainer.style.display = 'none';
@@ -8634,16 +8563,20 @@
                     form.reset();
                     hideCalculation();
                     hideValidationErrors();
-                    document.getElementById('deposit-limits').style.display = 'none';
+            const limits = document.getElementById('deposit-limits');
+            if (limits) limits.style.display = 'none';
                 }
             }
         }
         
         function loadUserDepositStats() {
             // Заглушка для статистики пользователя
-            document.getElementById('total-deposits').textContent = '$0';
-            document.getElementById('total-earnings').textContent = '$0';
-            document.getElementById('active-deposits').textContent = '0';
+        const elTotal = document.getElementById('total-deposits');
+        const elEarnings = document.getElementById('total-earnings');
+        const elActive = document.getElementById('active-deposits');
+        if (elTotal) elTotal.textContent = '$0';
+        if (elEarnings) elEarnings.textContent = '$0';
+        if (elActive) elActive.textContent = '0';
         }
         
         // MCP-MARKER:FUNCTION:PASTE_FROM_CLIPBOARD - Вставка из буфера обмена

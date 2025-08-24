@@ -315,12 +315,14 @@ window.CabinetTerminal = {
             toggleFullscreen: () => this.toggleFullscreen(),
             toggleStats: () => this.toggleStats(),
             toggleTheme: () => this.toggleTheme(),
+            toggleSound: () => this.toggleSound(),
             search: (q) => this.search(q),
             toggleFilter: (k) => this.toggleFilter(k),
             handleInput: (e) => this.handleInput(e),
             handleAutocomplete: (v) => this.handleAutocomplete(v),
             log: (m,t,d) => this.log(m,t,d),
-            get errorCount(){ return window.CabinetTerminal?.stats?.errorCount || 0; }
+            get errorCount(){ return window.CabinetTerminal?.stats?.errorCount || 0; },
+            get messageCount(){ return window.CabinetTerminal?.stats?.messageCount || window.CabinetTerminal?.messages?.length || 0; }
         };
     },
 
