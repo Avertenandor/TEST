@@ -6173,45 +6173,7 @@
             </div>
         </div>
         
-        <!-- MCP-MARKER:TERMINAL:GENESIS_TERMINAL - GENESIS TERMINAL v2.0 -->
-        <!-- MCP-MARKER:COMPONENT:TERMINAL_INTERFACE - Интерфейс терминала -->
-        <!-- MCP-MARKER:MONITORING:SYSTEM_LOGS - Системные логи -->
-        <!-- MCP-MARKER:SECTION:GENESIS_TERMINAL - GENESIS TERMINAL v2.0 -->
-        <section id="genesis-terminal-section" class="genesis-section" role="region" aria-label="Терминал системы">
-            <div class="genesis-container">
-                <div id="genesis-terminal" class="genesis-terminal genesis-panel-glass" role="log" aria-label="GENESIS TERMINAL v2.0">
-                        <!-- Удалён встроенный старый терминал: теперь используется модульный UI через shared/components/terminal/bootstrap.js -->
-                            
-                            <!-- MCP-MARKER:FEATURE:LOG_FILTERS - Фильтры логов -->
-                            <div class="terminal-filters" role="group" aria-label="Фильтры сообщений">
-                                <label class="terminal-filter">
-                                    <input type="checkbox" checked onchange="window.GenesisTerminal.toggleFilter('info')">
-                                    <span>INFO</span>
-                                </label>
-                                <label class="terminal-filter">
-                                    <input type="checkbox" checked onchange="window.GenesisTerminal.toggleFilter('success')">
-                                    <span>SUCCESS</span>
-                                </label>
-                                <label class="terminal-filter">
-                                    <input type="checkbox" checked onchange="window.GenesisTerminal.toggleFilter('warning')">
-                                    <span>WARNING</span>
-                                </label>
-                                <label class="terminal-filter">
-                                    <input type="checkbox" checked onchange="window.GenesisTerminal.toggleFilter('error')">
-                                    <span>ERROR</span>
-                                </label>
-                                <label class="terminal-filter">
-                                    <input type="checkbox" checked onchange="window.GenesisTerminal.toggleFilter('debug')">
-                                    <span>DEBUG</span>
-                                </label>
-                                <label class="terminal-filter">
-                                    <input type="checkbox" checked onchange="window.GenesisTerminal.toggleFilter('system')">
-                                    <span>SYSTEM</span>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <!-- Удалён старый встроенный терминал v2.1: используется модульный через bootstrap.js -->
+    <!-- Терминал на главной не встраивается статически: UI подключится через shared/components/terminal/bootstrap.js по требованию -->
                             <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
                             <h3>📱 Ваше устройство</h3>
                             <div class="info-item">
