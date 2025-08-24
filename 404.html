@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перенаправление...</title>
+    <script>
+        // Список маршрутов приложения
+        const appRoutes = [
+            '/auth',
+            '/deposits',
+            '/portfolio',
+            '/transactions',
+            '/analytics',
+            '/bonuses',
+            '/gifts',
+            '/referrals',
+            '/multipliers',
+            '/mining-rent',
+            '/my-device',
+            '/plex-coin',
+            '/settings',
+            '/experience',
+            '/rank',
+            '/how-it-works',
+            '/terminal',
+            '/platform-access'
+        ];
+        
+        // Получаем текущий путь
+        const currentPath = window.location.pathname;
+        
+        // Проверяем, является ли это маршрутом приложения
+        if (appRoutes.includes(currentPath) || currentPath === '/') {
+            // Перенаправляем на app.html с сохранением пути
+            window.location.replace('/app.html' + window.location.search + window.location.hash);
+        } else {
+            // Если это не маршрут приложения, перенаправляем на главную
+            window.location.replace('/');
+        }
+    </script>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0d1117; color: #fff; font-family: Arial, sans-serif;">
+        <div style="text-align: center;">
+            <h1>Перенаправление...</h1>
+            <p>Пожалуйста, подождите</p>
+        </div>
+    </div>
+</body>
+</html>

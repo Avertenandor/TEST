@@ -252,7 +252,7 @@ a:hover {
 .text-warning { color: var(--warning-color); }
 .text-error { color: var(--error-color); }
 
-/* Glass эффект */
+/* MCP-MARKER:STYLE:GLASS_EFFECT - Glass эффект */
 .genesis-panel-glass {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(15px);
@@ -284,7 +284,7 @@ a:hover {
     left: 100%;
 }
 
-/* Загрузочный экран */
+/* MCP-MARKER:STYLE:LOADING_SCREEN - Загрузочный экран */
 .genesis-loading-screen {
     position: fixed;
     top: 0;
@@ -353,7 +353,7 @@ a:hover {
     50% { opacity: 0.7; }
 }
 
-/* Header */
+/* MCP-MARKER:STYLE:HEADER - Шапка сайта */
 .genesis-header {
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border-color);
@@ -531,7 +531,7 @@ a:hover {
     opacity: 0.7;
 }
 
-/* Формы */
+/* MCP-MARKER:STYLE:FORMS - Формы */
 .genesis-form-group {
     margin-bottom: 1.5rem;
 }
@@ -579,7 +579,7 @@ a:hover {
     font-size: 0.875rem;
 }
 
-/* Терминал */
+/* MCP-MARKER:STYLE:TERMINAL - Терминал */
 .genesis-terminal {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
     border: 1px solid rgba(255, 165, 0, 0.3);
@@ -1163,7 +1163,7 @@ body[data-terminal-theme="neon"] .genesis-terminal {
     color: #ff00ff;
 }
 
-/* Cards */
+/* MCP-MARKER:STYLE:CARDS - Карточки */
 .genesis-info-card, .stats-card {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(15px);
@@ -1245,7 +1245,7 @@ body[data-terminal-theme="neon"] .genesis-terminal {
     color: var(--error-color);
 }
 
-/* Info items */
+/* MCP-MARKER:STYLE:INFO_ITEMS - Информационные элементы */
 .info-item {
     display: flex;
     justify-content: space-between;
@@ -1320,7 +1320,7 @@ body[data-terminal-theme="neon"] .genesis-terminal {
     }
 }
 
-/* Адаптивность для технической информации */
+/* MCP-MARKER:STYLE:RESPONSIVE_TECH - Адаптивность для технической информации */
 @media (max-width: 768px) {
     .genesis-tech-info-section {
         padding: 2rem 0;
@@ -1402,7 +1402,7 @@ body[data-terminal-theme="neon"] .genesis-terminal {
     }
 }
 
-/* Эффект свечения для заголовков */
+/* MCP-MARKER:STYLE:GLOW_EFFECT - Эффект свечения для заголовков */
 h1::after, h2::after, h3::after {
     content: '';
     position: absolute;
@@ -1418,7 +1418,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     width: 100%;
 }
 
-/* Анимированные микрочастицы для фона */
+/* MCP-MARKER:STYLE:PARTICLES - Анимированные микрочастицы для фона */
 .particles-bg {
     position: fixed;
     top: 0;
@@ -1543,7 +1543,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     animation: none !important;
 }
 
-/* Секция технических данных */
+/* MCP-MARKER:STYLE:TECH_SECTION - Секция технических данных */
 .genesis-tech-info-section {
     padding: 3rem 0;
     background: linear-gradient(135deg, rgba(13, 17, 23, 0.95), rgba(22, 27, 34, 0.95));
@@ -1587,7 +1587,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     margin: 0 auto;
 }
 
-/* ===== PLEX TOKEN SECTION STYLES ===== */
+/* MCP-MARKER:STYLE:PLEX_SECTION - PLEX TOKEN SECTION STYLES */
 
 .genesis-plex-info-section {
     padding: 4rem 0;
@@ -1634,7 +1634,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     line-height: 1.6;
 }
 
-/* PLEX Overview */
+/* MCP-MARKER:STYLE:PLEX_OVERVIEW - PLEX Overview */
 .genesis-plex-overview {
     margin-bottom: 3rem;
     padding: 2rem;
@@ -1731,7 +1731,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     display: inline-block;
 }
 
-/* PLEX Technical Info */
+/* MCP-MARKER:STYLE:PLEX_TECHNICAL - PLEX Technical Info */
 .genesis-plex-tech-info {
     margin-bottom: 3rem;
 }
@@ -1810,7 +1810,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     word-break: break-all;
 }
 
-/* PLEX Links */
+/* MCP-MARKER:STYLE:PLEX_LINKS - PLEX Links */
 .genesis-plex-links {
     margin-bottom: 3rem;
 }
@@ -1884,7 +1884,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     opacity: 0.8;
 }
 
-/* PLEX Benefits */
+/* MCP-MARKER:STYLE:PLEX_BENEFITS - PLEX Benefits */
 .genesis-plex-benefits {
     margin-bottom: 3rem;
 }
@@ -1937,7 +1937,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     margin: 0;
 }
 
-/* PLEX CTA */
+/* MCP-MARKER:STYLE:PLEX_CTA - PLEX CTA */
 .genesis-plex-cta {
     text-align: center;
     padding: 3rem 2rem;
@@ -1970,7 +1970,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     flex-wrap: wrap;
 }
 
-/* Animations */
+/* MCP-MARKER:STYLE:ANIMATIONS - Animations */
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
@@ -1981,7 +1981,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     to { text-shadow: 0 0 30px rgba(255, 165, 0, 0.8); }
 }
 
-/* Mobile Responsive */
+/* MCP-MARKER:STYLE:RESPONSIVE_PLEX - Mobile Responsive */
 @media (max-width: 768px) {
     .genesis-plex-header h2 {
         font-size: 2rem;
@@ -2115,7 +2115,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
   border-color: rgba(255, 107, 53, 0.3);
 }
-/* Секция PWA установки */
+/* MCP-MARKER:STYLE:PWA_INSTALL - Секция PWA установки */
 .genesis-pwa-install-section {
   padding: 3rem 0;
   background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);
@@ -2160,7 +2160,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
   line-height: 1.6;
 }
 
-/* Адаптивность PWA */
+/* MCP-MARKER:STYLE:RESPONSIVE_PWA - Адаптивность PWA */
 @media (max-width: 768px) {
   .genesis-pwa-features-grid { 
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -2311,7 +2311,7 @@ h1:hover::after, h2:hover::after, h3:hover::after {
   opacity: 0.9;
 }
 
-/* Адаптивность QR секции */
+/* MCP-MARKER:STYLE:RESPONSIVE_QR - Адаптивность QR секции */
 @media (max-width: 768px) {
   .genesis-qr-section {
     padding: 1.5rem;

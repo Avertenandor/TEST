@@ -1,0 +1,233 @@
+<!-- modules/bonuses/bonuses.template.html -->
+<div class="bonuses-module">
+    <!-- Заголовок модуля -->
+    <div class="module-header">
+        <div class="header-content">
+            <h1 class="module-title">
+                <span class="title-icon">🎁</span>
+                Бонусы и достижения
+            </h1>
+            <div class="header-stats">
+                <div class="stat-card">
+                    <div class="stat-label">Всего бонусов</div>
+                    <div class="stat-value" id="total-bonus-count">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Текущий множитель</div>
+                    <div class="stat-value multiplier" id="current-multiplier">x1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Активных бонусов</div>
+                    <div class="stat-value" id="active-bonus-count">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="bonuses-content">
+        <!-- Ежедневный бонус -->
+        <div class="bonus-card daily-bonus-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <span class="icon">📅</span>
+                    Ежедневный бонус
+                </h2>
+                <div class="streak-indicator">
+                    <span class="streak-icon">🔥</span>
+                    <span class="streak-count">0</span> дней подряд
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div class="daily-bonus-display">
+                    <div class="bonus-amount">
+                        <span class="amount-value">10-60</span>
+                        <span class="amount-currency">PLEX</span>
+                    </div>
+                    <div class="bonus-timer">
+                        <div class="timer-label">Следующий бонус через:</div>
+                        <div class="timer-value" id="next-bonus-timer">--:--:--</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-gradient btn-large" id="daily-bonus-btn">
+                    <span class="btn-icon">🎁</span>
+                    Получить бонус
+                </button>
+            </div>
+        </div>
+
+        <!-- Множители -->
+        <div class="bonus-card multipliers-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <span class="icon">⚡</span>
+                    Множители дохода
+                </h2>
+                <div class="info-tooltip" title="Увеличивают доход от всех депозитов">
+                    <span class="info-icon">ℹ️</span>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div class="multipliers-grid">
+                    <div class="multiplier-item" data-multiplier="2">
+                        <div class="multiplier-header">
+                            <span class="multiplier-value">x2</span>
+                            <span class="multiplier-duration">24ч</span>
+                        </div>
+                        <div class="multiplier-bonus">+100% к доходу</div>
+                        <div class="multiplier-cost">
+                            <span class="cost-value">100</span>
+                            <span class="cost-currency">PLEX</span>
+                        </div>
+                        <button class="btn btn-multiplier multiplier-btn" data-multiplier="2">
+                            Активировать
+                        </button>
+                    </div>
+                    
+                    <div class="multiplier-item" data-multiplier="3">
+                        <div class="multiplier-header">
+                            <span class="multiplier-value">x3</span>
+                            <span class="multiplier-duration">24ч</span>
+                        </div>
+                        <div class="multiplier-bonus">+200% к доходу</div>
+                        <div class="multiplier-cost">
+                            <span class="cost-value">250</span>
+                            <span class="cost-currency">PLEX</span>
+                        </div>
+                        <button class="btn btn-multiplier multiplier-btn" data-multiplier="3">
+                            Активировать
+                        </button>
+                    </div>
+                    
+                    <div class="multiplier-item premium" data-multiplier="5">
+                        <div class="multiplier-header">
+                            <span class="multiplier-value">x5</span>
+                            <span class="multiplier-duration">24ч</span>
+                        </div>
+                        <div class="multiplier-bonus">+400% к доходу</div>
+                        <div class="multiplier-cost">
+                            <span class="cost-value">500</span>
+                            <span class="cost-currency">PLEX</span>
+                        </div>
+                        <button class="btn btn-multiplier multiplier-btn" data-multiplier="5">
+                            Активировать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Активные бонусы -->
+        <div class="bonus-card active-bonuses-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <span class="icon">✨</span>
+                    Активные бонусы
+                </h2>
+            </div>
+            
+            <div class="card-body">
+                <div id="active-bonuses-list" class="active-bonuses-list">
+                    <!-- Активные бонусы будут загружены динамически -->
+                    <div class="no-bonuses">
+                        <div class="no-bonuses-icon">😴</div>
+                        <div class="no-bonuses-text">Нет активных бонусов</div>
+                        <div class="no-bonuses-hint">Активируйте бонусы для увеличения дохода</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Достижения -->
+        <div class="bonus-card achievements-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <span class="icon">🏆</span>
+                    Достижения
+                </h2>
+                <div class="achievements-progress">
+                    <span class="progress-text">Выполнено: </span>
+                    <span class="progress-value">0 / 5</span>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div id="achievements-container" class="achievements-list">
+                    <!-- Достижения будут загружены динамически -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Специальные предложения -->
+        <div class="bonus-card special-offers-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <span class="icon">💎</span>
+                    Специальные предложения
+                </h2>
+                <div class="offers-timer">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">Обновление через: </span>
+                    <span class="timer-value">23:59:59</span>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div class="special-offers-grid">
+                    <div class="offer-item">
+                        <div class="offer-badge">HOT</div>
+                        <div class="offer-icon">🚀</div>
+                        <div class="offer-title">Стартовый пакет</div>
+                        <div class="offer-description">
+                            +50% к первому депозиту
+                        </div>
+                        <div class="offer-price">
+                            <span class="old-price">100 PLEX</span>
+                            <span class="new-price">50 PLEX</span>
+                        </div>
+                        <button class="btn btn-offer bonus-activate-btn" data-bonus-type="starter">
+                            Получить
+                        </button>
+                    </div>
+                    
+                    <div class="offer-item">
+                        <div class="offer-badge">NEW</div>
+                        <div class="offer-icon">💰</div>
+                        <div class="offer-title">Бонус инвестора</div>
+                        <div class="offer-description">
+                            +10% к доходу на 7 дней
+                        </div>
+                        <div class="offer-price">
+                            <span class="price">200 PLEX</span>
+                        </div>
+                        <button class="btn btn-offer bonus-activate-btn" data-bonus-type="investor">
+                            Получить
+                        </button>
+                    </div>
+                    
+                    <div class="offer-item vip">
+                        <div class="offer-badge">VIP</div>
+                        <div class="offer-icon">👑</div>
+                        <div class="offer-title">VIP статус</div>
+                        <div class="offer-description">
+                            Эксклюзивные привилегии
+                        </div>
+                        <div class="offer-price">
+                            <span class="price">1000 PLEX</span>
+                        </div>
+                        <button class="btn btn-offer bonus-activate-btn" data-bonus-type="vip">
+                            Получить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомления об успехе -->
+    <div class="success-message" style="display: none;"></div>
+    <div class="error-message" style="display: none;"></div>
+</div>

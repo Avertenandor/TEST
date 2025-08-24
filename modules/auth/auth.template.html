@@ -1,0 +1,169 @@
+<!-- modules/auth/auth.template.html -->
+<!-- Шаблон модуля авторизации GENESIS -->
+<div class="auth-module-container">
+    <div class="auth-screen-overlay"></div>
+    
+    <div class="auth-card animated-entrance">
+        <!-- Логотип и заголовок -->
+        <div class="auth-header">
+            <div class="auth-logo">
+                <span class="logo-text">GENESIS</span>
+                <span class="logo-version">1.1</span>
+            </div>
+            <h2 class="auth-title">🔐 Авторизация в системе</h2>
+            <p class="auth-subtitle">Введите BSC адрес кошелька для доступа к платформе</p>
+        </div>
+        
+        <!-- Форма авторизации -->
+        <form id="auth-form" class="auth-form">
+            <div class="form-group">
+                <label for="wallet-address" class="form-label">
+                    <span class="label-icon">👛</span>
+                    BSC Адрес кошелька:
+                </label>
+                <div class="input-wrapper">
+                    <input type="text" 
+                           id="wallet-address" 
+                           class="form-control" 
+                           placeholder="0x1234567890abcdef..."
+                           pattern="^0x[a-fA-F0-9]{40}$"
+                           autocomplete="off"
+                           spellcheck="false"
+                           required>
+                    <div class="input-hint">
+                        Введите адрес вашего BSC кошелька (начинается с 0x)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Сообщения об ошибках и успехе -->
+            <div class="message-container">
+                <div class="error-message" style="display: none;">
+                    <span class="message-icon">⚠️</span>
+                    <span class="message-text"></span>
+                </div>
+                <div class="success-message" style="display: none;">
+                    <span class="message-icon">✅</span>
+                    <span class="message-text"></span>
+                </div>
+            </div>
+            
+            <!-- Кнопка входа -->
+            <button id="auth-button" type="submit" class="btn btn-primary btn-full btn-glow">
+                <span class="btn-icon">🚀</span>
+                <span class="btn-text">Войти в кабинет</span>
+            </button>
+            
+            <!-- ТЕСТОВАЯ КНОПКА ДЛЯ ОТЛАДКИ -->
+            <button id="test-auth-button" type="button" class="btn btn-secondary btn-full" style="margin-top: 1rem;">
+                <span class="btn-icon">🔧</span>
+                <span class="btn-text">ТЕСТ: Войти без проверки</span>
+            </button>
+        </form>
+        
+        <!-- Информация об оплате (скрыта по умолчанию) -->
+        <div class="payment-info" style="display: none;">
+            <div class="payment-header">
+                <h3>💳 Требуется оплата доступа</h3>
+                <p>Для авторизации необходимо отправить 1 PLEX на адрес системы</p>
+            </div>
+            
+            <div class="payment-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <h4>Скопируйте адрес системы</h4>
+                        <div class="system-address-container">
+                            <code id="system-address" class="system-address">0x...</code>
+                            <button type="button" class="copy-btn" title="Копировать адрес">
+                                <span class="copy-icon">📋</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <h4>Отправьте 1 PLEX</h4>
+                        <p>Используйте любой BSC кошелек для отправки</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <h4>Дождитесь подтверждения</h4>
+                        <p>Обычно занимает 1-2 минуты</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- QR код для оплаты -->
+            <div class="payment-qr-section">
+                <h4>Или отсканируйте QR-код:</h4>
+                <div id="payment-qr" class="qr-code-container">
+                    <!-- QR код будет сгенерирован здесь -->
+                </div>
+            </div>
+            
+            <!-- Информация о PLEX -->
+            <div class="plex-info">
+                <div class="plex-info-item">
+                    <span class="info-label">Контракт PLEX:</span>
+                    <span class="info-value">BSC (BEP-20)</span>
+                </div>
+                <div class="plex-info-item">
+                    <span class="info-label">Стоимость:</span>
+                    <span class="info-value">1 PLEX</span>
+                </div>
+                <div class="plex-info-item">
+                    <span class="info-label">Срок доступа:</span>
+                    <span class="info-value">Постоянный</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Тестовый режим -->
+        <div class="test-mode-info">
+            <details class="test-details">
+                <summary>🧪 Тестовый режим</summary>
+                <div class="test-content">
+                    <p>Для быстрого входа в тестовом режиме используйте:</p>
+                    <code class="test-address">0x742d35Cc6634C0532925a3b844Bc9e7595f2bD8e</code>
+                    <button type="button" class="btn btn-secondary btn-small" onclick="document.getElementById('wallet-address').value='0x742d35Cc6634C0532925a3b844Bc9e7595f2bD8e'">
+                        Вставить тестовый адрес
+                    </button>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Дополнительные ссылки -->
+        <div class="auth-footer">
+            <div class="footer-links">
+                <a href="#" class="footer-link" data-action="forgot-address">
+                    Забыли адрес?
+                </a>
+                <span class="separator">•</span>
+                <a href="#" class="footer-link" data-action="help">
+                    Помощь
+                </a>
+                <span class="separator">•</span>
+                <a href="#" class="footer-link" data-action="about-plex">
+                    О PLEX
+                </a>
+            </div>
+            
+            <div class="security-note">
+                <span class="security-icon">🔒</span>
+                <span class="security-text">Безопасное соединение • Данные защищены</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Индикатор загрузки -->
+    <div class="auth-loader" style="display: none;">
+        <div class="loader-spinner"></div>
+        <p class="loader-text">Проверка авторизации...</p>
+    </div>
+</div>

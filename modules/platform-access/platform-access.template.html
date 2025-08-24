@@ -1,0 +1,239 @@
+<!-- modules/platform-access/platform-access.template.html -->
+<div class="platform-access-container">
+    <!-- Заголовок -->
+    <div class="access-header">
+        <div class="header-content">
+            <h2 class="module-title">
+                <span class="title-icon">💎</span>
+                Доступ к платформе GENESIS
+            </h2>
+            <div class="access-status-badge">
+                <div class="access-status"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Информация о доступе -->
+    <div class="access-info-card">
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Статус:</span>
+                <span class="access-status-text"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Осталось дней:</span>
+                <span class="access-days"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Истекает:</span>
+                <span class="access-expires"></span>
+            </div>
+        </div>
+        
+        <!-- Таймер обратного отсчета -->
+        <div class="countdown-timer" style="display: none;">
+            <h4>До окончания доступа:</h4>
+            <div class="timer-display">
+                <div class="timer-unit">
+                    <span class="timer-value" id="timer-hours">00</span>
+                    <span class="timer-label">часов</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="timer-minutes">00</span>
+                    <span class="timer-label">минут</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="timer-seconds">00</span>
+                    <span class="timer-label">секунд</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Предупреждение об отсутствии доступа -->
+    <div class="access-warning alert alert-warning" style="display: none;"></div>
+    
+    <!-- Напоминание о продлении -->
+    <div class="renewal-reminder alert alert-info" style="display: none;"></div>
+    
+    <!-- Секция оплаты доступа -->
+    <div class="payment-section" style="display: none;">
+        <div class="payment-card">
+            <h3 class="section-title">
+                <span class="icon">💳</span>
+                Оплата доступа
+            </h3>
+            
+            <!-- Информация о тарифе -->
+            <div class="tariff-info">
+                <div class="tariff-description">
+                    <p>Ежедневный доступ к платформе GENESIS предоставляет:</p>
+                    <ul class="features-list">
+                        <li>✅ Полный доступ ко всем функциям</li>
+                        <li>✅ Создание и управление депозитами</li>
+                        <li>✅ Просмотр аналитики и статистики</li>
+                        <li>✅ Участие в бонусной программе</li>
+                        <li>✅ Доступ к реферальной системе</li>
+                    </ul>
+                </div>
+                
+                <div class="tariff-pricing">
+                    <div class="price-tag">
+                        <span class="price-value">$1</span>
+                        <span class="price-period">за день</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Форма оплаты -->
+            <div class="payment-form">
+                <div class="form-group">
+                    <label for="access-days-selector" class="form-label">
+                        Выберите период доступа:
+                    </label>
+                    <select id="access-days-selector" class="form-control">
+                        <option value="1">1 день - $1 USDT</option>
+                        <option value="3">3 дня - $3 USDT</option>
+                        <option value="7">7 дней - $7 USDT</option>
+                        <option value="14">14 дней - $14 USDT</option>
+                        <option value="30" selected>30 дней - $30 USDT</option>
+                    </select>
+                </div>
+                
+                <div class="payment-summary">
+                    <div class="summary-row">
+                        <span>Период:</span>
+                        <span id="selected-days">30 дней</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Итого к оплате:</span>
+                        <span class="payment-amount">30 USDT</span>
+                    </div>
+                </div>
+                
+                <button id="pay-access-button" class="btn btn-primary btn-large btn-full">
+                    <span class="btn-icon">💰</span>
+                    Оплатить доступ
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Секция активного доступа -->
+    <div class="active-access-section" style="display: none;">
+        <div class="active-card">
+            <div class="active-header">
+                <h3>✅ Ваш доступ активен</h3>
+                <span class="badge badge-success">ACTIVE</span>
+            </div>
+            
+            <div class="access-features">
+                <h4>Доступные возможности:</h4>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">💰</span>
+                        <span class="feature-name">Депозиты</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <span class="feature-name">Аналитика</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💼</span>
+                        <span class="feature-name">Портфель</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎁</span>
+                        <span class="feature-name">Бонусы</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">👥</span>
+                        <span class="feature-name">Рефералы</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📈</span>
+                        <span class="feature-name">Статистика</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Кнопка продления -->
+            <div class="extend-access">
+                <button class="btn btn-secondary" onclick="window.eventBus.emit('access:extend:request')">
+                    <span class="btn-icon">🔄</span>
+                    Продлить доступ
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Инструкции по оплате -->
+    <div class="payment-instructions" style="display: none;">
+        <div class="instructions-card">
+            <button class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</button>
+            
+            <h4 class="instructions-title">
+                <span class="icon">📋</span>
+                Инструкция по оплате
+            </h4>
+            
+            <div class="instructions-content">
+                <!-- Содержимое будет добавлено динамически -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- История платежей -->
+    <div class="payment-history-section">
+        <div class="history-header">
+            <h3>📜 История платежей</h3>
+            <button class="btn btn-small" id="refresh-history-btn">
+                Обновить
+            </button>
+        </div>
+        
+        <div class="history-content">
+            <div class="history-list" id="payment-history-list">
+                <!-- История будет загружена динамически -->
+                <div class="history-placeholder">
+                    <p>История платежей пуста</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Контейнер для сообщений -->
+    <div class="message-container">
+        <div class="error-message alert alert-danger" style="display: none;"></div>
+        <div class="success-message alert alert-success" style="display: none;"></div>
+        <div class="info-message alert alert-info" style="display: none;"></div>
+    </div>
+    
+    <!-- Модальное окно QR кода -->
+    <div class="qr-modal" id="payment-qr-modal" style="display: none;">
+        <div class="modal-overlay" onclick="this.parentElement.style.display='none'"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>QR код для оплаты</h3>
+                <button class="modal-close" onclick="this.closest('.qr-modal').style.display='none'">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="payment-qr-code" class="qr-container">
+                    <!-- QR код будет сгенерирован здесь -->
+                </div>
+                <div class="payment-address">
+                    <label>Адрес для оплаты:</label>
+                    <div class="address-field">
+                        <code id="system-address-display">0x...</code>
+                        <button class="copy-btn copy-payment-address">
+                            <span class="icon">📋</span>
+                            Копировать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

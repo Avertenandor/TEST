@@ -1,0 +1,826 @@
+/* modules/rank/rank.styles.css */
+
+/* =====================
+   Rank Module Styles
+   ===================== */
+
+.rank-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+    min-height: 100vh;
+}
+
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: #ff6b35;
+    font-family: 'Orbitron', monospace;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: #b0b0b0;
+    margin-bottom: 0;
+}
+
+/* Current Rank Section */
+.current-rank-section {
+    margin-bottom: 3rem;
+}
+
+.rank-card {
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.main-rank {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border: 2px solid #ffc107;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 107, 53, 0.1) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.main-rank::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.1), transparent);
+    animation: rankShimmer 3s ease-in-out infinite;
+}
+
+@keyframes rankShimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.rank-badge-large {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+    position: relative;
+    z-index: 1;
+}
+
+.rank-icon {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 20px rgba(255, 193, 7, 0.4));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.rank-level {
+    background: linear-gradient(135deg, #ffc107, #f59e0b);
+    color: #1a1a2e;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    text-shadow: none;
+}
+
+.rank-info {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.rank-info h3 {
+    font-size: 2rem;
+    color: #ffc107;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+}
+
+.rank-info p {
+    color: #b0b0b0;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.rank-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15, 15, 26, 0.5);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 193, 7, 0.1);
+}
+
+.stat-label {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    color: #ffc107;
+    font-weight: 600;
+    font-family: 'Orbitron', monospace;
+}
+
+/* Rank Progress */
+.rank-progress-card {
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.rank-progress-card h4 {
+    color: #ff6b35;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.rank-progress-bar {
+    margin-bottom: 2rem;
+}
+
+.progress-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #ffc107, #f59e0b);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.8s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: progressFlow 2s ease-in-out infinite;
+}
+
+@keyframes progressFlow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-info {
+    color: #b0b0b0;
+    font-size: 0.95rem;
+}
+
+.next-rank-preview {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(15, 15, 26, 0.5);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 193, 7, 0.1);
+}
+
+.next-rank-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 15px rgba(192, 192, 192, 0.3));
+}
+
+.next-rank-info h5 {
+    color: #ffc107;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.next-rank-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.next-rank-info li {
+    color: #b0b0b0;
+    padding: 0.25rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.next-rank-info li::before {
+    content: '🔹';
+    position: absolute;
+    left: 0;
+    color: #ffc107;
+}
+
+/* Ranks List */
+.ranks-list-section {
+    margin-bottom: 3rem;
+}
+
+.ranks-list-section h3 {
+    color: #ff6b35;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.ranks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.rank-tier {
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.rank-tier:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.1);
+}
+
+.rank-tier.completed {
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.05);
+}
+
+.rank-tier.current {
+    border-color: #ffc107;
+    background: rgba(255, 193, 7, 0.1);
+    animation: currentRankGlow 2s ease-in-out infinite;
+}
+
+@keyframes currentRankGlow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 193, 7, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(255, 193, 7, 0.5); }
+}
+
+.rank-tier.next {
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.05);
+}
+
+.rank-tier.legendary {
+    border: 2px solid #d946ef;
+    background: linear-gradient(135deg, rgba(217, 70, 239, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+    position: relative;
+}
+
+.rank-tier.legendary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(217, 70, 239, 0.1), transparent);
+    animation: legendaryShimmer 4s ease-in-out infinite;
+}
+
+@keyframes legendaryShimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.tier-badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tier-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.3));
+}
+
+.tier-number {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-family: 'Orbitron', monospace;
+}
+
+.rank-tier.completed .tier-number {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+}
+
+.rank-tier.current .tier-number {
+    background: linear-gradient(135deg, #ffc107, #f59e0b);
+}
+
+.rank-tier.legendary .tier-number {
+    background: linear-gradient(135deg, #d946ef, #9333ea);
+}
+
+.tier-content h4 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.tier-content p {
+    color: #b0b0b0;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.tier-requirements {
+    background: rgba(15, 15, 26, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.tier-requirements span {
+    color: #ff6b35;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.tier-rewards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.reward-item {
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.tier-status {
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.tier-status.completed {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+}
+
+.tier-status.current {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.tier-status:not(.completed):not(.current) {
+    background: rgba(128, 128, 128, 0.1);
+    color: #888;
+}
+
+/* Rank Coin Section */
+.rank-coin-section {
+    margin-bottom: 3rem;
+}
+
+.rank-coin-section h3 {
+    color: #ff6b35;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.coin-details-card {
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.coin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.coin-visual {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.coin-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.3));
+}
+
+.coin-name {
+    font-size: 2rem;
+    color: #ffc107;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+}
+
+.coin-balance-info {
+    text-align: right;
+}
+
+.balance-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.balance-amount span:first-child {
+    font-size: 2.5rem;
+    color: #ffc107;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+}
+
+.currency {
+    font-size: 1rem;
+    color: #b0b0b0;
+}
+
+.balance-label {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.coin-mechanics,
+.coin-usage,
+.earning-schedule {
+    margin-bottom: 2rem;
+}
+
+.coin-mechanics h4,
+.coin-usage h4,
+.earning-schedule h4 {
+    color: #ff6b35;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.mechanics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.mechanic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: rgba(15, 15, 26, 0.5);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 107, 53, 0.05);
+}
+
+.mechanic-icon {
+    font-size: 2rem;
+    min-width: 50px;
+    text-align: center;
+}
+
+.mechanic-content h5 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.mechanic-content p {
+    color: #b0b0b0;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.usage-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.usage-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(15, 15, 26, 0.5);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 107, 53, 0.05);
+    transition: all 0.3s ease;
+}
+
+.usage-item:hover {
+    border-color: #ff6b35;
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.1);
+}
+
+.usage-icon {
+    font-size: 1.5rem;
+}
+
+.usage-text {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.schedule-table {
+    background: rgba(15, 15, 26, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 107, 53, 0.05);
+}
+
+.schedule-header,
+.schedule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 80px;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: center;
+}
+
+.schedule-header {
+    background: rgba(255, 107, 53, 0.1);
+    color: #ff6b35;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.schedule-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.schedule-row:last-child {
+    border-bottom: none;
+}
+
+.schedule-row.completed {
+    background: rgba(74, 222, 128, 0.05);
+}
+
+.schedule-row.current {
+    background: rgba(255, 193, 7, 0.05);
+}
+
+.status-completed {
+    color: #4ade80;
+    font-size: 1.2rem;
+}
+
+.status-pending {
+    color: #ffc107;
+    font-size: 1.2rem;
+}
+
+.status-future {
+    color: #888;
+    font-size: 1.2rem;
+}
+
+/* Benefits Section */
+.rank-benefits-section h3 {
+    color: #ff6b35;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.benefit-card {
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.benefit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.1);
+}
+
+.benefit-card.active {
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.05);
+}
+
+.benefit-card.locked {
+    opacity: 0.5;
+    background: rgba(15, 15, 26, 0.3);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    min-width: 60px;
+    text-align: center;
+    filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.2));
+}
+
+.benefit-content {
+    flex: 1;
+}
+
+.benefit-content h4 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.benefit-content p {
+    color: #b0b0b0;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.benefit-value {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 80px;
+    text-align: center;
+}
+
+.benefit-card.locked .benefit-value {
+    background: rgba(128, 128, 128, 0.2);
+    color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .rank-container {
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .main-rank {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .rank-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .ranks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .next-rank-preview {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .coin-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .mechanics-grid,
+    .usage-list,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .schedule-header,
+    .schedule-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .benefit-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .rank-badge-large {
+        min-width: 80px;
+    }
+
+    .rank-icon {
+        font-size: 3rem;
+    }
+
+    .rank-info h3 {
+        font-size: 1.5rem;
+    }
+
+    .coin-icon {
+        font-size: 2.5rem;
+    }
+
+    .coin-name {
+        font-size: 1.5rem;
+    }
+
+    .balance-amount span:first-child {
+        font-size: 2rem;
+    }
+}

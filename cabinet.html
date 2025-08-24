@@ -1,18 +1,10 @@
 <!DOCTYPE html>
-<!-- MCP-BREADCRUMB:2025-07-25:14:40 - Добавлены breadcrumbs для отслеживания изменений -->
-<!-- MCP-BREADCRUMB:2025-07-25:21:50 - Добавлены MCP-маркеры для 32 методов и функций -->
-<!-- MCP-BREADCRUMB:2025-07-25:14:35 - Проанализирована структура маркеров, создан mcp-index.json -->
-<!-- MCP-BREADCRUMB:2025-07-25:14:30 - Начата работа по покрытию MCP-маркерами -->
-<!-- MCP-BREADCRUMB:2025-07-26:15:30 - Добавлены MCP-маркеры для 20+ методов генерации контента и вспомогательных функций -->
-<!-- MCP-BREADCRUMB:2025-07-26:16:00 - Добавлены MCP-маркеры для всех методов генерации контента страниц, функций модальных окон и вспомогательных методов -->
 <html lang="ru">
 <head>
-    <!-- MCP-MARKER:MODULE:CABINET_CONTROLLER - Контроллер личного кабинета -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GENESIS 1.1 - Личный кабинет</title>
     
-    <!-- КРИТИЧЕСКИЕ МЕТА-ТЕГИ: Принудительное отключение кэширования -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -20,40 +12,218 @@
     <meta name="build-time" content="24-01-2025-15:30">
     <meta name="force-reload" content="true">
     
-    <!-- PWA Meta -->
-    <!-- 
-        theme-color поддерживается Chrome, Safari, Edge. Firefox игнорирует.
-        Альтернативы:
-        - iOS: apple-mobile-web-app-status-bar-style
-        - Android: manifest.json theme_color
-        - Windows: msapplication-TileColor
-    -->
-    <!-- Theme color для браузеров на базе Chromium -->
     <meta name="theme-color" content="#0d1117">
     <meta name="msapplication-TileColor" content="#0d1117">
     <meta name="description" content="Личный кабинет GENESIS 1.1 - управление депозитами, аналитика и контроль доступа">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- Manifest -->
+    <script>
+        (function(){
+            'use strict';
+            
+            const OriginalPromise = window.Promise;
+            const OriginalThen = OriginalPromise.prototype.then;
+            const OriginalCatch = OriginalPromise.prototype.catch;
+            const OriginalFinally = OriginalPromise.prototype.finally;
+            
+            // Паттерны для определения MetaMask/Web3 ошибок
+            const errorPatterns = [
+                'inpage.js',
+                'Cannot read properties of null',
+                'Cannot read property',
+                'reading \'type\'',
+                'reading \'undefined\'',
+                'MetaMask',
+                'ethereum',
+                'web3',
+                'fm.<anonymous>',
+                'Generator.next'
+            ];
+            
+            function isMetaMaskError(error) {
+                if (!error) return false;
+                
+                try {
+                    const errorStr = error.toString ? error.toString() : String(error);
+                    const errorMsg = error.message || '';
+                    const errorStack = error.stack || '';
+                    const errorName = error.name || '';
+                    
+                    const fullError = errorStr + errorMsg + errorStack + errorName;
+                    
+                    return errorPatterns.some(pattern => fullError.includes(pattern));
+                } catch (e) {
+                    return false;
+                }
+            }
+            
+            // Создаем безопасную обертку для executor
+            function safeExecutor(executor, resolve, reject) {
+                try {
+                    executor(
+                        function(value) { 
+                            resolve(value); 
+                        },
+                        function(reason) {
+                            if (isMetaMaskError(reason)) {
+                                console.warn('[MetaMask Protection] Error suppressed in executor:', reason);
+                                resolve(null);
+                            } else {
+                                reject(reason);
+                            }
+                        }
+                    );
+                } catch (error) {
+                    if (isMetaMaskError(error)) {
+                        console.warn('[MetaMask Protection] Error caught in executor:', error);
+                        resolve(null);
+                    } else {
+                        reject(error);
+                    }
+                }
+            }
+            
+            // Переопределяем конструктор Promise
+            window.Promise = function(executor) {
+                if (!executor) {
+                    return new OriginalPromise(executor);
+                }
+                
+                return new OriginalPromise(function(resolve, reject) {
+                    safeExecutor(executor, resolve, reject);
+                });
+            };
+            
+            // Копируем все статические методы и свойства
+            Object.setPrototypeOf(window.Promise, OriginalPromise);
+            Object.setPrototypeOf(window.Promise.prototype, OriginalPromise.prototype);
+            
+            for (let prop in OriginalPromise) {
+                if (OriginalPromise.hasOwnProperty(prop)) {
+                    window.Promise[prop] = OriginalPromise[prop];
+                }
+            }
+            
+            // Статические методы
+            window.Promise.resolve = OriginalPromise.resolve.bind(OriginalPromise);
+            window.Promise.reject = OriginalPromise.reject.bind(OriginalPromise);
+            window.Promise.all = OriginalPromise.all.bind(OriginalPromise);
+            window.Promise.race = OriginalPromise.race.bind(OriginalPromise);
+            window.Promise.allSettled = OriginalPromise.allSettled ? OriginalPromise.allSettled.bind(OriginalPromise) : undefined;
+            window.Promise.any = OriginalPromise.any ? OriginalPromise.any.bind(OriginalPromise) : undefined;
+            
+            // Переопределяем методы прототипа
+            const SafePromisePrototype = window.Promise.prototype;
+            
+            SafePromisePrototype.then = function(onFulfilled, onRejected) {
+                const wrappedOnRejected = onRejected ? function(reason) {
+                    if (isMetaMaskError(reason)) {
+                        console.warn('[MetaMask Protection] Error suppressed in .then():', reason);
+                        return null;
+                    }
+                    return onRejected(reason);
+                } : function(reason) {
+                    if (isMetaMaskError(reason)) {
+                        console.warn('[MetaMask Protection] Error suppressed in .then() (no handler):', reason);
+                        return null;
+                    }
+                    throw reason;
+                };
+                
+                return OriginalThen.call(this, onFulfilled, wrappedOnRejected);
+            };
+            
+            SafePromisePrototype.catch = function(onRejected) {
+                const wrappedOnRejected = function(reason) {
+                    if (isMetaMaskError(reason)) {
+                        console.warn('[MetaMask Protection] Error suppressed in .catch():', reason);
+                        return null;
+                    }
+                    if (onRejected) {
+                        return onRejected(reason);
+                    }
+                    throw reason;
+                };
+                
+                return OriginalCatch.call(this, wrappedOnRejected);
+            };
+            
+            SafePromisePrototype.finally = function(onFinally) {
+                return OriginalFinally.call(this, onFinally);
+            };
+            
+            // Перехват глобальных ошибок
+            window.addEventListener('unhandledrejection', function(event) {
+                if (event.reason && isMetaMaskError(event.reason)) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    console.warn('[MetaMask Protection] Unhandled rejection prevented:', event.reason);
+                    return false;
+                }
+            }, true);
+            
+            window.addEventListener('error', function(event) {
+                if (event.error && isMetaMaskError(event.error)) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    console.warn('[MetaMask Protection] Global error prevented:', event.error);
+                    return false;
+                }
+                
+                const msg = event.message || '';
+                if (errorPatterns.some(pattern => msg.includes(pattern))) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    console.warn('[MetaMask Protection] Error message prevented:', msg);
+                    return false;
+                }
+            }, true);
+            
+            // Защита от переопределения нашей защиты
+            Object.freeze(window.Promise);
+            Object.freeze(window.Promise.prototype);
+            Object.freeze(SafePromisePrototype.then);
+            Object.freeze(SafePromisePrototype.catch);
+            
+            console.log('🛡️ MetaMask/Web3 Ultimate Protection Activated [v3.0]');
+        })();
+    </script>
+            
+            (function(){
+                try {
+                    if (!window.__genesisEarlyConsoleBuffer) {
+                        window.__genesisEarlyConsoleBuffer = [];
+                        var methods = ['log','info','warn','error','debug'];
+                        var originals = {};
+                        methods.forEach(function(m){
+                            originals[m] = console[m];
+                            console[m] = function(){
+                                try { window.__genesisEarlyConsoleBuffer.push({ m: m, args: Array.prototype.slice.call(arguments), ts: Date.now() }); } catch(e){}
+                                return originals[m].apply(console, arguments);
+                            };
+                        });
+                        window.__genesisConsoleOriginal = originals;
+                    }
+                } catch(e){}
+            })();
+        </script>
+    
     <link rel="manifest" href="assets/manifest.json">
     
-    <!-- Icons -->
-    <link rel="shortcut icon" href="assets/favicon-new.ico?v=3.6" type="image/x-icon">
-    <link rel="icon" href="assets/favicon-new.ico?v=3.6" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png?v=3.6">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png?v=3.6">
     <link rel="apple-touch-icon" href="assets/icons/apple-icon-180x180.png?v=3.6">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- ВСТРОЕННЫЕ КРИТИЧЕСКИЕ СТИЛИ ДЛЯ АВТОНОМНОЙ РАБОТЫ -->
-    <!-- MCP-MARKER:SECTION:CRITICAL_STYLES - Критические встроенные стили -->
     <style>
-        /* MCP-MARKER:SECTION:CSS_VARIABLES - CSS переменные */
         :root {
             --primary-color: #ff6b35;
             --secondary-color: #00d4ff;
@@ -71,7 +241,6 @@
             --border-color: #333344;
         }
         
-        /* MCP-MARKER:SECTION:BASE_STYLES - Базовые стили */
         * {
             margin: 0;
             padding: 0;
@@ -79,7 +248,7 @@
         }
         
         body {
-            font-family: 'Rajdhani', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             overflow: hidden;
@@ -89,8 +258,6 @@
         
         .hidden { display: none !important; }
         
-        /* MCP-MARKER:SECTION:LOADING_SCREEN_STYLES - Стили экрана загрузки */
-        /* Loading Screen */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -225,21 +392,6 @@
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.1);
-        }
-        
-        .form-control::placeholder {
-            color: #666;
-            opacity: 0.8;
-        }
-        
-        input.form-control::placeholder {
-            color: #666;
-            opacity: 0.8;
-        }
-        
-        .btn:focus {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 2px;
         }
         
         .btn {
@@ -526,7 +678,7 @@
             }
         }
         
-        /* @keyframes notificationSlideIn удален - дубликат (определен выше) */
+
         
         @keyframes notificationSlideOut {
             from {
@@ -1715,14 +1867,6 @@
         .grid-auto-fit-280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
         .grid-1fr-1fr { grid-template-columns: 1fr 1fr; }
         .grid-col-span-2 { grid-column: span 2; }
-
-        /* Текстовые утилиты */
-        .text-center { text-align: center; }
-        .text-primary { color: var(--text-primary); }
-        .text-secondary { color: var(--text-secondary); }
-        .text-success { color: var(--success-color); }
-        .font-weight-500 { font-weight: 500; }
-        .font-weight-600 { font-weight: 600; }
         .font-weight-700 { font-weight: 700; }
         .font-size-1-2 { font-size: 1.2rem; }
         .font-size-1-3 { font-size: 1.3rem; }
@@ -2443,152 +2587,12 @@
         .font-size-0-75 { font-size: 0.75rem; }
         .mt-1 { margin-top: 1rem; }
         .p-0-5 { padding: 0.8rem; }
-        
-        /* PWA Install Styles */
-        .pwa-install-nav-hidden {
-            display: none !important;
-        }
-        
-        .pwa-install-badge {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 8px;
-            animation: pulse 2s infinite;
-        }
-        
-        .pwa-install-header-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .pwa-install-header-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-        
-        .pwa-install-header-btn.hidden {
-            display: none;
-        }
-        
-        /* ===== ДОПОЛНИТЕЛЬНЫЕ UTILITY КЛАССЫ ===== */
-        .golden-value { color: var(--gold-color); }
-        .golden-value-medium { color: var(--success-color); }
-        .golden-value-large { color: var(--accent-color); }
-        .primary-color { color: var(--primary-color); }
-        .secondary-color { color: var(--secondary-color); }
-        .success-color { color: var(--success-color); }
-        .warning-color { color: var(--warning-color); }
-        .accent-color { color: var(--accent-color); }
-        .multiplier-value { font-weight: 600; }
-        .multiplier-badge {
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            color: white;
-        }
-        .stat-value { font-weight: 700; font-size: 1.2rem; }
-        .effect-value { font-weight: 600; }
-        .promo-timer { font-weight: 600; }
-        .record-value { font-weight: 700; }
-        .info-value { font-size: 0.9rem; }
-        .margin-right-small { margin-right: 0.5rem; }
-        .font-weight-600 { font-weight: 600; }
-        .font-weight-700 { font-weight: 700; }
-        .font-size-0-8 { font-size: 0.8rem; }
-        .font-size-0-9 { font-size: 0.9rem; }
-        .font-size-1-1 { font-size: 1.1rem; }
-        .font-style-italic { font-style: italic; }
-        .margin-top-0-5 { margin-top: 0.5rem; }
-        .margin-top-2 { margin-top: 2rem; }
-        .word-break-all { word-break: break-all; }
-        .opacity-0 { opacity: 0; }
-        .tech-card-checkmark { 
-            position: absolute; 
-            top: 10px; 
-            right: 10px; 
-            color: var(--success-color); 
-            font-size: 1.2rem; 
-        }
-        
-        /* ===== СТИЛИ ДЛЯ РАЗДЕЛА "КАК ВСЕ УСТРОЕНО" ===== */
-        .algorithm-explanation {
-            margin: 1.5rem 0;
-        }
-        .algo-step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
-        }
-        .algo-number {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            min-width: 2rem;
-            text-align: center;
-        }
-        .algo-content h4 {
-            margin: 0 0 0.5rem 0;
-            color: var(--text-primary);
-        }
-        .algo-content p {
-            margin: 0;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-        .security-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        .security-card {
-            display: flex;
-            align-items: flex-start;
-            padding: 1.5rem;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-        .security-icon {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            min-width: 2rem;
-        }
-        .security-content h4 {
-            margin: 0 0 0.5rem 0;
-            color: var(--text-primary);
-        }
-        .security-content p {
-            margin: 0;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
     </style>
 </head>
 <body>
-    <!-- MCP-MARKER:SECTION:AUTHENTICATION - Экран авторизации -->
     
-    <!-- Loading Screen -->
-    <!-- MCP-MARKER:COMPONENT:LOADING_SCREEN - Экран загрузки -->
     <div id="loading-screen" class="loading-screen">
-        <div class="loading-content" role="status" aria-live="polite">
+        <div class="loading-content">
             <div class="loading-logo">GENESIS 1.1</div>
             <div class="loading-text">Инициализация системы...</div>
             <div class="loading-spinner"></div>
@@ -2603,8 +2607,7 @@
         </div>
     </div>
 
-    <!-- Auth Screen -->
-    <!-- MCP-MARKER:COMPONENT:AUTH_SCREEN - Экран авторизации -->
+    
     <div id="auth-screen" class="auth-screen hidden">
         <div class="auth-container">
             <h2 class="auth-title">🔐 Авторизация</h2>
@@ -2630,16 +2633,14 @@
         </div>
     </div>
 
-    <!-- Cabinet App -->
-    <!-- MCP-MARKER:SECTION:CABINET_LAYOUT - Основная структура кабинета -->
-    <!-- MCP-MARKER:COMPONENT:CABINET_APP - Основное приложение кабинета -->
+    
     <div id="cabinet-app" class="cabinet-app hidden">
         <!-- Header -->
         <!-- MCP-MARKER:COMPONENT:CABINET_HEADER - Шапка кабинета -->
         <div id="cabinet-header" class="cabinet-header">
             <div class="header-content">
                 <div class="header-left">
-                    <button id="sidebar-toggle" class="mobile-menu-toggle" onclick="toggleSidebar()" tabindex="0" aria-label="Переключить боковое меню">☰</button>
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
                     <h1 class="header-title">GENESIS 1.1</h1>
                     <span class="header-subtitle">Личный кабинет</span>
                 </div>
@@ -2652,8 +2653,8 @@
                             <span id="access-days-count" class="access-days"></span>
                         </div>
                         
-                        <span class="user-address" id="user-address-display" title="Полный BSC адрес"></span>
-                        <button class="btn btn-outline" onclick="logout()" tabindex="0" aria-label="Выйти из кабинета">Выйти</button>
+                        <span class="user-address" id="user-address-display"></span>
+                        <button class="btn btn-outline" onclick="logout()">Выйти</button>
                     </div>
                 </div>
             </div>
@@ -2754,12 +2755,6 @@
                             <span class="nav-text">Ранг</span>
                         </a>
                     </li>
-                    <li class="nav-item" id="pwa-install-nav-item">
-                        <a href="#" class="nav-link" onclick="if(window.PWAInstallManager && window.PWAInstallManager.installApp) { window.PWAInstallManager.installApp(); } else { alert('Установка приложения временно недоступна'); } return false;">
-                            <span class="nav-icon">📱</span>
-                            <span class="nav-text">Установить приложение</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -2839,10 +2834,10 @@
     <!-- Модальное окно создания депозита -->
     <!-- MCP-MARKER:COMPONENT:MODAL_DEPOSIT_CREATE - Модалка создания депозита -->
     <div id="create-deposit-modal" class="modal-overlay hidden">
-        <div class="modal-container" role="dialog" aria-modal="true">
+        <div class="modal-container">
             <div class="modal-header">
                 <h3>💰 Создание депозита</h3>
-                <button class="modal-close" onclick="closeDepositModal()" tabindex="0" aria-label="Закрыть модальное окно">&times;</button>
+                <button class="modal-close" onclick="closeDepositModal()">&times;</button>
             </div>
             <div class="modal-content">
                 <div id="deposit-modal-content">
@@ -2860,10 +2855,10 @@
     <!-- Модальное окно подтверждения депозита -->
     <!-- MCP-MARKER:COMPONENT:MODAL_DEPOSIT_CONFIRM - Модалка подтверждения депозита -->
     <div id="confirm-deposit-modal" class="modal-overlay hidden">
-        <div class="modal-container modal-medium" role="dialog" aria-modal="true">
+        <div class="modal-container modal-medium">
             <div class="modal-header">
                 <h3 class="color-warning">⚠️ Подтверждение депозита</h3>
-                <button class="modal-close" onclick="closeConfirmModal()" tabindex="0" aria-label="Закрыть модальное окно">&times;</button>
+                <button class="modal-close" onclick="closeConfirmModal()">&times;</button>
             </div>
             <div class="modal-content">
                 <div id="confirm-modal-content">
@@ -2876,10 +2871,10 @@
     <!-- Модальное окно результата транзакции -->
     <!-- MCP-MARKER:COMPONENT:MODAL_TRANSACTION_RESULT - Модалка результата транзакции -->
     <div id="transaction-result-modal" class="modal-overlay hidden">
-        <div class="modal-container modal-medium" role="dialog" aria-modal="true">
+        <div class="modal-container modal-medium">
             <div class="modal-header">
                 <h3 id="transaction-result-title">📊 Результат транзакции</h3>
-                <button class="modal-close" onclick="closeTransactionResultModal()" tabindex="0" aria-label="Закрыть модальное окно">&times;</button>
+                <button class="modal-close" onclick="closeTransactionResultModal()">&times;</button>
             </div>
             <div class="modal-content">
                 <div id="transaction-result-content">
@@ -2892,10 +2887,10 @@
     <!-- Модальное окно пополнения доступа -->
     <!-- MCP-MARKER:COMPONENT:MODAL_PLATFORM_ACCESS - Модалка пополнения доступа -->
     <div id="platform-access-modal" class="modal-overlay hidden">
-        <div class="modal-container modal-medium" role="dialog" aria-modal="true">
+        <div class="modal-container modal-medium">
             <div class="modal-header">
                 <h3>🔑 Пополнение доступа к платформе</h3>
-                <button class="modal-close" onclick="closePlatformAccessModal()" tabindex="0" aria-label="Закрыть модальное окно">&times;</button>
+                <button class="modal-close" onclick="closePlatformAccessModal()">&times;</button>
             </div>
             <div class="modal-content">
                 <div id="platform-access-content">
@@ -2908,6 +2903,10 @@
     <!-- Notification Container -->
     <!-- MCP-MARKER:COMPONENT:NOTIFICATION_CONTAINER - Контейнер уведомлений -->
     <div id="notification-container"></div>
+    
+    <!-- Genesis Terminal Component -->
+    <!-- MCP-MARKER:COMPONENT:GENESIS_TERMINAL - Терминал для отладки и мониторинга -->
+    <genesis-terminal></genesis-terminal>
 
     <!-- Подключение всех необходимых сервисов -->
     <script src="js/config.js"></script>
@@ -2930,6 +2929,13 @@
     
     <!-- Исправление модальных окон депозитов -->
     <script src="fixes/fix-deposit-modal.js"></script>
+    <!-- MCP-MARKER:INTEGRATION:TERMINAL:SCRIPT -->
+    <script src="js/services/terminal.js"></script>
+    <script src="js/components/genesis-terminal.js"></script>
+    
+    <!-- Cabinet Content Generators -->
+    <script src="js/services/cabinet-content-generator.js"></script>
+    <script src="js/services/cabinet-content-restored.js"></script>
     
     <!-- КРИТИЧЕСКИЙ СКРИПТ: Системная инициализация -->
     <script>
@@ -2943,19 +2949,6 @@
         window.currentUser = null;
         window.cabinetApp = null;
         
-        // Обработчик загрузки страницы
-        window.onload = () => {
-            setTimeout(() => {
-                const cachedWallet = localStorage.getItem('walletAddress');
-                document.getElementById('loading-screen').classList.add('hidden');
-                if (!cachedWallet) {
-                    document.getElementById('auth-screen').classList.remove('hidden');
-                } else {
-                    document.querySelector('.cabinet-app')?.classList.remove('hidden');
-                }
-            }, 1000);
-        };
-        
         // MCP-MARKER:SECTION:GLOBAL_FUNCTIONS - Глобальные функции
         // MCP-BREADCRUMB:2025-07-25:21:45 - Добавлены маркеры для глобальных функций
         
@@ -2965,25 +2958,6 @@
             const prefix = type === 'error' ? '❌' : type === 'warn' ? '⚠️' : type === 'success' ? '✅' : 'ℹ️';
             console.log(`${prefix} [${timestamp}] ${message}`);
         };
-        
-        // Функция авторизации для кнопки
-        function handleAuth() {
-            const wallet = document.getElementById('wallet-address').value.trim();
-            if (wallet.length === 42 && wallet.startsWith('0x')) {
-                localStorage.setItem('walletAddress', wallet);
-                document.getElementById('auth-screen').classList.add('hidden');
-                document.querySelector('.cabinet-app')?.classList.remove('hidden');
-                // Инициализируем приложение
-                if (window.CabinetApp) {
-                    window.CabinetApp.state.userAddress = wallet;
-                    window.CabinetApp.state.isAuthenticated = true;
-                    window.CabinetApp.showMainApp();
-                }
-            } else {
-                alert('Неверный адрес кошелька!');
-            }
-        }
-        document.getElementById('auth-button').onclick = handleAuth;
         
         debugLog('GENESIS 1.1 Cabinet - инициализация', 'info');
         
@@ -3051,22 +3025,6 @@
                 window.CabinetApp.state.isMobileMenuOpen = !window.CabinetApp.state.isMobileMenuOpen;
             }
         };
-        
-        // Функция для сайдбара
-        function toggleSidebar() {
-            document.querySelector('.cabinet-sidebar')?.classList.toggle('active');
-        }
-        
-        // Закрытие модалок по Escape
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.modal-overlay').forEach(m => {
-                    if (!m.classList.contains('hidden')) {
-                        m.classList.add('hidden');
-                    }
-                });
-            }
-        });
         
         // Основной объект приложения
         window.CabinetApp = {
@@ -3147,6 +3105,7 @@
                 // Получаем IP адрес и локацию с таймаутом
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 секунд таймаут
+                let locationTimeoutId; // Объявляем переменную в правильной области видимости
                 
                 fetch('https://api.ipify.org?format=json', { 
                     signal: controller.signal 
@@ -3162,14 +3121,14 @@
                         
                         // Получаем информацию о локации с таймаутом
                         const locationController = new AbortController();
-                        const locationTimeoutId = setTimeout(() => locationController.abort(), 5000);
+                        locationTimeoutId = setTimeout(() => locationController.abort(), 5000);
                         
                         return fetch(`https://ipapi.co/${data.ip}/json/`, { 
                             signal: locationController.signal 
                         });
                     })
                     .then(response => {
-                        clearTimeout(locationTimeoutId);
+                        if (locationTimeoutId) clearTimeout(locationTimeoutId);
                         if (!response.ok) throw new Error('Location API response was not ok');
                         return response.json();
                     })
@@ -3204,9 +3163,17 @@
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 секунды таймаут
                 
-                fetch('https://bsc-dataseed.binance.org/', { 
-                    method: 'HEAD',
-                    mode: 'no-cors',
+                fetch('https://bsc-dataseed1.binance.org/', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        jsonrpc: '2.0',
+                        method: 'eth_blockNumber',
+                        params: [],
+                        id: 1
+                    }),
                     signal: controller.signal
                 })
                 .then(() => {
@@ -3487,9 +3454,9 @@
                         <h4 style="color: var(--warning-color); margin-bottom: 1.5rem;">⚠️ Требуется пополнение доступа</h4>
                         
                         <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--warning-color);">
-                            <div style="margin-bottom: 1rem;">
+                            <div class="margin-bottom-1rem">
                                 <div style="color: var(--text-secondary); font-size: 0.9rem;">Стоимость доступа:</div>
-                                <div class="font-size-1-5 font-weight-700" style="color: var(--primary-color);">$1 в день</div>
+                                <div class="font-size-1-5 font-weight-700" class="primary-text-color">$1 в день</div>
                             </div>
                             <div style="color: var(--text-secondary); font-size: 0.85rem;">
                                 Минимальное пополнение: $10 USDT (на 10 дней)
@@ -3562,7 +3529,7 @@
                 };
                 
                 notification.innerHTML = `
-                    <div class="notification-icon" style="font-size: 1.5rem;">${icons[type] || icons.info}</div>
+                    <div class="notification-icon" class="font-size-1.5rem">${icons[type] || icons.info}</div>
                     <div class="notification-content">
                         <h4 style="margin: 0 0 0.25rem 0; font-size: 1rem;">${title}</h4>
                         ${message ? `<p style="margin: 0; font-size: 0.875rem; color: var(--text-secondary);">${message}</p>` : ''}
@@ -3752,46 +3719,46 @@
                         content = this.getDashboardContent();
                         break;
                     case 'portfolio':
-                        content = this.getPortfolioContent();
+                        content = window.CabinetContentGenerator.getPortfolioContent();
                         break;
                     case 'transactions':
-                        content = this.getTransactionsContent();
+                        content = window.CabinetContentGenerator.getTransactionsContent();
                         break;
                     case 'analytics':
-                        content = this.getAnalyticsContent();
+                        content = window.CabinetContentGenerator.getAnalyticsContent();
                         break;
                     case 'bonuses':
-                        content = this.getBonusesContent();
+                        content = window.CabinetContentGenerator.getBonusesContent();
                         break;
                     case 'gifts':
-                        content = this.getGiftsContent();
+                        content = window.CabinetContentGenerator.getGiftsContent();
                         break;
                     case 'referrals':
-                        content = this.getReferralsContent();
+                        content = window.CabinetContentGenerator.getReferralsContent();
                         break;
                     case 'multipliers':
-                        content = this.getMultipliersContent();
+                        content = window.CabinetContentGenerator.getMultipliersContent();
                         break;
                     case 'mining-rent':
-                        content = this.getMiningRentContent();
+                        content = window.CabinetContentGenerator.getMiningRentContent();
                         break;
                     case 'my-device':
-                        content = this.getMyDeviceContent();
+                        content = window.CabinetContentGenerator.getMyDeviceContent();
                         break;
                     case 'plex-coin':
-                        content = this.getPlexCoinContent();
+                        content = window.CabinetContentGenerator.getPlexCoinContent();
                         break;
                     case 'settings':
-                        content = this.getSettingsContent();
+                        content = window.CabinetContentGenerator.getSettingsContent();
                         break;
                     case 'experience':
-                        content = this.getExperienceContent();
+                        content = window.CabinetContentGenerator.getExperienceContent();
                         break;
                     case 'rank':
-                        content = this.getRankContent();
+                        content = window.CabinetContentGenerator.getRankContent();
                         break;
                     case 'how-it-works':
-                        content = this.getHowItWorksContent();
+                        content = window.CabinetContentGenerator.getHowItWorksContent();
                         break;
                     default:
                         content = this.getDashboardContent();
@@ -3923,14 +3890,417 @@
             getBonusesContent: function() {
                 return `
                     <div class="page-header">
-                        <h2 class="page-title">🎁 Бонусы</h2>
-                        <p class="page-subtitle">Дополнительные возможности заработка</p>
+                        <h2 class="page-title">🎁 Бонусная программа GENESIS</h2>
+                        <p class="page-subtitle">Получайте дополнительные награды и множители доходности</p>
                     </div>
                     
-                    <div class="empty-state">
-                        <div class="empty-icon">🎁</div>
-                        <h3>Бонусы будут доступны позже</h3>
-                        <p>Следите за обновлениями</p>
+                    <!-- Общая статистика бонусов -->
+                    <div class="stats-grid stats-mb-2">
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Баланс USDT</span>
+                                <span class="stats-icon">💵</span>
+                            </div>
+                            <div class="stats-value">0.00</div>
+                            <div class="stats-change">USDT</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Баланс PLEX</span>
+                                <span class="stats-icon">🪙</span>
+                            </div>
+                            <div class="stats-value">0</div>
+                            <div class="stats-change">PLEX</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Монеты стажа</span>
+                                <span class="stats-icon">📅</span>
+                            </div>
+                            <div class="stats-value">0</div>
+                            <div class="stats-change">стажа</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Монеты ранга</span>
+                                <span class="stats-icon">🏅</span>
+                            </div>
+                            <div class="stats-value">0</div>
+                            <div class="stats-change">ранга</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Активные депозиты</span>
+                                <span class="stats-icon">📊</span>
+                            </div>
+                            <div class="stats-value">0</div>
+                            <div class="stats-change">штук</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Активные множители</span>
+                                <span class="stats-icon">⚡</span>
+                            </div>
+                            <div class="stats-value">0</div>
+                            <div class="stats-change">работают сейчас</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Бонусный доход</span>
+                                <span class="stats-icon">💰</span>
+                            </div>
+                            <div class="stats-value">$0.00</div>
+                            <div class="stats-change">всего получено</div>
+                        </div>
+                        
+                        <div class="stats-card">
+                            <div class="stats-header">
+                                <span class="stats-title">Достижения</span>
+                                <span class="stats-icon">🏆</span>
+                            </div>
+                            <div class="stats-value">0/25</div>
+                            <div class="stats-change">разблокировано</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Категории бонусов -->
+                    <div class="bonus-section">
+                        
+                        <!-- 1. Бонусы за привлечение партнеров -->
+                        <div class="bonus-card">
+                            <h3 class="bonus-title">
+                                <span class="bonus-icon">👥</span>
+                                Бонусы за привлечение партнеров
+                            </h3>
+                            
+                            <div class="bonus-grid">
+                                <!-- Бонус за 3 партнеров -->
+                                <div class="bonus-item"
+                                     onmouseover="this.style.borderColor='var(--primary-color)';this.style.transform='translateY(-2px)'"
+                                     onmouseout="this.style.borderColor='var(--border-color)';this.style.transform=''">
+                                    <div class="bonus-item-header">
+                                        <div>
+                                            <h4 class="bonus-item-title">Начинающий наставник</h4>
+                                            <p class="bonus-item-desc">Пригласите 3 партнеров</p>
+                                        </div>
+                                        <span class="bonus-icon">🥉</span>
+                                    </div>
+                                    <div class="bonus-reward">
+                                        <div class="bonus-reward-content">
+                                            <span class="text-secondary">Награда:</span>
+                                            <span class="golden-reward">290 монет</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-space-between flex-center">
+                                        <span class="text-secondary font-size-0-9">Прогресс: 0/3</span>
+                                        <button class="btn-outline p-0-5 font-size-0-9" disabled>🔒 Недоступно</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Бонус за 7 партнеров -->
+                                <div class="bonus-item"
+                                     onmouseover="this.style.borderColor='var(--primary-color)';this.style.transform='translateY(-2px)'"
+                                     onmouseout="this.style.borderColor='var(--border-color)';this.style.transform=''">
+                                    <div class="bonus-item-header">
+                                        <div>
+                                            <h4 class="bonus-item-title">Опытный наставник</h4>
+                                            <p class="bonus-item-desc">Пригласите 7 партнеров</p>
+                                        </div>
+                                        <span class="bonus-icon">🥈</span>
+                                    </div>
+                                    <div class="bonus-reward">
+                                        <div class="bonus-reward-content">
+                                            <span class="text-secondary">Награда:</span>
+                                            <span class="golden-reward">777 монет</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-space-between flex-center">
+                                        <span class="text-secondary font-size-0-9">Прогресс: 0/7</span>
+                                        <button class="btn-outline p-0-5 font-size-0-9" disabled>🔒 Недоступно</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Бонус за 15 партнеров -->
+                                <div class="bonus-item"
+                                     onmouseover="this.style.borderColor='var(--primary-color)';this.style.transform='translateY(-2px)'"
+                                     onmouseout="this.style.borderColor='var(--border-color)';this.style.transform=''">
+                                    <div class="bonus-item-header">
+                                        <div>
+                                            <h4 class="bonus-item-title">Мастер рекрутинга</h4>
+                                            <p class="bonus-item-desc">Пригласите 15 партнеров</p>
+                                        </div>
+                                        <span class="bonus-icon">🥇</span>
+                                    </div>
+                                    <div class="bonus-reward">
+                                        <div class="flex flex-column flex-gap-0-5">
+                                            <div class="bonus-reward-content">
+                                                <span class="text-secondary">Множитель:</span>
+                                                <span class="text-success font-weight-600">x0.88 на 12 часов</span>
+                                            </div>
+                                            <div class="text-secondary font-size-0-9">Однократный срочный множитель доходности</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-space-between flex-center">
+                                        <span class="text-secondary font-size-0-9">Прогресс: 0/15</span>
+                                        <button class="btn-outline p-0-5 font-size-0-9" disabled>🔒 Недоступно</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 2. Бонусы за покупку депозитов -->
+                        <div class="bonus-card">
+                            <h3 class="bonus-title">
+                                <span class="bonus-icon">💰</span>
+                                Бонусы за покупку депозитов
+                            </h3>
+                            
+                            <div class="bonus-grid">
+                                <!-- Первый депозит -->
+                                <div class="bonus-item-simple">
+                                    <h4 class="bonus-item-title">🎯 Первый шаг</h4>
+                                    <p class="bonus-item-desc mb-1">За первый депозит (не тестовый)</p>
+                                    <div class="bonus-reward-simple">
+                                        <div class="bonus-reward-content">
+                                            <span class="text-secondary">Награда:</span>
+                                            <span class="text-success font-weight-600">Множитель x0.71</span>
+                                        </div>
+                                        <div class="bonus-description">Однократный множитель доходности на 33 часа</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 3 депозита -->
+                                <div class="bonus-item-simple">
+                                    <h4 class="bonus-item-title">🔥 Активный инвестор</h4>
+                                    <p class="bonus-item-desc mb-1">За покупку 3 депозитов</p>
+                                    <div class="bonus-reward-simple">
+                                        <div class="bonus-reward-content">
+                                            <span class="text-secondary">Награда:</span>
+                                            <span class="text-success font-weight-600">Множитель x1.21</span>
+                                        </div>
+                                        <div class="bonus-description">Однократный множитель доходности на 9 часов</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 5 депозитов -->
+                                <div class="bonus-item-simple">
+                                    <h4 class="bonus-item-title">💎 Серьезный игрок</h4>
+                                    <p class="bonus-item-desc mb-1">За покупку 5 депозитов</p>
+                                    <div class="bonus-reward-simple">
+                                        <div class="bonus-reward-content">
+                                            <span class="text-secondary">Награда:</span>
+                                            <span class="text-success font-weight-600">Множитель x2.31</span>
+                                        </div>
+                                        <div class="bonus-description">Однократный множитель доходности на 10 часов</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 7 депозитов -->
+                                <div class="bonus-item-simple">
+                                    <h4 class="bonus-item-title">⚡ Профессионал</h4>
+                                    <p class="bonus-item-desc mb-1">За покупку 7 депозитов</p>
+                                    <div class="bonus-reward-simple">
+                                        <div class="text-secondary font-size-0-85 mb-0-5">Награды:</div>
+                                        <div class="flex flex-center flex-gap-0-5 mb-0-3">
+                                            <span class="text-success">•</span>
+                                            <span class="text-success font-weight-600">Два множителя x0.31</span>
+                                            <span class="text-secondary font-size-0-8">на 54 часа</span>
+                                        </div>
+                                        <div class="flex flex-center flex-gap-0-5">
+                                            <span class="primary-text-color">•</span>
+                                            <span class="primary-text-color font-weight-600">Множитель x4.12</span>
+                                            <span class="text-secondary font-size-0-8">на 5 часов</span>
+                                        </div>
+                                        <div class="text-secondary font-size-0-8 mt-0-5 font-style-italic">Однократные множители доходности</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Все депозиты -->
+                                <div class="bonus-item-special grid-col-span-2"
+                                     onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(255,107,53,0.3)'"
+                                     onmouseout="this.style.transform='';this.style.boxShadow=''">
+                                    <h4 class="bonus-special-title">
+                                        <span>👑</span> Легенда GENESIS
+                                    </h4>
+                                    <p class="bonus-item-desc mb-1">За покупку всех 13 депозитов</p>
+                                    <div class="grid grid-auto-fit-150 gap-1">
+                                        <div class="stat-card">
+                                            <div class="stat-value" class="gold-text-color">50,000</div>
+                                            <div class="stat-label">монет</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-value" class="success-text-color">x7.17</div>
+                                            <div class="stat-label">множитель</div>
+                                            <div class="stat-sublabel">на 29 часов</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-value" class="secondary-text-color">50,000</div>
+                                            <div class="stat-label">стажа</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-value accent-text-color">120</div>
+                                            <div class="stat-label">монет ранга</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 3. Бонусы за участие в экосистеме -->
+                        <div class="bonus-card">
+                            <h3 class="bonus-title">
+                                <span class="bonus-icon">🌐</span>
+                                Бонусы за участие в инструментах экосистемы
+                            </h3>
+                            
+                            <div class="bonus-item-simple">
+                                <p class="text-secondary mb-1">Получайте множитель доходности за каждый используемый инструмент экосистемы GENESIS</p>
+                                <div class="flex flex-center gap-1">
+                                    <div class="ecosystem-card">
+                                        <div class="ecosystem-value">x0.077</div>
+                                        <div class="ecosystem-desc">множитель доходности</div>
+                                        <div class="ecosystem-subdesc">на 37 часов</div>
+                                    </div>
+                                    <div class="text-secondary">
+                                        <div class="font-weight-500">За каждый инструмент:</div>
+                                        <div class="font-size-0-85">• Однократный множитель</div>
+                                        <div class="font-size-0-85">• Применяется автоматически</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 4. Бонусы за активность в чате -->
+                        <div class="bonus-card">
+                            <h3 class="bonus-title">
+                                <span class="bonus-icon">💬</span>
+                                Бонусы за активность в чате
+                            </h3>
+                            
+                            <div class="bonus-item-simple">
+                                <h4 class="bonus-item-title">🏆 Бонус за лояльность</h4>
+                                <p class="bonus-item-desc mb-1">За активное участие в жизни сообщества</p>
+                                <div class="bg-secondary p-1 border-radius-8 display-inline-block">
+                                    <span class="text-success font-weight-700 font-size-1-3">$237</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 5-7. Бонусы в разработке -->
+                        <div class="bonus-grid mb-2">
+                            <div class="bonus-card opacity-70">
+                                <h4 class="bonus-item-title mb-0-5 flex flex-center flex-gap-0-5">
+                                    <span>🧪</span> Бонусы за тестирования
+                                </h4>
+                                <p class="bonus-item-desc">За участие в тестированиях продуктов экосистемы</p>
+                                <div class="bg-primary p-0-5 border-radius-8 mt-1 text-center">
+                                    <span class="warning-text-color">🚧 В разработке</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bonus-card opacity-70">
+                                <h4 class="bonus-item-title mb-0-5 flex flex-center flex-gap-0-5">
+                                    <span>📅</span> Бонусы за стаж
+                                </h4>
+                                <p class="bonus-item-desc">Награды за длительное участие в проекте</p>
+                                <div class="bg-primary p-0-5 border-radius-8 mt-1 text-center">
+                                    <span class="warning-text-color">🚧 В разработке</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bonus-card opacity-70">
+                                <h4 class="bonus-item-title mb-0-5 flex flex-center flex-gap-0-5">
+                                    <span>🏅</span> Бонусы за ранг
+                                </h4>
+                                <p class="bonus-item-desc">Эксклюзивные награды за достижение рангов</p>
+                                <div class="bg-primary p-0-5 border-radius-8 mt-1 text-center">
+                                    <span class="warning-text-color">🚧 В разработке</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Специальный бонус 1000 -->
+                        <div class="golden-bonus">
+                            <h3 class="golden-title">
+                                <span class="font-size-2">🌟</span>
+                                БОНУСНАЯ 1000
+                            </h3>
+                            
+                            <p class="golden-description">
+                                За привлечение партнеров и участие в GENESIS более 400 дней
+                            </p>
+                            
+                            <div class="golden-grid">
+                                <div class="golden-card golden-card-special">
+                                    <div class="golden-value" class="gold-text-color">$1000</div>
+                                    <div class="text-secondary">Денежный бонус</div>
+                                </div>
+                                
+                                <div class="golden-card">
+                                    <div class="golden-value-medium" class="success-text-color">x3.21</div>
+                                    <div class="text-secondary font-size-0-85">множитель доходности</div>
+                                    <div class="text-secondary font-size-0-8">на 7 часов</div>
+                                </div>
+                                
+                                <div class="golden-card">
+                                    <div class="golden-value-medium" class="secondary-text-color">x0.21</div>
+                                    <div class="text-secondary font-size-0-85">множитель доходности</div>
+                                    <div class="text-secondary font-size-0-8">на 100 часов</div>
+                                </div>
+                                
+                                <div class="golden-card">
+                                    <div class="golden-value-large accent-text-color">MEV Валькирия</div>
+                                    <div class="text-secondary font-size-0-85">Торговая поддержка</div>
+                                    <div class="text-secondary font-size-0-8">$500 на 72 часа</div>
+                                </div>
+                                
+                                <div class="golden-card">
+                                    <div class="golden-value-large" class="primary-text-color">Гарантированный доступ</div>
+                                    <div class="text-secondary font-size-0-85">MEV бот Валькирия</div>
+                                    <div class="text-secondary font-size-0-8">до $500 на 100 часов</div>
+                                </div>
+                            </div>
+                            
+                            <div class="golden-conditions">
+                                <p class="text-secondary font-size-0-9" class="margin-zero">
+                                    <strong class="warning-text-color">Условия:</strong> Привлечение активных партнеров + непрерывное участие в проекте более 400 дней
+                                </p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Информационный блок -->
+                    <div class="info-block">
+                        <h4 class="info-title">💡 Как работают бонусы</h4>
+                        <ul class="bonus-list">
+                            <li class="bonus-list-item">
+                                <span class="bonus-check">✓</span>
+                                <span>Множители доходности применяются автоматически ко всем активным депозитам</span>
+                            </li>
+                            <li class="bonus-list-item">
+                                <span class="bonus-check">✓</span>
+                                <span>Монеты GENESIS можно обменять на дополнительные бонусы в магазине</span>
+                            </li>
+                            <li class="bonus-list-item">
+                                <span class="bonus-check">✓</span>
+                                <span>Однократные множители активируются сразу после получения</span>
+                            </li>
+                            <li class="bonus-list-item">
+                                <span class="bonus-check">✓</span>
+                                <span>Несколько множителей могут работать одновременно</span>
+                            </li>
+                            <li class="bonus-list-item">
+                                <span class="bonus-check">✓</span>
+                                <span>Прогресс по всем достижениям сохраняется автоматически</span>
+                            </li>
+                        </ul>
                     </div>
                 `;
             },
@@ -4065,7 +4435,7 @@
                             <span class="stats-title">Текущий ранг</span>
                             <span class="stats-icon">🏅</span>
                         </div>
-                        <div class="stats-value" style="font-size: 1.5rem;">Новичок</div>
+                        <div class="stats-value" class="font-size-1.5rem">Новичок</div>
                         <div class="stats-change color-text-secondary">Начальный уровень</div>
                     </div>
                 `;
@@ -4075,215 +4445,157 @@
                 return `
                     <div class="page-header">
                         <h2 class="page-title">🛠️ Как все устроено</h2>
-                        <p class="page-subtitle">Добро пожаловать в экосистему GENESIS 1.1 на базе монеты PLEX ONE</p>
+                        <p class="page-subtitle">Подробное руководство по работе с платформой GENESIS 1.1</p>
                     </div>
                     
-                    <div class="content-section">
-                        <div class="info-banner">
-                            <div class="info-icon">🌟</div>
-                            <div class="info-content">
-                                <h3>Рады вас приветствовать!</h3>
-                                <p>Это один из ключевых сайтов нашей экосистемы на базе монеты PLEX ONE. Здесь вы можете начать зарабатывать сразу и все больше каждый день, каждый час и каждую минуту.</p>
-                            </div>
+                    <div class="margin-bottom-large">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🌟 Добро пожаловать в GENESIS 1.1</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+                            GENESIS 1.1 - это современная DeFi платформа для управления цифровыми активами, построенная на блокчейне BSC (Binance Smart Chain). 
+                            Наша платформа предоставляет возможность создавать депозиты и получать пассивный доход от инвестиций.
+                        </p>
+                    </div>
+                    
+                    <div class="info-banner">
+                        <div class="info-icon">ℹ️</div>
+                        <div class="info-content">
+                            <h3>Основные принципы работы</h3>
+                            <p>Платформа работает полностью децентрализованно, без серверной части. Все транзакции проходят через смарт-контракты в блокчейне BSC.</p>
                         </div>
                     </div>
-
-                    <div class="content-section">
-                        <h3 class="section-title">📋 Пошаговый план заработка</h3>
+                    
+                    <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">📋 Пошаговая инструкция</h3>
+                    
+                    <div class="steps-container">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>🔑 Оплата доступа к платформе</h4>
+                                <p>Первым делом необходимо оплатить доступ к платформе. Стоимость: $1 в день, минимальное пополнение $10 USDT.</p>
+                            </div>
+                        </div>
                         
-                        <div class="steps-container">
-                            <div class="step-card">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>🔑 Оплатить доступ к сайту</h4>
-                                    <p>Первый шаг - получить доступ к функциям платформы</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step-card">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>💰 Купить тестовый депозит</h4>
-                                    <p>Убедитесь, что прибыль по депозиту приходит на ваш кошелек</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step-card">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>🎁 Посетить раздел "Бонусы и подарки"</h4>
-                                    <p>Если вы уже участвуете в инструментах экосистемы</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step-card">
-                                <div class="step-number">4</div>
-                                <div class="step-content">
-                                    <h4>⚡ Купить первый множитель доходности</h4>
-                                    <p>Доступны в разделе "Множители"</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step-card">
-                                <div class="step-number">5</div>
-                                <div class="step-content">
-                                    <h4>📈 Приобрести первый депозит</h4>
-                                    <p>Не тестовый, а полноценный депозит для заработка</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step-card">
-                                <div class="step-number">6</div>
-                                <div class="step-content">
-                                    <h4>💻 Подключиться к программе аренды мощностей</h4>
-                                    <p>Получайте криптовалюту, сдавая в аренду часть мощностей вашего устройства. Посмотрите раздел "Аренда мощностей"</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step-card">
-                                <div class="step-number">7</div>
-                                <div class="step-content">
-                                    <h4>🏆 Проверить разделы "Стаж" и "Ранг"</h4>
-                                    <p><strong>Стаж</strong> - ваш опыт в каждом инструменте системы, который превращается в монету Стаж и автоматически начисляется при росте опыта</p>
-                                    <p><strong>Ранг</strong> - монета, которая начисляется в зависимости от стажа и количества PLEX ONE на кошельке более одной недели</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step-card">
-                                <div class="step-number">8</div>
-                                <div class="step-content">
-                                    <h4>💎 Покупка множителей за Ранг и Стаж</h4>
-                                    <p>После начисления Ранга и Стажа вы можете покупать множители за эти монеты</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step-card">
-                                <div class="step-number">9</div>
-                                <div class="step-content">
-                                    <h4>🚀 Применение мощных множителей</h4>
-                                    <p>Применяйте множители на активные депозиты и начинайте получать в десятки раз больше прибыли</p>
-                                </div>
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>💰 Создание депозитов</h4>
+                                <p>После оплаты доступа вы можете создавать депозиты. Доступно 13 планов от $25 до $2500. Депозиты создаются последовательно - от меньшего к большему.</p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="content-section">
-                        <h3 class="section-title">🔧 Архитектура системы</h3>
                         
-                        <div class="architecture-info">
-                            <div class="arch-card">
-                                <div class="arch-icon">🌐</div>
-                                <div class="arch-content">
-                                    <h4>Блокчейн как база данных</h4>
-                                    <p>На этом сайте реализована передовая DeFi система учета, анализа и наград пользователя. В качестве базы данных выступает сам блокчейн.</p>
-                                </div>
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>📈 Получение дохода</h4>
+                                <p>Каждый депозит приносит ежедневный доход согласно выбранному плану. Доходность варьируется от 0.3% до 1.5% в день.</p>
                             </div>
-                            
-                            <div class="arch-card">
-                                <div class="arch-icon">📊</div>
-                                <div class="arch-content">
-                                    <h4>Анализ активности кошелька</h4>
-                                    <p>Анализ проводится по результатам активности вашего кошелька. Для системы вы = адрес вашего кошелька.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="arch-card">
-                                <div class="arch-icon">🔒</div>
-                                <div class="arch-content">
-                                    <h4>Анонимная работа</h4>
-                                    <p>Ваши действия, прогресс и награды система вычисляет по действиям кошелька. Это значит, что вы можете работать анонимно.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="arch-card">
-                                <div class="arch-icon">💵</div>
-                                <div class="arch-content">
-                                    <h4>Высокая доходность</h4>
-                                    <p>Вы можете зарабатывать много - вплоть до нескольких долларов в минуту.</p>
-                                </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>💸 Вывод средств</h4>
+                                <p>Заработанные средства можно вывести на ваш BSC кошелек в любое время. Минимальная сумма вывода: $10 USDT.</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="content-section">
-                        <div class="warning-banner">
-                            <div class="warning-icon">⚠️</div>
-                            <div class="warning-content">
-                                <h4>⚠️ ВАЖНО! Безопасность кошелька</h4>
-                                <p><strong>Если вы потеряли доступ к своему кошельку = вы потеряли доход и деньги. Мы помочь не сможем!</strong></p>
-                                <ul>
-                                    <li>Храните сид-фразу и/или приватный ключ в надежном месте</li>
-                                    <li>Никогда и никому не передавайте доступ к своему кошельку</li>
-                                    <li>Сделайте несколько резервных копий</li>
+                    
+                    <div class="warning-banner">
+                        <div class="warning-icon">⚠️</div>
+                        <div class="warning-content">
+                            <h4>Важная информация</h4>
+                            <ul>
+                                <li>Все операции проводятся в криптовалюте USDT (сеть BSC)</li>
+                                <li>Для планов 11-13 доступна оплата в PLEX токенах</li>
+                                <li>Транзакции необратимы - внимательно проверяйте адреса</li>
+                                <li>Сохраняйте приватные ключи от вашего кошелька</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">🏗️ Архитектура платформы</h3>
+                    
+                    <div class="architecture-info">
+                        <div class="arch-card">
+                            <div class="arch-icon">🔗</div>
+                            <div class="arch-content">
+                                <h4>Блокчейн BSC</h4>
+                                <p>Все транзакции проходят через блокчейн Binance Smart Chain, обеспечивая прозрачность и безопасность.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="arch-card">
+                            <div class="arch-icon">📱</div>
+                            <div class="arch-content">
+                                <h4>PWA приложение</h4>
+                                <p>Платформа работает как Progressive Web App - можно установить на любое устройство.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="arch-card">
+                            <div class="arch-icon">🔒</div>
+                            <div class="arch-content">
+                                <h4>Безопасность</h4>
+                                <p>Отсутствие серверной части исключает возможность взлома централизованной базы данных.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">⚡ Система множителей</h3>
+                    
+                    <div class="multiplier-explanation">
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            Множители - это специальные бонусы, которые увеличивают доходность ваших депозитов. 
+                            Они активируются за дополнительную плату и действуют ограниченное время.
+                        </p>
+                        
+                        <div class="multiplier-card">
+                            <div class="multiplier-icon">🚀</div>
+                            <div class="multiplier-content">
+                                <h4>Виды множителей</h4>
+                                <ul style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary);">
+                                    <li>x1.5 - увеличение дохода на 50%</li>
+                                    <li>x2.0 - удвоение дохода</li>
+                                    <li>x3.0 - утроение дохода</li>
                                 </ul>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="content-section">
-                        <h3 class="section-title">⚡ Что такое множитель?</h3>
                         
-                        <div class="multiplier-explanation">
-                            <div class="multiplier-card">
-                                <div class="multiplier-icon">📈</div>
-                                <div class="multiplier-content">
-                                    <h4>Множитель доходности</h4>
-                                    <p>Это ваша возможность получать пассивный доход в <strong>10, 20, 30 раз выше</strong> на ограниченный период времени.</p>
+                        <div class="example-card">
+                            <h4>💡 Пример расчета</h4>
+                            <div class="calculation">
+                                <div class="calc-step">
+                                    <span class="calc-label">Базовый доход:</span>
+                                    <span class="calc-value">$10/день</span>
                                 </div>
-                            </div>
-                            
-                            <div class="example-card">
-                                <h4>💡 Пример расчета:</h4>
-                                <div class="calculation">
-                                    <div class="calc-step">
-                                        <span class="calc-label">Базовый доход:</span>
-                                        <span class="calc-value">10 центов в минуту</span>
-                                    </div>
-                                    <div class="calc-step">
-                                        <span class="calc-label">В сутках минут:</span>
-                                        <span class="calc-value">1440</span>
-                                    </div>
-                                    <div class="calc-step">
-                                        <span class="calc-label">Доход за сутки без множителя:</span>
-                                        <span class="calc-value">144 доллара</span>
-                                    </div>
-                                    <div class="calc-divider"></div>
-                                    <div class="calc-step multiplier-example">
-                                        <span class="calc-label">Множитель x30 на 4 часа:</span>
-                                        <span class="calc-value">864 доллара вместо 144</span>
-                                    </div>
+                                <div class="calc-step">
+                                    <span class="calc-label">Множитель x2:</span>
+                                    <span class="calc-value">×2</span>
                                 </div>
-                            </div>
-                            
-                            <div class="multiplier-info">
-                                <h4>📋 Особенности множителей:</h4>
-                                <ul>
-                                    <li>Система не всегда располагает свободными множителями</li>
-                                    <li>Они стоят довольно дорого</li>
-                                    <li>Самые эффективные множители доступны только за PLEX ONE</li>
-                                    <li>Некоторые ударные множители доступны только за монеты Стаж и Ранг</li>
-                                    <li>Ударные множители приносят очень высокий доход</li>
-                                </ul>
+                                <div class="calc-divider"></div>
+                                <div class="calc-step multiplier-example">
+                                    <span class="calc-label">Итоговый доход:</span>
+                                    <span class="calc-value">$20/день</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="content-section">
-                        <div class="success-banner">
-                            <div class="success-icon">🎯</div>
-                            <div class="success-content">
-                                <h4>Готовы начать зарабатывать?</h4>
-                                <p>Теперь вы знаете, как устроена система GENESIS 1.1. Начните с первого шага - оплаты доступа к платформе!</p>
-                                <div class="action-buttons">
-                                    <button class="btn btn-primary" onclick="window.CabinetApp.showPlatformAccessModal()">
-                                        🔑 Оплатить доступ
-                                    </button>
-                                    <button class="btn btn-secondary" onclick="window.CabinetApp.navigateTo('portfolio')">
-                                        💰 Перейти к депозитам
-                                    </button>
-                                </div>
-                            </div>
+                    
+                    <div class="success-banner">
+                        <div class="success-icon">✅</div>
+                        <div class="success-content">
+                            <h4>Готовы начать?</h4>
+                            <p>Теперь вы знаете как работает платформа. Начните с пополнения доступа и создания первого депозита!</p>
                         </div>
+                    </div>
+                    
+                    <div class="action-buttons margin-bottom-large">
+                        <button class="btn btn-secondary" onclick="window.CabinetApp.showPlatformAccessModal()">
+                            🔑 Пополнить доступ
+                        </button>
+                        <button class="btn btn-outline" onclick="window.CabinetApp.showCreateDepositModal()">
+                            💰 Создать депозит
+                        </button>
                     </div>
                 `;
             },
@@ -4377,6 +4689,78 @@
         
         // Запуск приложения
         window.CabinetApp.init();
+
+        // MCP-MARKER:INTEGRATION:TERMINAL:TOGGLE_BUTTON:EARLY - Плавающая кнопка Терминала (раннее подключение)
+        (function(){
+            try {
+                const btnId = 'genesis-terminal-toggle-btn';
+                if (document.getElementById(btnId)) return;
+                const btn = document.createElement('button');
+                btn.id = btnId;
+                btn.type = 'button';
+                btn.title = 'Терминал';
+                btn.setAttribute('aria-label', 'Открыть/закрыть терминал');
+                Object.assign(btn.style, {
+                    position: 'fixed', right: '14px', bottom: '14px', zIndex: '1201',
+                    background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
+                    color: '#fff', border: 'none', borderRadius: '12px', padding: '10px 12px',
+                    boxShadow: '0 6px 18px rgba(0,0,0,0.35)', cursor: 'pointer',
+                    fontFamily: "Rajdhani, 'Segoe UI', sans-serif", fontWeight: '700', display: 'flex',
+                    alignItems: 'center', gap: '8px'
+                });
+                btn.innerHTML = '<span>🖥️</span><span>Терминал</span>';
+
+                const ensureTerminal = () => {
+                    if (!window.GenesisTerminal || !window.GenesisTerminal.init) return false;
+                    let container = document.getElementById('genesis-terminal') || document.querySelector('.genesis-terminal');
+                    if (!container) {
+                        container = document.createElement('div');
+                        container.id = 'genesis-terminal';
+                        container.className = 'genesis-terminal';
+                        Object.assign(container.style, {
+                            position: 'fixed', right: '16px', bottom: '64px', width: '520px', maxWidth: '95vw',
+                            background: 'var(--bg-secondary)', border: '1px solid var(--border-color)',
+                            borderRadius: '16px', overflow: 'hidden', zIndex: '1200'
+                        });
+                        container.innerHTML = (
+                            '<div class="terminal-header" style="padding:10px 14px;border-bottom:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center">'
+                          +   '<div class="terminal-title" style="font-weight:700;color:var(--primary-color)">GENESIS Terminal</div>'
+                          +   '<div class="terminal-controls" style="display:flex;gap:8px">'
+                          +     '<button id="terminal-btn-minimize" title="Свернуть">_</button>'
+                          +     '<button id="terminal-btn-fullscreen" title="Полноэкранный режим">⬜</button>'
+                          +     '<button id="terminal-btn-copy" title="Копировать логи">📋</button>'
+                          +     '<button id="terminal-btn-clear" title="Очистить">🗑️</button>'
+                          +     '<button id="terminal-btn-export" title="Экспорт">💾</button>'
+                          +   '</div>'
+                          + '</div>'
+                          + '<div id="terminal-stats" class="terminal-stats" style="display:none"></div>'
+                          + '<div id="genesis-terminal-body" class="terminal-body" style="max-height:300px;overflow:auto"></div>'
+                          + '<div class="terminal-input-container" style="display:flex;align-items:center;padding:8px 12px;border-top:1px solid var(--border-color)">'
+                          +   '<span class="terminal-prompt" style="color:var(--secondary-color);margin-right:8px">GENESIS ></span>'
+                          +   '<input id="terminalInput" class="terminal-input" style="flex:1;background:var(--bg-tertiary);border:1px solid var(--border-color);color:var(--text-primary);padding:8px;border-radius:8px" placeholder="Введите команду (help для справки)" />'
+                          + '</div>'
+                        );
+                        document.body.appendChild(container);
+                    }
+                    if (!window.GenesisTerminal.state?.isInitialized) {
+                        window.GenesisTerminal.init();
+                    }
+                    return true;
+                };
+
+                btn.addEventListener('click', () => {
+                    if (!ensureTerminal()) return;
+                    const c = document.getElementById('genesis-terminal') || document.querySelector('.genesis-terminal');
+                    if (!c) return;
+                    const hidden = c.style.display === 'none';
+                    c.style.display = hidden ? '' : 'none';
+                    if (!hidden && window.GenesisTerminal.state.isMinimized) {
+                        window.GenesisTerminal.minimize();
+                    }
+                });
+                document.body.appendChild(btn);
+            } catch (e) { /* no-op */ }
+        })();
     </script>
 </body>
 </html>ent();
@@ -4435,6 +4819,11 @@
             getPortfolioContent: function() {
                 const hasAccess = this.state.platformAccess && this.state.platformAccess.isActive;
                 
+                console.log('🔍 Portfolio Debug Info:');
+                console.log('- hasAccess:', hasAccess);
+                console.log('- platformAccess:', this.state.platformAccess);
+                console.log('- deposits:', this.state.deposits);
+                
                 // Планы депозитов согласно ТЗ (13 планов)
                 const depositPlans = [
                     { id: 1, name: 'STARTER', amount: 25, currency: 'USDT', percent: 0.3, days: 100, icon: '🌱' },
@@ -4461,6 +4850,9 @@
                 const lastPurchasedPlanId = userDeposits.length > 0 ? 
                     Math.max(...userDeposits.map(d => d.planId)) : 0;
                 const nextAvailablePlanId = lastPurchasedPlanId + 1;
+                
+                console.log('- lastPurchasedPlanId:', lastPurchasedPlanId);
+                console.log('- nextAvailablePlanId:', nextAvailablePlanId);
                 
                 // Расчет статистики портфеля
                 const totalInvested = userDeposits.reduce((sum, d) => sum + d.amount, 0);
@@ -4593,6 +4985,17 @@
                     <!-- Доступные планы депозитов -->
                     <div>
                         <h3 class="plans-title">💎 Планы депозитов</h3>
+                        
+                        <!-- Информация о системе планов -->
+                        <div class="info-block mb-2">
+                            <div class="info-title">📋 Система планов депозитов</div>
+                            <div class="info-description">
+                                <p>• Планы покупаются строго по порядку (от STARTER к ULTIMATE)</p>
+                                <p>• ${hasAccess ? `Доступен к покупке: план ${nextAvailablePlanId} из 13` : 'Требуется доступ к платформе'}</p>
+                                <p>• Заблокированные планы 🔒 откроются после покупки предыдущих</p>
+                            </div>
+                        </div>
+                        
                         ${!hasAccess ? `
                             <div class="notification warning notification-warning-static">
                                 <div class="notification-icon">⚠️</div>
@@ -4612,10 +5015,11 @@
                                 const isAvailable = plan.id === nextAvailablePlanId && hasAccess;
                                 const isLocked = plan.id > nextAvailablePlanId || !hasAccess;
                                 
+                                console.log(`Plan ${plan.name}: isPurchased=${isPurchased}, isAvailable=${isAvailable}, isLocked=${isLocked}`);
+                                
                                 return `
-                                    <div class="plan-card ${isLocked ? 'plan-card-locked' : (isAvailable ? 'plan-card-available' : '')}" 
-                                         style="border: 2px solid ${isPurchased ? 'var(--success-color)' : (isAvailable ? 'var(--primary-color)' : 'var(--border-color)')};"
-                                         ${!isLocked ? `onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''"` : ''}>
+                                    <!-- MCP-MARKER:FIX:NO_INLINE_STYLES:PLAN_CARD_BORDER_AND_HOVER -->
+                                    <div class="plan-card ${isLocked ? 'plan-card-locked' : (isAvailable ? 'plan-card-available' : '')} ${isPurchased ? 'plan-card-purchased' : ''}">
                                         ${isLocked ? `
                                             <div class="overlay">
                                                 <span class="font-size-2">🔒</span>
@@ -4637,7 +5041,7 @@
                                         <div class="plan-details">
                                             <div class="plan-detail-row">
                                                 <span class="text-secondary">Сумма:</span>
-                                                <span style="color: var(--primary-color);" class="font-weight-600">${plan.amount}</span>
+                                                <span class="primary-text-color" class="font-weight-600">${plan.amount}</span>
                                             </div>
                                             <div class="plan-detail-row">
                                                 <span class="text-secondary">Доход в день:</span>
@@ -4649,14 +5053,14 @@
                                             </div>
                                             <div class="flex flex-space-between">
                                                 <span class="text-secondary">Валюта:</span>
-                                                <span style="color: var(--secondary-color);" class="font-weight-600">${plan.currency}</span>
+                                                <span class="secondary-text-color" class="font-weight-600">${plan.currency}</span>
                                             </div>
                                         </div>
                                         
                                         <div class="plan-total-profit">
                                             <div class="plan-total-profit-content">
                                                 <span class="text-secondary font-size-0-9">Общий доход:</span>
-                                                <span style="color: var(--gold-color); font-weight: 700; font-size: 1.1rem;">${(plan.amount * plan.percent / 100 * plan.days).toFixed(2)}</span>
+                                                <span class="font-weight-700-font-size-1-1rem golden-value-color">${(plan.amount * plan.percent / 100 * plan.days).toFixed(2)}</span>
                                             </div>
                                         </div>
                                         
@@ -4842,7 +5246,7 @@
                                     <div class="bonus-reward">
                                         <div class="bonus-reward-content">
                                             <span class="text-secondary">Награда:</span>
-                                            <span class="golden-value font-weight-600 font-size-1-1">290 монет</span>
+                                            <span class="golden-reward">290 монет</span>
                                         </div>
                                     </div>
                                     <div class="flex flex-space-between flex-center">
@@ -4865,7 +5269,7 @@
                                     <div class="bonus-reward">
                                         <div class="bonus-reward-content">
                                             <span class="text-secondary">Награда:</span>
-                                            <span class="golden-value font-weight-600 font-size-1-1">777 монет</span>
+                                            <span class="golden-reward">777 монет</span>
                                         </div>
                                     </div>
                                     <div class="flex flex-space-between flex-center">
@@ -4961,8 +5365,8 @@
                                             <span class="text-secondary font-size-0-8">на 54 часа</span>
                                         </div>
                                         <div class="flex flex-center flex-gap-0-5">
-                                            <span class="primary-color">•</span>
-                                            <span class="primary-color font-weight-600">Множитель x4.12</span>
+                                            <span class="primary-text-color">•</span>
+                                            <span class="primary-text-color font-weight-600">Множитель x4.12</span>
                                             <span class="text-secondary font-size-0-8">на 5 часов</span>
                                         </div>
                                         <div class="text-secondary font-size-0-8 mt-0-5 font-style-italic">Однократные множители доходности</div>
@@ -4979,20 +5383,20 @@
                                     <p class="bonus-item-desc mb-1">За покупку всех 13 депозитов</p>
                                     <div class="grid grid-auto-fit-150 gap-1">
                                         <div class="stat-card">
-                                            <div class="stat-value golden-value">50,000</div>
+                                            <div class="stat-value" class="gold-text-color">50,000</div>
                                             <div class="stat-label">монет</div>
                                         </div>
                                         <div class="stat-card">
-                                            <div class="stat-value success-color">x7.17</div>
+                                            <div class="stat-value" class="success-text-color">x7.17</div>
                                             <div class="stat-label">множитель</div>
                                             <div class="stat-sublabel">на 29 часов</div>
                                         </div>
                                         <div class="stat-card">
-                                            <div class="stat-value secondary-color">50,000</div>
+                                            <div class="stat-value" class="secondary-text-color">50,000</div>
                                             <div class="stat-label">стажа</div>
                                         </div>
                                         <div class="stat-card">
-                                            <div class="stat-value accent-color">120</div>
+                                            <div class="stat-value accent-text-color">120</div>
                                             <div class="stat-label">монет ранга</div>
                                         </div>
                                     </div>
@@ -5048,7 +5452,7 @@
                                 </h4>
                                 <p class="bonus-item-desc">За участие в тестированиях продуктов экосистемы</p>
                                 <div class="bg-primary p-0-5 border-radius-8 mt-1 text-center">
-                                    <span class="warning-color">🚧 В разработке</span>
+                                    <span class="warning-text-color">🚧 В разработке</span>
                                 </div>
                             </div>
                             
@@ -5058,7 +5462,7 @@
                                 </h4>
                                 <p class="bonus-item-desc">Награды за длительное участие в проекте</p>
                                 <div class="bg-primary p-0-5 border-radius-8 mt-1 text-center">
-                                    <span class="warning-color">🚧 В разработке</span>
+                                    <span class="warning-text-color">🚧 В разработке</span>
                                 </div>
                             </div>
                             
@@ -5068,7 +5472,7 @@
                                 </h4>
                                 <p class="bonus-item-desc">Эксклюзивные награды за достижение рангов</p>
                                 <div class="bg-primary p-0-5 border-radius-8 mt-1 text-center">
-                                    <span class="warning-color">🚧 В разработке</span>
+                                    <span class="warning-text-color">🚧 В разработке</span>
                                 </div>
                             </div>
                         </div>
@@ -5086,38 +5490,38 @@
                             
                             <div class="golden-grid">
                                 <div class="golden-card golden-card-special">
-                                    <div class="golden-value">$1000</div>
+                                    <div class="golden-value" class="gold-text-color">$1000</div>
                                     <div class="text-secondary">Денежный бонус</div>
                                 </div>
                                 
                                 <div class="golden-card">
-                                    <div class="golden-value-medium">x3.21</div>
+                                    <div class="golden-value-medium" class="success-text-color">x3.21</div>
                                     <div class="text-secondary font-size-0-85">множитель доходности</div>
                                     <div class="text-secondary font-size-0-8">на 7 часов</div>
                                 </div>
                                 
                                 <div class="golden-card">
-                                    <div class="golden-value-medium secondary-color">x0.21</div>
+                                    <div class="golden-value-medium" class="secondary-text-color">x0.21</div>
                                     <div class="text-secondary font-size-0-85">множитель доходности</div>
                                     <div class="text-secondary font-size-0-8">на 100 часов</div>
                                 </div>
                                 
                                 <div class="golden-card">
-                                    <div class="golden-value-large">MEV Валькирия</div>
+                                    <div class="golden-value-large accent-text-color">MEV Валькирия</div>
                                     <div class="text-secondary font-size-0-85">Торговая поддержка</div>
                                     <div class="text-secondary font-size-0-8">$500 на 72 часа</div>
                                 </div>
                                 
                                 <div class="golden-card">
-                                    <div class="golden-value-large primary-color">Гарантированный доступ</div>
+                                    <div class="golden-value-large" class="primary-text-color">Гарантированный доступ</div>
                                     <div class="text-secondary font-size-0-85">MEV бот Валькирия</div>
                                     <div class="text-secondary font-size-0-8">до $500 на 100 часов</div>
                                 </div>
                             </div>
                             
                             <div class="golden-conditions">
-                                <p class="text-secondary font-size-0-9" style="margin: 0;">
-                                    <strong style="color: var(--warning-color);">Условия:</strong> Привлечение активных партнеров + непрерывное участие в проекте более 400 дней
+                                <p class="text-secondary font-size-0-9" class="margin-zero">
+                                    <strong class="warning-text-color">Условия:</strong> Привлечение активных партнеров + непрерывное участие в проекте более 400 дней
                                 </p>
                             </div>
                         </div>
@@ -5212,30 +5616,30 @@
                                     <div class="multiplier-card multiplier-card-active">
                                         <div class="multiplier-icon">🔥</div>
                                         <h5 class="multiplier-title">Огненный</h5>
-                                        <div class="multiplier-value" style="color: var(--success-color);">x2.5</div>
+                                        <div class="multiplier-value" class="success-text-color">x2.5</div>
                                         <div class="multiplier-time">Осталось: 4ч 23м</div>
                                         <div class="multiplier-progress">
-                                            <div class="multiplier-progress-bar" style="background: var(--success-color); width: 72%;"></div>
+                                            <div class="multiplier-progress-bar" class="background-success width-72-percent"></div>
                                         </div>
                                     </div>
                                     
                                     <div class="multiplier-card multiplier-card-secondary">
                                         <div class="multiplier-icon">💎</div>
                                         <h5 class="multiplier-title">Алмазный</h5>
-                                        <div class="multiplier-value" style="color: var(--secondary-color);">x1.8</div>
+                                        <div class="multiplier-value" class="secondary-text-color">x1.8</div>
                                         <div class="multiplier-time">Осталось: 12ч 45м</div>
                                         <div class="multiplier-progress">
-                                            <div class="multiplier-progress-bar" style="background: var(--secondary-color); width: 53%;"></div>
+                                            <div class="multiplier-progress-bar" class="background-secondary width-53-percent"></div>
                                         </div>
                                     </div>
                                     
                                     <div class="multiplier-card multiplier-card-warning">
                                         <div class="multiplier-icon">⭐</div>
                                         <h5 class="multiplier-title">Звездный</h5>
-                                        <div class="multiplier-value" style="color: var(--warning-color);">x3.2</div>
+                                        <div class="multiplier-value" class="warning-text-color">x3.2</div>
                                         <div class="multiplier-time">Осталось: 23ч 17м</div>
                                         <div class="multiplier-progress">
-                                            <div class="multiplier-progress-bar" style="background: var(--warning-color); width: 97%;"></div>
+                                            <div class="multiplier-progress-bar" class="background-warning width-97-percent"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -5254,7 +5658,7 @@
                                         </div>
                                         <div class="effect-item">
                                             <div class="effect-label">Суммарный множитель</div>
-                                            <div class="effect-value" style="color: var(--primary-color);">x5.48</div>
+                                            <div class="effect-value" class="primary-text-color">x5.48</div>
                                         </div>
                                     </div>
                                 </div>
@@ -5268,7 +5672,7 @@
                                                 <span class="font-size-1-5">🚀</span>
                                                 <h5 class="bonus-item-title">Турбо x2.0</h5>
                                             </div>
-                                            <span class="multiplier-badge" style="background: var(--success-color);">6 часов</span>
+                                            <span class="multiplier-badge" class="background-success">6 часов</span>
                                         </div>
                                         <p class="multiplier-description">Удваивает доходность от всех источников на 6 часов</p>
                                         <div class="multiplier-price">
@@ -5286,7 +5690,7 @@
                                                 <span class="font-size-1-5">⚡</span>
                                                 <h5 class="bonus-item-title">Молния x4.0</h5>
                                             </div>
-                                            <span class="multiplier-badge" style="background: var(--primary-color); color: white;">3 часа</span>
+                                            <span class="multiplier-badge background-primary color-white">3 часа</span>
                                         </div>
                                         <p class="multiplier-description">Увеличивает доходность в 4 раза на 3 часа</p>
                                         <div class="multiplier-price">
@@ -5298,13 +5702,13 @@
                                         </button>
                                     </div>
                                     
-                                    <div class="multiplier-shop-card" style="border-color: var(--warning-color);">
+                                    <div class="multiplier-shop-card border-color-warning">
                                         <div class="multiplier-header">
                                             <div class="multiplier-name">
                                                 <span class="font-size-1-5">🌟</span>
                                                 <h5 class="bonus-item-title">Супер x7.5</h5>
                                             </div>
-                                            <span class="multiplier-badge" style="background: var(--warning-color);">1 час</span>
+                                            <span class="multiplier-badge" class="background-warning">1 час</span>
                                         </div>
                                         <p class="multiplier-description">Максимальный множитель - увеличение в 7.5 раз на час</p>
                                         <div class="multiplier-price">
@@ -5321,14 +5725,14 @@
                         
                         <div>
                             <div class="stats-card mb-1-5">
-                                <h3 class="bonus-title" style="color: var(--secondary-color);">
+                                <h3 class="bonus-title" class="secondary-text-color">
                                     <span>📊</span> Статистика
                                 </h3>
                                 
                                 <div class="mb-1">
                                     <div class="flex flex-space-between mb-0-5">
                                         <span class="text-secondary">Активировано сегодня:</span>
-                                        <span class="font-weight-600" style="color: var(--success-color);">3</span>
+                                        <span class="font-weight-600" class="success-text-color">3</span>
                                     </div>
                                     <div class="flex flex-space-between mb-0-5">
                                         <span class="text-secondary">Всего за месяц:</span>
@@ -5336,17 +5740,17 @@
                                     </div>
                                     <div class="flex flex-space-between mb-0-5">
                                         <span class="text-secondary">Дополнительно заработано:</span>
-                                        <span class="font-weight-600" style="color: var(--primary-color);">$2,847</span>
+                                        <span class="font-weight-600" class="primary-text-color">$2,847</span>
                                     </div>
                                     <div class="flex flex-space-between">
                                         <span class="text-secondary">Потрачено PLEX:</span>
-                                        <span class="font-weight-600" style="color: var(--warning-color);">15,680</span>
+                                        <span class="font-weight-600" class="warning-text-color">15,680</span>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="stats-card mb-1-5">
-                                <h3 class="bonus-title" style="color: var(--warning-color);">
+                                <h3 class="bonus-title" class="warning-text-color">
                                     <span>🎁</span> Акции
                                 </h3>
                                 
@@ -5354,7 +5758,7 @@
                                     <h5 class="promo-title">🔥 Горящее предложение!</h5>
                                     <p class="promo-description">Купи 3 множителя - получи 4-й бесплатно!</p>
                                     <div class="promo-footer">
-                                        <span class="promo-timer" style="color: var(--success-color);">Осталось: 2ч 45м</span>
+                                        <span class="promo-timer" class="success-text-color">Осталось: 2ч 45м</span>
                                         <button class="btn-secondary promo-btn">🔥 Участвовать</button>
                                     </div>
                                 </div>
@@ -5367,14 +5771,14 @@
                             </div>
                             
                             <div class="stats-card">
-                                <h3 class="bonus-title" style="color: var(--primary-color);">
+                                <h3 class="bonus-title" class="primary-text-color">
                                     <span>🏆</span> Рекорды
                                 </h3>
                                 
                                 <div class="records-grid">
                                     <div class="record-item">
                                         <span class="record-label">Максимальный множитель:</span>
-                                        <span class="record-value" style="color: var(--warning-color);">x12.5</span>
+                                        <span class="record-value" class="warning-text-color">x12.5</span>
                                     </div>
                                     <div class="record-item">
                                         <span class="record-label">Самая долгая активация:</span>
@@ -5438,7 +5842,7 @@
                     <div class="genesis-info-grid">
                         <!-- Карточка устройства -->
                         <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark" style="opacity: 0;">✓</div>
+                            <div class="tech-card-checkmark" class="opacity-0">✓</div>
                             <h3>📱 Ваше устройство</h3>
                             <div class="info-item">
                                 <span class="info-label">Платформа:</span>
@@ -5488,7 +5892,7 @@
                         
                         <!-- Карточка сети -->
                         <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark" style="opacity: 0;">✓</div>
+                            <div class="tech-card-checkmark" class="opacity-0">✓</div>
                             <h3>🌐 Сетевая информация</h3>
                             <div class="info-item">
                                 <span class="info-label">IP адрес:</span>
@@ -5536,13 +5940,13 @@
                             </div>
                             <div class="info-item">
                                 <span class="info-label">User Agent:</span>
-                                <span class="info-value word-break-all" id="network-user-agent">${navigator.userAgent.substring(0, 100)}...</span>
+                                <span class="info-value word-break-break-all font-size-0-8rem" id="network-user-agent">${navigator.userAgent.substring(0, 100)}...</span>
                             </div>
                         </div>
                         
                         <!-- Карточка производительности -->
                         <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark" style="opacity: 0;">✓</div>
+                            <div class="tech-card-checkmark" class="opacity-0">✓</div>
                             <h3>⚡ Производительность</h3>
                             <div class="info-item">
                                 <span class="info-label">Процессор:</span>
@@ -5588,7 +5992,7 @@
                         
                         <!-- Карточка системы -->
                         <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark" style="opacity: 0;">✓</div>
+                            <div class="tech-card-checkmark" class="opacity-0">✓</div>
                             <h3>⚙️ Параметры системы</h3>
                             <div class="info-item">
                                 <span class="info-label">Основной адрес:</span>
@@ -5634,7 +6038,7 @@
                         
                         <!-- Карточка статистики -->
                         <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark" style="opacity: 0;">✓</div>
+                            <div class="tech-card-checkmark" class="opacity-0">✓</div>
                             <h3>📊 Статистика использования</h3>
                             <div class="info-item">
                                 <span class="info-label">Время в системе:</span>
@@ -5676,7 +6080,7 @@
                         
                         <!-- Карточка безопасности -->
                         <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark" style="opacity: 0;">✓</div>
+                            <div class="tech-card-checkmark" class="opacity-0">✓</div>
                             <h3>🔒 Безопасность и конфиденциальность</h3>
                             <div class="info-item">
                                 <span class="info-label">Протокол соединения:</span>
@@ -5733,7 +6137,7 @@
                     </div>
                     
                     <div class="margin-top-2">
-                        <h3 style="color: var(--text-primary); margin-bottom: 1rem;">PWA функции</h3>
+                        <h3 class="text-primary-color margin-bottom-1rem">PWA функции</h3>
                         <button class="btn btn-secondary" onclick="window.CabinetApp.installPWA()">
                             📱 Установить как приложение
                         </button>
@@ -5800,21 +6204,21 @@
                         <p class="page-subtitle">Внутренняя валюта экосистемы GENESIS. Торгуется на PancakeSwap, отслеживается на GeckoTerminal и BSCScan.</p>
                     </div>
 
-                    <div class="stats-card" style="margin-bottom: 2rem;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🌐 Описание экосистемы GENESIS</h3>
-                        <p style="color: var(--text-secondary); font-size: 1.1rem;">
+                    <div class="stats-card margin-bottom-2rem">
+                        <h3 class="primary-text-color margin-bottom-1rem">🌐 Описание экосистемы GENESIS</h3>
+                        <p class="text-secondary-color font-size-1-1rem">
                             GENESIS — это децентрализованная экосистема на базе токена PLEX ONE (BSC), объединяющая инвестиции, DeFi-инструменты, NFT, реферальные программы и геймификацию. Вся логика платформы строится вокруг PLEX: депозиты, бонусы, множители, аренда мощностей, торговля и награды. Токен PLEX ONE обеспечивает прозрачность, мгновенные расчёты и открытый аудит всех операций через блокчейн. В экосистеме реализованы механики стейкинга, фарминга, NFT-коллекций, а также интеграция с PancakeSwap и GeckoTerminal для мониторинга и торговли.
                         </p>
                     </div>
 
-                    <div class="stats-grid" style="margin-bottom: 2rem;">
+                    <div class="stats-grid margin-bottom-2rem">
                         <div class="stats-card">
                             <div class="stats-header">
                                 <span class="stats-title">Адрес контракта</span>
                                 <span class="stats-icon">🔗</span>
                             </div>
-                            <div class="stats-value" style="font-size: 1rem; word-break: break-all;">0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1</div>
-                            <div class="stats-change"><a href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#code" target="_blank" rel="noopener noreferrer">Проверить на BSCScan</a></div>
+                            <div class="stats-value font-size-1rem word-break-break-all">0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1</div>
+                            <div class="stats-change"><a href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#code" target="_blank" rel="noopener">Проверить на BSCScan</a></div>
                         </div>
                         <div class="stats-card">
                             <div class="stats-header">
@@ -5842,26 +6246,25 @@
                         </div>
                     </div>
 
-                    <div class="stats-card" style="margin-bottom: 2rem;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📈 График цены PLEX ONE (GeckoTerminal)</h3>
-                        <div style="width: 100%; min-height: 420px; background: var(--bg-tertiary); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
-                            <iframe 
-                                height="420" 
-                                width="100%" 
-                                id="geckoterminal-embed" 
-                                title="GeckoTerminal Embed" 
-                                src="https://www.geckoterminal.com/ru/bsc/pools/0x41d9650faf3341cbf8947fd8063a1fc88dbf1889?embed=1&info=1&swaps=1&grayscale=0&light_chart=0&chart_type=price&resolution=15m" 
-                                frameborder="0" 
-                                allow="clipboard-write" 
-                                allowfullscreen
-                                style="border: none; width: 100%; min-height: 420px; background: #181a20;">
+                    <div class="stats-card margin-bottom-2rem">
+                        <h3 class="primary-text-color margin-bottom-1rem">📈 График цены PLEX ONE (GeckoTerminal)</h3>
+                        <div class="chart-container">
+                            <!-- MCP-MARKER:FIX:NO_INLINE_STYLES:GECKO_IFRAME -->
+                            <iframe
+                                id="geckoterminal-embed"
+                                class="iframe-chart"
+                                title="График цены PLEX ONE (встроенный GeckoTerminal)"
+                                src="https://www.geckoterminal.com/ru/bsc/pools/0x41d9650faf3341cbf8947fd8063a1fc88dbf1889?embed=1&info=1&swaps=1&grayscale=0&light_chart=0&chart_type=price&resolution=15m"
+                                frameborder="0"
+                                allow="clipboard-write"
+                                allowfullscreen>
                             </iframe>
                         </div>
                     </div>
 
-                    <div class="stats-card" style="margin-bottom: 2rem;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">💡 Как добавить PLEX ONE в MetaMask</h3>
-                        <ol style="color: var(--text-secondary); font-size: 1rem; padding-left: 1.5rem;">
+                    <div class="stats-card margin-bottom-2rem">
+                        <h3 class="primary-text-color margin-bottom-1rem">💡 Как добавить PLEX ONE в MetaMask</h3>
+                        <ol class="text-secondary-color font-size-1rem padding-left-1-5rem">
                             <li>Откройте MetaMask и выберите сеть <b>Binance Smart Chain</b>.</li>
                             <li>Нажмите <b>"Добавить токен"</b> (или <b>"Import tokens"</b>).</li>
                             <li>Вставьте адрес контракта: <code>0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1</code></li>
@@ -5869,32 +6272,32 @@
                             <li>Точность (Decimals): <b>9</b></li>
                             <li>Подтвердите добавление — теперь PLEX ONE будет отображаться в вашем кошельке!</li>
                         </ol>
-                        <p style="color: var(--success-color); font-size: 1rem; margin-top: 0.5rem;">Вы всегда можете скопировать адрес контракта с этой страницы.</p>
+                        <p class="success-text-color font-size-1rem margin-top-0-5rem">Вы всегда можете скопировать адрес контракта с этой страницы.</p>
                     </div>
 
-                    <div class="stats-card" style="margin-bottom: 2rem;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">💱 Быстрые действия</h3>
+                    <div class="stats-card margin-bottom-2rem">
+                        <h3 class="primary-text-color margin-bottom-1rem">💱 Быстрые действия</h3>
                         <div class="plex-actions">
-                            <a class="plex-action-btn" href="https://pancakeswap.finance/swap?outputCurrency=0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1&inputCurrency=0x55d398326f99059fF775485246999027B3197955" target="_blank" rel="noopener noreferrer">Купить PLEX на PancakeSwap</a>
-                            <a class="plex-action-btn outline" href="https://pancakeswap.finance/swap?inputCurrency=0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1&outputCurrency=0x55d398326f99059fF775485246999027B3197955" target="_blank" rel="noopener noreferrer">Продать PLEX за USDT</a>
-                            <a class="plex-action-btn outline" href="https://pancakeswap.finance/add/0x55d398326f99059fF775485246999027B3197955/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1" target="_blank" rel="noopener noreferrer">Добавить ликвидность</a>
-                            <a class="plex-action-btn outline" href="https://pancakeswap.finance/info/v2/tokens/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1" target="_blank" rel="noopener noreferrer">Статистика PancakeSwap</a>
+                            <a class="plex-action-btn" href="https://pancakeswap.finance/swap?outputCurrency=0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1&inputCurrency=0x55d398326f99059fF775485246999027B3197955" target="_blank" rel="noopener">Купить PLEX на PancakeSwap</a>
+                            <a class="plex-action-btn outline" href="https://pancakeswap.finance/swap?inputCurrency=0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1&outputCurrency=0x55d398326f99059fF775485246999027B3197955" target="_blank" rel="noopener">Продать PLEX за USDT</a>
+                            <a class="plex-action-btn outline" href="https://pancakeswap.finance/add/0x55d398326f99059fF775485246999027B3197955/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1" target="_blank" rel="noopener">Добавить ликвидность</a>
+                            <a class="plex-action-btn outline" href="https://pancakeswap.finance/info/v2/tokens/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1" target="_blank" rel="noopener" rel="noopener">Статистика PancakeSwap</a>
                         </div>
                     </div>
 
-                    <div class="stats-card" style="margin-bottom: 2rem;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🔍 Блокчейн и контракт</h3>
-                        <ul style="color: var(--text-secondary); font-size: 1rem;">
-                            <li>Контракт: <a class="plex-link" href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1" target="_blank" rel="noopener noreferrer">0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1</a></li>
-                            <li>Исходный код: <a class="plex-link" href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#code" target="_blank" rel="noopener noreferrer">BSCScan Code</a></li>
-                            <li>Чтение данных: <a class="plex-link" href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#readContract" target="_blank" rel="noopener noreferrer">Read Contract</a></li>
-                            <li>Взаимодействие: <a class="plex-link" href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#writeContract" target="_blank" rel="noopener noreferrer">Write Contract</a></li>
+                    <div class="stats-card margin-bottom-2rem">
+                        <h3 class="primary-text-color margin-bottom-1rem">🔍 Блокчейн и контракт</h3>
+                        <ul class="text-secondary-color font-size-1rem">
+                            <li>Контракт: <a class="plex-link" href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1" target="_blank" rel="noopener">0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1</a></li>
+                            <li>Исходный код: <a class="plex-link" href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#code" target="_blank" rel="noopener">BSCScan Code</a></li>
+                            <li>Чтение данных: <a class="plex-link" href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#readContract" target="_blank" rel="noopener">Read Contract</a></li>
+                            <li>Взаимодействие: <a class="plex-link" href="https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#writeContract" target="_blank" rel="noopener">Write Contract</a></li>
                         </ul>
                     </div>
 
-                    <div class="stats-card" style="margin-bottom: 2rem;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📌 Основная информация</h3>
-                        <ul style="color: var(--text-secondary); font-size: 1rem;">
+                    <div class="stats-card margin-bottom-2rem">
+                        <h3 class="primary-text-color margin-bottom-1rem">📌 Основная информация</h3>
+                        <ul class="text-secondary-color font-size-1rem">
                             <li><strong>Название:</strong> PLEX ONE</li>
                             <li><strong>Символ:</strong> PLEX</li>
                             <li><strong>Decimals:</strong> 9</li>
@@ -5916,25 +6319,27 @@
                         <p class="page-subtitle">Управление аккаунтом</p>
                     </div>
                     
-                    <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem;">Основные настройки</h3>
+                    <div class="bg-secondary-card">
+                        <h3 class="text-primary-color margin-bottom-1-5rem">Основные настройки</h3>
                         
                         <div class="form-group">
-                            <label class="form-label">Адрес кошелька</label>
-                            <input type="text" class="form-control" value="${this.state.userAddress}" disabled>
+                            <!-- MCP-MARKER:FIX:ACCESSIBILITY:SETTINGS_WALLET_LABEL -->
+                            <label for="settings-wallet" class="form-label">Адрес кошелька</label>
+                            <input id="settings-wallet" name="settings-wallet" type="text" class="form-control" value="${this.state.userAddress}" aria-describedby="settings-wallet-hint" disabled>
+                            <p id="settings-wallet-hint" class="text-secondary-color font-size-0-875rem margin-top-0-5rem">Адрес используется для отображения и не может быть изменен.</p>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Уведомления</label>
-                            <label style="display: flex; align-items: center; cursor: pointer;">
-                                <input type="checkbox" id="notifications-checkbox" checked class="margin-right-small" title="Получать уведомления о транзакциях">
-                                <span>Получать уведомления о транзакциях</span>
+                            <label for="settings-notifications" class="form-label">Уведомления</label>
+                            <label class="display-flex align-items-center cursor-pointer">
+                                <input id="settings-notifications" name="settings-notifications" type="checkbox" checked class="margin-right-0-5rem">
+                                <span id="settings-notifications-label">Получать уведомления о транзакциях</span>
                             </label>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Тема оформления</label>
-                            <select class="form-control" title="Выберите тему оформления">
+                            <label for="settings-theme" class="form-label">Тема оформления</label>
+                            <select id="settings-theme" name="settings-theme" class="form-control">
                                 <option>Темная (по умолчанию)</option>
                                 <option>Светлая (скоро)</option>
                                 <option>Автоматическая (скоро)</option>
@@ -5944,12 +6349,12 @@
                         <button class="btn">Сохранить настройки</button>
                     </div>
                     
-                    <div style="margin-top: 2rem; background: var(--bg-secondary); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Безопасность</h3>
+                    <div class="margin-top-2rem bg-secondary-card">
+                        <h3 class="text-primary-color margin-bottom-1rem">Безопасность</h3>
                         <button class="btn btn-outline" onclick="window.CabinetApp.exportSession()">
                             📥 Экспорт сессии
                         </button>
-                        <button class="btn btn-outline" style="margin-left: 1rem;" onclick="clearCacheAndReload()">
+                        <button class="btn btn-outline margin-left-1rem" onclick="clearCacheAndReload()">
                             🧹 Очистить кэш
                         </button>
                     </div>
@@ -5992,25 +6397,25 @@
                     
                     const content = document.getElementById('platform-access-content');
                     content.innerHTML = `
-                        <div style="text-align: center;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem;">🔑</div>
-                            <h3 style="margin-bottom: 1rem;">Пополнение доступа к платформе</h3>
-                            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                        <div class="text-center">
+                            <div class="font-size-3rem margin-bottom-1rem">🔑</div>
+                            <h3 class="margin-bottom-1rem">Пополнение доступа к платформе</h3>
+                            <p class="text-secondary-color margin-bottom-2rem">
                                 Стоимость: $1 в сутки<br>
                                 Минимальное пополнение: $10 (на 10 дней)
                             </p>
                             
-                            <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
-                                <p style="margin-bottom: 1rem;">Отправьте USDT на адрес:</p>
-                                <code style="background: var(--bg-primary); padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.875rem; display: block; margin-bottom: 1rem;">
+                            <div class="bg-tertiary-color padding-1-5rem border-radius-12px margin-bottom-1-5rem">
+                                <p class="margin-bottom-1rem">Отправьте USDT на адрес:</p>
+                                <code class="bg-primary-color padding-0-5rem-1rem border-radius-6px font-size-0-875rem display-block margin-bottom-1rem">
                                     ${window.GENESIS_CONFIG ? window.GENESIS_CONFIG.addresses.system : '0x...'}
                                 </code>
-                                <p style="color: var(--text-secondary); font-size: 0.875rem;">
+                                <p class="text-secondary-color font-size-0-875rem">
                                     Минимальная сумма: 10 USDT
                                 </p>
                             </div>
                             
-                            <div id="qr-code-container" style="margin-bottom: 1.5rem;">
+                            <div id="qr-code-container" class="margin-bottom-1-5rem">
                                 <!-- QR код будет здесь -->
                             </div>
                             
@@ -6129,42 +6534,42 @@
                 if (!modal || !content) return;
                 
                 content.innerHTML = `
-                    <div style="text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-color);">⚡</div>
-                        <h3 style="margin-bottom: 1rem;">Активация множителя</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
-                            Вы активируете <strong style="color: var(--primary-color);">${multiplier.name}</strong><br>
+                    <div class="modal-content-center">
+                        <div class="modal-icon-large modal-icon-primary">⚡</div>
+                        <h3 class="margin-bottom-1rem">Активация множителя</h3>
+                        <p class="text-secondary-color margin-bottom-2rem">
+                            Вы активируете <strong class="primary-strong">${multiplier.name}</strong><br>
                             На ${multiplier.duration} час${multiplier.duration > 1 ? 'а' : ''}
                         </p>
                         
-                        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
-                            <p style="color: var(--warning-color); margin-bottom: 1rem;">⚠️ Внимание!</p>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                        <div class="modal-warning-box">
+                            <p class="modal-warning-text">⚠️ Внимание!</p>
+                            <p class="modal-secondary-text">
                                 Отправьте <strong>${multiplier.cost}</strong> USDT или <strong>${multiplier.plex}</strong> PLEX на системный адрес.<br>
                                 Множитель активируется автоматически после подтверждения.
                             </p>
                         </div>
                         
-                        <div style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
-                            <div style="margin-bottom: 1rem;">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: var(--text-secondary);">Множитель:</span>
-                                    <span style="color: var(--primary-color); font-weight: 600;">x${multiplier.multiplier}</span>
+                        <div class="bg-primary-box">
+                            <div class="margin-bottom-1rem">
+                                <div class="display-flex justify-content-space-between margin-bottom-0-5rem">
+                                    <span class="text-secondary-color">Множитель:</span>
+                                    <span class="primary-text-color font-weight-600">x${multiplier.multiplier}</span>
                                 </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: var(--text-secondary);">Длительность:</span>
-                                    <span style="color: var(--text-primary); font-weight: 600;">${multiplier.duration} час${multiplier.duration > 1 ? 'а' : ''}</span>
+                                <div class="display-flex justify-content-space-between margin-bottom-0-5rem">
+                                    <span class="text-secondary-color">Длительность:</span>
+                                    <span class="text-primary-font-weight-600">${multiplier.duration} час${multiplier.duration > 1 ? 'а' : ''}</span>
                                 </div>
-                                <div style="display: flex; justify-content: space-between;">
-                                    <span style="color: var(--text-secondary);">Стоимость:</span>
-                                    <span style="color: var(--success-color); font-weight: 600;">${multiplier.cost} / ${multiplier.plex} PLEX</span>
+                                <div class="display-flex justify-content-space-between">
+                                    <span class="text-secondary-color">Стоимость:</span>
+                                    <span class="success-text-color font-weight-600">${multiplier.cost} / ${multiplier.plex} PLEX</span>
                                 </div>
                             </div>
                         </div>
                         
-                        <div style="display: flex; gap: 1rem;">
-                            <button class="btn-outline" onclick="closeConfirmModal()" style="flex: 1; padding: 1rem;">Отмена</button>
-                            <button class="btn" onclick="closeConfirmModal(); window.CabinetApp.showNotification('Успех', 'Множитель будет активирован после подтверждения транзакции', 'success')" style="flex: 1; padding: 1rem; background: var(--primary-color);">Подтвердить</button>
+                        <div class="display-flex-gap-1rem">
+                            <button class="btn-outline flex-1 padding-1rem" onclick="closeConfirmModal()">Отмена</button>
+                            <button class="btn flex-1 padding-1rem background-primary" onclick="closeConfirmModal(); window.CabinetApp.showNotification('Успех', 'Множитель будет активирован после подтверждения транзакции', 'success')">Подтвердить</button>
                         </div>
                     </div>
                 `;
@@ -6629,22 +7034,6 @@
             reinvestDeposit: function(depositId) {
                 debugLog('Реинвестирование депозита: ' + depositId, 'info');
                 this.showNotification('Реинвестирование', 'Функция в разработке', 'info');
-            },
-            
-            // MCP-MARKER:METHOD:CABINET:CREATE_DEPOSIT - Создание депозита
-            createDeposit: function(planId) {
-                debugLog('Создание депозита для плана: ' + planId, 'info');
-                if (window.showDepositModal) {
-                    window.showDepositModal(planId);
-                } else {
-                    this.showNotification('Информация', 'Функция создания депозита в разработке', 'info');
-                }
-            },
-            
-            // MCP-MARKER:METHOD:CABINET:VIEW_DEPOSIT_HISTORY - Просмотр истории депозитов
-            viewDepositHistory: function(planId) {
-                debugLog('Просмотр истории депозитов для плана: ' + planId, 'info');
-                this.showNotification('История', 'Функция просмотра истории в разработке', 'info');
             }
         };
         
@@ -6731,7 +7120,7 @@ Screen: ${screen.width}x${screen.height}
                     .then(registration => debugLog('Service Worker registered', 'success'))
                     .catch(error => debugLog('Service Worker registration failed: ' + error, 'error'));
             });
-        }
+        };
         
         // Запуск приложения
         // MCP-MARKER:SECTION:APPLICATION_STARTUP - Точка входа приложения
@@ -6797,7 +7186,7 @@ Screen: ${screen.width}x${screen.height}
         
         // MCP-MARKER:FUNCTION:LOAD_PLAN_SELECTION_FORM - Форма выбора плана
         // MCP-MARKER:FUNCTION:LOAD_PLAN_SELECTION_FORM - Загрузка формы выбора плана
-        window.loadPlanSelectionForm = function(plans) {
+    window.loadPlanSelectionForm = function(plans) {
             const content = document.getElementById('deposit-modal-content');
             if (!content) return;
             
@@ -6807,23 +7196,19 @@ Screen: ${screen.width}x${screen.height}
                 const profit = (plan.usdtAmount * plan.percentage / 100) - plan.usdtAmount;
                 
                 return `
-                    <div class="deposit-plan-card" onclick="loadSpecificPlanForm('${plan.id}')" 
-                         style="background: var(--bg-primary); border: 1px solid var(--border-color); 
-                                border-radius: 12px; padding: 1.5rem; cursor: pointer; 
-                                transition: all 0.3s ease; margin-bottom: 1rem;"
-                         onmouseover="this.style.borderColor='${color}'; this.style.transform='translateY(-2px)';"
-                         onmouseout="this.style.borderColor='var(--border-color)'; this.style.transform='translateY(0)';">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 2.5rem;">${icon}</div>
-                            <div style="flex: 1;">
-                                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">${plan.name}</h4>
-                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">${plan.description}</p>
+            <!-- MCP-MARKER:FIX:NO_INLINE_STYLES:DEPOSIT_PLAN_CARD -->
+            <div class="deposit-plan-card plan-theme-${plan.id}" onclick="loadSpecificPlanForm('${plan.id}')" role="button" tabindex="0" aria-label="Выбрать план ${plan.name}">
+                        <div class="deposit-plan-layout">
+                            <div class="font-size-2.5rem">${icon}</div>
+                            <div class="deposit-plan-content">
+                                <h4 class="deposit-plan-title">${plan.name}</h4>
+                                <p class="deposit-plan-description">${plan.description}</p>
                             </div>
-                            <div style="text-align: right;">
-                                <div style="color: ${color}; font-size: 1.5rem; font-weight: 700;">
+                            <div class="deposit-plan-right">
+                <div class="deposit-plan-value">
                                     ${plan.percentage}%
                                 </div>
-                                <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                                <div class="deposit-plan-term">
                                     ${plan.usdtAmount}
                                 </div>
                             </div>
@@ -6834,10 +7219,10 @@ Screen: ${screen.width}x${screen.height}
             
             content.innerHTML = `
                 <div>
-                    <h3 style="text-align: center; color: var(--secondary-color); margin-bottom: 2rem;">
+                    <h3 class="text-center-secondary-color-margin-bottom-2rem">
                         Выберите план депозита
                     </h3>
-                    <div style="max-height: 400px; overflow-y: auto;">
+                    <div class="max-height-400-overflow-auto">
                         ${plansHtml}
                     </div>
                 </div>
@@ -6846,7 +7231,7 @@ Screen: ${screen.width}x${screen.height}
         
         // MCP-MARKER:FUNCTION:LOAD_SPECIFIC_PLAN_FORM - Загрузка формы для конкретного плана
         // MCP-MARKER:FUNCTION:LOAD_SPECIFIC_PLAN_FORM - Загрузка формы конкретного плана
-        window.loadSpecificPlanForm = function(planId) {
+    window.loadSpecificPlanForm = function(planId) {
             // Если передан объект плана, используем его
             let plan = planId;
             if (typeof planId === 'string') {
@@ -6868,46 +7253,46 @@ Screen: ${screen.width}x${screen.height}
             const color = getCabinetPlanColor(plan.id);
             
             content.innerHTML = `
-                <div style="max-width: 500px; margin: 0 auto;">
-                    <div style="text-align: center; margin-bottom: 2rem;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">${icon}</div>
-                        <h3 style="color: ${color}; margin-bottom: 0.5rem;">${plan.name}</h3>
-                        <p style="color: var(--text-secondary);">${plan.description}</p>
+                <div class="modal-content-wrapper">
+                    <div class="modal-content-center">
+                        <div class="modal-icon-3rem">${icon}</div>
+                        <!-- MCP-MARKER:FIX:NO_INLINE_STYLES:MODAL_PLAN_TITLE_COLOR -->
+                        <h3 class="modal-title-secondary plan-color-text plan-theme-${plan.id}">${plan.name}</h3>
+                        <p class="modal-description-secondary">${plan.description}</p>
                     </div>
                     
-                    <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
-                        <h4 style="color: var(--secondary-color); margin-bottom: 1rem; text-align: center;">Детали депозита</h4>
+                    <div class="modal-details-box">
+                        <h4 class="modal-details-title">Детали депозита</h4>
                         
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-                            <div style="text-align: center; padding: 1rem; background: var(--bg-secondary); border-radius: 8px;">
-                                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.3rem;">Инвестиция</div>
-                                <div style="color: var(--text-primary); font-weight: 600; font-size: 1.2rem;">${plan.usdtAmount}</div>
+                        <div class="modal-grid-2col">
+                            <!-- MCP-MARKER:FIX:NO_INLINE_STYLES:MODAL_GRID_CARDS -->
+                            <div class="modal-grid-card">
+                                <div class="modal-grid-label">Инвестиция</div>
+                                <div class="modal-grid-value-primary">${plan.usdtAmount}</div>
                             </div>
-                            <div style="text-align: center; padding: 1rem; background: var(--bg-secondary); border-radius: 8px;">
-                                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.3rem;">Доходность</div>
-                                <div style="color: var(--success-color); font-weight: 600; font-size: 1.2rem;">${plan.percentage}%</div>
+                            <div class="modal-grid-card">
+                                <div class="modal-grid-label">Доходность</div>
+                                <div class="modal-grid-value-success">${plan.percentage}%</div>
                             </div>
-                            <div style="text-align: center; padding: 1rem; background: var(--bg-secondary); border-radius: 8px;">
-                                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.3rem;">Срок</div>
-                                <div style="color: var(--text-primary); font-weight: 600; font-size: 1.2rem;">${plan.days} дней</div>
+                            <div class="modal-grid-card">
+                                <div class="modal-grid-label">Срок</div>
+                                <div class="modal-grid-value-primary">${plan.days} дней</div>
                             </div>
-                            <div style="text-align: center; padding: 1rem; background: var(--bg-secondary); border-radius: 8px;">
-                                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.3rem;">Прибыль</div>
-                                <div style="color: var(--gold-color); font-weight: 600; font-size: 1.2rem;">${profit.toFixed(2)}</div>
+                            <div class="modal-grid-card">
+                                <div class="modal-grid-label">Прибыль</div>
+                                <div class="modal-grid-value-gold">${profit.toFixed(2)}</div>
                             </div>
                         </div>
                         
-                        <div style="text-align: center; padding: 1rem; background: var(--bg-secondary); border-radius: 8px;">
-                            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.3rem;">Ежедневный доход</div>
-                            <div style="color: var(--accent-color); font-weight: 600; font-size: 1.4rem;">~${dailyProfit.toFixed(2)}/день</div>
+                        <div class="modal-grid-card">
+                            <div class="modal-grid-label">Ежедневный доход</div>
+                            <div class="modal-grid-value-accent">~${dailyProfit.toFixed(2)}/день</div>
                         </div>
                     </div>
                     
-                    <div style="display: flex; gap: 1rem;">
-                        <button class="btn-outline" onclick="loadPlanSelectionForm(window.GENESIS_CONFIG.depositPlans)" 
-                                style="flex: 1; padding: 1rem;">← Назад</button>
-                        <button class="btn" onclick="showConfirmDepositModal('${plan.id}')" 
-                                style="flex: 2; padding: 1rem; background: ${color};">Продолжить</button>
+                    <div class="display-flex-gap-1rem">
+                        <button class="btn-outline flex-1 padding-1rem" onclick="loadPlanSelectionForm(window.GENESIS_CONFIG.depositPlans)">← Назад</button>
+                        <button class="btn plan-bg flex-2-padding-1rem plan-theme-${plan.id}" onclick="showConfirmDepositModal('${plan.id}')">Продолжить</button>
                     </div>
                 </div>
             `;
@@ -7020,10 +7405,11 @@ Screen: ${screen.width}x${screen.height}
             
             content.innerHTML = `
                 <div class="text-center">
-                    <div class="font-size-large margin-bottom-medium" style="color: ${color};">${icon}</div>
+                    <!-- MCP-MARKER:FIX:NO_INLINE_STYLES:CONFIRM_ICON_COLOR -->
+                    <div class="font-size-large margin-bottom-medium plan-color-text plan-theme-${plan.id}">${icon}</div>
                     <h3 class="margin-bottom-medium">Подтверждение депозита</h3>
                     <p class="color-text-secondary margin-bottom-large">
-                        Вы создаете депозит <strong style="color: ${color};">${plan.name}</strong> на сумму <strong>${plan.usdtAmount}</strong>
+                        Вы создаете депозит <strong class="plan-color-text plan-theme-${plan.id}">${plan.name}</strong> на сумму <strong>${plan.usdtAmount}</strong>
                     </p>
                     
                     <div class="background-tertiary padding-large border-radius-large margin-bottom-large">
@@ -7044,12 +7430,11 @@ Screen: ${screen.width}x${screen.height}
                         </div>
                     </div>
                     
-                    <div class="flex-gap">
+                    <div class="flex-gap plan-theme-${plan.id}">
                         <button class="btn-outline flex-1 padding-medium" onclick="closeConfirmModal(); showDepositModal('${plan.id}');">
                             ← Назад
                         </button>
-                        <button class="btn flex-1 padding-medium" onclick="processDepositCreation('${plan.id}')" 
-                                style="background: ${color};">
+                        <button class="btn flex-1 padding-medium plan-bg" onclick="processDepositCreation('${plan.id}')">
                             Я отправил USDT
                         </button>
                     </div>
@@ -7226,6 +7611,60 @@ Screen: ${screen.width}x${screen.height}
                 window.forceFaviconReload();
             }, 1000);
         });
+        // MCP-MARKER:INTEGRATION:TERMINAL:TOGGLE_BUTTON - Плавающая кнопка управления терминалом
+        (function(){
+            try {
+                const btnId = 'genesis-terminal-toggle-btn';
+                if (document.getElementById(btnId)) return;
+                const btn = document.createElement('button');
+                btn.id = btnId;
+                btn.type = 'button';
+                btn.title = 'Терминал';
+                btn.setAttribute('aria-label', 'Открыть/закрыть терминал');
+                btn.style.position = 'fixed';
+                btn.style.right = '14px';
+                btn.style.bottom = '14px';
+                btn.style.zIndex = '1201';
+                btn.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+                btn.style.color = '#fff';
+                btn.style.border = 'none';
+                btn.style.borderRadius = '12px';
+                btn.style.padding = '10px 12px';
+                btn.style.boxShadow = '0 6px 18px rgba(0,0,0,0.35)';
+                btn.style.cursor = 'pointer';
+                btn.style.fontFamily = "Rajdhani, 'Segoe UI', sans-serif";
+                btn.style.fontWeight = '700';
+                btn.style.display = 'flex';
+                btn.style.alignItems = 'center';
+                btn.style.gap = '8px';
+                btn.innerHTML = '<span>🖥️</span><span>Терминал</span>';
+
+                const ensureTerminal = () => {
+                    // Если уже есть веб-компонент — достаточно
+                    let el = document.querySelector('genesis-terminal');
+                    if (!el) {
+                        el = document.createElement('genesis-terminal');
+                        document.body.appendChild(el);
+                    }
+                    return true;
+                };
+
+                btn.addEventListener('click', () => {
+                    if (!ensureTerminal()) return;
+                    // Переключение видимости контейнера
+                    const c = document.getElementById('genesis-terminal') || document.querySelector('.genesis-terminal');
+                    if (!c) return;
+                    const hidden = c.style.display === 'none';
+                    c.style.display = hidden ? '' : 'none';
+                    // Если разворачиваем из скрытого состояния – развернуть терминал
+                    if (!hidden && window.GenesisTerminal.state.isMinimized) {
+                        window.GenesisTerminal.minimize();
+                    }
+                });
+
+                document.body.appendChild(btn);
+            } catch (e) { /* no-op */ }
+        })();
     </script>
 </body>
 </html>

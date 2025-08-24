@@ -4,6 +4,30 @@
  * MCP-MARKER:FILE:APP_JS - Основной файл приложения
  */
 
+// Глобальная обработка ошибок
+window.addEventListener('error', (event) => {
+    console.warn('Global error caught:', event.error);
+    // Предотвращаем показ ошибок в консоли для известных проблем
+    if (event.error && event.error.message && 
+        (event.error.message.includes('Extension context invalidated') ||
+         event.error.message.includes('chrome-extension') ||
+         event.error.message.includes('moz-extension'))) {
+        event.preventDefault();
+        return false;
+    }
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+    console.warn('Unhandled promise rejection:', event.reason);
+    // Предотвращаем показ ошибок для известных проблем
+    if (event.reason && event.reason.toString && 
+        (event.reason.toString().includes('Extension context invalidated') ||
+         event.reason.toString().includes('Network request failed'))) {
+        event.preventDefault();
+        return false;
+    }
+});
+
 // MCP-MARKER:CLASS:GENESIS_APP - Класс основного приложения
 window.GenesisApp = {
     version: '1.1',
@@ -206,6 +230,23 @@ window.GenesisApp = {
     
     // MCP-MARKER:METHOD:INIT_UI - Инициализация UI
     initializeUI() {
+        console.log('🎨 Инициализация UI...');
+        
+        // Инициализируем навигацию
+        if (window.GenesisNavigation) {
+            console.log('🧭 Инициализируем навигацию...');
+            window.GenesisNavigation.init();
+        } else {
+            console.error('❌ GenesisNavigation не найден!');
+        }
+        
+        // Показываем основное приложение
+        const appContainer = document.getElementById('app');
+        if (appContainer) {
+            appContainer.classList.remove('hidden');
+            console.log('✅ Основное приложение показано');
+        }
+        
         // Навешиваем обработчики событий
         this.attachEventListeners();
         
@@ -218,6 +259,8 @@ window.GenesisApp = {
         
         // Обновляем информацию об устройстве
         this.updateDeviceInfo();
+        
+        console.log('✅ UI инициализирован');
     },
     
     // MCP-MARKER:METHOD:REGISTER_SW - Регистрация Service Worker
@@ -399,14 +442,27 @@ window.GenesisApp = {
     },
     
     showAuthorizedUI() {
+        // Показываем индикатор загрузки
+        const loadingEl = document.createElement('div');
+        loadingEl.className = 'genesis-transition-loading';
+        loadingEl.innerHTML = `
+            <div class="transition-content">
+                <div class="spinner"></div>
+                <p>Загрузка личного кабинета...</p>
+            </div>
+        `;
+        document.body.appendChild(loadingEl);
+        
         // Скрываем форму авторизации
         const authSection = document.getElementById('genesis-auth-section');
         if (authSection) {
             authSection.style.display = 'none';
         }
         
-        // Перенаправляем в кабинет
-        window.location.href = '/cabinet.html';
+        // Перенаправляем в модульный кабинет с относительным путем и небольшой задержкой для плавности
+        setTimeout(() => {
+            window.location.href = 'app.html';
+        }, 500);
     },
     
     // MCP-MARKER:METHOD:SHOW_ACCESS_PAYMENT - Показать требование оплаты доступа

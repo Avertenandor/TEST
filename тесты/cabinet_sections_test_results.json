@@ -1,0 +1,446 @@
+{
+  "timestamp": 1755165980.7226825,
+  "test_type": "comprehensive_cabinet_sections_check",
+  "modules_tested": [
+    "dashboard",
+    "deposits",
+    "portfolio",
+    "bonuses",
+    "referrals",
+    "gifts",
+    "settings",
+    "how-it-works"
+  ],
+  "detailed_results": {
+    "dashboard": {
+      "module": "dashboard",
+      "name": "Панель управления",
+      "route": "/",
+      "navigation_success": true,
+      "elements_found": {
+        "h1:has-text(\"Панель управления\")": false,
+        ".balance-card": false,
+        ".portfolio-overview": false,
+        ".recent-transactions": false,
+        ".quick-actions": false
+      },
+      "content_analysis": {
+        "баланс": false,
+        "портфель": false,
+        "депозиты": false,
+        "доходность": false
+      },
+      "functionality_check": {
+        "interactive_elements": 22,
+        "forms_present": 1,
+        "api_calls_detected": 0,
+        "errors_count": 0,
+        "score": 0.7,
+        "specific_tests": {}
+      },
+      "completeness_score": 14.0,
+      "issues": [],
+      "elements_found_count": 0,
+      "elements_expected_count": 5,
+      "content_matches_count": 0,
+      "content_expected_count": 4
+    },
+    "deposits": {
+      "module": "deposits",
+      "name": "Депозиты",
+      "route": "/deposits",
+      "navigation_success": false,
+      "elements_found": {},
+      "content_analysis": {},
+      "functionality_check": {},
+      "completeness_score": 0,
+      "issues": [
+        "Error during testing: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/deposits\\\"], a[href*=\\\"/deposits\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/deposits\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+      ],
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/deposits\\\"], a[href*=\\\"/deposits\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/deposits\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+    },
+    "portfolio": {
+      "module": "portfolio",
+      "name": "Инвестиционный портфель",
+      "route": "/portfolio",
+      "navigation_success": false,
+      "elements_found": {},
+      "content_analysis": {},
+      "functionality_check": {},
+      "completeness_score": 0,
+      "issues": [
+        "Error during testing: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/portfolio\\\"], a[href*=\\\"/portfolio\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/portfolio\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+      ],
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/portfolio\\\"], a[href*=\\\"/portfolio\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/portfolio\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+    },
+    "bonuses": {
+      "module": "bonuses",
+      "name": "Бонусная программа",
+      "route": "/bonuses",
+      "navigation_success": false,
+      "elements_found": {},
+      "content_analysis": {},
+      "functionality_check": {},
+      "completeness_score": 0,
+      "issues": [
+        "Error during testing: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/bonuses\\\"], a[href*=\\\"/bonuses\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/bonuses\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    54 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+      ],
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/bonuses\\\"], a[href*=\\\"/bonuses\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/bonuses\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    54 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+    },
+    "referrals": {
+      "module": "referrals",
+      "name": "Реферальная программа",
+      "route": "/referrals",
+      "navigation_success": false,
+      "elements_found": {},
+      "content_analysis": {},
+      "functionality_check": {},
+      "completeness_score": 0,
+      "issues": [
+        "Error during testing: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/referrals\\\"], a[href*=\\\"/referrals\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/referrals\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    54 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+      ],
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/referrals\\\"], a[href*=\\\"/referrals\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/referrals\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    54 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+    },
+    "gifts": {
+      "module": "gifts",
+      "name": "Подарочная система",
+      "route": "/gifts",
+      "navigation_success": false,
+      "elements_found": {},
+      "content_analysis": {},
+      "functionality_check": {},
+      "completeness_score": 0,
+      "issues": [
+        "Error during testing: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/gifts\\\"], a[href*=\\\"/gifts\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/gifts\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+      ],
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/gifts\\\"], a[href*=\\\"/gifts\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/gifts\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+    },
+    "settings": {
+      "module": "settings",
+      "name": "Настройки",
+      "route": "/settings",
+      "navigation_success": false,
+      "elements_found": {},
+      "content_analysis": {},
+      "functionality_check": {},
+      "completeness_score": 0,
+      "issues": [
+        "Error during testing: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/settings\\\"], a[href*=\\\"/settings\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/settings\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+      ],
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/settings\\\"], a[href*=\\\"/settings\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/settings\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+    },
+    "how-it-works": {
+      "module": "how-it-works",
+      "name": "Как все устроено",
+      "route": "/how-it-works",
+      "navigation_success": false,
+      "elements_found": {},
+      "content_analysis": {},
+      "functionality_check": {},
+      "completeness_score": 0,
+      "issues": [
+        "Error during testing: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/how-it-works\\\"], a[href*=\\\"/how-it-works\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/how-it-works\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+      ],
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-route=\\\"/how-it-works\\\"], a[href*=\\\"/how-it-works\\\"]\").first\n    - locator resolved to <a href=\"#\" class=\"nav-link\" data-route=\"/how-it-works\">…</a>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    55 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"auth-screen-overlay\"></div> from <main id=\"app-container\" class=\"main-content\">…</main> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+    }
+  },
+  "comparison_with_monolith": {
+    "modules_comparison": {
+      "dashboard": {
+        "modular_score": 14.0,
+        "monolith_score": 85.0,
+        "difference": -71.0,
+        "status": "needs_attention"
+      },
+      "deposits": {
+        "modular_score": 0.0,
+        "monolith_score": 90.0,
+        "difference": -90.0,
+        "status": "needs_attention"
+      },
+      "portfolio": {
+        "modular_score": 0.0,
+        "monolith_score": 80.0,
+        "difference": -80.0,
+        "status": "needs_attention"
+      },
+      "bonuses": {
+        "modular_score": 0.0,
+        "monolith_score": 75.0,
+        "difference": -75.0,
+        "status": "needs_attention"
+      },
+      "referrals": {
+        "modular_score": 0.0,
+        "monolith_score": 70.0,
+        "difference": -70.0,
+        "status": "needs_attention"
+      },
+      "gifts": {
+        "modular_score": 0.0,
+        "monolith_score": 65.0,
+        "difference": -65.0,
+        "status": "needs_attention"
+      },
+      "settings": {
+        "modular_score": 0.0,
+        "monolith_score": 85.0,
+        "difference": -85.0,
+        "status": "needs_attention"
+      },
+      "how-it-works": {
+        "modular_score": 0.0,
+        "monolith_score": 95.0,
+        "difference": -95.0,
+        "status": "needs_attention"
+      }
+    },
+    "overall_coverage": {
+      "average_modular_score": 1.75,
+      "average_monolith_score": 80.62,
+      "modules_compared": 8
+    },
+    "missing_features": [
+      {
+        "module": "dashboard",
+        "gap": 71.0,
+        "priority": "high"
+      },
+      {
+        "module": "deposits",
+        "gap": 90.0,
+        "priority": "high"
+      },
+      {
+        "module": "portfolio",
+        "gap": 80.0,
+        "priority": "high"
+      },
+      {
+        "module": "bonuses",
+        "gap": 75.0,
+        "priority": "high"
+      },
+      {
+        "module": "referrals",
+        "gap": 70.0,
+        "priority": "high"
+      },
+      {
+        "module": "gifts",
+        "gap": 65.0,
+        "priority": "high"
+      },
+      {
+        "module": "settings",
+        "gap": 85.0,
+        "priority": "high"
+      },
+      {
+        "module": "how-it-works",
+        "gap": 95.0,
+        "priority": "high"
+      }
+    ],
+    "improvements": [],
+    "parity_score": 2.17
+  },
+  "overall_statistics": {
+    "modules_tested": 8,
+    "successful_modules": 0,
+    "failed_modules": 8,
+    "average_completeness": 1.75,
+    "best_module": {
+      "name": "dashboard",
+      "score": 14.0
+    },
+    "worst_module": {
+      "name": "deposits",
+      "score": 0.0
+    },
+    "total_elements_checked": 5,
+    "total_content_items_checked": 4,
+    "recommendations": [
+      "Общая полнота кабинета ниже 70% - требуется доработка",
+      "Больше половины модулей требуют внимания",
+      "Модуль deposits критически неполный"
+    ]
+  },
+  "errors_and_issues": [],
+  "recommendations": [],
+  "authentication": {
+    "required": true,
+    "form_present": true,
+    "test_mode_active": false,
+    "bypass_successful": false,
+    "status": "unknown"
+  },
+  "console_logs": [
+    {
+      "type": "warning",
+      "text": "<link rel=preload> has an unsupported `type` value",
+      "timestamp": 1755165988.6249232
+    },
+    {
+      "type": "log",
+      "text": "🚀 Initializing GENESIS Application...",
+      "timestamp": 1755165988.886341
+    },
+    {
+      "type": "log",
+      "text": "📋 Dynamic config loaded",
+      "timestamp": 1755165989.159038
+    },
+    {
+      "type": "log",
+      "text": "🔗 BSC API initialized",
+      "timestamp": 1755165989.160039
+    },
+    {
+      "type": "log",
+      "text": "🔒 No saved authentication found",
+      "timestamp": 1755165989.1620364
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Handler registered for: user:login",
+      "timestamp": 1755165989.1634893
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Handler registered for: user:logout",
+      "timestamp": 1755165989.1634893
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Handler registered for: platform:access:renew",
+      "timestamp": 1755165989.1650405
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Handler registered for: module:loaded",
+      "timestamp": 1755165989.165589
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Handler registered for: loading:start",
+      "timestamp": 1755165989.1662755
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Handler registered for: loading:end",
+      "timestamp": 1755165989.1668534
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Handler registered for: notification:show",
+      "timestamp": 1755165989.1668534
+    },
+    {
+      "type": "log",
+      "text": "✅ Application initialized successfully",
+      "timestamp": 1755165989.1674378
+    },
+    {
+      "type": "log",
+      "text": "✅ GENESIS Application initialized successfully",
+      "timestamp": 1755165989.1674378
+    },
+    {
+      "type": "log",
+      "text": "🛣️ Routing to: / -> dashboard",
+      "timestamp": 1755165989.8762975
+    },
+    {
+      "type": "log",
+      "text": "🔒 User not authenticated, cannot access dashboard",
+      "timestamp": 1755165989.87729
+    },
+    {
+      "type": "warning",
+      "text": "🔒 Access denied to module: dashboard",
+      "timestamp": 1755165989.87729
+    },
+    {
+      "type": "log",
+      "text": "🛣️ Routing to: /auth -> auth",
+      "timestamp": 1755165989.878246
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Emit: route:change {from: null, to: auth, path: /auth}",
+      "timestamp": 1755165989.878246
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Emit: loading:start {}",
+      "timestamp": 1755165989.881297
+    },
+    {
+      "type": "log",
+      "text": "📦 Loading module: auth",
+      "timestamp": 1755165989.881297
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Emit: module:loading {name: auth}",
+      "timestamp": 1755165989.881297
+    },
+    {
+      "type": "log",
+      "text": "📂 Importing module from: /modules/auth/index.js",
+      "timestamp": 1755165989.8822937
+    },
+    {
+      "type": "log",
+      "text": "🔐 Initializing Auth Module...",
+      "timestamp": 1755165990.8821278
+    },
+    {
+      "type": "log",
+      "text": "✅ ServiceWorker registered: http://127.0.0.1:5502/",
+      "timestamp": 1755165990.9147413
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Handler registered for: user:logout",
+      "timestamp": 1755165990.967256
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Handler registered for: auth:required",
+      "timestamp": 1755165990.968257
+    },
+    {
+      "type": "log",
+      "text": "✅ Auth Module initialized successfully",
+      "timestamp": 1755165990.968257
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Emit: module:loaded {name: auth, version: 1.0.0}",
+      "timestamp": 1755165990.9697142
+    },
+    {
+      "type": "log",
+      "text": "📦 Module loaded: auth",
+      "timestamp": 1755165990.9697142
+    },
+    {
+      "type": "log",
+      "text": "✅ Module auth loaded successfully",
+      "timestamp": 1755165990.9707165
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Emit: route:loaded {module: auth, path: /auth}",
+      "timestamp": 1755165990.97146
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] Emit: loading:end {}",
+      "timestamp": 1755165990.9719958
+    }
+  ],
+  "errors": []
+}

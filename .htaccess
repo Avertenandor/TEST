@@ -1,0 +1,14 @@
+# .htaccess file for Apache servers
+# Redirects all application routes to app.html
+
+RewriteEngine On
+
+# Don't redirect actual files and directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirect application routes to app.html
+RewriteRule ^(auth|deposits|portfolio|transactions|analytics|bonuses|gifts|referrals|multipliers|mining-rent|my-device|plex-coin|settings|experience|rank|how-it-works|terminal|platform-access)$ /app.html [L]
+
+# Fallback for 404 errors
+ErrorDocument 404 /404.html

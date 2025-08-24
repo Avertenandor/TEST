@@ -12,7 +12,7 @@ const CACHE_NAME = 'genesis-v1.1.0';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/cabinet.html',
+    '/app.html',
     '/css/styles.css',
     '/css/mobile.css',
     '/css/pwa-visibility-fix.css',
@@ -22,7 +22,6 @@ const urlsToCache = [
     '/js/models.js',
     '/js/services/api.js',
     '/js/services/auth.js',
-    '/js/services/cabinet.js',
     '/js/services/terminal.js',
     '/js/services/transaction.js',
     '/js/services/utils.js',
@@ -87,74 +86,88 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
     // MCP-MARKER:FUNCTION:FETCH_EVENT - Обработка fetch-запросов
     const { request } = event;
-    const url = new URL(request.url);
     
-    // Пропускаем запросы к внешним API и не-GET запросы
-    if (url.origin !== location.origin || 
-        url.pathname.includes('/api/') || 
-        request.method !== 'GET') {
-        return;
-    }
-    
-    // Стратегия: Network First с fallback на кэш
-    event.respondWith(
-        fetch(request)
-            .then(response => {
-                // Проверяем валидность ответа
-                if (!response || response.status !== 200 || response.type !== 'basic') {
-                    return response;
-                }
-                
-                // Клонируем ответ для кэша
-                const responseToCache = response.clone();
-                
-                caches.open(CACHE_NAME)
-                    .then(cache => {
-                        cache.put(request, responseToCache);
-                    })
-                    .catch(error => {
-                        console.warn('[ServiceWorker] Failed to cache response:', error);
-                    });
-                
-                return response;
-            })
-            .catch(error => {
-                console.log('[ServiceWorker] Network failed, trying cache:', error);
-                
-                // Если сеть недоступна, пытаемся взять из кэша
-                return caches.match(request)
+    try {
+        const url = new URL(request.url);
+        
+        // Пропускаем запросы к внешним API и не-GET запросы
+        if (url.origin !== location.origin || 
+            url.pathname.includes('/api/') || 
+            request.method !== 'GET' ||
+            url.protocol === 'chrome-extension:' ||
+            url.protocol === 'moz-extension:') {
+            return;
+        }
+        
+        // Специальная обработка для иконок
+        if (url.pathname.includes('/assets/icons/') || url.pathname.includes('icon-')) {
+            event.respondWith(
+                caches.match(request)
                     .then(response => {
                         if (response) {
-                            console.log('[ServiceWorker] Serving from cache:', request.url);
                             return response;
                         }
                         
-                        // Возвращаем офлайн страницу для навигационных запросов
-                        if (request.mode === 'navigate') {
-                            return caches.match('/index.html');
-                        }
-                        
-                        // Для других запросов возвращаем пустой ответ
-                        return new Response('', {
-                            status: 404,
-                            statusText: 'Not Found'
+                        return fetch(request).catch(() => {
+                            // Возвращаем заглушку для недоступных иконок
+                            return new Response('', { 
+                                status: 204, 
+                                statusText: 'No Content',
+                                headers: { 'Content-Type': 'image/png' }
+                            });
                         });
                     })
-                    .catch(cacheError => {
-                        console.error('[ServiceWorker] Cache match failed:', cacheError);
-                        
-                        // Последний fallback - офлайн страница
-                        if (request.mode === 'navigate') {
-                            return caches.match('/index.html');
-                        }
-                        
-                        return new Response('', {
-                            status: 503,
-                            statusText: 'Service Unavailable'
+            );
+            return;
+        }
+        
+        // Стратегия: Network First с fallback на кэш
+        event.respondWith(
+            fetch(request)
+                .then(response => {
+                    // Проверяем успешность ответа
+                    if (!response || response.status !== 200 || response.type !== 'basic') {
+                        return response;
+                    }
+                    
+                    // Клонируем ответ для кэширования
+                    const responseToCache = response.clone();
+                    
+                    caches.open(CACHE_NAME)
+                        .then(cache => {
+                            cache.put(request, responseToCache);
+                        })
+                        .catch(err => {
+                            console.warn('Cache put failed:', err);
                         });
-                    });
-            })
-    );
+                    
+                    return response;
+                })
+                .catch(() => {
+                    // Network недоступен, пытаемся взять из кэша
+                    return caches.match(request)
+                        .then(response => {
+                            if (response) {
+                                return response;
+                            }
+                            
+                            // Если это HTML страница, возвращаем офлайн страницу
+                            if (request.destination === 'document') {
+                                return caches.match('/index.html');
+                            }
+                            
+                            return new Response('', { 
+                                status: 404, 
+                                statusText: 'Not Found' 
+                            });
+                        });
+                })
+        );
+    } catch (error) {
+        console.warn('Service Worker fetch error:', error);
+        // В случае любой ошибки, просто пропускаем запрос
+        return;
+    }
 });
 
 // Обработка push уведомлений
@@ -204,7 +217,7 @@ self.addEventListener('notificationclick', event => {
     
     if (event.action === 'explore') {
         event.waitUntil(
-            clients.openWindow('/cabinet.html')
+            clients.openWindow('/app.html')
                 .catch(error => {
                     console.error('[ServiceWorker] Failed to open window:', error);
                 })

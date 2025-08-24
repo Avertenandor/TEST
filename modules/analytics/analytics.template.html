@@ -1,0 +1,331 @@
+<!-- modules/analytics/analytics.template.html -->
+<!-- MCP-MARKER:TEMPLATE:ANALYTICS:MAIN - Основной шаблон модуля аналитики -->
+
+<div class="analytics-module">
+    <!-- Заголовок и управление -->
+    <div class="analytics-header">
+        <h1 class="module-title">
+            <i class="icon-analytics"></i>
+            Аналитика и статистика
+        </h1>
+        
+        <div class="header-controls">
+            <!-- Переключатель периода -->
+            <div class="period-selector">
+                <button class="period-btn" data-period="day">День</button>
+                <button class="period-btn" data-period="week">Неделя</button>
+                <button class="period-btn active" data-period="month">Месяц</button>
+                <button class="period-btn" data-period="year">Год</button>
+                <button class="period-btn" data-period="all">Все время</button>
+            </div>
+            
+            <!-- Кнопки действий -->
+            <div class="header-actions">
+                <button class="btn btn-refresh" title="Обновить">
+                    <i class="icon-refresh"></i>
+                </button>
+                <button class="btn btn-export" title="Экспорт отчета">
+                    <i class="icon-export"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Основные метрики -->
+    <div id="metrics-container" class="metrics-grid">
+        <!-- Общие инвестиции -->
+        <div class="metric-card primary">
+            <div class="metric-icon">
+                <i class="icon-investment"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-label">Общие инвестиции</div>
+                <div class="metric-value" id="metric-total-invested">$0.00</div>
+                <div class="metric-change positive">
+                    <i class="icon-arrow-up"></i>
+                    <span>+12.5%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Общий доход -->
+        <div class="metric-card success">
+            <div class="metric-icon">
+                <i class="icon-earnings"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-label">Общий доход</div>
+                <div class="metric-value" id="metric-total-earned">$0.00</div>
+                <div class="metric-change positive">
+                    <i class="icon-arrow-up"></i>
+                    <span>+8.3%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ROI -->
+        <div class="metric-card info">
+            <div class="metric-icon">
+                <i class="icon-roi"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-label">ROI</div>
+                <div class="metric-value" id="metric-roi">0.00%</div>
+                <div class="metric-change positive">
+                    <i class="icon-arrow-up"></i>
+                    <span>+2.1%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Активные депозиты -->
+        <div class="metric-card warning">
+            <div class="metric-icon">
+                <i class="icon-deposits"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-label">Активные депозиты</div>
+                <div class="metric-value" id="metric-active-deposits">0</div>
+                <div class="metric-change neutral">
+                    <i class="icon-arrow-right"></i>
+                    <span>0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Дополнительные метрики -->
+    <div class="secondary-metrics">
+        <div class="metric-row">
+            <div class="metric-item">
+                <span class="metric-label">Средний депозит:</span>
+                <span class="metric-value" id="metric-avg-deposit">$0.00</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Дневной доход:</span>
+                <span class="metric-value" id="metric-avg-daily-income">$0.00</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Прогноз на месяц:</span>
+                <span class="metric-value" id="metric-projected-monthly">$0.00</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Прогноз на год:</span>
+                <span class="metric-value" id="metric-projected-yearly">$0.00</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Графики -->
+    <div id="charts-container" class="charts-section">
+        <!-- График доходности -->
+        <div class="chart-wrapper">
+            <div class="chart-header">
+                <h3>Доходность по дням</h3>
+                <div class="chart-controls">
+                    <button class="chart-type-btn" data-chart-type="line">
+                        <i class="icon-chart-line"></i>
+                    </button>
+                    <button class="chart-type-btn" data-chart-type="bar">
+                        <i class="icon-chart-bar"></i>
+                    </button>
+                    <button class="chart-type-btn" data-chart-type="area">
+                        <i class="icon-chart-area"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="chart-canvas-container">
+                <canvas id="earnings-chart"></canvas>
+            </div>
+        </div>
+        
+        <!-- График депозитов -->
+        <div class="chart-wrapper">
+            <div class="chart-header">
+                <h3>Активные депозиты</h3>
+            </div>
+            <div class="chart-canvas-container">
+                <canvas id="deposits-chart"></canvas>
+            </div>
+        </div>
+        
+        <!-- График портфеля -->
+        <div class="chart-wrapper">
+            <div class="chart-header">
+                <h3>Распределение портфеля</h3>
+            </div>
+            <div class="chart-canvas-container">
+                <canvas id="portfolio-chart"></canvas>
+            </div>
+        </div>
+        
+        <!-- График ROI -->
+        <div class="chart-wrapper">
+            <div class="chart-header">
+                <h3>ROI (Return on Investment)</h3>
+            </div>
+            <div class="chart-canvas-container">
+                <canvas id="roi-chart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Таблицы и детали -->
+    <div class="analytics-details">
+        <!-- Топ депозиты -->
+        <div class="detail-section">
+            <h3>Топ-5 депозитов по доходности</h3>
+            <div class="table-responsive">
+                <table class="analytics-table">
+                    <thead>
+                        <tr>
+                            <th>План</th>
+                            <th>Сумма</th>
+                            <th>Процент</th>
+                            <th>Заработано</th>
+                        </tr>
+                    </thead>
+                    <tbody id="top-deposits-table">
+                        <tr>
+                            <td colspan="4" class="text-center">Загрузка данных...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Последние транзакции -->
+        <div class="detail-section">
+            <h3>Последние транзакции</h3>
+            <div class="table-responsive">
+                <table class="analytics-table">
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Тип</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-transactions-table">
+                        <tr>
+                            <td colspan="4" class="text-center">Загрузка данных...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Прогресс к целям -->
+    <div class="goals-section">
+        <h3>Прогресс к целям</h3>
+        <div class="goals-grid">
+            <!-- Месячный доход -->
+            <div class="goal-card">
+                <div class="goal-header">
+                    <span class="goal-title">Месячный доход</span>
+                    <span class="goal-target">$1,000</span>
+                </div>
+                <div class="goal-progress-bar">
+                    <div class="goal-progress" data-goal="monthlyEarnings" style="width: 0%"></div>
+                </div>
+                <div class="goal-status">
+                    <span class="current">$0</span>
+                    <span class="percentage">0%</span>
+                </div>
+            </div>
+            
+            <!-- Общие инвестиции -->
+            <div class="goal-card">
+                <div class="goal-header">
+                    <span class="goal-title">Общие инвестиции</span>
+                    <span class="goal-target">$10,000</span>
+                </div>
+                <div class="goal-progress-bar">
+                    <div class="goal-progress" data-goal="totalInvestment" style="width: 0%"></div>
+                </div>
+                <div class="goal-status">
+                    <span class="current">$0</span>
+                    <span class="percentage">0%</span>
+                </div>
+            </div>
+            
+            <!-- ROI цель -->
+            <div class="goal-card">
+                <div class="goal-header">
+                    <span class="goal-title">ROI</span>
+                    <span class="goal-target">150%</span>
+                </div>
+                <div class="goal-progress-bar">
+                    <div class="goal-progress" data-goal="roi" style="width: 0%"></div>
+                </div>
+                <div class="goal-status">
+                    <span class="current">0%</span>
+                    <span class="percentage">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Прогресс к следующему уровню -->
+    <div class="level-section">
+        <h3>Прогресс к следующему уровню</h3>
+        <div class="level-progress-container">
+            <div class="level-info">
+                <span class="current-level">Уровень 1</span>
+                <span class="next-level">Уровень 2</span>
+            </div>
+            <div class="level-progress-bar">
+                <div id="level-progress" class="level-progress" style="width: 0%">0%</div>
+            </div>
+            <div class="level-requirements">
+                <p>Для перехода на следующий уровень необходимо инвестировать еще <strong>$400</strong></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Генератор отчетов -->
+    <div id="reports-container" class="reports-section">
+        <h3>Генератор отчетов</h3>
+        <div class="report-options">
+            <div class="report-option">
+                <label>
+                    <input type="checkbox" class="metric-toggle" data-metric="deposits" checked>
+                    Включить депозиты
+                </label>
+            </div>
+            <div class="report-option">
+                <label>
+                    <input type="checkbox" class="metric-toggle" data-metric="transactions" checked>
+                    Включить транзакции
+                </label>
+            </div>
+            <div class="report-option">
+                <label>
+                    <input type="checkbox" class="metric-toggle" data-metric="earnings" checked>
+                    Включить доходы
+                </label>
+            </div>
+            <div class="report-option">
+                <label>
+                    <input type="checkbox" class="metric-toggle" data-metric="portfolio" checked>
+                    Включить портфель
+                </label>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-generate-report">
+            <i class="icon-document"></i>
+            Сгенерировать отчет
+        </button>
+    </div>
+    
+    <!-- Загрузчик -->
+    <div class="analytics-loader" style="display: none;">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Загрузка аналитики...</div>
+    </div>
+    
+    <!-- Сообщение об ошибке -->
+    <div class="error-message" style="display: none;"></div>
+</div>

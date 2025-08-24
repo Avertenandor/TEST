@@ -1,0 +1,231 @@
+<!-- modules/dashboard/dashboard.template.html -->
+<div class="dashboard-container">
+    <!-- Боковая панель навигации -->
+    <aside class="dashboard-sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">💎</span>
+                <span class="logo-text">GENESIS</span>
+            </div>
+            <button class="mobile-menu-toggle">☰</button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-link active" data-page="dashboard">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">Главная</span>
+            </a>
+            <a href="#" class="nav-link" data-page="deposits">
+                <span class="nav-icon">💰</span>
+                <span class="nav-text">Депозиты</span>
+            </a>
+            <a href="#" class="nav-link" data-page="portfolio">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Портфолио</span>
+            </a>
+            <a href="#" class="nav-link" data-page="transactions">
+                <span class="nav-icon">📝</span>
+                <span class="nav-text">Транзакции</span>
+            </a>
+            <a href="#" class="nav-link" data-page="analytics">
+                <span class="nav-icon">📈</span>
+                <span class="nav-text">Аналитика</span>
+            </a>
+            <a href="#" class="nav-link" data-page="bonuses">
+                <span class="nav-icon">🎁</span>
+                <span class="nav-text">Бонусы</span>
+            </a>
+            <a href="#" class="nav-link" data-page="referrals">
+                <span class="nav-icon">👥</span>
+                <span class="nav-text">Рефералы</span>
+            </a>
+            <a href="#" class="nav-link" data-page="device">
+                <span class="nav-icon">💻</span>
+                <span class="nav-text">Устройство</span>
+            </a>
+            <a href="#" class="nav-link" data-page="terminal">
+                <span class="nav-icon">⚡</span>
+                <span class="nav-text">Терминал</span>
+            </a>
+            <a href="#" class="nav-link" data-page="settings">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Настройки</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <div class="user-details">
+                    <div id="user-address-display" class="user-address">0x...</div>
+                    <div id="platform-access-indicator" class="access-status">
+                        <!-- Статус доступа будет обновлен JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Основной контент -->
+    <main class="dashboard-main">
+        <!-- Заголовок -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1>Панель управления</h1>
+                <p>Добро пожаловать в GENESIS DeFi Platform</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-icon" data-action="notifications">
+                    <span class="notification-badge">3</span>
+                    🔔
+                </button>
+                <button class="btn btn-icon" data-action="settings">
+                    ⚙️
+                </button>
+            </div>
+        </header>
+        
+        <!-- Статистические карточки -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div id="stat-total-balance" class="stats-card">
+                    <div class="stats-header">
+                        <span class="stats-title">Общий баланс</span>
+                        <span class="stats-icon">💰</span>
+                    </div>
+                    <div class="stats-value">$0.00</div>
+                    <div class="stats-change positive">
+                        <span class="change-icon">↑</span>
+                        <span class="change-value">+12.5%</span>
+                    </div>
+                </div>
+                
+                <div id="stat-active-deposits" class="stats-card">
+                    <div class="stats-header">
+                        <span class="stats-title">Активные депозиты</span>
+                        <span class="stats-icon">📈</span>
+                    </div>
+                    <div class="stats-value">0</div>
+                    <div class="stats-subtitle">из 13 возможных</div>
+                </div>
+                
+                <div id="stat-total-earnings" class="stats-card">
+                    <div class="stats-header">
+                        <span class="stats-title">Общий доход</span>
+                        <span class="stats-icon">🚀</span>
+                    </div>
+                    <div class="stats-value">$0.00</div>
+                    <div class="stats-change positive">
+                        <span class="change-icon">↑</span>
+                        <span class="change-value">+8.3%</span>
+                    </div>
+                </div>
+                
+                <div id="stat-today-earnings" class="stats-card">
+                    <div class="stats-header">
+                        <span class="stats-title">Доход за сегодня</span>
+                        <span class="stats-icon">📅</span>
+                    </div>
+                    <div class="stats-value">$0.00</div>
+                    <div class="stats-subtitle">обновлено 1 мин назад</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Быстрые действия -->
+        <section class="quick-actions-section">
+            <h2>Быстрые действия</h2>
+            <div class="quick-actions">
+                <button class="action-card" data-action="create-deposit">
+                    <div class="action-icon">💰</div>
+                    <div class="action-text">
+                        <h3>Создать депозит</h3>
+                        <p>Начните зарабатывать прямо сейчас</p>
+                    </div>
+                </button>
+                
+                <button class="action-card" data-action="platform-access">
+                    <div class="action-icon">🔑</div>
+                    <div class="action-text">
+                        <h3>Пополнить доступ</h3>
+                        <p>Продлите доступ к платформе</p>
+                    </div>
+                </button>
+                
+                <button class="action-card" data-action="analytics">
+                    <div class="action-icon">📊</div>
+                    <div class="action-text">
+                        <h3>Просмотр аналитики</h3>
+                        <p>Детальная статистика доходов</p>
+                    </div>
+                </button>
+                
+                <button class="action-card" data-action="settings">
+                    <div class="action-icon">⚙️</div>
+                    <div class="action-text">
+                        <h3>Настройки</h3>
+                        <p>Управление аккаунтом</p>
+                    </div>
+                </button>
+            </div>
+        </section>
+        
+        <!-- Активные депозиты и последняя активность -->
+        <section class="content-grid">
+            <div class="content-column">
+                <div class="section-header">
+                    <h2>Активные депозиты</h2>
+                    <a href="#" class="view-all" data-page="deposits">Все депозиты →</a>
+                </div>
+                <div id="active-deposits-list" class="deposits-container">
+                    <!-- Депозиты будут загружены JavaScript -->
+                </div>
+            </div>
+            
+            <div class="content-column">
+                <div id="last-activity" class="activity-container">
+                    <!-- Последняя активность будет загружена JavaScript -->
+                </div>
+                
+                <!-- Технические показатели -->
+                <div class="tech-stats">
+                    <h3>Системная информация</h3>
+                    <div class="tech-stats-grid">
+                        <div class="tech-stat">
+                            <span class="tech-label">FPS:</span>
+                            <span id="tech-fps" class="tech-value">60</span>
+                        </div>
+                        <div class="tech-stat">
+                            <span class="tech-label">Ping:</span>
+                            <span id="tech-ping" class="tech-value">25 ms</span>
+                        </div>
+                        <div class="tech-stat">
+                            <span class="tech-label">Uptime:</span>
+                            <span id="tech-uptime" class="tech-value">00:00:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- График доходности (заглушка) -->
+        <section class="chart-section">
+            <div class="section-header">
+                <h2>График доходности</h2>
+                <div class="chart-controls">
+                    <button class="chart-period active">День</button>
+                    <button class="chart-period">Неделя</button>
+                    <button class="chart-period">Месяц</button>
+                    <button class="chart-period">Год</button>
+                </div>
+            </div>
+            <div class="chart-container">
+                <div class="chart-placeholder">
+                    <div class="chart-message">
+                        📈 График доходности будет доступен после создания первого депозита
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

@@ -13,7 +13,7 @@ window.GenesisCabinet = {
     activeModal: null,
     transactionInProgress: false,
     
-    // MCP-MARKER:METHOD:INIT_CABINET - Инициализация кабинета
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:INIT - Инициализация кабинета
     init: function(userAddress) {
         console.log('💼 Инициализация Genesis Cabinet...');
         this.currentUser = userAddress;
@@ -22,7 +22,7 @@ window.GenesisCabinet = {
         console.log('✅ Genesis Cabinet инициализирован');
     },
     
-    // MCP-MARKER:METHOD:SETUP_EVENT_LISTENERS - Настройка обработчиков событий
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:SETUP_LISTENERS - Настройка обработчиков событий
     setupEventListeners: function() {
         // Обработчики для модальных окон
         document.addEventListener('click', (e) => {
@@ -41,7 +41,7 @@ window.GenesisCabinet = {
         console.log('🎯 Обработчики событий настроены');
     },
     
-    // MCP-MARKER:METHOD:LOAD_USER_DEPOSITS - Загрузка депозитов пользователя
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:LOAD_DEPOSITS - Загрузка депозитов пользователя
     loadUserDeposits: async function() {
         if (!this.currentUser) return;
         
@@ -54,7 +54,7 @@ window.GenesisCabinet = {
         }
     },
     
-    // MCP-MARKER:METHOD:SHOW_DEPOSIT_MODAL - Показ модального окна создания депозита
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:SHOW_MODAL - Показ модального окна создания депозита
     showDepositModal: function(selectedPlanId = null) {
         console.log('💰 Открываем модальное окно создания депозита');
         
@@ -80,7 +80,7 @@ window.GenesisCabinet = {
         }
     },
     
-    // MCP-MARKER:METHOD:GENERATE_DEPOSIT_MODAL_CONTENT - Генерация контента модального окна
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:GENERATE_CONTENT - Генерация контента модального окна
     generateDepositModalContent: function() {
         if (!window.GENESIS_CONFIG || !window.GENESIS_CONFIG.depositPlans) {
             return `
@@ -223,7 +223,7 @@ window.GenesisCabinet = {
         `;
     },
     
-    // MCP-MARKER:METHOD:GENERATE_PLAN_OPTION_CARD - Генерация карточки плана
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:GENERATE_CARD - Генерация карточки плана
     generatePlanOptionCard: function(plan, userPlanIds) {
         const hasThisPlan = userPlanIds.includes(plan.id);
         const isLocked = this.isPlanLocked(plan, userPlanIds);
@@ -281,7 +281,7 @@ window.GenesisCabinet = {
         `;
     },
     
-    // MCP-MARKER:METHOD:SELECT_DEPOSIT_PLAN - Выбор плана депозита
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:SELECT_PLAN - Выбор плана депозита
     selectDepositPlan: function(planId) {
         console.log('📋 Выбран план:', planId);
         
@@ -321,7 +321,7 @@ window.GenesisCabinet = {
         }, 500);
     },
     
-    // MCP-MARKER:METHOD:NEXT_WIZARD_STEP - Переход к следующему шагу мастера
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:NEXT_STEP - Переход к следующему шагу мастера
     nextWizardStep: function() {
         const currentStep = document.querySelector('.wizard-step.active');
         const currentStepNumber = parseInt(currentStep.id.split('-')[1]);
@@ -358,7 +358,7 @@ window.GenesisCabinet = {
         }
     },
     
-    // MCP-MARKER:METHOD:LOAD_PAYMENT_STEP - Загрузка шага оплаты
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:LOAD_PAYMENT - Загрузка шага оплаты
     loadPaymentStep: function() {
         if (!this.selectedPlan) return;
         
@@ -417,7 +417,7 @@ window.GenesisCabinet = {
         `;
     },
     
-    // MCP-MARKER:METHOD:GENERATE_PAYMENT_OPTION - Генерация варианта оплаты
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:PAYMENT_OPTION - Генерация варианта оплаты
     generatePaymentOption: function(plan, currency) {
         const amount = currency === 'USDT' ? plan.usdtAmount : plan.plexAmount;
         const address = currency === 'USDT' ? 
@@ -464,7 +464,7 @@ window.GenesisCabinet = {
         `;
     },
     
-    // MCP-MARKER:METHOD:SELECT_PAYMENT_CURRENCY - Выбор валюты оплаты
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:SELECT_CURRENCY - Выбор валюты оплаты
     selectPaymentCurrency: function(currency) {
         console.log('💱 Выбрана валюта оплаты:', currency);
         
@@ -486,7 +486,7 @@ window.GenesisCabinet = {
         }
     },
     
-    // MCP-MARKER:METHOD:COPY_TO_CLIPBOARD - Копирование в буфер обмена
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:COPY_CLIPBOARD - Копирование в буфер обмена
     copyToClipboard: function(text, message = 'Скопировано!') {
         navigator.clipboard.writeText(text).then(() => {
             this.showNotification('📋 ' + message, '', 'success');
@@ -503,7 +503,7 @@ window.GenesisCabinet = {
         });
     },
     
-    // MCP-MARKER:METHOD:GENERATE_QR_CODE - Генерация QR кода
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:GENERATE_QR - Генерация QR кода
     generateQRCode: function(address, amount, currency) {
         const qrContainer = document.getElementById(`qr-${currency}`);
         if (!qrContainer) return;
@@ -525,7 +525,7 @@ window.GenesisCabinet = {
         `;
     },
     
-    // MCP-MARKER:METHOD:CHECK_PAYMENT_STATUS - Проверка статуса оплаты
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:CHECK_PAYMENT - Проверка статуса оплаты
     checkPaymentStatus: async function() {
         if (!this.selectedPlan || !this.selectedCurrency) {
             alert('⚠️ Сначала выберите план и валюту оплаты');
@@ -566,7 +566,7 @@ window.GenesisCabinet = {
         }
     },
     
-    // MCP-MARKER:METHOD:VERIFY_PAYMENT - Верификация платежа
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:VERIFY_PAYMENT - Верификация платежа
     verifyPayment: async function() {
         try {
             // Имитация проверки платежа (в реальном проекте здесь будет BSC API)
@@ -602,7 +602,7 @@ window.GenesisCabinet = {
         }
     },
     
-    // MCP-MARKER:METHOD:LOAD_CONFIRMATION_STEP - Загрузка шага подтверждения
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:LOAD_CONFIRM - Загрузка шага подтверждения
     loadConfirmationStep: function() {
         const confirmationContainer = document.getElementById('confirmation-details');
         const plan = this.selectedPlan;
@@ -676,7 +676,7 @@ window.GenesisCabinet = {
         `;
     },
     
-    // MCP-MARKER:METHOD:PREVIOUS_WIZARD_STEP - Переход к предыдущему шагу
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:PREV_STEP - Переход к предыдущему шагу
     previousWizardStep: function() {
         const currentStep = document.querySelector('.wizard-step.active');
         const currentStepNumber = parseInt(currentStep.id.split('-')[1]);
@@ -703,7 +703,7 @@ window.GenesisCabinet = {
         document.querySelector(`[data-step="${prevStepNumber}"]`).classList.add('active');
     },
     
-    // MCP-MARKER:METHOD:VIEW_PORTFOLIO - Переход к портфелю
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:VIEW_PORTFOLIO - Переход к портфелю
     viewPortfolio: function() {
         this.closeDepositModal();
         
@@ -718,7 +718,7 @@ window.GenesisCabinet = {
         }
     },
     
-    // MCP-MARKER:METHOD:CLOSE_DEPOSIT_MODAL - Закрытие модального окна депозита
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:CLOSE_MODAL - Закрытие модального окна депозита
     closeDepositModal: function() {
         const modal = document.getElementById('create-deposit-modal');
         if (modal) {
@@ -732,7 +732,7 @@ window.GenesisCabinet = {
         console.log('🚪 Модальное окно депозита закрыто');
     },
     
-    // MCP-MARKER:METHOD:CLOSE_ALL_MODALS - Закрытие всех модальных окон
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:CLOSE_ALL - Закрытие всех модальных окон
     closeAllModals: function() {
         const modals = [
             'create-deposit-modal',
@@ -752,13 +752,13 @@ window.GenesisCabinet = {
         this.selectedCurrency = null;
     },
     
-    // MCP-MARKER:METHOD:SHOW_PURCHASE_MODAL - Показ модального окна покупки плана
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:SHOW_PURCHASE - Показ модального окна покупки плана
     showPurchaseModal: function(planId) {
         console.log('🛒 Показ модального окна покупки для плана:', planId);
         this.showDepositModal(planId);
     },
     
-    // MCP-MARKER:METHOD:SHOW_NOTIFICATION - Показ уведомления
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:NOTIFICATION - Показ уведомления
     showNotification: function(title, message = '', type = 'info') {
         // Создаем уведомление
         const notification = document.createElement('div');
@@ -830,6 +830,7 @@ window.GenesisCabinet = {
     
     // MCP-MARKER:UTILITY_METHODS - Утилиты
     
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:GET_USER_PLANS - Получение ID планов пользователя
     getUserPlanIds: function() {
         // Получаем ID планов пользователя из депозитов
         if (window.CabinetDepositService && window.CabinetDepositService.userDeposits) {
@@ -840,6 +841,7 @@ window.GenesisCabinet = {
         return ['trial']; // Предполагаем что у пользователя есть только trial
     },
     
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:IS_PLAN_LOCKED - Проверка блокировки плана
     isPlanLocked: function(plan, userPlanIds) {
         if (plan.id === 'trial') return false;
         
@@ -858,6 +860,7 @@ window.GenesisCabinet = {
         return false;
     },
     
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:GET_PLAN_ICON - Получение иконки плана
     getPlanIcon: function(planName) {
         const icons = {
             'TRIAL': '🧪',
@@ -877,6 +880,7 @@ window.GenesisCabinet = {
         return icons[planName] || '💰';
     },
     
+    // MCP-MARKER:METHOD:CABINET_DEPOSIT:MOCK_TX_HASH - Генерация тестового хеша транзакции
     generateMockTxHash: function() {
         const chars = '0123456789abcdef';
         let hash = '0x';
@@ -887,14 +891,14 @@ window.GenesisCabinet = {
     }
 };
 
-// MCP-MARKER:GLOBAL_FUNCTIONS - Глобальные функции для совместимости
+// MCP-MARKER:SECTION:GLOBAL_FUNCTIONS - Глобальные функции для совместимости
 
-// Закрытие модальных окон (для кнопок в HTML)
+// MCP-MARKER:FUNCTION:CLOSE_MODALS - Закрытие модальных окон (для кнопок в HTML)
 window.closeDepositModal = () => window.GenesisCabinet.closeDepositModal();
 window.closeConfirmModal = () => window.GenesisCabinet.closeAllModals();
 window.closeTransactionResultModal = () => window.GenesisCabinet.closeAllModals();
 
-// Функции для экстренных действий
+// MCP-MARKER:FUNCTION:EMERGENCY_ACTIONS - Функции для экстренных действий
 window.clearCacheAndReload = function() {
     if (confirm('🧹 Очистить кэш браузера и перезагрузить страницу?')) {
         localStorage.clear();
@@ -903,6 +907,7 @@ window.clearCacheAndReload = function() {
     }
 };
 
+// MCP-MARKER:FUNCTION:DEV_ACCESS - Активация режима разработчика
 window.enableDevAccess = function() {
     const password = prompt('🔧 Введите пароль разработчика:');
     if (password === 'genesis2025') {
@@ -914,7 +919,7 @@ window.enableDevAccess = function() {
     }
 };
 
-// Функция выхода из кабинета
+// MCP-MARKER:FUNCTION:LOGOUT - Функция выхода из кабинета
 window.logout = function() {
     if (confirm('🚪 Выйти из кабинета?')) {
         localStorage.removeItem('genesis_user_address');
@@ -922,7 +927,7 @@ window.logout = function() {
     }
 };
 
-// MCP-MARKER:INITIALIZATION - Инициализация при загрузке страницы
+// MCP-MARKER:SECTION:INITIALIZATION - Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     console.log('💼 Genesis Cabinet Integration loaded');
     
@@ -947,7 +952,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 10000);
     
-    // MCP-MARKER:DEPOSIT_MODAL_FIX - Исправление модальных окон депозитов
+    // MCP-MARKER:FUNCTION:DEPOSIT_MODAL_FIX - Исправление модальных окон депозитов
     // Глобальная функция для открытия модального окна депозита
     window.openDepositModal = function(planId) {
         console.log('🚀 openDepositModal вызвана для плана:', planId);
@@ -970,7 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // Fallback модальное окно
+    // MCP-MARKER:FUNCTION:FALLBACK_MODAL - Fallback модальное окно
     function showFallbackDepositModal(planId) {
         console.log('⚠️ Используем fallback модальное окно');
         
@@ -1058,7 +1063,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('hidden');
     }
     
-    // Функция для перехвата кликов на кнопках депозитов
+    // MCP-MARKER:FUNCTION:INTERCEPT_BUTTONS - Функция для перехвата кликов на кнопках депозитов
     function interceptDepositButtons() {
         // Используем делегирование событий для динамически создаваемых кнопок
         document.addEventListener('click', function(e) {
@@ -1115,7 +1120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('✅ Исправление для модальных окон депозитов применено');
 });
 
-// MCP-MARKER:FIX_DEPOSIT_MODAL - Функция ручного исправления кнопок
+// MCP-MARKER:FUNCTION:FIX_DEPOSIT_MODAL - Функция ручного исправления кнопок
 window.fixDepositModal = function() {
     console.log('🔧 Ручной вызов исправления модальных окон...');
     

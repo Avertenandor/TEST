@@ -1,0 +1,66 @@
+{
+  "timestamp": 1755171298.5505,
+  "architecture": {
+    "app_container": true,
+    "router_container": false,
+    "navigation": true,
+    "main_content": true,
+    "auth_overlay": true,
+    "loading_screen": true
+  },
+  "auth_elements": {
+    "auth_form": 1,
+    "wallet_input": 1,
+    "auth_button": 1,
+    "system_address": 1,
+    "access_address": 0,
+    "auth_instructions": 0
+  },
+  "navigation_count": 67,
+  "bypass_attempts": {
+    "Прямой переход к дашборду": {
+      "content_found": false,
+      "auth_overlay": true,
+      "success": false
+    },
+    "Прямой переход к депозитам": {
+      "content_found": false,
+      "auth_overlay": true,
+      "success": false
+    },
+    "Прямой переход к портфелю": {
+      "content_found": false,
+      "auth_overlay": true,
+      "success": false
+    },
+    "Прямой переход к \"как все устроено\"": {
+      "content_found": false,
+      "auth_overlay": true,
+      "success": false
+    }
+  },
+  "console_logs": [
+    "[log] ℹ️ Partial update: plex",
+    "[log] ⏳ Loading USDT balance...",
+    "[log] [RequestScheduler] Cache hit for: account_tokenbalance_0x1234567890123456789012345678901234567890_",
+    "[log] ℹ️ Partial update: usdt",
+    "[log] ✅ Dashboard data loaded successfully",
+    "[log] [RequestScheduler] Request queued: req_1755171295302_99urkbbng, queue size: 1",
+    "[log] ✅ Dashboard loading flag reset",
+    "[log] ✅ Dashboard Module initialized successfully",
+    "[log] [EventBus] Emit: module:loaded {name: dashboard, version: 1.1.0}",
+    "[log] 📦 Module loaded: dashboard",
+    "[log] ✅ Module dashboard loaded successfully",
+    "[log] [EventBus] Emit: route:loaded {module: dashboard, path: /}",
+    "[log] [EventBus] Emit: loading:end {}",
+    "[log] [EventBus] Emit: route:loaded {module: dashboard, path: /dashboard}",
+    "[log] [EventBus] Emit: loading:end {}",
+    "[log] [RequestScheduler] Processing request: req_1755171295302_99urkbbng",
+    "[log] 📡 BSCScan API request: tokentx",
+    "[log] ✅ BSCScan API success: tokentx",
+    "[log] [RequestScheduler] Request successful: req_1755171295302_99urkbbng",
+    "[log] [RequestScheduler] Cache hit for: account_tokentx_0x1234567890123456789012345678901234567890_"
+  ],
+  "errors": [],
+  "success_rate": 56.25
+}

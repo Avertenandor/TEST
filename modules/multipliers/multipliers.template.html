@@ -1,0 +1,294 @@
+<!-- modules/multipliers/multipliers.template.html -->
+<!-- Модуль множителей GENESIS -->
+<div class="multipliers-container">
+    <div class="page-header">
+        <h2 class="page-title">⚡ Множители</h2>
+        <p class="page-subtitle">Активируйте бонусные множители для увеличения доходности</p>
+    </div>
+
+    <!-- Активные множители -->
+    <div class="active-multipliers-card">
+        <div class="card-header">
+            <h3>⚡ Активные множители</h3>
+            <div class="multipliers-count">
+                <span id="active-count">3</span> активны
+            </div>
+        </div>
+        
+        <div class="active-multipliers-grid" id="active-multipliers">
+            <div class="multiplier-card multiplier-card-active">
+                <div class="multiplier-icon">🔥</div>
+                <h5 class="multiplier-title">Огненный</h5>
+                <div class="multiplier-value success-color">x2.5</div>
+                <div class="multiplier-time">Осталось: <span id="fire-timer">4ч 23м</span></div>
+                <div class="multiplier-progress">
+                    <div class="multiplier-progress-bar success-bg" data-progress="72"></div>
+                </div>
+            </div>
+            
+            <div class="multiplier-card multiplier-card-secondary">
+                <div class="multiplier-icon">💎</div>
+                <h5 class="multiplier-title">Алмазный</h5>
+                <div class="multiplier-value secondary-color">x1.8</div>
+                <div class="multiplier-time">Осталось: <span id="diamond-timer">12ч 45м</span></div>
+                <div class="multiplier-progress">
+                    <div class="multiplier-progress-bar secondary-bg" data-progress="53"></div>
+                </div>
+            </div>
+            
+            <div class="multiplier-card multiplier-card-warning">
+                <div class="multiplier-icon">⭐</div>
+                <h5 class="multiplier-title">Звездный</h5>
+                <div class="multiplier-value warning-color">x3.2</div>
+                <div class="multiplier-time">Осталось: <span id="star-timer">23ч 17м</span></div>
+                <div class="multiplier-progress">
+                    <div class="multiplier-progress-bar warning-bg" data-progress="97"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Эффект множителей -->
+    <div class="multiplier-effect-card">
+        <div class="card-header">
+            <h3>📊 Эффект множителей</h3>
+        </div>
+        
+        <div class="effect-grid">
+            <div class="effect-item">
+                <div class="effect-label">Базовая доходность</div>
+                <div class="effect-value primary-color" id="base-income">$45.20/день</div>
+            </div>
+            <div class="effect-item">
+                <div class="effect-label">С множителями</div>
+                <div class="effect-value success-color" id="boosted-income">$247.83/день</div>
+            </div>
+            <div class="effect-item">
+                <div class="effect-label">Суммарный множитель</div>
+                <div class="effect-value primary-color" id="total-multiplier">x5.48</div>
+            </div>
+        </div>
+        
+        <div class="income-comparison">
+            <div class="comparison-bar">
+                <div class="base-bar">
+                    <span>Базовый доход</span>
+                </div>
+                <div class="boosted-bar" data-width="85">
+                    <span>+447% с множителями</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Магазин множителей -->
+    <div class="multiplier-shop-card">
+        <div class="card-header">
+            <h3>🛒 Магазин множителей</h3>
+            <div class="balance-info">
+                Баланс: <span id="user-balance">1,250 PLEX</span>
+            </div>
+        </div>
+        
+        <div class="shop-grid">
+            <div class="multiplier-shop-item">
+                <div class="shop-item-header">
+                    <div class="item-icon">🚀</div>
+                    <div class="item-info">
+                        <h5>Турбо x2.0</h5>
+                        <span class="duration-badge success-bg">6 часов</span>
+                    </div>
+                </div>
+                <p class="item-description">Удваивает доходность от всех источников на 6 часов</p>
+                <div class="item-price">
+                    <span class="price-usd">$25</span>
+                    <span class="price-plex">или 500 PLEX</span>
+                </div>
+                <button type="button" class="btn-activate" onclick="activateMultiplier('turbo')">
+                    🚀 Активировать
+                </button>
+            </div>
+            
+            <div class="multiplier-shop-item">
+                <div class="shop-item-header">
+                    <div class="item-icon">⚡</div>
+                    <div class="item-info">
+                        <h5>Молния x4.0</h5>
+                        <span class="duration-badge primary-bg">3 часа</span>
+                    </div>
+                </div>
+                <p class="item-description">Увеличивает доходность в 4 раза на 3 часа</p>
+                <div class="item-price">
+                    <span class="price-usd">$45</span>
+                    <span class="price-plex">или 900 PLEX</span>
+                </div>
+                <button type="button" class="btn-activate" onclick="activateMultiplier('lightning')">
+                    ⚡ Активировать
+                </button>
+            </div>
+            
+            <div class="multiplier-shop-item">
+                <div class="shop-item-header">
+                    <div class="item-icon">💰</div>
+                    <div class="item-info">
+                        <h5>Золотой x1.5</h5>
+                        <span class="duration-badge warning-bg">24 часа</span>
+                    </div>
+                </div>
+                <p class="item-description">Стабильное увеличение дохода на 50% в течение суток</p>
+                <div class="item-price">
+                    <span class="price-usd">$35</span>
+                    <span class="price-plex">или 700 PLEX</span>
+                </div>
+                <button type="button" class="btn-activate" onclick="activateMultiplier('golden')">
+                    💰 Активировать
+                </button>
+            </div>
+            
+            <div class="multiplier-shop-item premium-item">
+                <div class="shop-item-header">
+                    <div class="item-icon">🌟</div>
+                    <div class="item-info">
+                        <h5>Мега x10.0</h5>
+                        <span class="duration-badge error-bg">1 час</span>
+                    </div>
+                </div>
+                <p class="item-description">Максимальное увеличение дохода в 10 раз на час</p>
+                <div class="item-price">
+                    <span class="price-usd">$100</span>
+                    <span class="price-plex">или 2000 PLEX</span>
+                </div>
+                <button type="button" class="btn-activate premium-btn" onclick="activateMultiplier('mega')">
+                    🌟 Активировать
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- История множителей -->
+    <div class="multiplier-history-card">
+        <div class="card-header">
+            <h3>📜 История активации</h3>
+            <div class="filter-controls">
+                <select id="history-period" class="form-select" aria-label="Период истории" title="Выберите период">
+                    <option value="7">За неделю</option>
+                    <option value="30" selected>За месяц</option>
+                    <option value="90">За 3 месяца</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="history-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="total-activated">25</div>
+                <div class="stat-label">Активировано</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="total-spent">$450</div>
+                <div class="stat-label">Потрачено</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="total-earned">$1,240</div>
+                <div class="stat-label">Дополнительно заработано</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="roi-percent">175%</div>
+                <div class="stat-label">ROI</div>
+            </div>
+        </div>
+        
+        <div class="history-table-container">
+            <div id="history-loading" class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Загрузка истории...</p>
+            </div>
+            
+            <div id="history-table" class="history-table hidden">
+                <div class="table-header">
+                    <div class="col-multiplier">Множитель</div>
+                    <div class="col-duration">Длительность</div>
+                    <div class="col-cost">Стоимость</div>
+                    <div class="col-earned">Заработано</div>
+                    <div class="col-date">Дата</div>
+                </div>
+                
+                <div class="table-body" id="history-list">
+                    <!-- История будет загружена динамически -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Рекомендации -->
+    <div class="recommendations-card">
+        <div class="card-header">
+            <h3>💡 Рекомендации</h3>
+        </div>
+        
+        <div class="recommendations-content">
+            <div class="recommendation-item">
+                <div class="rec-icon">🎯</div>
+                <div class="rec-content">
+                    <h4>Оптимальная стратегия</h4>
+                    <p>Для максимизации прибыли рекомендуем комбинировать долгосрочные множители с короткими мощными бустами</p>
+                </div>
+            </div>
+            
+            <div class="recommendation-item">
+                <div class="rec-icon">⏰</div>
+                <div class="rec-content">
+                    <h4>Лучшее время</h4>
+                    <p>Активируйте мощные множители в периоды высокой волатильности рынка для максимального эффекта</p>
+                </div>
+            </div>
+            
+            <div class="recommendation-item">
+                <div class="rec-icon">💎</div>
+                <div class="rec-content">
+                    <h4>PLEX экономия</h4>
+                    <p>Покупка множителей за PLEX токены дает скидку 15% по сравнению с USD</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Комбо-множители -->
+    <div class="combo-multipliers-card">
+        <div class="card-header">
+            <h3>🔥 Комбо-множители</h3>
+            <span class="combo-badge">Эксклюзив</span>
+        </div>
+        
+        <div class="combo-content">
+            <p class="combo-description">
+                Активируйте несколько множителей одновременно для получения дополнительных бонусов!
+            </p>
+            
+            <div class="combo-examples">
+                <div class="combo-item">
+                    <div class="combo-icons">
+                        <span>🔥</span>
+                        <span class="combo-plus">+</span>
+                        <span>💎</span>
+                    </div>
+                    <div class="combo-effect">
+                        <span class="combo-name">Огонь + Алмаз</span>
+                        <span class="combo-bonus">+10% бонус</span>
+                    </div>
+                </div>
+                
+                <div class="combo-item">
+                    <div class="combo-icons">
+                        <span>⚡</span>
+                        <span class="combo-plus">+</span>
+                        <span>🌟</span>
+                    </div>
+                    <div class="combo-effect">
+                        <span class="combo-name">Молния + Мега</span>
+                        <span class="combo-bonus">+25% бонус</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
