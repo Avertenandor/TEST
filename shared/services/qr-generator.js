@@ -406,6 +406,23 @@ if (typeof window !== 'undefined') {
             return false;
         }
     };
+
+    // Шим для совместимости: если кто-то вызывает QRCode.toCanvas на DIV — перенаправим на canvas
+    if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
+        const origToCanvas = window.QRCode.toCanvas.bind(window.QRCode);
+        window.QRCode.toCanvas = function(target, text, options, cb) {
+            let canvasTarget = target;
+            try {
+                if (target && target.tagName && target.tagName.toLowerCase() !== 'canvas') {
+                    const canvas = document.createElement('canvas');
+                    target.innerHTML = '';
+                    target.appendChild(canvas);
+                    canvasTarget = canvas;
+                }
+            } catch {}
+            return origToCanvas(canvasTarget, text, options, cb);
+        };
+    }
 }
 
 // Создаем глобальный экземпляр

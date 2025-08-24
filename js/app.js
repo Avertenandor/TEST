@@ -613,8 +613,16 @@ window.GenesisApp = {
     }
 };
 
-// Запускаем приложение при загрузке
+// Запускаем приложение при загрузке (только на app.html)
 document.addEventListener('DOMContentLoaded', () => {
+    // Дополнительные предохранители: не инициализировать на главной и иных страницах
+    const path = (location && location.pathname) || '';
+    const isAppPage = /app\.html$/i.test(path);
+    if (!isAppPage || window.GENESIS_LANDING === true) {
+        console.log('⏭️ GenesisApp init skipped on this page');
+        return;
+    }
+
     window.GenesisApp.init();
     
     // MCP-MARKER:ACCESS_CHECK_DOM_READY - Проверка доступа при готовности DOM
