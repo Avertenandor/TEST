@@ -6857,7 +6857,7 @@
         <!-- MCP-MARKER:SCRIPTS:EXTERNAL_LIBS - Внешние библиотеки -->
         <!-- MCP-MARKER:SECTION:JAVASCRIPT_CORE - Основные JavaScript модули -->
         <!-- Cache Buster System - Должен загружаться первым -->
-        <script src="cache-buster.js"></script>
+    <!-- Удалено: cache-buster.js отсутствует на сервере -->
         
         <!-- MCP-MARKER:JS:CORE_MODULES - Основные модули приложения -->
         <!-- Основные скрипты приложения -->
@@ -7963,52 +7963,24 @@
         
         // MCP-MARKER:FUNCTION:GENERATE_QR_CODE - Генерация QR кода
         // Функция генерации QR кода
-        function generateQRCode() {
+        async function generateQRCode() {
             const qrContainer = document.getElementById('genesis-qr-code');
             if (!qrContainer) {
                 console.error('❌ Контейнер QR кода не найден');
                 return;
             }
-            
-            // Очищаем контейнер
-            qrContainer.innerHTML = '';
-            
             try {
-                // Проверяем доступность QRCode библиотеки
-                if (window.QRCode) {
-                    console.log('🔧 Генерируем QR код с библиотекой QRCode');
-                    
-                    // Создаем QR код с адресом (улучшенные параметры для сканирования)
-                    QRCode.toCanvas(qrContainer, AUTH_CONFIG.address, {
-                        width: 256,
-                        height: 256,
-                        margin: 4,
-                        color: {
-                            dark: '#000000', // Черный для лучшего контраста
-                            light: '#ffffff'  // Белый фон
-                        },
-                        errorCorrectionLevel: 'H' // Высокий уровень коррекции ошибок
-                    }, function(error) {
-                        if (error) {
-                            console.error('❌ Ошибка генерации QR кода:', error);
-                            showFallbackQR();
-                        } else {
-                            console.log('✅ QR код успешно сгенерирован');
-                            // Добавляем стили для лучшего отображения
-                            const canvas = qrContainer.querySelector('canvas');
-                            if (canvas) {
-                                canvas.style.borderRadius = '10px';
-                                canvas.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-                                canvas.style.border = '3px solid #4ecdc4';
-                            }
-                        }
-                    });
-                } else {
-                    console.warn('⚠️ QRCode библиотека не найдена, используем fallback');
-                    showFallbackQR();
+                const ok = await (window.generateQRCode ? window.generateQRCode(qrContainer, AUTH_CONFIG.address) : Promise.resolve(false));
+                if (!ok) throw new Error('Bridge generation failed');
+                // Стилизация, если был создан canvas
+                const canvas = qrContainer.querySelector('canvas');
+                if (canvas) {
+                    canvas.style.borderRadius = '10px';
+                    canvas.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+                    canvas.style.border = '3px solid #4ecdc4';
                 }
-            } catch (error) {
-                console.error('❌ Ошибка при генерации QR кода:', error);
+            } catch (e) {
+                console.error('❌ Ошибка генерации QR кода через мост:', e);
                 showFallbackQR();
             }
         }
