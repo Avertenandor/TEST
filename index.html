@@ -7698,14 +7698,18 @@
         };
         
         // MCP-MARKER:FUNCTION:GENERATE_QR_CODE - Генерация QR кода
-        // Функция генерации QR кода
+        // Функция генерации QR кода (идемпотентная, с защитой от параллельных вызовов)
+        let __qrGenerating = false;
+        let __qrLastFallbackLog = 0;
         async function generateQRCode() {
+            if (__qrGenerating) return; // защита от параллельных вызовов
             const qrContainer = document.getElementById('genesis-qr-code');
             if (!qrContainer) {
                 console.error('❌ Контейнер QR кода не найден');
                 return;
             }
             try {
+                __qrGenerating = true;
                 const ok = await (window.generateQRCode ? window.generateQRCode(qrContainer, AUTH_CONFIG.address) : Promise.resolve(false));
                 if (!ok) throw new Error('Bridge generation failed');
                 // Стилизация, если был создан canvas
@@ -7716,17 +7720,26 @@
                     canvas.style.border = '3px solid #4ecdc4';
                 }
             } catch (e) {
-                console.error('❌ Ошибка генерации QR кода через мост:', e);
+                // троттлинг ошибок, чтобы не спамить консоль
+                const now = Date.now();
+                if (now - __qrLastFallbackLog > 5000) {
+                    __qrLastFallbackLog = now;
+                    console.error('❌ Ошибка генерации QR кода через мост:', e);
+                }
                 showFallbackQR();
+            } finally {
+                __qrGenerating = false;
             }
         }
         
         // MCP-MARKER:FUNCTION:SHOW_FALLBACK_QR - Fallback QR код
-        // Fallback функция для QR кода
+        // Fallback функция для QR кода (перезаписывает содержимое контейнера)
         function showFallbackQR() {
             const qrContainer = document.getElementById('genesis-qr-code');
             if (!qrContainer) return;
             
+            // очищаем контейнер чтобы избежать накопления узлов
+            qrContainer.innerHTML = '';
             console.log('🔄 Используем fallback QR код');
             
             // Создаем изображение с внешним API (улучшенные параметры)
@@ -7830,8 +7843,10 @@
             }, 3000);
         }
         
-        // Инициализация при загрузке страницы
+        // Инициализация при загрузке страницы (однократная)
         document.addEventListener('DOMContentLoaded', function() {
+            if (window.__qrInit) return;
+            window.__qrInit = true;
             console.log('🚀 Инициализация QR кода');
             
             // Ждем загрузки библиотек
@@ -7840,7 +7855,10 @@
                 generateQRCode();
                 
                 // Автообновление QR кода каждые 5 минут
-                setInterval(generateQRCode, 300000);
+                if (!window.__qrIntervalStarted) {
+                    window.__qrIntervalStarted = true;
+                    setInterval(generateQRCode, 300000);
+                }
             }, 1000);
         });
         
