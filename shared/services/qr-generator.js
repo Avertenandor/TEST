@@ -7,7 +7,7 @@ export class QRGenerator {
         this.loadingPromise = null;
     }
 
-    // Загрузка библиотеки QRCode.js
+    // Загрузка библиотеки QRCode.js (попытка нескольких источников)
     async loadQRLibrary() {
         if (this.qrLibraryLoaded) return;
         
@@ -16,30 +16,45 @@ export class QRGenerator {
         }
 
         this.loadingPromise = new Promise((resolve, reject) => {
-            // Проверяем, не загружена ли уже библиотека
-            if (typeof QRCode !== 'undefined') {
+            // Если уже есть любой из вариантов
+            if (typeof window !== 'undefined' && (window.QRCode || window.qrcode)) {
                 this.qrLibraryLoaded = true;
-                resolve();
-                return;
+                return resolve();
             }
 
-            // Создаем script элемент для загрузки библиотеки
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-            script.async = true;
-            
-            script.onload = () => {
-                this.qrLibraryLoaded = true;
-                console.log('✅ QRCode library loaded successfully');
-                resolve();
+            const trySources = [
+                // Популярная библиотека с API toCanvas
+                'https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js',
+                // Классическая qrcodejs (конструктор new QRCode)
+                'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'
+            ];
+
+            let idx = 0;
+            const tryLoad = () => {
+                if (idx >= trySources.length) {
+                    return reject(new Error('Failed to load any QRCode library'));
+                }
+                const src = trySources[idx++];
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                script.onload = () => {
+                    if (window.QRCode || window.qrcode) {
+                        this.qrLibraryLoaded = true;
+                        console.log(`✅ QR library loaded: ${src}`);
+                        resolve();
+                    } else {
+                        tryLoad();
+                    }
+                };
+                script.onerror = () => {
+                    console.warn(`⚠️ QR library failed: ${src}`);
+                    tryLoad();
+                };
+                document.head.appendChild(script);
             };
-            
-            script.onerror = () => {
-                console.error('❌ Failed to load QRCode library');
-                reject(new Error('Failed to load QRCode library'));
-            };
-            
-            document.head.appendChild(script);
+
+            tryLoad();
         });
 
         return this.loadingPromise;
@@ -59,10 +74,18 @@ export class QRGenerator {
             // Загружаем библиотеку если нужно
             await this.loadQRLibrary();
 
-            // Получаем контейнер
-            const containerElement = typeof container === 'string' 
-                ? document.getElementById(container) 
-                : container;
+            // Получаем контейнер (поддержка CSS-селектора/ID/элемента/NodeList)
+            let containerElement = container;
+            if (typeof container === 'string') {
+                // поддержка как '#id', так и 'id'
+                containerElement = container.startsWith('#')
+                    ? document.querySelector(container)
+                    : document.getElementById(container);
+            }
+            if (containerElement && typeof containerElement.length === 'number' && !containerElement.tagName) {
+                // NodeList/HTMLCollection
+                containerElement = containerElement[0];
+            }
 
             if (!containerElement) {
                 throw new Error('Container element not found');
@@ -74,15 +97,45 @@ export class QRGenerator {
             // Создаем данные для QR кода
             const qrData = this.createPaymentData(address, amount, token, network);
 
-            // Генерируем QR код
-            const qrcode = new QRCode(containerElement, {
-                text: qrData,
-                width: 256,
-                height: 256,
-                colorDark: '#000000',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.H
-            });
+            // Генерация: предпочтительно через QRCode.toCanvas, иначе через конструктор
+            let qrcode = null;
+            if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
+                const canvas = document.createElement('canvas');
+                canvas.width = 256;
+                canvas.height = 256;
+                containerElement.appendChild(canvas);
+                await new Promise((res, rej) => {
+                    window.QRCode.toCanvas(canvas, qrData, { width: 256, margin: 1 }, (err) => {
+                        if (err) return rej(err);
+                        return res();
+                    });
+                });
+                qrcode = canvas;
+            } else if (window.qrcode && typeof window.qrcode.toCanvas === 'function') {
+                const canvas = document.createElement('canvas');
+                canvas.width = 256;
+                canvas.height = 256;
+                containerElement.appendChild(canvas);
+                await new Promise((res, rej) => {
+                    window.qrcode.toCanvas(canvas, qrData, { width: 256, margin: 1 }, (err) => {
+                        if (err) return rej(err);
+                        return res();
+                    });
+                });
+                qrcode = canvas;
+            } else if (window.QRCode) {
+                // Классический конструктор
+                qrcode = new window.QRCode(containerElement, {
+                    text: qrData,
+                    width: 256,
+                    height: 256,
+                    colorDark: '#000000',
+                    colorLight: '#ffffff',
+                    correctLevel: window.QRCode.CorrectLevel ? window.QRCode.CorrectLevel.H : 0
+                });
+            } else {
+                throw new Error('QRCode library not available after load');
+            }
 
             // Добавляем стили и информацию
             this.styleQRContainer(containerElement, address, amount, token);
@@ -92,7 +145,11 @@ export class QRGenerator {
 
         } catch (error) {
             console.error('Failed to generate QR code:', error);
-            this.showFallback(container, address, amount, token);
+            try {
+                this.showFallback(container, address, amount, token);
+            } catch (e) {
+                // ignore fallback errors
+            }
             throw error;
         }
     }
@@ -213,9 +270,15 @@ export class QRGenerator {
 
     // Показать fallback если QR не генерируется
     showFallback(container, address, amount, token) {
-        const containerElement = typeof container === 'string' 
-            ? document.getElementById(container) 
-            : container;
+        let containerElement = container;
+        if (typeof container === 'string') {
+            containerElement = container.startsWith('#')
+                ? document.querySelector(container)
+                : document.getElementById(container);
+        }
+        if (containerElement && typeof containerElement.length === 'number' && !containerElement.tagName) {
+            containerElement = containerElement[0];
+        }
 
         if (!containerElement) return;
 
@@ -226,7 +289,7 @@ export class QRGenerator {
                 <p>Отправьте <strong>${amount} ${token}</strong> на адрес:</p>
                 <div class="qr-fallback-address">
                     <code>${address}</code>
-                    <button onclick="window.QRGenerator.copyAddress('${address}')">
+                    <button onclick="window.QRGenerator && window.QRGenerator.copyAddress && window.QRGenerator.copyAddress('${address}')">
                         📋 Копировать
                     </button>
                 </div>
@@ -300,6 +363,11 @@ export class QRGenerator {
             return null;
         }
     }
+}
+
+// Создаём глобальный экземпляр для использования в HTML-обработчиках
+if (typeof window !== 'undefined') {
+    window.QRGenerator = new QRGenerator();
 }
 
 // Создаем глобальный экземпляр
