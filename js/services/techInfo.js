@@ -300,6 +300,12 @@ if (typeof window.GenesisTechInfo === 'undefined') {
 
         // MCP-MARKER:METHOD:TECH_INFO:GET_IP - Получение IP адреса
         async getIPAddress() {
+            // На лендинге не делаем внешние IP-запросы, чтобы не нарушать CSP и не шуметь
+            if (window.GENESIS_LANDING) {
+                this.techData.ipAddress = 'Недоступно (landing)';
+                this.updateElements();
+                return;
+            }
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
                 const data = await response.json();

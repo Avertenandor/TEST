@@ -92,7 +92,7 @@
     <link rel="canonical" href="https://genesis-one.io/">
     
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://api.qrserver.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://api.bscscan.com https://api.ipapi.com https://api.qrserver.com; frame-src 'self' https://www.geckoterminal.com; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://api.qrserver.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://api.bscscan.com https://api.ipapi.com https://api.qrserver.com https://api.ipify.org https://api.myip.com; frame-src 'self' https://www.geckoterminal.com; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self';">
     
     <!-- MCP-MARKER:SOCIAL:OPEN_GRAPH - Open Graph метатеги -->
     <!-- Open Graph / Facebook - Enhanced -->
@@ -8857,16 +8857,7 @@
             }
         });
         
-        // Инициализация терминала при готовности DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            if (window.GenesisTerminal) {
-                console.log('🖥️ Инициализация терминала на главной странице');
-                window.GenesisTerminal.log('🏠 Терминал загружен на главной странице GENESIS 1.1', 'system');
-                window.GenesisTerminal.log('💡 Используйте команду "help" для просмотра доступных команд', 'info'); 
-                window.GenesisTerminal.log('⌨️ Горячие клавиши: Ctrl+T или Ctrl+` для открытия/сворачивания', 'info');
-                window.GenesisTerminal.log('🔒 Некоторые команды могут быть ограничены без авторизации', 'warning');
-            }
-        });
+    // Терминал отключен на главной странице
     </script>
     
     <!-- MCP-MARKER:DOCUMENT:END_BODY - Конец тела документа -->
