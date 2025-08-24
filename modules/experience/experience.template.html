@@ -1,0 +1,413 @@
+<!-- modules/experience/experience.template.html -->
+<!-- Модуль системы опыта и стажа GENESIS -->
+<div class="experience-container">
+    <div class="page-header">
+        <h2 class="page-title">📅 Стаж в системе</h2>
+        <p class="page-subtitle">Ваш опыт и достижения в GENESIS</p>
+    </div>
+
+    <!-- Общая статистика опыта -->
+    <div class="experience-overview">
+        <div class="exp-card main-stats">
+            <div class="exp-icon">🏆</div>
+            <div class="exp-content">
+                <h3>Общий стаж</h3>
+                <div class="exp-value" id="total-experience">0 дней</div>
+                <div class="exp-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="0"></div>
+                    </div>
+                    <span class="progress-text">До следующего уровня: 30 дней</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="exp-stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">📅</div>
+                <div class="stat-label">Дней на платформе</div>
+                <div class="stat-value" id="platform-days">0</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-icon">💰</div>
+                <div class="stat-label">Активных депозитов</div>
+                <div class="stat-value" id="active-deposits">0</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-icon">📈</div>
+                <div class="stat-label">Общий доход</div>
+                <div class="stat-value" id="total-earnings">$0.00</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-icon">👥</div>
+                <div class="stat-label">Рефералов</div>
+                <div class="stat-value" id="referrals-count">0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Детальный опыт по разделам -->
+    <div class="experience-sections">
+        <h3>📊 Опыт по разделам</h3>
+        
+        <div class="sections-grid">
+            <!-- Депозиты -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">💰</div>
+                    <div class="section-info">
+                        <h4>Депозиты</h4>
+                        <p>Создание и управление депозитами</p>
+                    </div>
+                    <div class="section-level">
+                        <span class="level-badge">Ур. <span id="deposits-level">1</span></span>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="deposits-progress" data-progress="15"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span id="deposits-exp">150 EXP</span>
+                        <span id="deposits-next">/ 1000 EXP</span>
+                    </div>
+                </div>
+                <div class="section-stats">
+                    <div class="mini-stat">
+                        <span class="mini-label">Создано:</span>
+                        <span class="mini-value" id="deposits-created">2</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-label">Активных:</span>
+                        <span class="mini-value" id="deposits-active">2</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Транзакции -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">📋</div>
+                    <div class="section-info">
+                        <h4>Транзакции</h4>
+                        <p>Операции с криптовалютой</p>
+                    </div>
+                    <div class="section-level">
+                        <span class="level-badge">Ур. <span id="transactions-level">1</span></span>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="transactions-progress" data-progress="25"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span id="transactions-exp">250 EXP</span>
+                        <span id="transactions-next">/ 1000 EXP</span>
+                    </div>
+                </div>
+                <div class="section-stats">
+                    <div class="mini-stat">
+                        <span class="mini-label">Операций:</span>
+                        <span class="mini-value" id="transactions-count">5</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-label">Объем:</span>
+                        <span class="mini-value" id="transactions-volume">$325</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Рефералы -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">👥</div>
+                    <div class="section-info">
+                        <h4>Рефералы</h4>
+                        <p>Привлечение новых пользователей</p>
+                    </div>
+                    <div class="section-level">
+                        <span class="level-badge">Ур. <span id="referrals-level">0</span></span>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="referrals-progress" data-progress="0"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span id="referrals-exp">0 EXP</span>
+                        <span id="referrals-next">/ 500 EXP</span>
+                    </div>
+                </div>
+                <div class="section-stats">
+                    <div class="mini-stat">
+                        <span class="mini-label">Приглашено:</span>
+                        <span class="mini-value" id="referrals-invited">0</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-label">Активных:</span>
+                        <span class="mini-value" id="referrals-active">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Множители -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">⚡</div>
+                    <div class="section-info">
+                        <h4>Множители</h4>
+                        <p>Использование бустов доходности</p>
+                    </div>
+                    <div class="section-level">
+                        <span class="level-badge">Ур. <span id="multipliers-level">1</span></span>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="multipliers-progress" data-progress="10"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span id="multipliers-exp">100 EXP</span>
+                        <span id="multipliers-next">/ 1000 EXP</span>
+                    </div>
+                </div>
+                <div class="section-stats">
+                    <div class="mini-stat">
+                        <span class="mini-label">Куплено:</span>
+                        <span class="mini-value" id="multipliers-bought">1</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-label">Активных:</span>
+                        <span class="mini-value" id="multipliers-active">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Майнинг -->
+            <div class="section-card locked">
+                <div class="section-header">
+                    <div class="section-icon">⛏️</div>
+                    <div class="section-info">
+                        <h4>Аренда мощностей</h4>
+                        <p>Заработок на майнинге</p>
+                    </div>
+                    <div class="section-level">
+                        <span class="level-badge locked">🔒</span>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="0"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span>Будет доступно с 21.07.2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Терминал -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">💻</div>
+                    <div class="section-info">
+                        <h4>Терминал</h4>
+                        <p>Продвинутое управление</p>
+                    </div>
+                    <div class="section-level">
+                        <span class="level-badge">Ур. <span id="terminal-level">0</span></span>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="terminal-progress" data-progress="0"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span id="terminal-exp">0 EXP</span>
+                        <span id="terminal-next">/ 2000 EXP</span>
+                    </div>
+                </div>
+                <div class="section-stats">
+                    <div class="mini-stat">
+                        <span class="mini-label">Команд:</span>
+                        <span class="mini-value" id="terminal-commands">0</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-label">Сессий:</span>
+                        <span class="mini-value" id="terminal-sessions">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Достижения -->
+    <div class="achievements-section">
+        <h3>🏅 Достижения</h3>
+        
+        <div class="achievements-grid">
+            <div class="achievement-card earned">
+                <div class="achievement-icon">🎯</div>
+                <div class="achievement-info">
+                    <h4>Первые шаги</h4>
+                    <p>Создали первый депозит</p>
+                    <div class="achievement-date">Получено: 12.08.2025</div>
+                </div>
+                <div class="achievement-reward">+50 EXP</div>
+            </div>
+
+            <div class="achievement-card earned">
+                <div class="achievement-icon">💰</div>
+                <div class="achievement-info">
+                    <h4>Инвестор</h4>
+                    <p>Создали 2 депозита</p>
+                    <div class="achievement-date">Получено: 13.08.2025</div>
+                </div>
+                <div class="achievement-reward">+100 EXP</div>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">⚡</div>
+                <div class="achievement-info">
+                    <h4>Ускоритель</h4>
+                    <p>Купите 3 множителя</p>
+                    <div class="achievement-progress">Прогресс: 1/3</div>
+                </div>
+                <div class="achievement-reward">+150 EXP</div>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">👥</div>
+                <div class="achievement-info">
+                    <h4>Наставник</h4>
+                    <p>Пригласите первого реферала</p>
+                    <div class="achievement-progress">Прогресс: 0/1</div>
+                </div>
+                <div class="achievement-reward">+200 EXP</div>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">💎</div>
+                <div class="achievement-info">
+                    <h4>Мастер депозитов</h4>
+                    <p>Создайте депозиты на $1000</p>
+                    <div class="achievement-progress">Прогресс: $125/$1000</div>
+                </div>
+                <div class="achievement-reward">+500 EXP</div>
+            </div>
+
+            <div class="achievement-card locked">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-info">
+                    <h4>Легенда GENESIS</h4>
+                    <p>Достигните 10 уровня</p>
+                    <div class="achievement-progress">Требует: Ур. 10</div>
+                </div>
+                <div class="achievement-reward">+1000 EXP</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Награды за уровни -->
+    <div class="rewards-section">
+        <h3>🎁 Награды за уровни</h3>
+        
+        <div class="rewards-timeline">
+            <div class="reward-item completed">
+                <div class="reward-level">Ур. 1</div>
+                <div class="reward-content">
+                    <h4>🎯 Новичок</h4>
+                    <p>Добро пожаловать в GENESIS!</p>
+                    <div class="reward-bonus">+Базовый доступ</div>
+                </div>
+                <div class="reward-status">✓ Получено</div>
+            </div>
+
+            <div class="reward-item current">
+                <div class="reward-level">Ур. 2</div>
+                <div class="reward-content">
+                    <h4>💰 Начинающий инвестор</h4>
+                    <p>Скидка 5% на все депозиты</p>
+                    <div class="reward-bonus">+5% скидка</div>
+                </div>
+                <div class="reward-status">Осталось: 700 EXP</div>
+            </div>
+
+            <div class="reward-item">
+                <div class="reward-level">Ур. 3</div>
+                <div class="reward-content">
+                    <h4>⚡ Ускоритель</h4>
+                    <p>Доступ к премиум множителям</p>
+                    <div class="reward-bonus">+Премиум бусты</div>
+                </div>
+                <div class="reward-status">Требует: 2000 EXP</div>
+            </div>
+
+            <div class="reward-item">
+                <div class="reward-level">Ур. 5</div>
+                <div class="reward-content">
+                    <h4>🏅 Профессионал</h4>
+                    <p>Увеличенные лимиты депозитов</p>
+                    <div class="reward-bonus">+50% лимиты</div>
+                </div>
+                <div class="reward-status">Требует: 5000 EXP</div>
+            </div>
+
+            <div class="reward-item">
+                <div class="reward-level">Ур. 10</div>
+                <div class="reward-content">
+                    <h4>🏆 Мастер</h4>
+                    <p>Доступ к эксклюзивным планам</p>
+                    <div class="reward-bonus">+Эксклюзив</div>
+                </div>
+                <div class="reward-status">Требует: 20000 EXP</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Монета Стаж -->
+    <div class="experience-coin-section">
+        <h3>🪙 Монета Стаж</h3>
+        
+        <div class="coin-info-card">
+            <div class="coin-header">
+                <div class="coin-icon">📅</div>
+                <div class="coin-details">
+                    <h4>Стаж (STAGE)</h4>
+                    <p>Ваш опыт автоматически конвертируется в монету Стаж</p>
+                </div>
+                <div class="coin-balance">
+                    <span class="balance-value" id="stage-balance">0.00</span>
+                    <span class="balance-currency">STAGE</span>
+                </div>
+            </div>
+
+            <div class="conversion-info">
+                <div class="conversion-item">
+                    <span class="conv-label">Курс конвертации:</span>
+                    <span class="conv-value">1000 EXP = 1 STAGE</span>
+                </div>
+                <div class="conversion-item">
+                    <span class="conv-label">Следующая конвертация:</span>
+                    <span class="conv-value" id="next-conversion">через 750 EXP</span>
+                </div>
+                <div class="conversion-item">
+                    <span class="conv-label">Всего заработано:</span>
+                    <span class="conv-value" id="total-stage">0.00 STAGE</span>
+                </div>
+            </div>
+
+            <div class="coin-usage">
+                <h5>💡 Применение STAGE:</h5>
+                <ul>
+                    <li>Покупка эксклюзивных множителей</li>
+                    <li>Скидки на комиссии платформы</li>
+                    <li>Доступ к премиум функциям</li>
+                    <li>Участие в специальных акциях</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

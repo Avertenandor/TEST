@@ -1,0 +1,163 @@
+/* shared/styles/variables.css */
+/* CSS переменные для GENESIS DeFi Platform */
+
+:root {
+    /* Primary Colors */
+    --primary-color: #ff6b35;
+    --primary-dark: #e85a2b;
+    --primary-light: #ff8e53;
+    --primary-gradient: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
+    
+    /* Secondary Colors */
+    --secondary-color: #4a90e2;
+    --secondary-dark: #357abd;
+    --secondary-light: #6ba3e7;
+    
+    /* Success/Error/Warning */
+    --success-color: #22c55e;
+    --success-bg: rgba(34, 197, 94, 0.1);
+    --error-color: #ef4444;
+    --error-bg: rgba(239, 68, 68, 0.1);
+    --warning-color: #f59e0b;
+    --warning-bg: rgba(245, 158, 11, 0.1);
+    --info-color: #3b82f6;
+    --info-bg: rgba(59, 130, 246, 0.1);
+    
+    /* Background Colors */
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #1a1a2e;
+    --bg-tertiary: #16213e;
+    --bg-card: rgba(26, 26, 46, 0.8);
+    --bg-hover: rgba(255, 107, 53, 0.1);
+    
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #6b7280;
+    --text-disabled: #4b5563;
+    
+    /* Border Colors */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-hover: rgba(255, 107, 53, 0.3);
+    --border-focus: rgba(255, 107, 53, 0.5);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 20px rgba(255, 107, 53, 0.3);
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 300ms ease;
+    --transition-slow: 500ms ease;
+    
+    /* Z-Index */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+    --z-notification: 800;
+    --z-terminal: 900;
+    
+    /* Typography */
+    --font-primary: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'Orbitron', 'Courier New', monospace;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+    --font-size-4xl: 2.5rem;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Line Heights */
+    --line-height-tight: 1.25;
+    --line-height-base: 1.5;
+    --line-height-relaxed: 1.75;
+    
+    /* Breakpoints */
+    --breakpoint-xs: 480px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+}
+
+/* Dark Theme (default) */
+body {
+    --theme-bg: var(--bg-primary);
+    --theme-text: var(--text-primary);
+    --theme-border: var(--border-color);
+}
+
+/* Light Theme */
+body.theme-light {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --bg-tertiary: #e5e7eb;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --theme-bg: #ffffff;
+    --theme-text: #111827;
+    --theme-border: rgba(0, 0, 0, 0.1);
+}
+
+/* Matrix Theme */
+body.theme-matrix {
+    --primary-color: #00ff00;
+    --primary-dark: #00cc00;
+    --primary-light: #33ff33;
+    --primary-gradient: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #111111;
+    --text-primary: #00ff00;
+    --text-secondary: #00cc00;
+    --shadow-glow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+/* Cyber Theme */
+body.theme-cyber {
+    --primary-color: #00ffff;
+    --primary-dark: #00cccc;
+    --primary-light: #33ffff;
+    --primary-gradient: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
+    --bg-primary: #0a0a1e;
+    --bg-secondary: #1a1a3e;
+    --bg-tertiary: #2a2a5e;
+    --text-primary: #00ffff;
+    --text-secondary: #ff00ff;
+    --shadow-glow: 0 0 20px rgba(0, 255, 255, 0.5);
+}

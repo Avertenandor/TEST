@@ -1,0 +1,311 @@
+{
+  "mcp_index_version": "3.1.0",
+  "file": "cabinet.html",
+  "generated": "2025-08-05T00:00:00Z",
+  "analysis": {
+    "total_lines": 10484,
+    "mcp_markers_found": 65,
+    "structure_complexity": "CRITICAL",
+    "dekostylization_progress": {
+      "status": "MAJOR_SUCCESS",
+      "completed_fixes": [
+        "Удален неиспользуемый CSS класс .grid-template-columns-1fr",
+        "Исправлено принудительное отключение кэширования (Cache-Control)",
+        "Удалены дублирующие функции closeDepositModal, closeConfirmModal, closeTransactionResultModal",
+        "Удалена функция forceFaviconReload (костыль принудительного обновления favicon)",
+        "Удален костыль принудительного скрытия экрана загрузки через 3 секунды",
+        "Заменены 3 alert() на современные уведомления (handleAuth, showSystemInfo, bonuses)",
+        "Заменен confirm() в logout на современное модальное окно с fallback",
+        "Удалены 2 функции-заглушки 'в разработке' (множители и аренда мощностей)",
+        "Начата замена отладочных console.log на debugLog"
+      ],
+      "lines_reduced": 95,
+      "major_kostyli_removed": [
+        "Принудительное отключение кэширования",
+        "Принудительное обновление favicon",
+        "Принудительное скрытие экрана загрузки",
+        "Дублированные функции модалок",
+        "Неиспользуемые CSS классы",
+        "Отладочные alert() и confirm()",
+        "Функции-заглушки с текстом 'в разработке'"
+      ],
+      "remaining_minor_issues": [
+        "1-2 остальных alert() для замены (если есть)",
+        "Множественные console.log для замены на debugLog",
+        "Хардкод API endpoints",
+        "Неиспользуемые CSS классы (требует дополнительного анализа)",
+        "Fallback модальные окна с встроенными стилями (мелкие улучшения)"
+      ]
+    },
+    "identified_issues": [
+      "Монолитная структура - весь код в одном файле",
+      "Смешанные стили, HTML и JavaScript",
+      "Отсутствие модульности",
+      "Повторяющийся код в функциях",
+      "Неконсистентные MCP-маркеры",
+      "Отсутствие разделения на компоненты",
+      "Хардкод значений",
+      "Проблемы с производительностью из-за размера",
+      "Сложность поддержки и отладки"
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "name": "HTML_HEAD",
+        "lines": "1-57",
+        "markers": ["MODULE:CABINET_CONTROLLER"],
+        "description": "HTML head с мета-тегами, шрифтами, иконками",
+        "issues": ["Избыточные мета-теги", "Принудительное отключение кэширования"]
+      },
+      {
+        "name": "CRITICAL_STYLES",
+        "lines": "58-3329",
+        "markers": [
+          "SECTION:CRITICAL_STYLES",
+          "SECTION:CSS_VARIABLES", 
+          "SECTION:BASE_STYLES",
+          "SECTION:LOADING_SCREEN_STYLES",
+          "STYLE:NAV_SEPARATOR",
+          "STYLE:LOGOUT_BUTTON", 
+          "STYLE:BREADCRUMBS",
+          "STYLE:TERMINAL_STYLES"
+        ],
+        "description": "Огромный блок встроенных CSS стилей (~3270 строк)",
+        "issues": [
+          "Критический размер CSS блока",
+          "Должен быть вынесен в отдельные файлы",
+          "Много дублирования стилей",
+          "Неоптимизированные селекторы",
+          "Смешанные стили для разных компонентов"
+        ]
+      },
+      {
+        "name": "AUTHENTICATION_LAYOUT", 
+        "lines": "3330-3378",
+        "markers": [
+          "SECTION:AUTHENTICATION",
+          "COMPONENT:LOADING_SCREEN",
+          "COMPONENT:AUTH_SCREEN"
+        ],
+        "description": "HTML структура экранов загрузки и авторизации",
+        "issues": ["Жестко зашитый контент", "Отсутствие локализации"]
+      },
+      {
+        "name": "CABINET_LAYOUT",
+        "lines": "3379-3674",
+        "markers": [
+          "SECTION:CABINET_LAYOUT",
+          "COMPONENT:CABINET_APP",
+          "COMPONENT:CABINET_HEADER",
+          "COMPONENT:CABINET_SIDEBAR", 
+          "NAV:SEPARATOR",
+          "NAV:LOGOUT_BUTTON",
+          "COMPONENT:CABINET_MAIN",
+          "COMPONENT:BREADCRUMBS",
+          "COMPONENT:TERMINAL_CONTAINER"
+        ],
+        "description": "Основная структура интерфейса кабинета (~295 строк)",
+        "issues": [
+          "Жестко зашитая навигация",
+          "Отсутствие динамического контента",
+          "Смешанная логика отображения"
+        ]
+      },
+      {
+        "name": "MODAL_WINDOWS",
+        "lines": "3675-3749",
+        "markers": [
+          "SECTION:DEPOSIT_MODALS",
+          "COMPONENT:MODAL_DEPOSIT_CREATE",
+          "COMPONENT:MODAL_DEPOSIT_CONFIRM", 
+          "COMPONENT:MODAL_TRANSACTION_RESULT",
+          "COMPONENT:MODAL_PLATFORM_ACCESS",
+          "COMPONENT:NOTIFICATION_CONTAINER"
+        ],
+        "description": "Модальные окна и уведомления (~74 строки)",
+        "issues": ["Статичная структура", "Отсутствие переиспользования"]
+      },
+      {
+        "name": "JAVASCRIPT_CORE",
+        "lines": "3750-10276",
+        "markers": [
+          "SECTION:SYSTEM_INITIALIZATION",
+          "SECTION:GLOBAL_FUNCTIONS", 
+          "Multiple FUNCTION markers"
+        ],
+        "description": "Основной JavaScript код (~6526 строк)",
+        "issues": [
+          "КРИТИЧЕСКИЙ размер JavaScript блока",
+          "Отсутствие модульности",
+          "Смешанная логика разных компонентов",
+          "Дублирование кода",
+          "Отсутствие типизации",
+          "Сложность отладки и тестирования"
+        ]
+      }
+    ]
+  },
+  "components": {
+    "identified_components": [
+      {
+        "name": "AuthController",
+        "type": "authentication",
+        "lines": "3814-3833",
+        "functions": ["handleAuth"],
+        "markers": ["FUNCTION:DEBUG_LOG"],
+        "issues": ["Нет валидации", "Простая проверка адреса"]
+      },
+      {
+        "name": "ModalManager", 
+        "type": "ui_components",
+        "lines": "3835-3856",
+        "functions": [
+          "closeDepositModal",
+          "closeConfirmModal", 
+          "closeTransactionResultModal",
+          "closePlatformAccessModal"
+        ],
+        "markers": [
+          "FUNCTION:CLOSE_DEPOSIT_MODAL",
+          "FUNCTION:CLOSE_CONFIRM_MODAL",
+          "FUNCTION:CLOSE_TRANSACTION_RESULT_MODAL", 
+          "FUNCTION:CLOSE_PLATFORM_ACCESS_MODAL"
+        ],
+        "issues": ["Дублирование логики", "Нет общего базового класса"]
+      },
+      {
+        "name": "SystemController",
+        "type": "system_management", 
+        "lines": "3857-3882",
+        "functions": [
+          "clearCacheAndReload",
+          "enableDevAccess",
+          "showSystemInfo"
+        ],
+        "markers": [
+          "FUNCTION:CLEAR_CACHE_AND_RELOAD",
+          "FUNCTION:ENABLE_DEV_ACCESS",
+          "FUNCTION:SHOW_SYSTEM_INFO"
+        ],
+        "issues": ["Отсутствие проверок безопасности"]
+      },
+      {
+        "name": "NavigationController",
+        "type": "navigation",
+        "lines": "3883-3960",
+        "functions": [
+          "logout",
+          "toggleMobileMenu", 
+          "toggleSidebar"
+        ],
+        "markers": [
+          "FUNCTION:LOGOUT",
+          "FUNCTION:TOGGLE_MOBILE_MENU"
+        ],
+        "issues": ["Смешанная логика UI и бизнес-логики"]
+      },
+      {
+        "name": "TechnicalInfoManager",
+        "type": "technical_info",
+        "lines": "4000-4200",
+        "functions": [
+          "init",
+          "initTechnicalInfo",
+          "getNetworkInfo", 
+          "measureBSCPing"
+        ],
+        "issues": ["Хардкод API endpoints", "Отсутствие обработки ошибок"]
+      }
+    ]
+  },
+  "problems_analysis": {
+    "critical_issues": [
+      {
+        "type": "ARCHITECTURE",
+        "severity": "CRITICAL",
+        "description": "Монолитная архитектура - все в одном файле 10K+ строк",
+        "impact": "Невозможность поддержки, отладки, тестирования",
+        "lines_affected": "1-10276"
+      },
+      {
+        "type": "PERFORMANCE", 
+        "severity": "HIGH",
+        "description": "Огромный CSS блок встроен в HTML (~3270 строк)",
+        "impact": "Медленная загрузка, блокировка рендеринга",
+        "lines_affected": "58-3329"
+      },
+      {
+        "type": "PERFORMANCE",
+        "severity": "HIGH", 
+        "description": "Огромный JavaScript блок (~6526 строк)",
+        "impact": "Медленный парсинг, выполнение, отладка",
+        "lines_affected": "3750-10276"
+      },
+      {
+        "type": "MAINTAINABILITY",
+        "severity": "HIGH",
+        "description": "Отсутствие модульности и разделения ответственности",
+        "impact": "Сложность внесения изменений, высокий риск багов"
+      },
+      {
+        "type": "CODE_QUALITY",
+        "severity": "MEDIUM", 
+        "description": "Дублирование кода в функциях и стилях",
+        "impact": "Увеличение размера, сложность поддержки"
+      }
+    ],
+    "code_smells": [
+      "Функции без обработки ошибок",
+      "Хардкод значений и URL",
+      "Глобальные переменные",
+      "Смешанная логика UI и бизнес-логики",
+      "Отсутствие типизации",
+      "Неконсистентное именование",
+      "Избыточные DOM запросы",
+      "Отсутствие кэширования селекторов"
+    ]
+  },
+  "recommendations": {
+    "immediate": [
+      "Вынести CSS в отдельные файлы (styles/)",
+      "Разделить JavaScript на модули (js/)", 
+      "Создать компонентную архитектуру",
+      "Добавить обработку ошибок",
+      "Оптимизировать критический рендеринг"
+    ],
+    "short_term": [
+      "Внедрить систему сборки (webpack/vite)",
+      "Добавить TypeScript", 
+      "Создать систему компонентов",
+      "Внедрить тестирование",
+      "Оптимизировать производительность"
+    ],
+    "long_term": [
+      "Переход на современный фреймворк (React/Vue)",
+      "Внедрение PWA функций",
+      "Серверный рендеринг",
+      "Микрофронтенды архитектура"
+    ]
+  },
+  "mcp_markers": {
+    "current_coverage": "50 маркеров",
+    "coverage_quality": "PARTIAL",
+    "missing_markers": [
+      "Большинство функций не имеют MCP-маркеров",
+      "Отсутствуют маркеры для блоков данных",
+      "Нет маркеров для состояний",
+      "Отсутствуют маркеры для API calls",
+      "Нет маркеров для бизнес-логики"
+    ],
+    "proposed_new_markers": [
+      "FUNCTION:* для всех функций",
+      "API:* для всех API вызовов", 
+      "STATE:* для управления состоянием",
+      "DATA:* для блоков данных",
+      "EVENT:* для обработчиков событий",
+      "VALIDATION:* для валидации",
+      "UTILS:* для утилитарных функций"
+    ]
+  }
+}

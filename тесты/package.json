@@ -1,0 +1,16 @@
+{
+  "name": "genesis-tests",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Тесты консоли и контента модульной версии GENESIS (Puppeteer)",
+  "type": "module",
+  "scripts": {
+    "test:howitworks": "node browser/test_console_how_it_works.mjs",
+  "test:howitworks:headed": "HEADLESS=false node browser/test_console_how_it_works.mjs",
+  "test:routes": "node browser/test_console_routes.mjs",
+  "test:routes:headed": "HEADLESS=false node browser/test_console_routes.mjs"
+  },
+  "devDependencies": {
+    "puppeteer": "^22.8.0"
+  }
+}

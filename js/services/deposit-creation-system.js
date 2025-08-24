@@ -745,6 +745,7 @@ window.DepositCreationSystem = {
     getPlanIcon(planName) {
         const icons = {
             'TRIAL': '🧪',
+            'BASIC': '💼',
             'STARTER': '🚀',
             'PROGRESSIVE1': '📈',
             'PROGRESSIVE2': '💫',

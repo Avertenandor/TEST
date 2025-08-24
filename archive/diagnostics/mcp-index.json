@@ -1,0 +1,15 @@
+{
+  "project": "GENESIS DeFi Platform",
+  "version": "1.4.4",
+  "updated_at": "2025-08-24T10:28:00Z",
+  "markers": [
+    {
+      "type": "module",
+      "name": "home",
+      "path": "/modules/home/",
+      "route": "/home",
+      "status": "done",
+      "notes": "Главная (landing) страница вынесена в модульную систему без потери контента."
+    }
+  ]
+}

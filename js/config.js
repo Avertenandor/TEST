@@ -61,6 +61,18 @@ window.GENESIS_CONFIG = {
             description: 'Пробный депозит для знакомства с системой'
         },
         { 
+            id: 'basic', 
+            name: 'BASIC', 
+            title: 'Базовый',
+            plexAmount: 1000, 
+            usdtAmount: 50.00, 
+            percentage: 115, 
+            days: 7, 
+            order: 1,
+            currencies: ['USDT'], // Только USDT
+            description: 'Базовый депозит для начинающих'
+        },
+        { 
             id: 'starter', 
             name: 'STARTER', 
             title: 'Стартовый',
@@ -68,9 +80,9 @@ window.GENESIS_CONFIG = {
             usdtAmount: 100.05, 
             percentage: 120, 
             days: 10, 
-            order: 1,
+            order: 2,
             currencies: ['USDT'], // Только USDT
-            description: 'Первый обязательный депозит'
+            description: 'Основной стартовый депозит'
         },
         { 
             id: 'progressive1', 
@@ -80,7 +92,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 200.05, 
             percentage: 135, 
             days: 15, 
-            order: 2,
+            order: 3,
             currencies: ['USDT'], // Только USDT
             description: 'Прогрессивный уровень 1'
         },
@@ -92,7 +104,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 300.05, 
             percentage: 140, 
             days: 18, 
-            order: 3,
+            order: 4,
             currencies: ['USDT'], // Только USDT
             description: 'Прогрессивный уровень 2'
         },
@@ -104,7 +116,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 400.05, 
             percentage: 145, 
             days: 20, 
-            order: 4,
+            order: 5,
             currencies: ['USDT'], // Только USDT
             description: 'Прогрессивный уровень 3'
         },
@@ -116,7 +128,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 500.05, 
             percentage: 150, 
             days: 22, 
-            order: 5,
+            order: 6,
             currencies: ['USDT'], // Только USDT
             description: 'Прогрессивный уровень 4'
         },
@@ -128,7 +140,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 600.05, 
             percentage: 155, 
             days: 24, 
-            order: 6,
+            order: 7,
             currencies: ['USDT'], // Только USDT
             description: 'Прогрессивный уровень 5'
         },
@@ -140,7 +152,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 700.05, 
             percentage: 160, 
             days: 26, 
-            order: 7,
+            order: 8,
             currencies: ['USDT'], // Только USDT
             description: 'Прогрессивный уровень 6'
         },
@@ -152,7 +164,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 800.05, 
             percentage: 165, 
             days: 28, 
-            order: 8,
+            order: 9,
             currencies: ['USDT'], // Только USDT
             description: 'Прогрессивный уровень 7'
         },
@@ -164,7 +176,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 900.05, 
             percentage: 170, 
             days: 30, 
-            order: 9,
+            order: 10,
             currencies: ['USDT'], // Только USDT
             description: 'Прогрессивный уровень 8'
         },
@@ -176,7 +188,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 1000.05, 
             percentage: 175, 
             days: 35, 
-            order: 10,
+            order: 11,
             currencies: ['PLEX', 'USDT'], // PLEX или USDT
             description: 'Рекомендуемый уровень для опытных инвесторов'
         },
@@ -188,7 +200,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 1500.05, 
             percentage: 200, 
             days: 40, 
-            order: 11,
+            order: 12,
             currencies: ['PLEX', 'USDT'], // PLEX или USDT
             description: 'Платиновый уровень с высокими привилегиями'
         },
@@ -200,7 +212,7 @@ window.GENESIS_CONFIG = {
             usdtAmount: 2500.05, 
             percentage: 250, 
             days: 45, 
-            order: 12,
+            order: 13,
             currencies: ['PLEX', 'USDT'], // PLEX или USDT
             description: 'Максимальный уровень с премиум условиями'
         }
@@ -220,8 +232,9 @@ window.GENESIS_CONFIG = {
         MIN_SUBSCRIPTION: 9.5,   // 9.5 USDT
         MAX_SUBSCRIPTION: 21.0,  // 21.0 USDT
         DEPOSIT_PLANS: {
-            // Пробный и стартовый (только USDT)
+            // Пробный, базовый и стартовый (только USDT)
             TRIAL: { min: 23.75, max: 26.25, usd: 25.00, currencies: ['USDT'] },
+            BASIC: { min: 47.50, max: 52.50, usd: 50.00, currencies: ['USDT'] },
             STARTER: { min: 95.05, max: 105.05, usd: 100.05, currencies: ['USDT'] },
             
             // Прогрессивные уровни (только USDT)

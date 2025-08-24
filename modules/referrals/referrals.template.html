@@ -1,0 +1,245 @@
+<!-- modules/referrals/referrals.template.html -->
+<!-- Модуль рефералов GENESIS -->
+<div class="referrals-container">
+    <div class="page-header">
+        <h2 class="page-title">👥 Рефералы</h2>
+        <p class="page-subtitle">Партнерская программа GENESIS</p>
+    </div>
+
+    <!-- Мой реферальный код -->
+    <div class="referral-info-card">
+        <div class="card-header">
+            <h3>🔗 Ваша реферальная ссылка</h3>
+            <span class="info-badge">3 уровня</span>
+        </div>
+        
+        <div class="referral-link-section">
+            <div class="referral-link-container">
+                <input type="text" 
+                       id="referral-link" 
+                       class="referral-link-input" 
+                       value="https://genesis-one.io/?ref=0x1234...7890" 
+                       title="Ваша реферальная ссылка"
+                       placeholder="Реферальная ссылка"
+                       readonly>
+                <button type="button" class="btn-copy" onclick="copyReferralLink()">
+                    📋 Копировать
+                </button>
+            </div>
+            
+            <div class="referral-stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="total-referrals">0</div>
+                    <div class="stat-label">Всего рефералов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="active-referrals">0</div>
+                    <div class="stat-label">Активных</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="referral-earnings">$0.00</div>
+                    <div class="stat-label">Заработано</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Структура комиссий -->
+    <div class="commission-structure-card">
+        <div class="card-header">
+            <h3>💰 Структура комиссий</h3>
+        </div>
+        
+        <div class="commission-levels">
+            <div class="commission-level">
+                <div class="level-icon">1️⃣</div>
+                <div class="level-info">
+                    <h4>1-й уровень</h4>
+                    <p>Прямые рефералы</p>
+                </div>
+                <div class="level-commission">15%</div>
+            </div>
+            
+            <div class="commission-level">
+                <div class="level-icon">2️⃣</div>
+                <div class="level-info">
+                    <h4>2-й уровень</h4>
+                    <p>Рефералы ваших рефералов</p>
+                </div>
+                <div class="level-commission">10%</div>
+            </div>
+            
+            <div class="commission-level">
+                <div class="level-icon">3️⃣</div>
+                <div class="level-info">
+                    <h4>3-й уровень</h4>
+                    <p>Третий уровень сети</p>
+                </div>
+                <div class="level-commission">5%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Мои рефералы -->
+    <div class="referrals-list-card">
+        <div class="card-header">
+            <h3>👥 Мои рефералы</h3>
+            <div class="filter-tabs">
+                <button type="button" class="tab-btn active" data-level="all">Все</button>
+                <button type="button" class="tab-btn" data-level="1">1 уровень</button>
+                <button type="button" class="tab-btn" data-level="2">2 уровень</button>
+                <button type="button" class="tab-btn" data-level="3">3 уровень</button>
+            </div>
+        </div>
+        
+        <div class="referrals-table-container">
+            <div id="referrals-loading" class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Загрузка рефералов...</p>
+            </div>
+            
+            <div id="referrals-empty" class="empty-state hidden">
+                <div class="empty-icon">👥</div>
+                <h3>У вас пока нет рефералов</h3>
+                <p>Поделитесь своей ссылкой, чтобы начать зарабатывать</p>
+                <button type="button" class="btn-primary" onclick="copyReferralLink()">
+                    🔗 Копировать ссылку
+                </button>
+            </div>
+            
+            <div id="referrals-table" class="referrals-table hidden">
+                <div class="table-header">
+                    <div class="col-address">Адрес</div>
+                    <div class="col-level">Уровень</div>
+                    <div class="col-deposits">Депозиты</div>
+                    <div class="col-commission">Ваша комиссия</div>
+                    <div class="col-date">Дата</div>
+                </div>
+                
+                <div class="table-body" id="referrals-list">
+                    <!-- Данные рефералов будут загружены динамически -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- История комиссий -->
+    <div class="commission-history-card">
+        <div class="card-header">
+            <h3>📊 История комиссий</h3>
+            <div class="period-selector">
+                <select id="period-select" class="form-select" title="Выберите период" aria-label="Период истории комиссий">
+                    <option value="7">За неделю</option>
+                    <option value="30" selected>За месяц</option>
+                    <option value="90">За 3 месяца</option>
+                    <option value="0">За все время</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="commission-summary">
+            <div class="summary-item">
+                <div class="summary-label">Всего заработано</div>
+                <div class="summary-value" id="total-commission">$0.00</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-label">В этом месяце</div>
+                <div class="summary-value" id="month-commission">$0.00</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-label">Средний доход</div>
+                <div class="summary-value" id="avg-commission">$0.00/день</div>
+            </div>
+        </div>
+        
+        <div class="commission-chart-container">
+            <canvas id="commission-chart"></canvas>
+        </div>
+        
+        <div class="commission-transactions" id="commission-transactions">
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Загрузка истории...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Инструменты продвижения -->
+    <div class="promotion-tools-card">
+        <div class="card-header">
+            <h3>🚀 Инструменты продвижения</h3>
+        </div>
+        
+        <div class="promotion-grid">
+            <div class="promotion-tool">
+                <div class="tool-icon">📱</div>
+                <h4>QR-код</h4>
+                <p>Для быстрого перехода</p>
+                <button type="button" class="btn-tool" onclick="generateQR()">Создать QR</button>
+            </div>
+            
+            <div class="promotion-tool">
+                <div class="tool-icon">🎨</div>
+                <h4>Баннеры</h4>
+                <p>Готовые изображения</p>
+                <button type="button" class="btn-tool" onclick="downloadBanners()">Скачать</button>
+            </div>
+            
+            <div class="promotion-tool">
+                <div class="tool-icon">📧</div>
+                <h4>Email шаблон</h4>
+                <p>Готовое письмо</p>
+                <button type="button" class="btn-tool" onclick="copyEmailTemplate()">Копировать</button>
+            </div>
+            
+            <div class="promotion-tool">
+                <div class="tool-icon">💬</div>
+                <h4>Соцсети</h4>
+                <p>Готовые посты</p>
+                <button type="button" class="btn-tool" onclick="copySocialPost()">Получить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Программа лояльности -->
+    <div class="loyalty-program-card">
+        <div class="card-header">
+            <h3>🏆 Программа лояльности</h3>
+        </div>
+        
+        <div class="loyalty-content">
+            <div class="loyalty-level">
+                <div class="level-info">
+                    <span class="current-level">🥉 Бронза</span>
+                    <span class="next-level">→ 🥈 Серебро</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill progress-fill-35"></div>
+                </div>
+                <div class="progress-text">7/20 рефералов до Серебра</div>
+            </div>
+            
+            <div class="loyalty-benefits">
+                <h4>Преимущества уровней:</h4>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <span class="benefit-level">🥉 Бронза</span>
+                        <span class="benefit-bonus">+0% бонус</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-level">🥈 Серебро</span>
+                        <span class="benefit-bonus">+25% к комиссии</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-level">🥇 Золото</span>
+                        <span class="benefit-bonus">+50% к комиссии</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-level">💎 Платина</span>
+                        <span class="benefit-bonus">+100% к комиссии</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

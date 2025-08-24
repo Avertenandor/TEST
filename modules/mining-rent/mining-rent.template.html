@@ -1,0 +1,272 @@
+<!-- modules/mining-rent/mining-rent.template.html -->
+<!-- Модуль аренды майнинговых мощностей GENESIS -->
+<div class="mining-rent-container">
+    <div class="page-header">
+        <h2 class="page-title">💻 Аренда мощностей</h2>
+        <p class="page-subtitle">Зарабатывайте на неиспользуемых ресурсах вашего устройства</p>
+    </div>
+    
+    <!-- Обратный отсчет до запуска -->
+    <div id="mining-countdown-section" class="countdown-section">
+        <h3>🚀 Запуск программы через</h3>
+        <div id="mining-countdown-container" class="countdown-grid">
+            <div class="countdown-item">
+                <div class="countdown-value" id="mining-countdown-days">0</div>
+                <div class="countdown-label">дней</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="mining-countdown-hours">0</div>
+                <div class="countdown-label">часов</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="mining-countdown-minutes">0</div>
+                <div class="countdown-label">минут</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="mining-countdown-seconds">0</div>
+                <div class="countdown-label">секунд</div>
+            </div>
+        </div>
+        <p class="countdown-description">21 июля 2025 года мы запускаем революционную программу аренды мощностей!</p>
+    </div>
+
+    <!-- Информация об устройстве -->
+    <div class="info-section">
+        <h3>📱 Информация об устройстве</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">🖥️</div>
+                <div class="info-title">Процессор</div>
+                <div class="info-value" id="device-cores">4 ядра</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">💾</div>
+                <div class="info-title">Оперативная память</div>
+                <div class="info-value" id="device-memory">8 GB</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">💿</div>
+                <div class="info-title">Хранилище</div>
+                <div class="info-value" id="device-storage">1 TB</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Тарифы и доходность -->
+    <div class="earnings-section">
+        <h3>💰 Тарифы и ваша доходность</h3>
+        <div class="earnings-grid">
+            <!-- 10% мощности -->
+            <div class="earnings-card">
+                <div class="earnings-icon">⚡</div>
+                <div class="earnings-title">10% мощностей</div>
+                <div class="earnings-amount" id="earnings-10">$1.40/сутки</div>
+                <div class="earnings-details">
+                    <div class="earnings-period">
+                        <span class="period-label">Неделя</span>
+                        <span class="period-value" id="weekly-10">$9.80</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Месяц</span>
+                        <span class="period-value" id="monthly-10">$42.00</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Год</span>
+                        <span class="period-value" id="yearly-10">$511.00</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="selectPowerLevel(10)">
+                    Выбрать
+                </button>
+            </div>
+
+            <!-- 20% мощности -->
+            <div class="earnings-card">
+                <div class="earnings-icon">⚡⚡</div>
+                <div class="earnings-title">20% мощностей</div>
+                <div class="earnings-amount" id="earnings-20">$2.80/сутки</div>
+                <div class="earnings-details">
+                    <div class="earnings-period">
+                        <span class="period-label">Неделя</span>
+                        <span class="period-value" id="weekly-20">$19.60</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Месяц</span>
+                        <span class="period-value" id="monthly-20">$84.00</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Год</span>
+                        <span class="period-value" id="yearly-20">$1,022.00</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="selectPowerLevel(20)">
+                    Выбрать
+                </button>
+            </div>
+
+            <!-- 30% мощности - Популярно -->
+            <div class="earnings-card popular">
+                <div class="earnings-icon">⚡⚡⚡</div>
+                <div class="earnings-title">30% мощностей</div>
+                <div class="earnings-amount" id="earnings-30">$4.20/сутки</div>
+                <div class="earnings-details">
+                    <div class="earnings-period">
+                        <span class="period-label">Неделя</span>
+                        <span class="period-value" id="weekly-30">$29.40</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Месяц</span>
+                        <span class="period-value" id="monthly-30">$126.00</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Год</span>
+                        <span class="period-value" id="yearly-30">$1,533.00</span>
+                    </div>
+                </div>
+                <div class="popular-badge">Популярно</div>
+                <button class="btn btn-primary" onclick="selectPowerLevel(30)">
+                    Выбрать
+                </button>
+            </div>
+
+            <!-- 40% мощности -->
+            <div class="earnings-card">
+                <div class="earnings-icon">⚡⚡⚡⚡</div>
+                <div class="earnings-title">40% мощностей</div>
+                <div class="earnings-amount" id="earnings-40">$5.60/сутки</div>
+                <div class="earnings-details">
+                    <div class="earnings-period">
+                        <span class="period-label">Неделя</span>
+                        <span class="period-value" id="weekly-40">$39.20</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Месяц</span>
+                        <span class="period-value" id="monthly-40">$168.00</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Год</span>
+                        <span class="period-value" id="yearly-40">$2,044.00</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="selectPowerLevel(40)">
+                    Выбрать
+                </button>
+            </div>
+
+            <!-- 50% мощности -->
+            <div class="earnings-card">
+                <div class="earnings-icon">⚡⚡⚡⚡⚡</div>
+                <div class="earnings-title">50% мощностей</div>
+                <div class="earnings-amount" id="earnings-50">$7.00/сутки</div>
+                <div class="earnings-details">
+                    <div class="earnings-period">
+                        <span class="period-label">Неделя</span>
+                        <span class="period-value" id="weekly-50">$49.00</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Месяц</span>
+                        <span class="period-value" id="monthly-50">$210.00</span>
+                    </div>
+                    <div class="earnings-period">
+                        <span class="period-label">Год</span>
+                        <span class="period-value" id="yearly-50">$2,555.00</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="selectPowerLevel(50)">
+                    Выбрать
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Требования участия -->
+    <div class="requirements-section">
+        <h3>📋 Требования для участия</h3>
+        <div class="requirements-card">
+            <div class="requirement-item">
+                <div class="req-icon">📊</div>
+                <div class="req-content">
+                    <h4>Минимум 3 активных депозита</h4>
+                    <p>Для участия в программе необходимо иметь минимум 3 активных депозита в системе GENESIS (начиная с депозита "Тестовый")</p>
+                </div>
+                <div class="req-status" id="deposits-status">
+                    <span class="status-text">Проверка...</span>
+                </div>
+            </div>
+            
+            <div class="requirement-item">
+                <div class="req-icon">🔐</div>
+                <div class="req-content">
+                    <h4>Верификация устройства</h4>
+                    <p>Автоматическая проверка технических характеристик вашего устройства</p>
+                </div>
+                <div class="req-status verified">
+                    <span class="status-text">✅ Пройдено</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Безопасность -->
+    <div class="security-section">
+        <h3>🔒 Безопасность</h3>
+        <div class="security-grid">
+            <div class="security-card">
+                <h4>Что мы НЕ делаем</h4>
+                <ul>
+                    <li>❌ Не получаем доступ к личным данным</li>
+                    <li>❌ Не читаем файлы пользователя</li>
+                    <li>❌ Не отслеживаем активность</li>
+                    <li>❌ Не используем более 50% мощности</li>
+                </ul>
+            </div>
+            <div class="security-card">
+                <h4>Что мы делаем</h4>
+                <ul>
+                    <li>✅ Выполняем математические вычисления</li>
+                    <li>✅ Работаем с блокчейн-системами</li>
+                    <li>✅ Разрабатываем программные продукты</li>
+                    <li>✅ Используем только неактивные ресурсы</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+        <h3>❓ Часто задаваемые вопросы</h3>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h4>🔒 Безопасно ли это?</h4>
+                <p>Да, абсолютно безопасно! Мы используем мощности только для математических вычислений при разработке программных продуктов и валидации блокчейн-систем.</p>
+            </div>
+            <div class="faq-item">
+                <h4>💳 Как происходит оплата?</h4>
+                <p>Оплата производится криптовалютой (PLEX или USDT) ежедневно. Средства автоматически переводятся на ваш криптокошелек в GENESIS 1.1.</p>
+            </div>
+            <div class="faq-item">
+                <h4>📊 Какие требования для участия?</h4>
+                <p>Необходимо иметь минимум 3 активных депозита в системе GENESIS 1.1 (начиная с депозита "Тестовый").</p>
+            </div>
+            <div class="faq-item">
+                <h4>⚡ Можно ли отключить в любой момент?</h4>
+                <p>Да! Вы можете подключить или отключить услугу в любое время через личный кабинет. Никаких обязательств и штрафов нет.</p>
+            </div>
+            <div class="faq-item">
+                <h4>🖥️ Влияет ли это на производительность?</h4>
+                <p>Нет! Мы используем только неактивные ресурсы. Когда вы работаете за компьютером, программа автоматически снижает нагрузку.</p>
+            </div>
+            <div class="faq-item">
+                <h4>🌍 В каких странах доступна программа?</h4>
+                <p>Программа доступна во всех странах, где работает GENESIS 1.1. Ограничения могут действовать в соответствии с местным законодательством.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Действия -->
+    <div class="action-section">
+        <button class="btn btn-secondary" onclick="scrollToCountdown()">
+            🚀 Вернуться к счетчику
+        </button>
+    </div>
+</div>

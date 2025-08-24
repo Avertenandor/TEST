@@ -6,6 +6,7 @@
 // MCP-MARKER:FIX:IDEMPOTENT_CLASS - Защита от повторного объявления класса
 if (typeof window.GenesisTechInfo === 'undefined') {
     class GenesisTechInfo {
+        // MCP-MARKER:METHOD:TECH_INFO:CONSTRUCTOR - Инициализация сервиса
         constructor() {
             this.techData = {};
             this.updateInterval = null;
@@ -14,6 +15,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             this.init();
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:INIT - Основная инициализация
         init() {
             console.log('🔧 Инициализация сервиса технической информации GENESIS 1.1');
             this.collectTechData();
@@ -21,6 +23,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             this.setupEventListeners();
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:SETUP_LISTENERS - Настройка слушателей событий
         setupEventListeners() {
             // Слушаем изменения размера окна
             window.addEventListener('resize', () => {
@@ -56,6 +59,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             }
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:COLLECT_DATA - Сбор технической информации
         collectTechData() {
             try {
                 this.techData = {
@@ -122,6 +126,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             }
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:GET_BROWSER - Определение браузера
         getBrowserInfo() {
             const ua = navigator.userAgent;
             let browser = 'Unknown';
@@ -147,6 +152,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             return version ? `${browser} ${version}` : browser;
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:GET_PLATFORM - Информация о платформе
         getPlatformInfo() {
             const platform = navigator.platform || 'Unknown';
             const os = this.getOperatingSystem();
@@ -217,6 +223,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             return '0';
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:GET_WEBGL - Информация о WebGL
         getWebGLInfo() {
             try {
                 const canvas = document.createElement('canvas');
@@ -251,6 +258,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             return 'Unknown';
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:GET_BATTERY - Информация о батарее
         async getBatteryInfo() {
             if (navigator.getBattery) {
                 try {
@@ -290,6 +298,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             }
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:GET_IP - Получение IP адреса
         async getIPAddress() {
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
@@ -310,6 +319,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             }
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:GET_STORAGE - Информация о хранилище
         async getStorageInfo() {
             if ('storage' in navigator && 'estimate' in navigator.storage) {
                 try {
@@ -330,6 +340,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             }
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:UPDATE_ELEMENTS - Обновление элементов на странице
         updateElements() {
             // Маппинг данных к элементам на странице
             const elementMapping = {
@@ -395,6 +406,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             }
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:REQUEST_GEO - Запрос геолокации
         async requestGeolocation() {
             if (!navigator.geolocation) {
                 this.techData.geolocation = 'Не поддерживается';
@@ -438,6 +450,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             }
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:REFRESH - Обновление данных
         refreshData() {
             console.log('🔄 Обновление технических данных...');
             this.collectTechData();
@@ -449,6 +462,7 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             }
         }
 
+        // MCP-MARKER:METHOD:TECH_INFO:EXPORT - Экспорт данных
         exportData() {
             const data = {
                 timestamp: new Date().toISOString(),

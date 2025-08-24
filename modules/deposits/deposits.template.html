@@ -1,0 +1,391 @@
+<!-- modules/deposits/deposits.template.html -->
+<div class="deposits-module">
+    <!-- Заголовок и статистика -->
+    <div class="deposits-header">
+        <div class="genesis-brand-header">
+            <h1 class="section-title">💰 Депозитная система GENESIS</h1>
+            <p class="section-subtitle">Последовательная система инвестиций с гарантированной доходностью от 110% до 300%</p>
+        </div>
+        
+        <!-- Расширенная статистика -->
+        <div class="deposits-stats-grid">
+            <div class="stat-card stat-card-primary">
+                <div class="stat-icon">💎</div>
+                <div class="stat-content">
+                    <div class="stat-label">Инвестировано</div>
+                    <div class="stat-value" id="total-invested">$0.00</div>
+                    <div class="stat-change" id="invested-change">+0.00%</div>
+                </div>
+            </div>
+            <div class="stat-card stat-card-success">
+                <div class="stat-icon">📈</div>
+                <div class="stat-content">
+                    <div class="stat-label">Заработано</div>
+                    <div class="stat-value text-success" id="total-earned">$0.00</div>
+                    <div class="stat-change" id="earned-change">+0.00%</div>
+                </div>
+            </div>
+            <div class="stat-card stat-card-info">
+                <div class="stat-icon">🔄</div>
+                <div class="stat-content">
+                    <div class="stat-label">Активных депозитов</div>
+                    <div class="stat-value" id="active-deposits-count">0</div>
+                    <div class="stat-change" id="active-change">из 0 планов</div>
+                </div>
+            </div>
+            <div class="stat-card stat-card-warning">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-content">
+                    <div class="stat-label">Доход в день</div>
+                    <div class="stat-value text-primary" id="daily-income">$0.00</div>
+                    <div class="stat-change" id="daily-change">прогноз</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Информационная панель -->
+        <div class="deposits-info-panel">
+            <div class="info-card info-card-important">
+                <div class="info-icon">ℹ️</div>
+                <div class="info-content">
+                    <h3>Как работает система депозитов</h3>
+                    <ul>
+                        <li><strong>Последовательность:</strong> Начните с TRIAL за $25, затем открывайте планы по порядку</li>
+                        <li><strong>Валюты:</strong> Базовые планы - только USDT, премиум планы - PLEX или USDT</li>
+                        <li><strong>Доходность:</strong> От 110% до 300% с автоматическими выплатами</li>
+                        <li><strong>Безопасность:</strong> Все транзакции в блокчейне BSC</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Табы для переключения между разделами -->
+    <div class="deposits-tabs">
+        <button class="tab-btn active" data-tab="plans">
+            <span class="tab-icon">📋</span>
+            <span class="tab-text">Планы депозитов</span>
+        </button>
+        <button class="tab-btn" data-tab="active">
+            <span class="tab-icon">🔄</span>
+            <span class="tab-text">Активные депозиты</span>
+            <span class="tab-badge" id="active-deposits-badge">0</span>
+        </button>
+        <button class="tab-btn" data-tab="history">
+            <span class="tab-icon">📊</span>
+            <span class="tab-text">История</span>
+        </button>
+        <button class="tab-btn" data-tab="calculator">
+            <span class="tab-icon">🧮</span>
+            <span class="tab-text">Калькулятор</span>
+        </button>
+    </div>
+    
+    <!-- Контент вкладок -->
+    <div class="deposits-content">
+        <!-- Вкладка планов депозитов -->
+        <div class="tab-content active" data-tab="plans">
+            <!-- Фильтры планов -->
+            <div class="deposits-filters">
+                <div class="filter-group">
+                    <label for="currency-filter">Валюта:</label>
+                    <select id="currency-filter" class="filter-select" title="Выберите валюту для фильтрации планов депозитов" aria-label="Фильтр по валюте">
+                        <option value="all">Все валюты</option>
+                        <option value="USDT">Только USDT</option>
+                        <option value="PLEX">Только PLEX</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="profit-filter">Доходность:</label>
+                    <select id="profit-filter" class="filter-select" title="Выберите диапазон доходности" aria-label="Фильтр по доходности">
+                        <option value="all">Любая доходность</option>
+                        <option value="110-130">110-130%</option>
+                        <option value="130-170">130-170%</option>
+                        <option value="170-300">170-300%</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="duration-filter">Срок:</label>
+                    <select id="duration-filter" class="filter-select" title="Выберите срок депозита" aria-label="Фильтр по сроку депозита">
+                        <option value="all">Любой срок</option>
+                        <option value="short">До 10 дней</option>
+                        <option value="medium">10-30 дней</option>
+                        <option value="long">Более 30 дней</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Информация о последовательности -->
+            <div class="deposits-sequence-info">
+                <div class="sequence-card">
+                    <div class="sequence-header">
+                        <span class="sequence-icon">🎯</span>
+                        <h3>Последовательная система</h3>
+                    </div>
+                    <div class="sequence-content">
+                        <p>Откройте депозиты в правильном порядке для максимальной доходности:</p>
+                        <div class="sequence-steps">
+                            <div class="sequence-step">
+                                <span class="step-number">1</span>
+                                <span class="step-text">Начните с TRIAL ($25)</span>
+                            </div>
+                            <div class="sequence-step">
+                                <span class="step-number">2</span>
+                                <span class="step-text">Базовые планы (USDT)</span>
+                            </div>
+                            <div class="sequence-step">
+                                <span class="step-number">3</span>
+                                <span class="step-text">Премиум планы (PLEX/USDT)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Сетка планов депозитов -->
+            <div id="deposit-plans-grid" class="deposit-plans-grid">
+                <!-- Карточки планов будут сгенерированы JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Вкладка активных депозитов -->
+        <div class="tab-content" data-tab="active">
+            <div class="active-deposits-header">
+                <h3>Ваши активные депозиты</h3>
+                <div class="active-summary">
+                    <span id="active-summary-text">Нет активных депозитов</span>
+                </div>
+            </div>
+            <div id="active-deposits-list" class="deposits-list">
+                <!-- Список активных депозитов будет сгенерирован JavaScript -->
+                <div class="empty-state" id="active-empty-state">
+                    <div class="empty-icon">📭</div>
+                    <h4>Нет активных депозитов</h4>
+                    <p>Создайте первый депозит, чтобы начать зарабатывать</p>
+                    <button class="btn btn-primary" onclick="switchTab('plans')">Выбрать план</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Вкладка истории -->
+        <div class="tab-content" data-tab="history">
+            <div class="history-header">
+                <h3>История депозитов</h3>
+                <div class="history-filters">
+                    <select id="history-filter" title="Фильтр истории">
+                        <option value="all">Все депозиты</option>
+                        <option value="completed">Завершенные</option>
+                        <option value="active">Активные</option>
+                        <option value="cancelled">Отмененные</option>
+                    </select>
+                </div>
+            </div>
+            <div id="deposit-history-list" class="history-list">
+                <!-- История депозитов будет сгенерирована JavaScript -->
+                <div class="empty-state" id="history-empty-state">
+                    <div class="empty-icon">📊</div>
+                    <h4>История пуста</h4>
+                    <p>Ваши депозиты будут отображаться здесь</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Вкладка калькулятора -->
+        <div class="tab-content" data-tab="calculator">
+            <div class="calculator-container">
+                <div class="calculator-header">
+                    <h3>Калькулятор доходности</h3>
+                    <p>Рассчитайте прибыль от инвестиций в депозитные планы</p>
+                </div>
+                
+                <div class="calculator-form">
+                    <div class="calc-input-group">
+                        <label for="calc-amount">Сумма инвестиций (USD)</label>
+                        <input type="number" id="calc-amount" placeholder="Введите сумму" min="25" max="2500" step="0.01">
+                    </div>
+                    
+                    <div class="calc-input-group">
+                        <label for="calc-plan">Выберите план</label>
+                        <select id="calc-plan" title="Выберите план депозита">
+                            <option value="">-- Выберите план --</option>
+                            <!-- Планы будут добавлены JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="calc-results hidden" id="calc-results">
+                        <h4>Результаты расчета:</h4>
+                        <div class="result-grid">
+                            <div class="result-item">
+                                <span class="result-label">Инвестиция:</span>
+                                <span class="result-value" id="calc-investment">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Прибыль:</span>
+                                <span class="result-value result-profit" id="calc-profit">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Итого к получению:</span>
+                                <span class="result-value result-total" id="calc-total">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Доход в день:</span>
+                                <span class="result-value" id="calc-daily">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Срок депозита:</span>
+                                <span class="result-value" id="calc-duration">0 дней</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Процент доходности:</span>
+                                <span class="result-value" id="calc-percentage">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно создания депозита -->
+    <div id="deposit-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Создание депозита</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Информация о плане -->
+                <div class="deposit-plan-info">
+                    <h3 id="deposit-plan-name">План</h3>
+                    <div class="plan-details">
+                        <div class="detail-row">
+                            <span>Сумма USDT:</span>
+                            <strong id="deposit-amount-usdt">$0</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Сумма PLEX:</span>
+                            <strong id="deposit-amount-plex">0 PLEX</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Процент прибыли:</span>
+                            <strong class="text-success" id="deposit-percentage">0%</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Срок:</span>
+                            <strong id="deposit-days">0 дней</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Ожидаемая прибыль:</span>
+                            <strong class="text-primary" id="deposit-expected-profit">$0</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Выбор валюты -->
+                <div class="currency-selection">
+                    <h4>Выберите валюту оплаты:</h4>
+                    <div class="currency-selector">
+                        <!-- Кнопки валют будут сгенерированы JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Информация для оплаты -->
+                <div class="payment-info">
+                    <h4>Данные для оплаты:</h4>
+                    
+                    <div class="payment-details">
+                        <div class="payment-row">
+                            <label>Адрес для оплаты:</label>
+                            <div class="address-container">
+                                <code id="payment-address">0x...</code>
+                                <button class="copy-btn" onclick="copyToClipboard('payment-address')">
+                                    <i class="icon-copy"></i> Копировать
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-row">
+                            <label>Сумма к оплате:</label>
+                            <div class="amount-container">
+                                <strong id="payment-amount">0 USDT</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-qr">
+                            <div id="payment-qr" class="qr-container">
+                                <!-- QR код будет сгенерирован -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-warning">
+                        <i class="icon-warning"></i>
+                        <p>
+                            <strong>Важно!</strong> Отправьте точную сумму на указанный адрес.<br>
+                            После оплаты депозит будет активирован автоматически в течение 1-5 минут.<br>
+                            Допустимая погрешность суммы: ±5%
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="document.querySelector('.modal-close').click()">
+                    Отмена
+                </button>
+                <button id="confirm-deposit" class="btn btn-primary">
+                    <i class="icon-check"></i> Я оплатил
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Информационные блоки -->
+    <div class="deposits-footer">
+        <div class="info-cards">
+            <div class="info-card">
+                <i class="icon-shield"></i>
+                <h3>Безопасность</h3>
+                <p>Все транзакции проходят через смарт-контракты BSC. Ваши средства защищены блокчейном.</p>
+            </div>
+            <div class="info-card">
+                <i class="icon-chart"></i>
+                <h3>Прозрачность</h3>
+                <p>Отслеживайте все операции в реальном времени через BSCScan. Полная прозрачность всех транзакций.</p>
+            </div>
+            <div class="info-card">
+                <i class="icon-clock"></i>
+                <h3>Автоматизация</h3>
+                <p>Выплаты происходят автоматически по завершении срока депозита. Никаких дополнительных действий не требуется.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Вспомогательный скрипт для копирования -->
+<script>
+function copyToClipboard(elementId) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    const text = element.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        // Показываем уведомление
+        const btn = element.parentElement.querySelector('.copy-btn');
+        if (btn) {
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="icon-check"></i> Скопировано!';
+            btn.classList.add('success');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('success');
+            }, 2000);
+        }
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+    });
+}
+</script>

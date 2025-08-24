@@ -1,0 +1,73 @@
+{
+    "version": "1.1.1",
+    "buildDate": "2025-08-12",
+    "build": "modular-v1.0",
+    "network": "BSC",
+    
+    "addresses": {
+        "system": "0x399B22170B0AC7BB20bdC86772bfF478f201fFCD",
+        "access": "0x28915a33562b58500cf8b5b682C89A3D2e55f6d6e083ade6c1"
+    },
+    
+    "plex": {
+        "address": "0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1",
+        "symbol": "PLEX",
+        "name": "PLEX ONE",
+        "decimals": 9
+    },
+    
+    "usdt": {
+        "address": "0x55d398326f99059ff775485246999027b3197955",
+        "symbol": "USDT",
+        "name": "Tether USD",
+        "decimals": 18
+    },
+    
+    "bscscan": {
+        "apiUrl": "https://api.bscscan.com/api",
+        "apiKeys": {
+            "AUTHORIZATION": "YA5RH81WYSNS41KQPNNCX74FVXN7DJRJR4",
+            "DEPOSITS": "2ZJG1N64RZ17GGAMZJU4DKY21GYBERMNY6",
+            "SUBSCRIPTION": "ARA9FYMNCIZHTB2PPBSWF686GID9F99P41"
+        },
+        "rateLimit": 5,
+        "retryAttempts": 3
+    },
+    
+    "routes": {
+        "/": "dashboard",
+        "/auth": "auth",
+        "/deposits": "deposits",
+        "/portfolio": "portfolio",
+        "/transactions": "transactions",
+        "/analytics": "analytics",
+        "/bonuses": "bonuses",
+        "/gifts": "gifts",
+        "/referrals": "referrals",
+        "/multipliers": "multipliers",
+        "/mining-rent": "mining-rent",
+        "/my-device": "device",
+        "/plex-coin": "plex-coin",
+        "/settings": "settings",
+        "/experience": "experience",
+        "/rank": "rank",
+        "/how-it-works": "how-it-works",
+        "/terminal": "terminal",
+        "/platform-access": "platform-access"
+    },
+    
+    "app": {
+        "debug": false,
+        "cacheTimeout": 300000,
+        "apiTimeout": 10000,
+        "animationDuration": 300,
+        "maxRetries": 3,
+        "offlineMode": true
+    },
+    
+    "modules": {
+        "lazyLoad": true,
+        "cache": true,
+        "debug": false
+    }
+}

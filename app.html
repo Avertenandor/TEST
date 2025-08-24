@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!--
+==================================================
+GENESIS DeFi Platform v1.4.2
+Build: 2025-08-13T11:20:00Z
+Environment: Production
+© 2025 GENESIS Platform. All rights reserved.
+==================================================
+-->
+<html lang="ru" data-env="production" data-version="1.4.2">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENESIS 1.4.2 - Личный кабинет</title>
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.bscscan.com https://api.binance.com https://api.coingecko.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self';">
+    
+    <!-- Meta tags -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="cache-version" content="1.4.2">
+    <meta name="build-time" content="2025-08-13">
+    <meta name="environment" content="production">
+    <meta name="app-version" content="1.4.2">
+    <meta name="force-reload" content="true">
+    
+    <meta name="theme-color" content="#0d1117">
+    <meta name="msapplication-TileColor" content="#0d1117">
+    <meta name="description" content="Личный кабинет GENESIS 1.4.2 - управление депозитами, аналитика и контроль доступа">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/assets/manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png?v=3.6">
+    <link rel="icon" type="image/png" sizes="144x144" href="/assets/icons/icon-144x144.png?v=3.6">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-icon-180x180.png?v=3.6">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="shared/styles/variables.css" as="style">
+    <link rel="preload" href="shared/styles/reset.css" as="style">
+    <link rel="preload" href="shared/styles/typography.css" as="style">
+    <link rel="preload" href="./core/bootstrap.js" as="script" crossorigin="anonymous">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="shared/styles/variables.css">
+    <link rel="stylesheet" href="shared/styles/reset.css">
+    <link rel="stylesheet" href="shared/styles/typography.css">
+    <link rel="stylesheet" href="shared/styles/animations.css">
+    <link rel="stylesheet" href="shared/styles/utilities.css">
+    <link rel="stylesheet" href="shared/styles/qr-codes.css">
+    
+    <!-- Base App Styles -->
+    <style>
+        /* Base loading screen */
+        .app-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+        }
+        
+        .app-loading-content {
+            text-align: center;
+            max-width: 400px;
+            padding: 2rem;
+        }
+        
+        .app-loading-logo {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', monospace;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .app-loading-text {
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .app-loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #333344;
+            border-top: 3px solid #ff6b35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="app-loading" class="app-loading">
+        <div class="app-loading-content">
+            <div class="app-loading-logo">GENESIS 1.4.2</div>
+            <div id="app-loading-text" class="app-loading-text">Загрузка модулей...</div>
+            <div class="app-loading-spinner"></div>
+        </div>
+    </div>
+    
+    <!-- Main App Container -->
+    <div id="app" class="hidden">
+        <!-- Navigation will be injected here -->
+        <nav id="app-navigation" class="sidebar"></nav>
+        
+        <!-- Main content area where modules are loaded -->
+        <main id="app-container" class="main-content"></main>
+    </div>
+    
+    <!-- Global Components -->
+    <div id="global-loader" class="hidden" role="status" aria-busy="true" aria-label="Загрузка">
+        <div class="loader"></div>
+    </div>
+    
+    <div id="global-notifications" role="alert" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- Core Application Bootstrap -->
+    <script type="module">
+        import { Application } from './core/bootstrap.js';
+        
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('✅ ServiceWorker registered:', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('📦 New version available! Reload to update.');
+                                    // Could show update notification here
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('❌ ServiceWorker registration failed:', error);
+                    });
+            });
+        }
+        
+        let initAttempts = 0;
+        const MAX_INIT_ATTEMPTS = 3;
+        
+        async function initializeApp() {
+            initAttempts++;
+            const app = new Application();
+            
+            try {
+                await app.init();
+                console.log('✅ GENESIS Application initialized successfully');
+            } catch (error) {
+                console.error(`❌ Failed to initialize application (attempt ${initAttempts}/${MAX_INIT_ATTEMPTS}):`, error);
+                
+                const loadingText = document.getElementById('app-loading-text');
+                const spinner = document.querySelector('.app-loading-spinner');
+                
+                if (initAttempts < MAX_INIT_ATTEMPTS) {
+                    // Show retry message
+                    if (loadingText) {
+                        loadingText.textContent = `Ошибка инициализации. Повторная попытка ${initAttempts + 1}/${MAX_INIT_ATTEMPTS}...`;
+                    }
+                    
+                    // Retry after delay
+                    setTimeout(() => initializeApp(), 2000);
+                } else {
+                    // Show error with retry button
+                    if (spinner) {
+                        spinner.style.display = 'none';
+                    }
+                    
+                    if (loadingText) {
+                        loadingText.innerHTML = `
+                            <div style="color: #ff6b35;">Не удалось загрузить приложение</div>
+                            <div style="color: #b0b0b0; margin: 10px 0;">Проверьте соединение с интернетом</div>
+                            <button onclick="location.reload()" style="
+                                background: #ff6b35;
+                                color: white;
+                                border: none;
+                                padding: 10px 20px;
+                                border-radius: 5px;
+                                cursor: pointer;
+                                font-size: 16px;
+                                margin-top: 10px;
+                            ">Повторить попытку</button>
+                        `;
+                    }
+                }
+            }
+        }
+        
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeApp();
+        });
+    </script>
+</body>
+</html>

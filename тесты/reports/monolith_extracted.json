@@ -1,0 +1,10 @@
+{
+  "portfolio": true,
+  "bonuses": true,
+  "multipliers": true,
+  "gifts": true,
+  "referrals": true,
+  "settings": true,
+  "rank": true,
+  "experience": true
+}

@@ -1,0 +1,7 @@
+/* modules/home/home.styles.css */
+.home-fallback { padding: 3rem 1rem; color: #e6e6e6; }
+.home-fallback .container { max-width: 1080px; margin: 0 auto; }
+.home-fallback h1 { font-family: 'Orbitron', sans-serif; font-weight: 800; color: #ff6b35; margin: 0 0 1rem; }
+.home-fallback p { color: #b0b0b0; margin-bottom: 1.5rem; }
+.home-fallback .btn { background: #ff6b35; color: #fff; border: 0; padding: .75rem 1.25rem; border-radius: 8px; cursor: pointer; }
+.home-fallback .btn:hover { filter: brightness(1.05); }

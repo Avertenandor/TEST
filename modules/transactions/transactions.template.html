@@ -1,0 +1,143 @@
+<!-- modules/transactions/transactions.template.html -->
+<!-- MCP-MARKER:TEMPLATE:TRANSACTIONS:MAIN - Основной шаблон модуля транзакций -->
+
+<div class="transactions-module">
+    <!-- Заголовок и статистика -->
+    <div class="transactions-header">
+        <h1 class="module-title">
+            <i class="icon-transactions"></i>
+            История транзакций
+        </h1>
+        
+        <div class="header-actions">
+            <button class="btn btn-refresh" title="Обновить">
+                <i class="icon-refresh"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Статистика -->
+    <div class="transactions-stats">
+        <div class="stat-card">
+            <div class="stat-icon deposits">
+                <i class="icon-deposit"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-label">Всего депозитов</div>
+                <div class="stat-value" id="total-deposits">$0.00</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon withdrawals">
+                <i class="icon-withdrawal"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-label">Всего выводов</div>
+                <div class="stat-value" id="total-withdrawals">$0.00</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon earnings">
+                <i class="icon-earnings"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-label">Общий доход</div>
+                <div class="stat-value positive" id="total-earnings">$0.00</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon count">
+                <i class="icon-count"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-label">Транзакций</div>
+                <div class="stat-value" id="transaction-count">0</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Фильтры и поиск -->
+    <div class="transactions-controls">
+        <!-- Типы транзакций -->
+        <div class="transaction-types">
+            <button class="transaction-type-btn active" data-type="all">
+                Все
+                <span class="badge total-count">0</span>
+            </button>
+            <button class="transaction-type-btn" data-type="deposits">
+                Депозиты
+                <span class="badge deposits-count">0</span>
+            </button>
+            <button class="transaction-type-btn" data-type="withdrawals">
+                Выводы
+                <span class="badge withdrawals-count">0</span>
+            </button>
+            <button class="transaction-type-btn" data-type="platform">
+                Платформа
+                <span class="badge platform-count">0</span>
+            </button>
+        </div>
+        
+        <!-- Поиск -->
+        <div class="transaction-search">
+            <input 
+                type="text" 
+                id="transaction-search" 
+                placeholder="Поиск по хешу, адресу..."
+                class="search-input"
+            />
+            <i class="icon-search"></i>
+        </div>
+    </div>
+    
+    <!-- Расширенные фильтры -->
+    <div id="transaction-filter" class="advanced-filters">
+        <!-- Компонент фильтров будет инициализирован здесь -->
+    </div>
+    
+    <!-- Список транзакций -->
+    <div class="transactions-content">
+        <!-- Загрузчик -->
+        <div class="transactions-loader" style="display: none;">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Загрузка транзакций...</div>
+        </div>
+        
+        <!-- Сообщение об ошибке -->
+        <div class="error-message" style="display: none;"></div>
+        
+        <!-- Список транзакций -->
+        <div id="transaction-list" class="transaction-list">
+            <!-- Транзакции будут загружены сюда -->
+        </div>
+        
+        <!-- Пустое состояние -->
+        <div class="empty-state" style="display: none;">
+            <i class="icon-empty"></i>
+            <h3>Транзакций не найдено</h3>
+            <p>У вас пока нет транзакций или они не соответствуют выбранным фильтрам</p>
+        </div>
+    </div>
+    
+    <!-- Экспорт данных -->
+    <div id="transaction-export" class="export-section">
+        <!-- Компонент экспорта будет инициализирован здесь -->
+    </div>
+</div>
+
+<!-- Модальное окно деталей транзакции -->
+<div id="transaction-details-modal" class="modal" style="display: none;">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Детали транзакции</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body" id="transaction-details">
+            <!-- Детали транзакции будут загружены сюда -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,159 @@
+<!-- modules/portfolio/portfolio.template.html -->
+<div class="portfolio-module">
+    <!-- Заголовок -->
+    <div class="portfolio-header">
+        <h1>📊 Инвестиционный портфолио</h1>
+        <p>Полный обзор ваших инвестиций и доходности</p>
+    </div>
+    
+    <!-- Статистика портфолио -->
+    <div class="portfolio-stats">
+        <div class="stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-content">
+                <div class="stat-label">Инвестировано</div>
+                <div class="stat-value" id="total-invested">$0.00</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">📈</div>
+            <div class="stat-content">
+                <div class="stat-label">Заработано</div>
+                <div class="stat-value success" id="total-earned">$0.00</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">🚀</div>
+            <div class="stat-content">
+                <div class="stat-label">Чистая прибыль</div>
+                <div class="stat-value primary" id="total-profit">$0.00</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div class="stat-content">
+                <div class="stat-label">ROI</div>
+                <div class="stat-value" id="roi">0.00%</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">📅</div>
+            <div class="stat-content">
+                <div class="stat-label">Доход в день</div>
+                <div class="stat-value" id="daily-income">$0.00</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-content">
+                <div class="stat-label">Активных</div>
+                <div class="stat-value" id="active-deposits">0</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Распределение активов и прогнозы -->
+    <div class="portfolio-overview">
+        <div class="overview-column">
+            <div class="section-card">
+                <h2>Распределение активов</h2>
+                <div id="asset-distribution">
+                    <!-- График распределения будет здесь -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="overview-column">
+            <div class="section-card">
+                <div id="projections">
+                    <!-- Прогнозы будут здесь -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- График доходности -->
+    <div class="section-card">
+        <div class="section-header">
+            <h2>График доходности</h2>
+            <div class="chart-controls">
+                <button class="chart-period active" data-period="day">День</button>
+                <button class="chart-period" data-period="week">Неделя</button>
+                <button class="chart-period" data-period="month">Месяц</button>
+                <button class="chart-period" data-period="year">Год</button>
+            </div>
+        </div>
+        <div id="performance-chart" class="chart-container">
+            <!-- График будет здесь -->
+        </div>
+    </div>
+    
+    <!-- Список депозитов -->
+    <div class="section-card">
+        <div class="section-header">
+            <h2>Мои депозиты</h2>
+            <div class="section-controls">
+                <div class="filter-buttons">
+                    <button class="filter-button active" data-filter="all">Все</button>
+                    <button class="filter-button" data-filter="active">Активные</button>
+                    <button class="filter-button" data-filter="completed">Завершенные</button>
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="cards" title="Карточки">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <rect x="2" y="2" width="7" height="7" rx="1"/>
+                            <rect x="11" y="2" width="7" height="7" rx="1"/>
+                            <rect x="2" y="11" width="7" height="7" rx="1"/>
+                            <rect x="11" y="11" width="7" height="7" rx="1"/>
+                        </svg>
+                    </button>
+                    <button class="view-btn" data-view="table" title="Таблица">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <rect x="2" y="4" width="16" height="2" rx="0.5"/>
+                            <rect x="2" y="9" width="16" height="2" rx="0.5"/>
+                            <rect x="2" y="14" width="16" height="2" rx="0.5"/>
+                        </svg>
+                    </button>
+                </div>
+                <button id="export-portfolio" class="btn btn-secondary">
+                    📥 Экспорт
+                </button>
+            </div>
+        </div>
+        <div id="deposits-list">
+            <!-- Список депозитов будет здесь -->
+        </div>
+    </div>
+    
+    <!-- Инфо блоки -->
+    <div class="info-blocks">
+        <div class="info-block">
+            <div class="info-icon">💡</div>
+            <div class="info-content">
+                <h3>Диверсификация</h3>
+                <p>Распределяйте инвестиции между USDT и PLEX для оптимального баланса риска и доходности</p>
+            </div>
+        </div>
+        
+        <div class="info-block">
+            <div class="info-icon">📈</div>
+            <div class="info-content">
+                <h3>Реинвестирование</h3>
+                <p>Реинвестируйте прибыль для получения сложного процента и ускорения роста капитала</p>
+            </div>
+        </div>
+        
+        <div class="info-block">
+            <div class="info-icon">🔍</div>
+            <div class="info-content">
+                <h3>Мониторинг</h3>
+                <p>Отслеживайте эффективность каждого депозита и принимайте взвешенные решения</p>
+            </div>
+        </div>
+    </div>
+</div>

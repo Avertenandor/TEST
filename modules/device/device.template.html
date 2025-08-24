@@ -1,0 +1,117 @@
+<!-- modules/device/device.template.html -->
+<div class="device-module">
+    <div class="module-header">
+        <div class="header-title">
+            <h1 class="module-title">
+                <span class="title-icon">📱</span>
+                Информация об устройстве
+            </h1>
+            <p class="module-subtitle">Технические характеристики и возможности вашего устройства</p>
+        </div>
+        <div class="header-actions">
+            <button id="refresh-device-info" class="btn btn-icon" title="Обновить информацию">
+                <span class="icon">🔄</span>
+            </button>
+            <button id="copy-device-info" class="btn btn-icon" title="Скопировать информацию">
+                <span class="icon">📋</span>
+            </button>
+            <button id="check-permissions" class="btn btn-icon" title="Проверить разрешения">
+                <span class="icon">🔐</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="device-tabs">
+        <button class="tab-btn active" data-tab="basic">
+            <span class="tab-icon">🖥️</span>
+            Основное
+        </button>
+        <button class="tab-btn" data-tab="technical">
+            <span class="tab-icon">⚙️</span>
+            Техническое
+        </button>
+        <button class="tab-btn" data-tab="pwa">
+            <span class="tab-icon">📱</span>
+            PWA
+        </button>
+        <button class="tab-btn" data-tab="performance">
+            <span class="tab-icon">⚡</span>
+            Производительность
+        </button>
+    </div>
+    
+    <div class="device-content">
+        <!-- Основная информация -->
+        <div class="tab-content active" data-tab="basic" id="basic-info">
+            <div class="loading-placeholder">
+                <div class="loading-spinner"></div>
+                <p>Загрузка информации об устройстве...</p>
+            </div>
+        </div>
+        
+        <!-- Техническая информация -->
+        <div class="tab-content" data-tab="technical" id="technical-info">
+            <div class="loading-placeholder">
+                <div class="loading-spinner"></div>
+                <p>Загрузка технической информации...</p>
+            </div>
+        </div>
+        
+        <!-- PWA статус -->
+        <div class="tab-content" data-tab="pwa" id="pwa-status">
+            <div class="loading-placeholder">
+                <div class="loading-spinner"></div>
+                <p>Проверка PWA статуса...</p>
+            </div>
+        </div>
+        
+        <!-- Производительность -->
+        <div class="tab-content" data-tab="performance" id="performance-info">
+            <div class="info-card">
+                <h3>⚡ Тест производительности</h3>
+                <p class="info-description">
+                    Проверьте производительность вашего устройства для оптимальной работы с платформой GENESIS
+                </p>
+                
+                <button id="run-performance-test" class="btn btn-primary btn-large">
+                    <span class="icon">🚀</span>
+                    Запустить тест производительности
+                </button>
+                
+                <div id="performance-results" class="performance-results hidden">
+                    <!-- Результаты теста будут здесь -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Дополнительная информация -->
+    <div class="device-footer">
+        <div class="device-tips">
+            <h3>💡 Рекомендации</h3>
+            <ul class="tips-list">
+                <li>Используйте современный браузер для лучшей производительности</li>
+                <li>Установите GENESIS как PWA приложение для быстрого доступа</li>
+                <li>Разрешите уведомления для получения важных обновлений</li>
+                <li>Регулярно очищайте кэш браузера для оптимальной работы</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно разрешений (скрытое по умолчанию) -->
+<div id="permissions-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>🔐 Разрешения браузера</h3>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body" id="permissions-list">
+            <!-- Список разрешений будет загружен динамически -->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary modal-close">Закрыть</button>
+        </div>
+    </div>
+</div>

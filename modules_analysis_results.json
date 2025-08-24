@@ -1,0 +1,920 @@
+{
+  "timestamp": "2025-08-14 14:48:17",
+  "modules_analyzed": [
+    {
+      "name": "dashboard",
+      "display_name": "Панель управления",
+      "icon": "📊",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": true,
+        "file_count": 5,
+        "files": [
+          "dashboard.api.js",
+          "dashboard.module.js",
+          "dashboard.styles.css",
+          "dashboard.template.html",
+          "index.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 60,
+        "notes": [
+          "Найдено 2 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ dashboard: Отсутствует template.html",
+        "⚠️ dashboard: Отсутствует styles.css",
+        "⚠️ dashboard: Шаблон слишком мал (0 символов)",
+        "⚠️ dashboard: Отсутствуют элементы отображения данных",
+        "⚠️ dashboard: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "deposits",
+      "display_name": "Депозиты",
+      "icon": "💰",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": true,
+        "file_count": 7,
+        "files": [
+          "deposits.api.js",
+          "deposits.module.js",
+          "deposits.state.js",
+          "deposits.styles.css",
+          "deposits.template.html",
+          "DEPOSITS_ERROR_FIX_REPORT.md",
+          "index.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ deposits: Отсутствует template.html",
+        "⚠️ deposits: Отсутствует styles.css",
+        "⚠️ deposits: Шаблон слишком мал (0 символов)",
+        "⚠️ deposits: Отсутствуют элементы отображения данных",
+        "⚠️ deposits: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "portfolio",
+      "display_name": "Портфель",
+      "icon": "💼",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": false,
+        "file_count": 5,
+        "files": [
+          "index.js",
+          "portfolio.module.js",
+          "portfolio.state.js",
+          "portfolio.styles.css",
+          "portfolio.template.html"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ portfolio: Отсутствует template.html",
+        "⚠️ portfolio: Отсутствует styles.css",
+        "⚠️ portfolio: Шаблон слишком мал (0 символов)",
+        "⚠️ portfolio: Отсутствуют элементы отображения данных",
+        "⚠️ portfolio: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "transactions",
+      "display_name": "Транзакции",
+      "icon": "📋",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": true,
+        "file_count": 7,
+        "files": [
+          "components",
+          "index.js",
+          "transactions.api.js",
+          "transactions.module.js",
+          "transactions.state.js",
+          "transactions.styles.css",
+          "transactions.template.html"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ transactions: Отсутствует template.html",
+        "⚠️ transactions: Отсутствует styles.css",
+        "⚠️ transactions: Шаблон слишком мал (0 символов)",
+        "⚠️ transactions: Отсутствуют элементы отображения данных",
+        "⚠️ transactions: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "analytics",
+      "display_name": "Аналитика",
+      "icon": "📈",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": true,
+        "file_count": 7,
+        "files": [
+          "analytics.api.js",
+          "analytics.module.js",
+          "analytics.state.js",
+          "analytics.styles.css",
+          "analytics.template.html",
+          "components",
+          "index.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ analytics: Отсутствует template.html",
+        "⚠️ analytics: Отсутствует styles.css",
+        "⚠️ analytics: Шаблон слишком мал (0 символов)",
+        "⚠️ analytics: Отсутствуют элементы отображения данных",
+        "⚠️ analytics: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "bonuses",
+      "display_name": "Бонусы",
+      "icon": "🎁",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": true,
+        "file_count": 6,
+        "files": [
+          "bonuses.api.js",
+          "bonuses.module.js",
+          "bonuses.state.js",
+          "bonuses.styles.css",
+          "bonuses.template.html",
+          "index.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ bonuses: Отсутствует template.html",
+        "⚠️ bonuses: Отсутствует styles.css",
+        "⚠️ bonuses: Шаблон слишком мал (0 символов)",
+        "⚠️ bonuses: Отсутствуют элементы отображения данных",
+        "⚠️ bonuses: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "gifts",
+      "display_name": "Подарки",
+      "icon": "🎈",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": true,
+        "file_count": 6,
+        "files": [
+          "gifts.api.js",
+          "gifts.module.js",
+          "gifts.state.js",
+          "gifts.styles.css",
+          "gifts.template.html",
+          "index.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 60,
+        "notes": [
+          "Найдено 2 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ gifts: Отсутствует template.html",
+        "⚠️ gifts: Отсутствует styles.css",
+        "⚠️ gifts: Шаблон слишком мал (0 символов)",
+        "⚠️ gifts: Отсутствуют элементы отображения данных",
+        "⚠️ gifts: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "referrals",
+      "display_name": "Рефералы",
+      "icon": "👥",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": false,
+        "file_count": 2,
+        "files": [
+          "index.js",
+          "referrals.module.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ referrals: Отсутствует template.html",
+        "⚠️ referrals: Отсутствует styles.css",
+        "⚠️ referrals: Шаблон слишком мал (0 символов)",
+        "⚠️ referrals: Отсутствуют элементы отображения данных",
+        "⚠️ referrals: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "multipliers",
+      "display_name": "Множители",
+      "icon": "⚡",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": false,
+        "file_count": 2,
+        "files": [
+          "index.js",
+          "multipliers.module.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 60,
+        "notes": [
+          "Найдено 2 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ multipliers: Отсутствует template.html",
+        "⚠️ multipliers: Отсутствует styles.css",
+        "⚠️ multipliers: Шаблон слишком мал (0 символов)",
+        "⚠️ multipliers: Отсутствуют элементы отображения данных",
+        "⚠️ multipliers: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "mining-rent",
+      "display_name": "Аренда майнинга",
+      "icon": "⛏️",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": false,
+        "file_count": 2,
+        "files": [
+          "index.js",
+          "mining-rent.module.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ mining-rent: Отсутствует template.html",
+        "⚠️ mining-rent: Отсутствует styles.css",
+        "⚠️ mining-rent: Шаблон слишком мал (0 символов)",
+        "⚠️ mining-rent: Отсутствуют элементы отображения данных",
+        "⚠️ mining-rent: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "device",
+      "display_name": "Устройство",
+      "icon": "🔧",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": true,
+        "file_count": 6,
+        "files": [
+          "device.api.js",
+          "device.module.js",
+          "device.state.js",
+          "device.styles.css",
+          "device.template.html",
+          "index.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 60,
+        "notes": [
+          "Найдено 2 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ device: Отсутствует template.html",
+        "⚠️ device: Отсутствует styles.css",
+        "⚠️ device: Шаблон слишком мал (0 символов)",
+        "⚠️ device: Отсутствуют элементы отображения данных",
+        "⚠️ device: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "plex-coin",
+      "display_name": "PLEX Coin",
+      "icon": "🪙",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": false,
+        "file_count": 4,
+        "files": [
+          "index.js",
+          "plex-coin.module.js",
+          "plex-coin.styles.css",
+          "plex-coin.template.html"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ plex-coin: Отсутствует template.html",
+        "⚠️ plex-coin: Отсутствует styles.css",
+        "⚠️ plex-coin: Шаблон слишком мал (0 символов)",
+        "⚠️ plex-coin: Отсутствуют элементы отображения данных",
+        "⚠️ plex-coin: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "experience",
+      "display_name": "Опыт",
+      "icon": "🌟",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": false,
+        "file_count": 2,
+        "files": [
+          "experience.module.js",
+          "index.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ experience: Отсутствует template.html",
+        "⚠️ experience: Отсутствует styles.css",
+        "⚠️ experience: Шаблон слишком мал (0 символов)",
+        "⚠️ experience: Отсутствуют элементы отображения данных",
+        "⚠️ experience: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "rank",
+      "display_name": "Ранг",
+      "icon": "🏆",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": false,
+        "file_count": 2,
+        "files": [
+          "index.js",
+          "rank.module.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ rank: Отсутствует template.html",
+        "⚠️ rank: Отсутствует styles.css",
+        "⚠️ rank: Шаблон слишком мал (0 символов)",
+        "⚠️ rank: Отсутствуют элементы отображения данных",
+        "⚠️ rank: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "settings",
+      "display_name": "Настройки",
+      "icon": "⚙️",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": false,
+        "file_count": 5,
+        "files": [
+          "index.js",
+          "settings.module.js",
+          "settings.state.js",
+          "settings.styles.css",
+          "settings.template.html"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 60,
+        "notes": [
+          "Найдено 2 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ settings: Отсутствует template.html",
+        "⚠️ settings: Отсутствует styles.css",
+        "⚠️ settings: Шаблон слишком мал (0 символов)",
+        "⚠️ settings: Отсутствуют элементы отображения данных",
+        "⚠️ settings: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "terminal",
+      "display_name": "Терминал",
+      "icon": "💻",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": true,
+        "file_count": 3,
+        "files": [
+          "index.js",
+          "terminal.api.js",
+          "terminal.module.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ terminal: Отсутствует template.html",
+        "⚠️ terminal: Отсутствует styles.css",
+        "⚠️ terminal: Шаблон слишком мал (0 символов)",
+        "⚠️ terminal: Отсутствуют элементы отображения данных",
+        "⚠️ terminal: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "platform-access",
+      "display_name": "Доступ к платформе",
+      "icon": "🔐",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": true,
+        "file_count": 6,
+        "files": [
+          "index.js",
+          "platform-access.api.js",
+          "platform-access.module.js",
+          "platform-access.state.js",
+          "platform-access.styles.css",
+          "platform-access.template.html"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ platform-access: Отсутствует template.html",
+        "⚠️ platform-access: Отсутствует styles.css",
+        "⚠️ platform-access: Шаблон слишком мал (0 символов)",
+        "⚠️ platform-access: Отсутствуют элементы отображения данных",
+        "⚠️ platform-access: Мало JavaScript функций (0)"
+      ]
+    },
+    {
+      "name": "how-it-works",
+      "display_name": "Как все устроено",
+      "icon": "🛠️",
+      "structure": {
+        "exists": true,
+        "has_index": true,
+        "has_template": false,
+        "has_styles": false,
+        "has_api": false,
+        "file_count": 4,
+        "files": [
+          "how-it-works.module.js",
+          "how-it-works.styles.css",
+          "how-it-works.template.html",
+          "index.js"
+        ]
+      },
+      "content": {
+        "template_size": 0,
+        "has_navigation": false,
+        "has_data_display": false,
+        "has_forms": false,
+        "has_interactive_elements": false,
+        "javascript_functions": 0,
+        "css_rules": 0,
+        "content_richness": 0
+      },
+      "comparison": {
+        "cabinet_has_section": true,
+        "similarity_score": 90,
+        "notes": [
+          "Найдено 3 совпадений из 3"
+        ]
+      },
+      "completeness_score": 3,
+      "is_complete": false,
+      "recommendations": [
+        "❌ how-it-works: Отсутствует template.html",
+        "⚠️ how-it-works: Отсутствует styles.css",
+        "⚠️ how-it-works: Шаблон слишком мал (0 символов)",
+        "⚠️ how-it-works: Отсутствуют элементы отображения данных",
+        "⚠️ how-it-works: Мало JavaScript функций (0)"
+      ]
+    }
+  ],
+  "structure_analysis": {},
+  "content_completeness": {},
+  "missing_components": [
+    "❌ dashboard: Отсутствует template.html",
+    "⚠️ dashboard: Отсутствует styles.css",
+    "⚠️ dashboard: Шаблон слишком мал (0 символов)",
+    "⚠️ dashboard: Отсутствуют элементы отображения данных",
+    "⚠️ dashboard: Мало JavaScript функций (0)",
+    "❌ deposits: Отсутствует template.html",
+    "⚠️ deposits: Отсутствует styles.css",
+    "⚠️ deposits: Шаблон слишком мал (0 символов)",
+    "⚠️ deposits: Отсутствуют элементы отображения данных",
+    "⚠️ deposits: Мало JavaScript функций (0)",
+    "❌ portfolio: Отсутствует template.html",
+    "⚠️ portfolio: Отсутствует styles.css",
+    "⚠️ portfolio: Шаблон слишком мал (0 символов)",
+    "⚠️ portfolio: Отсутствуют элементы отображения данных",
+    "⚠️ portfolio: Мало JavaScript функций (0)",
+    "❌ transactions: Отсутствует template.html",
+    "⚠️ transactions: Отсутствует styles.css",
+    "⚠️ transactions: Шаблон слишком мал (0 символов)",
+    "⚠️ transactions: Отсутствуют элементы отображения данных",
+    "⚠️ transactions: Мало JavaScript функций (0)",
+    "❌ analytics: Отсутствует template.html",
+    "⚠️ analytics: Отсутствует styles.css",
+    "⚠️ analytics: Шаблон слишком мал (0 символов)",
+    "⚠️ analytics: Отсутствуют элементы отображения данных",
+    "⚠️ analytics: Мало JavaScript функций (0)",
+    "❌ bonuses: Отсутствует template.html",
+    "⚠️ bonuses: Отсутствует styles.css",
+    "⚠️ bonuses: Шаблон слишком мал (0 символов)",
+    "⚠️ bonuses: Отсутствуют элементы отображения данных",
+    "⚠️ bonuses: Мало JavaScript функций (0)",
+    "❌ gifts: Отсутствует template.html",
+    "⚠️ gifts: Отсутствует styles.css",
+    "⚠️ gifts: Шаблон слишком мал (0 символов)",
+    "⚠️ gifts: Отсутствуют элементы отображения данных",
+    "⚠️ gifts: Мало JavaScript функций (0)",
+    "❌ referrals: Отсутствует template.html",
+    "⚠️ referrals: Отсутствует styles.css",
+    "⚠️ referrals: Шаблон слишком мал (0 символов)",
+    "⚠️ referrals: Отсутствуют элементы отображения данных",
+    "⚠️ referrals: Мало JavaScript функций (0)",
+    "❌ multipliers: Отсутствует template.html",
+    "⚠️ multipliers: Отсутствует styles.css",
+    "⚠️ multipliers: Шаблон слишком мал (0 символов)",
+    "⚠️ multipliers: Отсутствуют элементы отображения данных",
+    "⚠️ multipliers: Мало JavaScript функций (0)",
+    "❌ mining-rent: Отсутствует template.html",
+    "⚠️ mining-rent: Отсутствует styles.css",
+    "⚠️ mining-rent: Шаблон слишком мал (0 символов)",
+    "⚠️ mining-rent: Отсутствуют элементы отображения данных",
+    "⚠️ mining-rent: Мало JavaScript функций (0)",
+    "❌ device: Отсутствует template.html",
+    "⚠️ device: Отсутствует styles.css",
+    "⚠️ device: Шаблон слишком мал (0 символов)",
+    "⚠️ device: Отсутствуют элементы отображения данных",
+    "⚠️ device: Мало JavaScript функций (0)",
+    "❌ plex-coin: Отсутствует template.html",
+    "⚠️ plex-coin: Отсутствует styles.css",
+    "⚠️ plex-coin: Шаблон слишком мал (0 символов)",
+    "⚠️ plex-coin: Отсутствуют элементы отображения данных",
+    "⚠️ plex-coin: Мало JavaScript функций (0)",
+    "❌ experience: Отсутствует template.html",
+    "⚠️ experience: Отсутствует styles.css",
+    "⚠️ experience: Шаблон слишком мал (0 символов)",
+    "⚠️ experience: Отсутствуют элементы отображения данных",
+    "⚠️ experience: Мало JavaScript функций (0)",
+    "❌ rank: Отсутствует template.html",
+    "⚠️ rank: Отсутствует styles.css",
+    "⚠️ rank: Шаблон слишком мал (0 символов)",
+    "⚠️ rank: Отсутствуют элементы отображения данных",
+    "⚠️ rank: Мало JavaScript функций (0)",
+    "❌ settings: Отсутствует template.html",
+    "⚠️ settings: Отсутствует styles.css",
+    "⚠️ settings: Шаблон слишком мал (0 символов)",
+    "⚠️ settings: Отсутствуют элементы отображения данных",
+    "⚠️ settings: Мало JavaScript функций (0)",
+    "❌ terminal: Отсутствует template.html",
+    "⚠️ terminal: Отсутствует styles.css",
+    "⚠️ terminal: Шаблон слишком мал (0 символов)",
+    "⚠️ terminal: Отсутствуют элементы отображения данных",
+    "⚠️ terminal: Мало JavaScript функций (0)",
+    "❌ platform-access: Отсутствует template.html",
+    "⚠️ platform-access: Отсутствует styles.css",
+    "⚠️ platform-access: Шаблон слишком мал (0 символов)",
+    "⚠️ platform-access: Отсутствуют элементы отображения данных",
+    "⚠️ platform-access: Мало JavaScript функций (0)",
+    "❌ how-it-works: Отсутствует template.html",
+    "⚠️ how-it-works: Отсутствует styles.css",
+    "⚠️ how-it-works: Шаблон слишком мал (0 символов)",
+    "⚠️ how-it-works: Отсутствуют элементы отображения данных",
+    "⚠️ how-it-works: Мало JavaScript функций (0)"
+  ],
+  "recommendations": [],
+  "overall_score": 0.0
+}

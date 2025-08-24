@@ -1,0 +1,294 @@
+/* shared/styles/qr-codes.css */
+/* Стили для QR кодов в GENESIS DeFi Platform */
+
+/* Основной контейнер QR кода */
+.qr-payment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 142, 83, 0.1));
+    border-radius: 12px;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    margin: 20px auto;
+    max-width: 320px;
+    position: relative;
+    animation: fadeIn 0.5s ease;
+}
+
+/* QR код изображение */
+.qr-payment-container img {
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+/* Информация под QR кодом */
+.qr-payment-info {
+    text-align: center;
+    width: 100%;
+}
+
+/* Сумма платежа */
+.qr-amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6b35;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Адрес */
+.qr-address {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 15px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    word-break: break-all;
+}
+
+/* Кнопка копирования */
+.qr-copy-btn {
+    background: linear-gradient(135deg, #ff6b35, #ff8e53);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.qr-copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.qr-copy-btn:active {
+    transform: translateY(0);
+}
+
+/* Fallback контейнер */
+.qr-fallback {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(255, 142, 83, 0.05));
+    border-radius: 12px;
+    border: 2px dashed rgba(255, 107, 53, 0.3);
+}
+
+.qr-fallback-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    filter: grayscale(0.5);
+}
+
+.qr-fallback h4 {
+    color: #ff6b35;
+    margin-bottom: 10px;
+}
+
+.qr-fallback p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.qr-fallback-address {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.qr-fallback-address code {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #333;
+    word-break: break-all;
+}
+
+.qr-fallback-address button {
+    padding: 8px 15px;
+    background: #ff6b35;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.3s;
+}
+
+.qr-fallback-address button:hover {
+    background: #ff8e53;
+}
+
+/* Модальное окно с QR кодом */
+.qr-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    max-width: 400px;
+    width: 90%;
+}
+
+.qr-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+}
+
+.qr-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.qr-modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.qr-modal-close {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    transition: all 0.3s;
+}
+
+.qr-modal-close:hover {
+    background: #ff6b35;
+    color: white;
+}
+
+/* Inline QR в депозитах */
+.deposit-qr-container {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.deposit-qr-container canvas {
+    max-width: 200px !important;
+    height: auto !important;
+    margin: 0 auto;
+}
+
+/* QR в платформенном доступе */
+.platform-access-qr {
+    margin: 20px auto;
+    max-width: 280px;
+}
+
+.platform-access-qr img {
+    width: 100%;
+    height: auto;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 107, 53, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+    }
+}
+
+.qr-loading {
+    animation: pulse 2s infinite;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .qr-payment-container {
+        max-width: 100%;
+        margin: 15px 0;
+    }
+    
+    .qr-payment-container img {
+        max-width: 200px;
+    }
+    
+    .qr-modal {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .qr-fallback-address {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Темная тема */
+body.theme-dark .qr-payment-container {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 142, 83, 0.15));
+    border-color: rgba(255, 107, 53, 0.5);
+}
+
+body.theme-dark .qr-address {
+    background: rgba(255, 255, 255, 0.05);
+    color: #aaa;
+}
+
+body.theme-dark .qr-fallback {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 142, 83, 0.1));
+}
+
+body.theme-dark .qr-modal {
+    background: #1a1a1a;
+}
+
+body.theme-dark .qr-modal-title {
+    color: #fff;
+}
+
+body.theme-dark .qr-modal-close {
+    background: #2a2a2a;
+    color: #888;
+}

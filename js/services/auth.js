@@ -26,6 +26,12 @@ window.GenesisAuth = {
                 window.GenesisTerminal.log(`🔍 Проверка авторизации для ${window.GenesisUtils.formatAddress(userAddress)}...`, 'info');
             }
             
+            // Проверяем доступность API
+            if (!window.GenesisAPI || typeof window.GenesisAPI.checkAuthorizationPayment !== 'function') {
+                console.warn('⚠️ GenesisAPI не загружен или метод checkAuthorizationPayment недоступен');
+                return false;
+            }
+            
             // Проверяем оплату через обновленный API
             const authResult = await window.GenesisAPI.checkAuthorizationPayment(userAddress);
             

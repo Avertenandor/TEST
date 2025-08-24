@@ -1,175 +1,368 @@
-# 🏦 GENESIS 1.1 - DeFi Platform
+# 🚀 GENESIS DeFi Platform v1.1
 
-<div align="center">
-  <img src="assets/preview.png" alt="GENESIS 1.1 Preview" width="600">
-  
-  [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Avertenandor/TEST)
-  [![Version](https://img.shields.io/badge/version-1.1-blue)](https://github.com/Avertenandor/TEST)
-  [![License](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
-</div>
+Professional DeFi monitoring and investment platform built on Binance Smart Chain (BSC).
 
-## 📋 О проекте
+![GENESIS Platform](https://img.shields.io/badge/Version-1.1-blue)
+![BSC Network](https://img.shields.io/badge/Network-BSC-yellow)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-**GENESIS 1.1** - это современная DeFi платформа на базе BSC (Binance Smart Chain), реализованная как Progressive Web Application (PWA) без серверной инфраструктуры.
+## 📋 Overview
 
-### 🚀 Ключевые особенности
+GENESIS is a comprehensive DeFi platform that provides:
 
-- **100% Frontend** - работает без серверной части
-- **BSC Integration** - полная интеграция с Binance Smart Chain
-- **PWA Ready** - установка как приложение в один клик
-- **Real-time Terminal** - встроенный терминал для мониторинга
-- **MCP Architecture** - уникальная система маркеров для навигации по коду
+- Real-time portfolio monitoring
+- Automated deposit management  
+- BSC blockchain integration
+- PWA support for mobile devices
+- Enterprise-level security
 
-## 🎯 Функционал
+## 🌟 Features
 
-### Для пользователей
-- ✅ Авторизация через BSC кошелек
-- ✅ Система депозитов (13 планов от $25 до $2500)
-- ✅ Мониторинг транзакций в реальном времени
-- ✅ Множители доходности (до x5)
-- ✅ Детальная аналитика портфеля
-- ✅ QR-коды для удобной оплаты
+### Core Functionality
 
-### Технические возможности
-- 🔧 Интеграция с BSCScan API (3 специализированных ключа)
-- 🔧 Поддержка токенов USDT и PLEX
-- 🔧 Защита от ошибок MetaMask
-- 🔧 Автоматическое обновление данных
-- 🔧 Кеширование для оптимизации
+- **🔐 BSC Authorization** - Secure authentication via BSC wallet
+- **💰 Deposit System** - 13 investment plans ($10-$1000)
+- **📊 Real-time Analytics** - Portfolio performance tracking
+- **📱 PWA Support** - Install as mobile/desktop app
+- **🔄 Auto-payments** - Daily platform access fees
+- **📈 Transaction History** - Complete audit trail
 
-## 📁 Структура проекта
+### Technical Features
 
-```
-GEN1.1/
-├── index.html              # Главная страница
-├── cabinet.html            # Личный кабинет
-├── cabinet-part2.js        # Дополнительный код кабинета
-├── js/                     # JavaScript модули
-│   ├── config.js          # Конфигурация системы
-│   ├── app.js             # Основное приложение
-│   ├── models.js          # Модели данных
-│   └── services/          # Сервисы
-│       ├── api.js         # BSCScan API
-│       ├── auth.js        # Авторизация
-│       ├── platform-access.js    # Управление доступом
-│       ├── deposits-enhanced.js  # Система депозитов
-│       ├── multipliers.js        # Множители
-│       ├── terminal.js          # Терминал
-│       └── utils.js             # Утилиты
-├── css/                    # Стили
-├── assets/                 # Ресурсы
-└── docs/                   # Документация
-```
+- **Modular Architecture** - ES6 modules with lazy loading
+- **State Management** - Reactive state with event bus
+- **Security** - XSS protection, input sanitization
+- **Performance** - Optimized bundle, caching strategies
+- **Monitoring** - Built-in performance analytics
 
-## 🛠 Технологии
+## 🛠️ Tech Stack
 
-- **Frontend**: Pure HTML/CSS/JavaScript (без фреймворков)
-- **Blockchain**: BSC (Binance Smart Chain)
-- **Tokens**: USDT, PLEX ONE
-- **APIs**: BSCScan API, IPAPI, QR Server API
-- **PWA**: Service Workers, Web App Manifest
+- **Frontend**: Vanilla JavaScript (ES6+), HTML5, CSS3
+- **Blockchain**: Binance Smart Chain (BSC)
+- **APIs**: BSCScan API integration
+- **PWA**: Service Worker, Web App Manifest
+- **Build Tools**: Node.js, Terser, Clean-CSS
+- **Testing**: Jest, ESLint
 
-## 🚀 Быстрый старт
+## 📦 Installation
 
-### 1. Клонирование репозитория
+### Prerequisites
+
+- Node.js 14.0+
+- npm 6.0+
+- Modern web browser
+- BSC wallet (MetaMask recommended)
+
+### Setup
+
+1. Clone the repository:
+
 ```bash
 git clone https://github.com/Avertenandor/TEST.git
-cd TEST
+cd GENESIS-Website-Clean
 ```
 
-### 2. Запуск локального сервера
+2. Install dependencies:
+
 ```bash
-# Используйте любой статический сервер
-npx http-server -p 8080
-
-# Или Python
-python -m http.server 8080
-
-# Или Node.js
-npm install -g live-server
-live-server --port=8080
+npm install
 ```
 
-### 3. Открыть в браузере
+3. Configure the platform:
+
+- Copy `js/config.js.example` to `js/config.js` (if exists)
+- Update BSC contract addresses
+- Add BSCScan API keys
+
+4. Run development server:
+
+```bash
+npm run dev
 ```
-http://localhost:8080
+
+5. Build for production:
+
+```bash
+npm run build
 ```
 
-## 💡 Использование
+## 🚀 Usage
 
-1. **Авторизация**: Введите адрес BSC кошелька
-2. **Пополнение доступа**: Минимум $10 USDT для активации платформы
-3. **Создание депозита**: Выберите план и оплатите через QR-код
-4. **Мониторинг**: Следите за доходностью в реальном времени
+### Development
 
-## 🔧 Конфигурация
+```bash
+# Start development server
+npm run dev
 
-Основные настройки находятся в `js/config.js`:
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Lint code
+npm run lint
+
+# Fix linting issues
+npm run lint:fix
+```
+
+### Production Build
+
+```bash
+# Create optimized build
+npm run build
+
+# Files will be in dist/ directory
+```
+
+### Deployment
+
+1. Build the project: `npm run build`
+2. Upload `dist/` contents to your web server
+3. Configure HTTPS (required for PWA)
+4. Set up proper CORS headers
+5. Test all functionality
+
+## 📁 Project Structure
+
+```
+GENESIS-Website-Clean/
+├── index.html                # Landing page (маркетинг)
+├── app.html                  # SPA контейнер (модульная архитектура)
+├── manifest.json             # PWA manifest
+├── sw.js                     # Service Worker
+├── core/                     # Ядро SPA
+│   ├── bootstrap.js         # Инициализация приложения
+│   ├── router.js            # Роутер модулей
+│   ├── module-loader.js     # Динамическая загрузка модулей
+│   ├── event-bus.js         # Шина событий
+│   └── store.js             # Глобальное состояние
+├── modules/                  # ES6-модули разделов
+│   ├── home/                # Главная (landing) в SPA
+│   ├── dashboard/           # Панель управления
+│   ├── deposits/            # Депозиты
+│   └── ...                  # Другие разделы
+├── shared/                   # Общие компоненты/сервисы/стили
+├── css/                      # Статические стили
+├── assets/                   # Изображения и медиа
+└── tests/                    # Тесты
+```
+
+### 🧱 Modular Architecture (SPA)
+- Точка входа: `app.html`
+- Маршруты SPA: управляются `core/router.js`
+- Разделы вынесены в модули (`/modules/<name>`), загрузка — динамическая
+- Новый маршрут: `/home` (модуль `modules/home`) — главная в SPA без потери контента
+
+Примечание: публичная главная `index.html` остаётся для SEO и маркетинга; SPA-доступ — через `/home` или пункт меню «Главная».
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create `.env` file in root directory:
+
+```env
+NODE_ENV=development
+BSC_NETWORK=mainnet
+API_TIMEOUT=30000
+```
+
+### Platform Configuration
+
+Edit `js/config.js`:
 
 ```javascript
 window.GENESIS_CONFIG = {
-    addresses: {
-        system: "0x...",  // Системный кошелек
-    },
-    bscscan: {
-        apiKeys: {
-            DEPOSITS: "...",
-            AUTH: "...",
-            GENERAL: "..."
-        }
-    }
+  addresses: {
+    system: '0x...', // System wallet
+    access: '0x...', // Platform access wallet
+    plex: '0x...',   // PLEX token contract
+    usdt: '0x...'    // USDT token contract
+  },
+  api: {
+    bscscan: ['API_KEY_1', 'API_KEY_2', 'API_KEY_3']
+  }
 };
 ```
 
-## 📊 MCP Архитектура
+## 🧪 Testing
 
-Проект использует уникальную систему MCP-маркеров для навигации:
+### Run All Tests
 
-- **351 маркер** для быстрого поиска кода
-- **100% покрытие** основных файлов
-- **Индексация** в `mcp-index.json`
-
-Пример маркера:
-```javascript
-// MCP-MARKER:MODULE:CABINET_CONTROLLER - Контроллер личного кабинета
+```bash
+npm test
 ```
 
-## 🐛 Известные проблемы
+### Run Specific Test File
 
-- ⚠️ Файл `cabinet.html` требует восстановления (обрыв на строке 2520)
-- 🔄 Система платформенного доступа в разработке
-- 🔄 MEV-бот функционал планируется
+```bash
+npm test -- config.test.js
+```
 
-## 📈 Roadmap
+### Generate Coverage Report
 
-- [ ] Полная интеграция системы оплаты доступа
-- [ ] Добавление MEV-бот функционала
-- [ ] Расширение аналитики портфеля
-- [ ] Мультиязычная поддержка
-- [ ] Темная тема
+```bash
+npm run test:coverage
+```
 
-## 🤝 Вклад в проект
+### Test Structure
 
-Мы приветствуем вклад в развитие проекта! Пожалуйста:
+- `tests/setup.js` - Test environment configuration
+- `tests/*.test.js` - Test files
+- `jest.config.js` - Jest configuration
 
-1. Fork репозитория
-2. Создайте feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit изменения (`git commit -m 'Add AmazingFeature'`)
-4. Push в branch (`git push origin feature/AmazingFeature`)
-5. Откройте Pull Request
+## 📊 API Documentation
 
-## 📝 Лицензия
+### Authorization Service
 
-Этот проект лицензирован под MIT License - см. файл [LICENSE](LICENSE) для деталей.
+```javascript
+// Check if user is authenticated
+const isAuth = GenesisAuthService.isAuthenticated;
 
-## 🙏 Благодарности
+// Authenticate user
+const result = await GenesisAuthService.authenticate(walletAddress);
+```
 
-- BSC Community
-- Всем контрибьюторам проекта
-- Пользователям платформы
+### Deposit Creation
+
+```javascript
+// Start deposit creation
+DepositCreationSystem.selectPlan(planId);
+DepositCreationSystem.selectCurrency('USDT');
+await DepositCreationSystem.generatePaymentInfo();
+```
+
+### Platform Access
+
+```javascript
+// Check platform access
+const access = await GenesisPlatformAccess.checkAccess(userAddress);
+```
+
+## 🔒 Security
+
+### Implemented Security Measures
+
+- Content Security Policy (CSP)
+- XSS Protection via HTML sanitization
+- Input validation and sanitization
+- Secure event handling (no inline handlers)
+- Protected global objects
+- HTTPS enforcement
+- Rate limiting for API calls
+
+### Security Best Practices
+
+1. Always validate user input
+2. Use `safeSetHTML()` instead of `innerHTML`
+3. Sanitize all dynamic content
+4. Keep dependencies updated
+5. Regular security audits
+
+## 🎨 Customization
+
+### Themes
+
+Platform supports multiple themes:
+
+- Dark (default)
+- Light
+- Matrix
+- Retro
+- Cyber
+- Neon
+
+### Adding New Sections
+
+1. Create new section file in `cabinet/js/sections/`
+2. Extend `BaseSection` class
+3. Register in navigation system
+4. Add MCP markers for tracking
+
+## 📱 PWA Features
+
+### Installation
+
+Users can install the platform as an app:
+
+- Desktop: Chrome menu → Install GENESIS
+- Mobile: Browser menu → Add to Home Screen
+
+### Offline Support
+
+- Service Worker caches critical assets
+- Offline fallback pages
+- Background sync for transactions
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature/NewFeature`
+3. Commit changes: `git commit -m 'Add NewFeature'`
+4. Push to branch: `git push origin feature/NewFeature`
+5. Submit pull request
+
+### Code Style
+
+- Follow ESLint configuration
+- Use 2-space indentation
+- Add JSDoc comments
+- Include tests for new features
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Team
+
+- **Development**: GENESIS Team
+- **Design**: UI/UX Team
+- **Testing**: QA Team
+- **Documentation**: Tech Writers
+
+## 📞 Support
+
+- **GitHub Issues**: [Report bugs](https://github.com/Avertenandor/TEST/issues)
+- **Documentation**: [Wiki](https://github.com/Avertenandor/TEST/wiki)
+- **Community**: [Discord](https://discord.gg/genesis)
+
+## 🎯 Roadmap
+
+### Version 1.2 (Q2 2025)
+
+- [ ] Multi-language support
+- [ ] Advanced analytics dashboard
+- [ ] Mobile app (React Native)
+- [ ] API for third-party integration
+
+### Version 1.3 (Q3 2025)
+
+- [ ] Cross-chain support
+- [ ] Automated trading strategies
+- [ ] Social features
+- [ ] Governance token
+
+## ⚡ Performance
+
+### Metrics
+
+- **Initial Load**: < 1.5s
+- **Time to Interactive**: < 2s
+- **Lighthouse Score**: 95+
+- **Bundle Size**: < 500KB (minified)
+
+### Optimization
+
+- Code splitting
+- Lazy loading
+- Image optimization
+- Caching strategies
+- CDN integration
 
 ---
 
-<div align="center">
-  <strong>GENESIS 1.1</strong> - Будущее DeFi уже здесь! 🚀
-</div>
+**Built with ❤️ by GENESIS Team**
+
+*Last updated: July 31, 2025*

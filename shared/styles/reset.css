@@ -1,0 +1,248 @@
+/* shared/styles/reset.css */
+/* CSS Reset для GENESIS DeFi Platform */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set core root defaults */
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Set core body defaults */
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+}
+
+/* Remove list styles */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Remove default styles for links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+/* Remove default button styles */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Remove default input styles */
+input,
+textarea {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* Remove spinner from number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Remove search input styles */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+}
+
+/* Set cursor on buttons */
+button,
+[role="button"] {
+    cursor: pointer;
+}
+
+/* Disabled state */
+:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+}
+
+/* Paragraphs */
+p {
+    line-height: var(--line-height-base);
+}
+
+/* Strong and emphasis */
+strong, b {
+    font-weight: var(--font-weight-bold);
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* Code blocks */
+code, pre {
+    font-family: var(--font-mono);
+}
+
+/* Horizontal rule */
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--spacing-lg) 0;
+}
+
+/* Focus styles */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Selection styles */
+::selection {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+::-moz-selection {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--bg-secondary);
+}
+
+/* Placeholder styles */
+::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+::-moz-placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+/* Hidden class */
+.hidden,
+[hidden] {
+    display: none !important;
+}
+
+/* Visually hidden but accessible */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

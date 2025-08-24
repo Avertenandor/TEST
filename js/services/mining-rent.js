@@ -5,7 +5,9 @@
  * Сервис управления арендой мощностей устройства
  * Запуск программы: 21 июля 2025
  */
+// MCP-MARKER:CLASS:MINING_RENT_SERVICE - Класс сервиса аренды мощностей
 class MiningRentService {
+    // MCP-MARKER:METHOD:MINING:CONSTRUCTOR - Конструктор сервиса
     constructor() {
         this.launchDate = new Date('2025-07-21T00:00:00');
         this.tariffs = {
@@ -24,6 +26,7 @@ class MiningRentService {
     /**
      * Логирование для отладки
      */
+    // MCP-MARKER:METHOD:MINING:DEBUG_LOG - Логирование сообщений
     debugLog(message, type = 'info') {
         if (window.debugLog) {
             window.debugLog(`[MiningRent] ${message}`, type);
@@ -35,6 +38,7 @@ class MiningRentService {
     /**
      * Инициализация сервиса
      */
+    // MCP-MARKER:METHOD:MINING:INIT - Инициализация сервиса
     async init() {
         try {
             this.debugLog('Инициализация сервиса аренды мощностей');
@@ -50,6 +54,7 @@ class MiningRentService {
     /**
      * Получение информации об устройстве
      */
+    // MCP-MARKER:METHOD:MINING:GET_DEVICE_INFO - Получение информации об устройстве
     getDeviceInfo() {
         const info = {
             cores: navigator.hardwareConcurrency || 4,
@@ -64,6 +69,7 @@ class MiningRentService {
     /**
      * Расчет доходности для указанного процента мощности
      */
+    // MCP-MARKER:METHOD:MINING:CALCULATE_EARNINGS - Расчет доходности
     calculateEarnings(percentage) {
         if (!this.deviceInfo) {
             this.deviceInfo = this.getDeviceInfo();
@@ -89,6 +95,7 @@ class MiningRentService {
     /**
      * Проверка доступности программы для пользователя
      */
+    // MCP-MARKER:METHOD:MINING:CHECK_ELIGIBILITY - Проверка доступности
     async checkUserEligibility() {
         try {
             // Проверяем количество активных депозитов
@@ -129,6 +136,7 @@ class MiningRentService {
     /**
      * Запуск обратного отсчета
      */
+    // MCP-MARKER:METHOD:MINING:START_COUNTDOWN - Запуск таймера
     startCountdown() {
         if (this.countdownInterval) {
             clearInterval(this.countdownInterval);
@@ -189,6 +197,7 @@ class MiningRentService {
     /**
      * Обработка запуска программы
      */
+    // MCP-MARKER:METHOD:MINING:ON_LAUNCHED - Обработчик запуска программы
     onProgramLaunched() {
         this.debugLog('Программа аренды мощностей запущена!', 'success');
         
@@ -211,6 +220,7 @@ class MiningRentService {
     /**
      * Выбор уровня мощности
      */
+    // MCP-MARKER:METHOD:MINING:SELECT_POWER - Выбор уровня мощности
     async selectPowerLevel(percentage) {
         try {
             this.debugLog(`Выбор ${percentage}% мощностей`);
@@ -285,6 +295,7 @@ class MiningRentService {
     /**
      * Активация аренды мощностей
      */
+    // MCP-MARKER:METHOD:MINING:ACTIVATE_POWER - Активация аренды
     async activateMiningPower(percentage) {
         try {
             this.debugLog(`Активация ${percentage}% мощностей`);
@@ -342,6 +353,7 @@ class MiningRentService {
     /**
      * Рендеринг страницы аренды мощностей
      */
+    // MCP-MARKER:METHOD:MINING:RENDER_PAGE - Рендеринг страницы
     renderMiningRentPage() {
         const deviceInfo = this.getDeviceInfo();
         
@@ -514,6 +526,7 @@ class MiningRentService {
     /**
      * Очистка ресурсов
      */
+    // MCP-MARKER:METHOD:MINING:DESTROY - Очистка ресурсов
     destroy() {
         this.stopCountdown();
         this.debugLog('Сервис аренды мощностей остановлен');
