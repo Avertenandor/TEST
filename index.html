@@ -5339,18 +5339,16 @@
             },
             
             // Измерение пинга до BSC
-            measureBSCPing: async function() {
+        measureBSCPing: async function() {
                 try {
                     const startTime = performance.now();
-                    await fetch('https://bsc-dataseed.binance.org/', { 
-                        method: 'HEAD',
-                        mode: 'no-cors'
-                    });
+            const url = 'https://bsc-dataseed.binance.org/?_=' + Date.now();
+            await fetch(url, { method: 'GET', mode: 'no-cors', cache: 'no-store' });
                     const endTime = performance.now();
                     const ping = Math.round(endTime - startTime);
                     document.getElementById('network-bsc-ping').textContent = `${ping}ms`;
                 } catch (error) {
-                    document.getElementById('network-bsc-ping').textContent = 'Timeout';
+            document.getElementById('network-bsc-ping').textContent = 'n/a';
                 }
             },
             
