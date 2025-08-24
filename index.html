@@ -6867,8 +6867,9 @@
         <script src="./js/models.js?v=3.6"></script>
         <!-- MCP-MARKER:JS:UTILS - Утилиты -->
         <script src="./js/services/utils.js?v=3.6"></script>
-        <!-- MCP-MARKER:JS:TERMINAL - Терминал -->
-        <script src="./js/services/terminal.js?v=3.6"></script>
+    <!-- MCP-MARKER:JS:TERMINАЛ - Терминал -->
+    <!-- ОТКЛЮЧЕНО: терминал не должен подключаться на главной -->
+    <!-- <script src="./js/services/terminal.js?v=3.6"></script> -->
         <!-- MCP-MARKER:JS:API - API сервисы -->
         <script src="./js/services/api.js?v=3.6"></script>
         <!-- MCP-MARKER:JS:AUTH - Авторизация -->
@@ -6881,13 +6882,19 @@
         <script src="./js/services/techInfo.js?v=3.6"></script>
         <!-- MCP-MARKER:JS:DEPOSITS_ENHANCED - Улучшенная система депозитов -->
         <script src="./js/services/deposits-enhanced.js?v=3.6"></script>
-        <!-- MCP-MARKER:JS:MAIN_APP - Главное приложение -->
-        <script src="./js/app.js?v=3.6"></script>
+    <!-- MCP-MARKER:JS:MAIN_APP - Главное приложение -->
+    <!-- ОТКЛЮЧЕНО: кабинет/приложение не должно инициализироваться на главной -->
+    <!-- <script src="./js/app.js?v=3.6"></script> -->
         
         <!-- MCP-MARKER:SCRIPTS:TOKEN_FUNCTIONS - Функции для работы с PLEX ONE Token -->
         <!-- MCP-MARKER:TOKEN:TRADING_FUNCTIONS - Торговые функции -->
         <!-- Дополнительные функции для PLEX ONE Token -->
         <script>
+        // No-op для обращения к GenesisApp на главной, когда приложение отключено
+        window.GenesisApp = window.GenesisApp || {
+            showNotification: function(){},
+            checkPlatformAccessOnLoad: function(){},
+        };
         // MCP-MARKER:FUNCTION:OPEN_TRADING_LINK - Открытие торговых ссылок
         // Универсальная функция для открытия торговых и информационных ссылок
         function openTradingLink(type) {
