@@ -18,6 +18,8 @@
 <head>
     <!-- ROUTING FIX: Redirect to app.html for application routes -->
     <script>
+        // Флаг: мы на лендинге, отключаем тяжёлые сетевые проверки
+        window.GENESIS_LANDING = true;
         (function() {
             // List of application routes
             const appRoutes = [
@@ -422,6 +424,9 @@
     
     <!-- External Errors Shield для защиты от ошибок расширений -->
     <script src="js/services/external-errors-shield.js"></script>
+    
+    <!-- QR Generator (provides window.QRGenerator and window.generateQRCode bridge) -->
+    <script type="module" src="./shared/services/qr-generator.js"></script>
     
     <!-- MCP-MARKER:SECURITY:ERROR_PROTECTION - Защита от ошибок -->
     <!-- MCP-MARKER:MODULES:LIBRARY_LOADER - Система загрузки библиотек -->
@@ -5149,6 +5154,7 @@
             
             // Получение IP и сетевой информации
             fetchNetworkInfo: async function() {
+                if (window.GENESIS_LANDING) return; // отключено на главной
                 try {
                     // Получаем информацию от нескольких API для надежности
                     const apis = [
@@ -5339,7 +5345,8 @@
             },
             
             // Измерение пинга до BSC
-        measureBSCPing: async function() {
+            measureBSCPing: async function() {
+                if (window.GENESIS_LANDING) return; // отключено на главной
                 try {
                     const startTime = performance.now();
             const url = 'https://bsc-dataseed.binance.org/?_=' + Date.now();
