@@ -425,6 +425,40 @@
     <!-- External Errors Shield для защиты от ошибок расширений -->
     <script src="js/services/external-errors-shield.js"></script>
     
+        <!-- Early network guards: suppress noisy HEAD pings and ipapi calls on landing -->
+        <script>
+            (function(){
+                try {
+                    window.GENESIS_LANDING = true;
+                        // Попытка отключить активный SW и очистить кэши на лендинге
+                        if ('serviceWorker' in navigator) {
+                            navigator.serviceWorker.getRegistrations().then(list => {
+                                list.forEach(reg => reg.unregister().catch(()=>{}));
+                            });
+                        }
+                        if (window.caches && caches.keys) {
+                            caches.keys().then(keys => keys.forEach(k => caches.delete(k))).catch(()=>{});
+                        }
+                    const origFetch = window.fetch;
+                    window.fetch = function(input, init){
+                        try {
+                            const url = (typeof input === 'string') ? input : (input && input.url) || '';
+                            const method = (init && (init.method||'GET').toUpperCase()) || 'GET';
+                            if (window.GENESIS_LANDING) {
+                                if (/bsc-dataseed\.binance\.org\/?$/i.test(url) && method === 'HEAD') {
+                                    return Promise.resolve(new Response(null, { status: 204 }));
+                                }
+                                if (/^https?:\/\/ipapi\.co\//i.test(url)) {
+                                    return Promise.resolve(new Response(JSON.stringify({ blocked:true }), { status: 200, headers: { 'Content-Type':'application/json' } }));
+                                }
+                            }
+                        } catch {}
+                        return origFetch.apply(this, arguments);
+                    };
+                } catch {}
+            })();
+        </script>
+    
     <!-- QR Generator (provides window.QRGenerator and window.generateQRCode bridge) -->
     <script type="module" src="./shared/services/qr-generator.js"></script>
     
@@ -6881,8 +6915,10 @@
     <script src="./js/services/auth.js?v=3.7"></script>
         <!-- MCP-MARKER:JS:TRANSACTIONS - Транзакции -->
     <script src="./js/services/transaction.js?v=3.7"></script>
-        <!-- MCP-MARKER:JS:CABINET - Кабинет пользователя -->
-        <!-- <script src="./js/services/cabinet.js?v=3.6"></script> --> // ОТКЛЮЧЕНО: кабинет не должен инициализироваться на главной
+    <!-- MCP-MARKER:JS:CABINET - Кабинет пользователя -->
+    <!-- ОТКЛЮЧЕНО: кабинет не должен инициализироваться на главной
+    <script src="./js/services/cabinet.js?v=3.7"></script>
+    -->
         <!-- MCP-MARKER:JS:TECH_INFO - Техническая информация -->
     <script src="./js/services/techInfo.js?v=3.7"></script>
         <!-- MCP-MARKER:JS:DEPOSITS_ENHANCED - Улучшенная система депозитов -->
