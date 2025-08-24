@@ -5275,20 +5275,24 @@
                 if ('memory' in performance) {
                     const memory = performance.memory;
                     const usedMB = Math.round(memory.usedJSHeapSize / 1024 / 1024);
-                    document.getElementById('stats-memory-usage').textContent = `${usedMB} MB`;
+                    const elMem = document.getElementById('stats-memory-usage');
+                    if (elMem) elMem.textContent = `${usedMB} MB`;
                 }
-                
+
                 // Загрузка CPU (симуляция)
                 const cpuUsage = Math.floor(Math.random() * 30) + 5; // 5-35%
-                document.getElementById('stats-cpu-usage').textContent = `${cpuUsage}%`;
-                
+                const elCpu = document.getElementById('stats-cpu-usage');
+                if (elCpu) elCpu.textContent = `${cpuUsage}%`;
+
                 // Активные вкладки (симуляция)
                 const activeTabs = Math.floor(Math.random() * 10) + 1; // 1-10
-                document.getElementById('stats-active-tabs').textContent = activeTabs;
-                
+                const elTabs = document.getElementById('stats-active-tabs');
+                if (elTabs) elTabs.textContent = activeTabs;
+
                 // Время последнего обновления
                 const now = new Date();
-                document.getElementById('stats-last-update').textContent = now.toLocaleTimeString();
+                const elLast = document.getElementById('stats-last-update');
+                if (elLast) elLast.textContent = now.toLocaleTimeString();
                 
                 // Показать галочку
                 setTimeout(() => {
