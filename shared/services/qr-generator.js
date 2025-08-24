@@ -368,6 +368,44 @@ export class QRGenerator {
 // Создаём глобальный экземпляр для использования в HTML-обработчиках
 if (typeof window !== 'undefined') {
     window.QRGenerator = new QRGenerator();
+    // Backward-compatible bridge for legacy calls
+    window.generateQRCode = async function(container, data) {
+        try {
+            // Простейшее: если строка — генерируем QR из текста
+            if (typeof data === 'string') {
+                await window.QRGenerator.loadQRLibrary();
+                let el = container;
+                if (typeof container === 'string') {
+                    el = container.startsWith('#') ? document.querySelector(container) : document.getElementById(container);
+                }
+                if (el && typeof el.length === 'number' && !el.tagName) el = el[0];
+                if (!el) throw new Error('QR container not found');
+                el.innerHTML = '';
+                if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
+                    const canvas = document.createElement('canvas');
+                    el.appendChild(canvas);
+                    await new Promise((res, rej) => window.QRCode.toCanvas(canvas, data, { width: 256, margin: 1 }, (err) => err ? rej(err) : res()));
+                    return true;
+                }
+                if (window.QRCode) {
+                    new window.QRCode(el, { text: data, width: 256, height: 256 });
+                    return true;
+                }
+                throw new Error('QRCode library unavailable');
+            }
+
+            // Если объект — пробуем платежный QR
+            if (data && typeof data === 'object') {
+                const opts = { container, ...data };
+                await window.QRGenerator.generatePaymentQR(opts);
+                return true;
+            }
+        } catch (e) {
+            console.error('generateQRCode bridge failed:', e);
+            try { window.QRGenerator.showFallback(container, data?.address || '', data?.amount || '', data?.token || ''); } catch {}
+            return false;
+        }
+    };
 }
 
 // Создаем глобальный экземпляр
