@@ -1,0 +1,232 @@
+[
+  {
+    "type": "log",
+    "text": "⚙️ GENESIS CONFIG loaded v1.1.1 (Terminal v2.1)",
+    "location": {
+      "url": "https://crypto-processing.net/js/config.js?v=3.7",
+      "lineNumber": 605,
+      "columnNumber": 8
+    },
+    "timestamp": "2025-08-25T10:32:37.687391"
+  },
+  {
+    "type": "log",
+    "text": "📊 GENESIS MODELS loaded",
+    "location": {
+      "url": "https://crypto-processing.net/js/models.js?v=3.7",
+      "lineNumber": 88,
+      "columnNumber": 8
+    },
+    "timestamp": "2025-08-25T10:32:37.687391"
+  },
+  {
+    "type": "log",
+    "text": "🛠️ GENESIS UTILS loaded",
+    "location": {
+      "url": "https://crypto-processing.net/js/services/utils.js?v=3.7",
+      "lineNumber": 522,
+      "columnNumber": 8
+    },
+    "timestamp": "2025-08-25T10:32:37.689297"
+  },
+  {
+    "type": "log",
+    "text": "🌐 GENESIS API loaded",
+    "location": {
+      "url": "https://crypto-processing.net/js/services/api.js?v=3.7",
+      "lineNumber": 837,
+      "columnNumber": 8
+    },
+    "timestamp": "2025-08-25T10:32:37.689297"
+  },
+  {
+    "type": "log",
+    "text": "🔐 GENESIS AUTH loaded",
+    "location": {
+      "url": "https://crypto-processing.net/js/services/auth.js?v=3.7",
+      "lineNumber": 368,
+      "columnNumber": 8
+    },
+    "timestamp": "2025-08-25T10:32:37.689297"
+  },
+  {
+    "type": "log",
+    "text": "💸 GENESIS TRANSACTION SERVICE loaded",
+    "location": {
+      "url": "https://crypto-processing.net/js/services/transaction.js?v=3.7",
+      "lineNumber": 200,
+      "columnNumber": 8
+    },
+    "timestamp": "2025-08-25T10:32:37.689915"
+  },
+  {
+    "type": "log",
+    "text": "🔧 Инициализация сервиса технической информации GENESIS 1.1",
+    "location": {
+      "url": "https://crypto-processing.net/js/services/techInfo.js?v=3.7",
+      "lineNumber": 19,
+      "columnNumber": 20
+    },
+    "timestamp": "2025-08-25T10:32:37.690216"
+  },
+  {
+    "type": "log",
+    "text": "✅ Техническая информация собрана",
+    "location": {
+      "url": "https://crypto-processing.net/js/services/techInfo.js?v=3.7",
+      "lineNumber": 120,
+      "columnNumber": 24
+    },
+    "timestamp": "2025-08-25T10:32:37.772358"
+  },
+  {
+    "type": "log",
+    "text": "📦 Enhanced Deposit System loaded successfully",
+    "location": {
+      "url": "https://crypto-processing.net/js/services/deposits-enhanced.js?v=3.7",
+      "lineNumber": 194,
+      "columnNumber": 8
+    },
+    "timestamp": "2025-08-25T10:32:37.779474"
+  },
+  {
+    "type": "log",
+    "text": "✅ Конфигурация проверена успешно",
+    "location": {
+      "url": "https://crypto-processing.net/shared/components/terminal/bootstrap.js?v=1",
+      "lineNumber": 12,
+      "columnNumber": 82
+    },
+    "timestamp": "2025-08-25T10:32:37.788931"
+  },
+  {
+    "type": "log",
+    "text": "[GENESIS-INFO] 2025-08-25T07:32:37.787Z: GenesisUtils initialized null",
+    "location": {
+      "url": "https://crypto-processing.net/shared/components/terminal/bootstrap.js?v=1",
+      "lineNumber": 12,
+      "columnNumber": 82
+    },
+    "timestamp": "2025-08-25T10:32:37.791068"
+  },
+  {
+    "type": "log",
+    "text": "💸 Transaction service initialized",
+    "location": {
+      "url": "https://crypto-processing.net/shared/components/terminal/bootstrap.js?v=1",
+      "lineNumber": 12,
+      "columnNumber": 82
+    },
+    "timestamp": "2025-08-25T10:32:37.791068"
+  },
+  {
+    "type": "log",
+    "text": "🏦 Enhanced Deposit System initialized",
+    "location": {
+      "url": "https://crypto-processing.net/shared/components/terminal/bootstrap.js?v=1",
+      "lineNumber": 12,
+      "columnNumber": 82
+    },
+    "timestamp": "2025-08-25T10:32:37.792116"
+  },
+  {
+    "type": "log",
+    "text": "🚀 Инициализация QR кода",
+    "location": {
+      "url": "https://crypto-processing.net/shared/components/terminal/bootstrap.js?v=1",
+      "lineNumber": 12,
+      "columnNumber": 82
+    },
+    "timestamp": "2025-08-25T10:32:37.792682"
+  },
+  {
+    "type": "error",
+    "text": "❌ Ошибка генерации QR кода через мост: Error: Bridge generation failed\n    at generateQRCode (https://crypto-processing.net/:7676:32)",
+    "location": {
+      "url": "https://crypto-processing.net/shared/components/terminal/bootstrap.js?v=1",
+      "lineNumber": 12,
+      "columnNumber": 82
+    },
+    "timestamp": "2025-08-25T10:32:39.075522"
+  },
+  {
+    "type": "log",
+    "text": "🔄 Используем fallback QR код",
+    "location": {
+      "url": "https://crypto-processing.net/shared/components/terminal/bootstrap.js?v=1",
+      "lineNumber": 12,
+      "columnNumber": 82
+    },
+    "timestamp": "2025-08-25T10:32:39.079278"
+  },
+  {
+    "type": "log",
+    "text": "✅ Fallback QR код загружен",
+    "location": {
+      "url": "https://crypto-processing.net/shared/components/terminal/bootstrap.js?v=1",
+      "lineNumber": 12,
+      "columnNumber": 82
+    },
+    "timestamp": "2025-08-25T10:32:39.346056"
+  },
+  {
+    "type": "warning",
+    "text": "The resource https://crypto-processing.net/js/config.js?v=3.6 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+    "location": {
+      "url": "https://crypto-processing.net/",
+      "lineNumber": 0,
+      "columnNumber": 0
+    },
+    "timestamp": "2025-08-25T10:32:43.959259"
+  },
+  {
+    "type": "warning",
+    "text": "The resource https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+    "location": {
+      "url": "https://crypto-processing.net/",
+      "lineNumber": 0,
+      "columnNumber": 0
+    },
+    "timestamp": "2025-08-25T10:32:43.959259"
+  },
+  {
+    "type": "warning",
+    "text": "The resource https://crypto-processing.net/js/config.js?v=3.6 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+    "location": {
+      "url": "https://crypto-processing.net/",
+      "lineNumber": 0,
+      "columnNumber": 0
+    },
+    "timestamp": "2025-08-25T10:32:51.094060"
+  },
+  {
+    "type": "warning",
+    "text": "The resource https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+    "location": {
+      "url": "https://crypto-processing.net/",
+      "lineNumber": 0,
+      "columnNumber": 0
+    },
+    "timestamp": "2025-08-25T10:32:51.094060"
+  },
+  {
+    "type": "warning",
+    "text": "The resource https://crypto-processing.net/js/config.js?v=3.6 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+    "location": {
+      "url": "https://crypto-processing.net/",
+      "lineNumber": 0,
+      "columnNumber": 0
+    },
+    "timestamp": "2025-08-25T10:32:54.298736"
+  },
+  {
+    "type": "warning",
+    "text": "The resource https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+    "location": {
+      "url": "https://crypto-processing.net/",
+      "lineNumber": 0,
+      "columnNumber": 0
+    },
+    "timestamp": "2025-08-25T10:32:54.298736"
+  }
+]

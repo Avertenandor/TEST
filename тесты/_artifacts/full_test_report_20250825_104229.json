@@ -1,0 +1,297 @@
+{
+  "timestamp": "20250825_104229",
+  "url": "https://crypto-processing.net/",
+  "config": {
+    "timeout": 30000,
+    "headless": true
+  },
+  "summary": {
+    "total_suites": 6,
+    "passed": 3,
+    "failed": 3,
+    "skipped": 0,
+    "success_rate": 50.0
+  },
+  "results": [
+    {
+      "status": "PASS",
+      "duration": 25.439972,
+      "report": {
+        "url": "https://crypto-processing.net/",
+        "time": "20250825_104231",
+        "console_artifact": "тесты\\e2e\\_artifacts\\console_20250825_104231.json",
+        "results": {
+          "modular_terminal_count": 1,
+          "static_terminal_count": 0,
+          "has_triple_backticks": false,
+          "duplicate_ids": [],
+          "qr_error_count": 1
+        },
+        "status": "PASS",
+        "failures": []
+      },
+      "error": "",
+      "suite_name": "Landing Chrome Test",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\e2e\\test_landing_chrome.py"
+    },
+    {
+      "status": "FAIL",
+      "duration": 19.629055,
+      "report": {
+        "url": "https://crypto-processing.net/",
+        "timestamp": "20250825_104255",
+        "console_artifact": "тесты\\e2e\\_artifacts\\full_test_console_20250825_104255.json",
+        "summary": {
+          "total_tests": 5,
+          "passed": 3,
+          "failed": 2,
+          "success_rate": "60.0%"
+        },
+        "test_results": [
+          {
+            "test_name": "page_load",
+            "status": "FAIL",
+            "details": {
+              "title": "GENESIS 1.1 - Пассивный и активный доход в криптовалюте | PLEX ONE Token",
+              "section_#genesis-header": false,
+              "section_#genesis-app": true,
+              "section_#qr-section": true,
+              "section_#how-it-works-section": false,
+              "css_loaded": true
+            },
+            "errors": [
+              "Секция не найдена: #genesis-header",
+              "Секция не найдена: #how-it-works-section"
+            ]
+          },
+          {
+            "test_name": "qr_functionality",
+            "status": "PASS",
+            "details": {
+              "qr_container_exists": true,
+              "has_qr_image": true,
+              "has_fallback": false,
+              "refresh_button_exists": true
+            },
+            "errors": []
+          },
+          {
+            "test_name": "navigation",
+            "status": "PASS",
+            "details": {
+              "buttons_button[onclick*='app.html']": 1,
+              "buttons_.genesis-btn-large": 4,
+              "total_links": 8,
+              "broken_anchor_links": []
+            },
+            "errors": []
+          },
+          {
+            "test_name": "terminal_integration",
+            "status": "PASS",
+            "details": {
+              "modular_terminal_exists": true,
+              "static_terminal_count": 0,
+              "terminal_api_available": true,
+              "bootstrap_loaded": true
+            },
+            "errors": []
+          },
+          {
+            "test_name": "responsive_design",
+            "status": "FAIL",
+            "details": {
+              "desktop_header_visible": false,
+              "desktop_app_visible": true,
+              "tablet_header_visible": false,
+              "tablet_app_visible": true,
+              "mobile_header_visible": false,
+              "mobile_app_visible": true
+            },
+            "errors": [
+              "Header не виден на desktop",
+              "Header не виден на tablet",
+              "Header не виден на mobile"
+            ]
+          }
+        ],
+        "all_errors": [
+          "Секция не найдена: #genesis-header",
+          "Секция не найдена: #how-it-works-section",
+          "Header не виден на desktop",
+          "Header не виден на tablet",
+          "Header не виден на mobile"
+        ],
+        "console_message_count": 21,
+        "status": "FAIL"
+      },
+      "error": "",
+      "suite_name": "Full Landing Test",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\e2e\\test_full_landing.py"
+    },
+    {
+      "status": "PASS",
+      "duration": 12.196179,
+      "report": {
+        "url": "https://crypto-processing.net/",
+        "timestamp": "20250825_104315",
+        "artifacts": {
+          "console_log": "тесты\\e2e\\_artifacts\\console_monitor_20250825_104315.json",
+          "network_log": "тесты\\e2e\\_artifacts\\network_monitor_20250825_104315.json"
+        },
+        "metrics": {
+          "page_load_time_seconds": 9.63,
+          "total_console_messages": 19,
+          "total_errors": 1,
+          "total_warnings": 2,
+          "critical_errors": 0,
+          "total_requests": 251,
+          "failed_requests": 0
+        },
+        "performance": {
+          "load_time": 3244,
+          "dom_ready": 1457,
+          "first_paint": 3243.2999999523163,
+          "page_size": 353178
+        },
+        "critical_errors": [],
+        "failed_requests": [],
+        "status": "PASS"
+      },
+      "error": "",
+      "suite_name": "Console Monitor",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\e2e\\test_console_monitor.py"
+    },
+    {
+      "status": "PASS",
+      "duration": 13.772176,
+      "report": {
+        "url": "https://crypto-processing.net/",
+        "timestamp": "20250825_104327",
+        "summary": {
+          "total_tests": 3,
+          "passed": 3,
+          "failed": 0,
+          "success_rate": "100.0%"
+        },
+        "test_results": [
+          {
+            "status": "PASS",
+            "errors": [],
+            "results": {
+              "qr_section_exists": true,
+              "auth_address": "0x399B22170B0AC7BB20bdC86772BfF478f201fFCD",
+              "valid_address_format": true,
+              "copy_buttons_count": 4,
+              "cabinet_button_exists": true
+            },
+            "test_name": "authorization_flow"
+          },
+          {
+            "status": "PASS",
+            "errors": [],
+            "results": {
+              "redirected_to_cabinet": true,
+              "module_loader_available": false,
+              "bootstrap_available": false,
+              "router_available": false,
+              "store_available": false,
+              "modules_container_exists": true
+            },
+            "test_name": "cabinet_redirect"
+          },
+          {
+            "status": "PASS",
+            "errors": [],
+            "results": {
+              "terminal_exists": true,
+              "terminal_visible": true,
+              "terminal_api_type": "object",
+              "terminal_methods": {
+                "hasInit": true,
+                "hasClear": true,
+                "hasLog": true,
+                "hasExport": true
+              }
+            },
+            "test_name": "terminal_in_cabinet"
+          }
+        ],
+        "all_errors": [],
+        "status": "PASS"
+      },
+      "error": "",
+      "suite_name": "Functional Tests",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\e2e\\test_functional.py"
+    },
+    {
+      "status": "FAIL",
+      "duration": 8.560417,
+      "report": {
+        "url": "https://crypto-processing.net/",
+        "timestamp": "20250825_104341",
+        "test_type": "javascript_unit_tests",
+        "summary": {
+          "total": 8,
+          "passed": 7,
+          "failed": 1,
+          "success_rate": "87.5%"
+        },
+        "test_results": [
+          {
+            "name": "Bootstrap загружен",
+            "status": "PASS",
+            "error": null
+          },
+          {
+            "name": "Terminal API доступен",
+            "status": "FAIL",
+            "error": "show должен быть функцией: expected function, got undefined"
+          },
+          {
+            "name": "QR функции работают",
+            "status": "PASS",
+            "error": null
+          },
+          {
+            "name": "Конфигурация AUTH_CONFIG",
+            "status": "PASS",
+            "error": null
+          },
+          {
+            "name": "DOM элементы существуют",
+            "status": "PASS",
+            "error": null
+          },
+          {
+            "name": "CSS переменные загружены",
+            "status": "PASS",
+            "error": null
+          },
+          {
+            "name": "Перехватчики консоли работают",
+            "status": "PASS",
+            "error": null
+          },
+          {
+            "name": "Fetch перехватчик установлен",
+            "status": "PASS",
+            "error": null
+          }
+        ],
+        "status": "FAIL"
+      },
+      "error": "",
+      "suite_name": "JavaScript Unit Tests",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\unit\\test_js_modules.py"
+    },
+    {
+      "status": "FAIL",
+      "duration": 11.470226,
+      "report": {},
+      "error": "Traceback (most recent call last):\n  File \"C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\performance\\test_performance.py\", line 231, in <module>\n    print(json.dumps(report, ensure_ascii=False, indent=2))\n  File \"C:\\Python312\\Lib\\encodings\\cp1251.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f4b0' in position 2240: character maps to <undefined>\n",
+      "suite_name": "Performance Tests",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\performance\\test_performance.py"
+    }
+  ]
+}

@@ -1,0 +1,1514 @@
+[
+  {
+    "url": "https://crypto-processing.net/",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.251373",
+    "resource_type": "document"
+  },
+  {
+    "url": "https://crypto-processing.net/css/styles.css?v=3.6",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.784931",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://crypto-processing.net/js/config.js?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.828308",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/js/models.js?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.828308",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/js/services/utils.js?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.829326",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/js/services/api.js?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.829326",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/js/services/auth.js?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.829326",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/js/services/transaction.js?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.829326",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/js/services/techInfo.js?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.830324",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/js/services/deposits-enhanced.js?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.830324",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/shared/components/terminal/bootstrap.js?v=1",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.830832",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/css/mobile.css?v=3.6",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:36.963094",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://crypto-processing.net/css/pwa-visibility-fix.css?v=3.6",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.183627",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://crypto-processing.net/js/config.js?v=3.6",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.375231",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.376251",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://www.geckoterminal.com/ru/bsc/pools/0x41d9650faf3341cbf8947fd8063a1fc88dbf1889?embed=1&info=1&swaps=1&grayscale=0&light_chart=0&chart_type=price&resolution=15m",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.377766",
+    "resource_type": "document"
+  },
+  {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.378306",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://crypto-processing.net/modules/terminal/terminal.styles.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.467065",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://crypto-processing.net/modules/terminal/terminal.template.html",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.467065",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://www.geckoterminal.com/cdn-cgi/speculation",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.601438",
+    "resource_type": "other"
+  },
+  {
+    "url": "https://cloudcdn-img.com/static/752c02be/spacer.gif",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.601438",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://s.geckoterminal.com/js/newrelic.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.601438",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://btloader.com/tag?o=5172243878903808&upapi=true",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.602955",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://scripts.webcontentassessor.com/scripts/61d41f27d0c82528be0728f671349d49aa7a8c22b5f09adc9bf61b4b976047b0",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.602955",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.603492",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/media/logo_symbol.d6e8a303.svg",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.603492",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/media/ec1a1eae803b668e-s.p.woff2",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.603492",
+    "resource_type": "font"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/media/f980ec13b5b5e554.p.woff2",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.603492",
+    "resource_type": "font"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/css/55bc877914543b88.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.603492",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/css/df19e319e5577e68.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.604507",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/8230-c83d804a486a1820.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.604507",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4587-fbe535bc8e575183.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.604507",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4857.5d9472e55507c1ec.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.604507",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/9571.fefbe174f9792154.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.604507",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4382-f1d44434a9e15232.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.605516",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/5578-a15818a70d6d7810.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.605516",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2423-2de3daf4abb5289a.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.605516",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/7214-d65c3a3056886aa4.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.606505",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/7211-f32ed3f2467d2637.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.606505",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/8496-064dbcdaca0bebb3.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.606505",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4823-7917a1d9773280c9.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.606505",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2613.1ee0f545719b00e6.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.606505",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2221-4b8e2069a2dac275.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.606505",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1518.d38c3bdc92876feb.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.606505",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/6715.6fe9519b210c98f7.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.606505",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/8680.d0dbe1b976d5bebe.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.607506",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/07c2d338-acda1a8ce2ecfd2c.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.607506",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1930-d622e9f75ec6582f.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.607506",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/7932-348922fa99555ecf.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.608023",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4085.8707acf4f763e9a2.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.608023",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2405.087c885c26109f1c.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.608531",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/8867.8915c3e39a29c3d4.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.608531",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/8319.7a5a2999d454b7f7.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.608531",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3543.54f5838fd5c36ace.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.608531",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3057.d752f4743c99870c.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.609081",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/6729.e1c1e7e78746d0e3.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.609081",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/6374.ce213efd1b94e1a8.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.609081",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3199.9f6a9dd6a2f88a3c.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.609081",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2883.3f4d782a808b9863.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.609081",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/8184.fe284efb520b85dd.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.609081",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/956.c8cc3c40ae1c13fd.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.609081",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/6565.b46bbffb4e40f853.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.609081",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3239.20e745c13dac6922.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.609081",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/998-70156a114c17b2f5.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.610625",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/5962.ab7166d8c03b6081.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.610625",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/5194.e288f39a99b07fc1.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.611757",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4933.f40d14bf93324dad.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.611757",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/7779.429a86f7510240c9.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.611757",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/webpack-6c090e44e509477b.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.613127",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/framework-604bcf9450985ef8.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.613639",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/main-4f2068628506f4f8.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.614184",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/pages/_app-50663b49b3f73e92.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.614184",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/9573-d9d6f3ab69913f82.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.614764",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/5763-9cc132e5cafc8232.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.615297",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4118-07aa55f66c5b5e64.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.615297",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/7620-82eb5ec413303725.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.615297",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1193-909fc775a687eebc.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.615297",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/6501-c549ea6a90f61871.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.615297",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/7389-03308d9b95fe8d43.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.615297",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4419-b9e258d0fd878d23.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.615297",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/pages/%5Bnetwork%5D/pools/%5Baddress%5D-1d2af2645080af2c.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.615297",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/IpI7b8vboDHjA3lo4yoXS/_buildManifest.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.616832",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/IpI7b8vboDHjA3lo4yoXS/_ssgManifest.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.616832",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://snippet.maze.co/maze-universal-loader.js?apiKey=1ce7fdf9-9f7e-453d-b231-909ba76425d1",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.616832",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.658889",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://crypto-processing.net/modules/terminal/terminal.module.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.894134",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://ag.dns-finder.com/meta/dns",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.956719",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://ad-delivery.net/px.gif?ch=2&e=0.26299510832637973",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.957863",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://ad.doubleclick.net/favicon.ico?ad=300x250&ad_box_=1&adnet=1&showad=1&size=250x250&e=0.9092628529093536",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.957863",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://ad-delivery.net/px.gif?ch=1&e=0.7399431574056703",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.958409",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://ad-delivery.net/px.gif?ch=2&e=0.9589108776248593",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.958409",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://ad.doubleclick.net/favicon.ico?ad=300x250&ad_box_=1&adnet=1&showad=1&size=250x250&e=0.5712412327237094",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.958409",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://ad-delivery.net/px.gif?ch=1&e=0.06173317532101086",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.959644",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://snippet.maze.co/static/f95fb246cacd20ad269b6c9efefa25d8f55d2a3d/contextualScaffold.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:37.962668",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://sessions.bugsnag.com/",
+    "method": "POST",
+    "timestamp": "2025-08-25T10:47:38.249329",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://sessions.bugsnag.com/",
+    "method": "POST",
+    "timestamp": "2025-08-25T10:47:38.249848",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/8881.54538880e71aafab.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.536543",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/6592.87a4d451a7954d13.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.536543",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4342.e69c582854585320.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.536543",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4827.284d973ddce47296.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.537559",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3252.96a0668725af8417.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.537559",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/8862.a6498afff194c103.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.537559",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1039.719ae0d0ec9852b9.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.537559",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2802.7caaa4dad946f75f.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.539077",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3607.882e4e0a1762defe.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.539077",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1110.a5422dc17f0e67ff.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.539077",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2728.61008308975f8b76.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.539077",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/7714.e8bdfb922af86de0.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.539077",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3516.a1f81a0f76954e89.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.539077",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4477.6ad6908ad5bcf246.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.539077",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/5427.7718eea307740b05.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.540616",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1113.4f7e88d9949c71c2.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.540616",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2707.18f11c7cb472ee63.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.540616",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/5643.323af36e6fd26cc6.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.540616",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1759.a4744cac3e33e72d.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.540616",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/9012.8b76f140bdbd678c.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.540616",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/5407.30ba9c1384c58ff2.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.540616",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3686.262f8ca4d2c595da.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.542232",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3606.03a8ee8685a7ea87.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.542232",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1971.b8863fdb716edcae.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.542232",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/423.6959102ced3ecdbd.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.542232",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/8750.87880ed2145cbcfc.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.542232",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/css/7db1c173f4775205.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.542232",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/9765.d3a34e36cb158ab1.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.543772",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://app.geckoterminal.com/api/p1/bsc/pools?page=1&items=20&sort=-6h_trend_score&include=tokens&fields%5Bpool%5D=address%2Cbase_token_id%2Cprice_percent_change%2Cpool_created_at%2Ctokens&fields%5Btoken%5D=symbol%2Cimage_url",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.543772",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://app.geckoterminal.com/api/p1/bsc/pools/0x41d9650faf3341cbf8947fd8063a1fc88dbf1889/token_info_snapshots",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.544532",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://app.geckoterminal.com/api/p1/bsc/pools/0x41d9650faf3341cbf8947fd8063a1fc88dbf1889?include=dex%2Cdex.network.explorers%2Cdex_link_services%2Cnetwork_link_services%2Cpairs%2Ctoken_link_services%2Ctokens.token_security_metric%2Ctokens.tags%2Cpool_locked_liquidities&base_token=0&embed=1",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.544532",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4135.bff2da9c4ba9b09e.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.544532",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1831.a8152783fcb71183.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.546053",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://ad.doubleclick.net/favicon.ico?ad=300x250&ad_box_=1&adnet=1&showad=1&size=250x250&e=0.525418083330454",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.615674",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://ad-delivery.net/px.gif?ch=2&e=0.7966806754082167",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.617889",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/7052.7d3fdc756fe4afa6.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.703248",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4545-f731395878b7b90d.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.703787",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/3413.c303c2154cd92b28.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.703787",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/9141.fc60c5fb4c735f51.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.745881",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1895-d6b6e24aaba9d4f0.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.745881",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/9799-0d72f26adc1ba6d7.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.745881",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/5724-3b3fc3816de4362e.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.745881",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/1105.ecef7265661c6162.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.745881",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/runtime.45222d21327e712692d2.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.803226",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/ru.5826.82f25d5636541df34beb.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.803765",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/7346.a2efeed47130dd4e832c.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.803765",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/library.cb873585ffc0b08e6bdf.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.804370",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/9662.03109f673cda5962c847.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.804370",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://ad.doubleclick.net/favicon.ico?ad=300x250&ad_box_=1&adnet=1&showad=1&size=250x250&e=0.061840480354284244",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.805090",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://ad-delivery.net/px.gif?ch=2&e=0.19634032838400428",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.805621",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://app.geckoterminal.com/api/p1/bsc/pools/0x41d9650faf3341cbf8947fd8063a1fc88dbf1889/swaps?include=from_token%2Cto_token&pair_id=13049642&page%5Bafter%5D=1756108058&inverted=0",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.847519",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/7566.e8ac75cdd654602f.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.848528",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/663.5dceef55bd051231.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.849153",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=0x399B22170B0AC7BB20bdC86772BfF478f201fFCD&color=000000&bgcolor=ffffff&margin=4&ecc=H&format=png",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:38.926055",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://ad-delivery.net/px.gif?ch=2&e=0.2355490931576566",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.008089",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://ad.doubleclick.net/favicon.ico?ad=300x250&ad_box_=1&adnet=1&showad=1&size=250x250&e=0.5375068819078316",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.008089",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/6942.5a0ac573ed49c73b.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.209419",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/4799.ed42528453aedd95.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.209419",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/9891.554f803d7d55a4e1.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.209419",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2565.e1b6c2392a026c46.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.210675",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://ad-delivery.net/px.gif?ch=2&e=0.9901386990593738",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.571270",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://ad.doubleclick.net/favicon.ico?ad=300x250&ad_box_=1&adnet=1&showad=1&size=250x250&e=0.13795906047545436",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.572309",
+    "resource_type": "image"
+  },
+  {
+    "url": "https://s.geckoterminal.com/_next/static/chunks/2139.628432f4251a5ef6.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.714728",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://prompts.maze.co/api/widgets",
+    "method": "POST",
+    "timestamp": "2025-08-25T10:47:39.732244",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/ru.1595.3d841ca6685312109688.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.953796",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/3060.fbb750fd312778403036.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.954815",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/2603.67a756e92dbe51a30f72.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.954815",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/5514.81333b83f4e18e9cde99.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.954815",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/7399.bdaaf55cfdf2cf1aca38.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.954815",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/2248.362fa6a7ab1f3e3b06c4.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.956332",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/7769.687807fe02a928ff5a51.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.956332",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/7125.ee8a75f271c0eade9d69.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.956332",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/55.fbe45f08e8a580b70f48.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.956332",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/5666.234fdce3b58e2b7f4b38.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.956332",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/4632.c0ade5e298b9c20b0703.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.956332",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/8432.c18381bc85b04ca9ccc7.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.957874",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/8073.4e8847f52f692b35ff45.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.957874",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/6107.b8b526751e7230cd2e69.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.958563",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/3645.ca58330494e035ef62ab.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.958563",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/8732.c64d758dad3d1c98dd39.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.958563",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/1227.68542dac293294290d44.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.959150",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/1335.5f0edd452b4452a9eaf4.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.959150",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/5877.e211c1f134e8a786af4f.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.959150",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/1538.b6bc85c0060285eaeced.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.960166",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/2227.e46f1f2d53203e1fb152.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.960680",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/361.0b7d3fd5d9c0b7234428.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.961221",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/line-tools-icons.0be276f665ef833ced55.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.961221",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/2157.d1cab62b805a1a6282a1.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.962309",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/3504.6d6bf3e942233dfe76b7.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.962821",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/floating-toolbars.227af68729a87ca33204.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.962821",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/ru.6822.133118c814d077e6ba80.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.964354",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/7811.bc4bc25228d45f97e53e.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.964354",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/5546.681a9e7b91dfc741f79f.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.964354",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/3762.2ec6c50ea553cf1e0197.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.965348",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/302.f0da356af4ffe12ac66d.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.965348",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/5075.8b3ee5b294c55402c5c7.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.965857",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/chart-bottom-toolbar.44c5ff5339e5cebbbf16.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.965857",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/ru.2364.70a5ef2312c476f2c4d6.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.965857",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/1729.0f1e7f0f19efe1232ab6.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.965857",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/3547.2cd7133d1e05f50985a5.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.965857",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/2153.302cc6392cc9f067008b.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.965857",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/5715.5f6b9b0b26b050b9aaaf.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.966863",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/chart-widget-gui.6f7c69eb427cab3bfa2e.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.966863",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/ru.8066.82e3f9a2a10373a165a1.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.966863",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/61.6420f5b2ff091a8d8a5f.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.967396",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/5458.0ad67886dc6df4a03094.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.967396",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/8467.683a2458d61cd83980b6.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.967396",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/2208.2c33dcc3a2ea34861c2c.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.967396",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/8596.b84315f4350430cdb348.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.967927",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/1298.d597f50113da0645dcf5.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.967927",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/restricted-toolset.3623b9d6786b259391e1.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.967927",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/ru.8370.85c5d4763595c3bc07a1.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.968574",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/5446.24be1f27837a64b8646b.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.968574",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/header-toolbar.509c33f5e1dd207b3f2a.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.968574",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/2841.9384677f17d8e3fe6f1e.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.968574",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/user-defined-bars-marks-tooltip.77d8dc2f2d5b3ab9e50a.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.969133",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/studies.137042b318030eec091b.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.969133",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/8077.abb400ed43eea3166fbf.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.969133",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/4814.8f9f36a0b818caadd4c6.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.969133",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/get-error-card.60b010a94494ccdc034c.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.969133",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/ru.6342.80f9837a6aba883bf2c5.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.969133",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/6246.3ecbd24f95eff1b7dd4f.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.970145",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/6625.8ead11e183058d3b8778.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.970145",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/4392.f247c8bc262c51d15d8e.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.970145",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/7241.6134620811847ea8ea05.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.970145",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/6014.2fec107692917fa3b96b.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.970145",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/change-interval-dialog.daec8d3a7b6905b9234b.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.970145",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/ru.1962.c5efb1e1c53dc98e363e.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.971145",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/2417.7835cfcd422c2f0478a4.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.971145",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/9796.0efc740bbb6e80b6cee1.css",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.971145",
+    "resource_type": "stylesheet"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/3443.937a37795af03888d64a.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.971145",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/6408.53f95c8edf441cf41f5e.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.972146",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/drawing-toolbar.f6410fe587830ab66caf.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:39.972146",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://app.geckoterminal.com/api/p1/candlesticks/174912060/13049642?resolution=15&from_timestamp=1755812020&to_timestamp=1756108120&for_update=false&count_back=329&currency=usd&is_inverted=false",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.169503",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://s.geckoterminal.com/lib/charting_library/bundles/study-pane-views.430ecb3d50d053b6e7fa.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.171497",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/async-api.6c072bf7-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.185734",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/lazy-loader.ff971c03-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.186816",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://prompts.maze.co/api/widgets",
+    "method": "POST",
+    "timestamp": "2025-08-25T10:47:40.186816",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://crypto-processing.net/assets/favicon.ico?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.194228",
+    "resource_type": "other"
+  },
+  {
+    "url": "https://www.geckoterminal.com/cdn-cgi/rum?",
+    "method": "POST",
+    "timestamp": "2025-08-25T10:47:40.195771",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://btloader.com/trustedIframe.html?o=5172243878903808&tid=wVKgQqVkqm-vtNPiZ8KaS-98e0326d50&upapi=true",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.257917",
+    "resource_type": "document"
+  },
+  {
+    "url": "https://api.btloader.com/country?o=5172243878903808",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.258465",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://api.btloader.com/pv?nlf=false&tid=wVKgQqVkqm-vtNPiZ8KaS-98e0326d50&sid=7pn5244k-zzDMnBFI-98e0326d50&cv=2.1.141&upapi=true",
+    "method": "POST",
+    "timestamp": "2025-08-25T10:47:40.265679",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://crypto-processing.net/assets/favicon-better.svg?v=3.7",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.340407",
+    "resource_type": "other"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/862.9f44b58b-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.407590",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/page_view_event-aggregate.75812140-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.407590",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/page_view_timing-aggregate.9590bdab-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.408121",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/metrics-aggregate.20a08804-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.408121",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/jserrors-aggregate.9136a849-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.408121",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/ajax-aggregate.bcd562bf-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.408663",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/session_trace-aggregate.6e2218bf-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.408663",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/page_action-aggregate.4d79b951-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.408663",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://js-agent.newrelic.com/spa-aggregate.6c038a0a-1.230.0.min.js",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.408663",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://bam.nr-data.net/1/NRJS-d84958ee1e44b117426?a=594350595&sa=1&v=1.230.0&t=Unnamed%20Transaction&rst=3115&ck=0&s=594f44ff81cede3c&ref=https://www.geckoterminal.com/ru/bsc/pools/0x41d9650faf3341cbf8947fd8063a1fc88dbf1889&be=207&fe=2600&dc=665&af=err,xhr,stn,ins,spa&perf=%7B%22timing%22:%7B%22of%22:1756108057374,%22n%22:0,%22f%22:2,%22dn%22:3,%22dne%22:4,%22c%22:6,%22s%22:6,%22ce%22:70,%22rq%22:70,%22rp%22:206,%22rpe%22:282,%22dl%22:214,%22di%22:285,%22ds%22:871,%22de%22:871,%22dc%22:2797,%22l%22:2800,%22le%22:2806%7D,%22navigation%22:%7B%7D%7D&fp=664&fcp=664&jsonp=NREUM.setToken",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:40.492020",
+    "resource_type": "script"
+  },
+  {
+    "url": "https://bam.nr-data.net/events/1/NRJS-d84958ee1e44b117426?a=594350595&sa=1&v=1.230.0&t=Unnamed%20Transaction&rst=3452&ck=0&s=594f44ff81cede3c&ref=https://www.geckoterminal.com/ru/bsc/pools/0x41d9650faf3341cbf8947fd8063a1fc88dbf1889",
+    "method": "POST",
+    "timestamp": "2025-08-25T10:47:40.828663",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://btloader.com/trustedIframe.html?o=5172243878903808&tid=wVKgQqVkqm-vtNPiZ8KaS-98e0326d50&upapi=true",
+    "method": "GET",
+    "timestamp": "2025-08-25T10:47:46.508766",
+    "resource_type": "document"
+  }
+]

@@ -1,0 +1,54 @@
+{
+  "url": "https://crypto-processing.net/",
+  "timestamp": "20250825_104801",
+  "test_type": "javascript_unit_tests",
+  "summary": {
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "success_rate": "87.5%"
+  },
+  "test_results": [
+    {
+      "name": "Bootstrap загружен",
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "name": "Terminal API доступен",
+      "status": "FAIL",
+      "error": "show должен быть функцией: expected function, got undefined"
+    },
+    {
+      "name": "QR функции работают",
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "name": "Конфигурация AUTH_CONFIG",
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "name": "DOM элементы существуют",
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "name": "CSS переменные загружены",
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "name": "Перехватчики консоли работают",
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "name": "Fetch перехватчик установлен",
+      "status": "PASS",
+      "error": null
+    }
+  ],
+  "status": "FAIL"
+}
