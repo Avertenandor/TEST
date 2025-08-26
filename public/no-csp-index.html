@@ -19,10 +19,6 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://genesis-one.io/">
 
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; img-src 'self' data: https: blob:; connect-src 'self' https:; frame-src 'self' https:;">
-
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://genesis-one.io/">
@@ -225,12 +221,12 @@
             visibility: hidden;
         }
 
-        /* Clean mode indicator */
-        .clean-mode {
+        /* No CSP mode indicator */
+        .no-csp-mode {
             position: fixed;
             top: 10px;
             right: 10px;
-            background: #4ecdc4;
+            background: #ff6b6b;
             color: white;
             padding: 5px 10px;
             border-radius: 5px;
@@ -241,8 +237,8 @@
 </head>
 
 <body>
-    <!-- Clean Mode Indicator -->
-    <div class="clean-mode">✨ CLEAN MODE</div>
+    <!-- No CSP Mode Indicator -->
+    <div class="no-csp-mode">🚫 NO CSP MODE</div>
 
     <!-- Loading Screen -->
     <div id="genesis-loading" class="genesis-loading-screen">
@@ -293,7 +289,7 @@
     <!-- Скрипт для скрытия экрана загрузки -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            console.log('[CLEAN] DOM загружен, инициализация приложения...');
+            console.log('[NO-CSP] DOM загружен, инициализация приложения...');
 
             setTimeout(() => {
                 const app = document.getElementById('genesis-app');
@@ -301,20 +297,20 @@
 
                 if (app) {
                     app.classList.remove('hidden-initially');
-                    console.log('[CLEAN] Приложение показано');
+                    console.log('[NO-CSP] Приложение показано');
                 }
 
                 if (loading) {
                     loading.style.opacity = '0';
                     setTimeout(() => {
                         loading.style.display = 'none';
-                        console.log('[CLEAN] Экран загрузки скрыт');
+                        console.log('[NO-CSP] Экран загрузки скрыт');
                     }, 300);
                 }
             }, 1000);
         });
 
-        console.log('[CLEAN] ✅ Чистая версия без ненужных preload ресурсов');
+        console.log('[NO-CSP] ✅ Версия без Content Security Policy для отладки');
     </script>
 </body>
 
