@@ -1,0 +1,225 @@
+<section id="terminal" class="genesis-terminal" role="region" aria-label="Терминал">
+    <div class="genesis-container">
+        <div class="genesis-terminal-content">
+            <!-- Заголовок секции -->
+            <div class="genesis-terminal-header">
+                <h2 class="genesis-terminal-title">
+                    <span class="genesis-terminal-title-main">🖥️ Терминал v3.1</span>
+                    <span class="genesis-terminal-title-sub">Мощный инструмент для трейдинга</span>
+                </h2>
+                <p class="genesis-terminal-description">
+                    Профессиональный терминал с расширенными возможностями для торговли криптовалютами, 
+                    анализа рынка и автоматизации торговых стратегий.
+                </p>
+            </div>
+            
+            <!-- Терминал -->
+            <div class="genesis-terminal-widget">
+                <div class="genesis-terminal-toolbar">
+                    <div class="genesis-terminal-toolbar-left">
+                        <div class="genesis-terminal-status">
+                            <span class="genesis-terminal-status-dot"></span>
+                            <span class="genesis-terminal-status-text">Подключено</span>
+                        </div>
+                        <div class="genesis-terminal-connection">
+                            <span class="genesis-terminal-connection-label">BSC</span>
+                            <span class="genesis-terminal-connection-value">56</span>
+                        </div>
+                    </div>
+                    
+                    <div class="genesis-terminal-toolbar-right">
+                        <button class="genesis-terminal-btn genesis-terminal-btn-secondary" data-action="settings">
+                            <span class="genesis-terminal-btn-icon">⚙️</span>
+                            <span class="genesis-terminal-btn-text">Настройки</span>
+                        </button>
+                        <button class="genesis-terminal-btn genesis-terminal-btn-primary" data-action="connect">
+                            <span class="genesis-terminal-btn-icon">🔗</span>
+                            <span class="genesis-terminal-btn-text">Подключить кошелек</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="genesis-terminal-main">
+                    <div class="genesis-terminal-chart">
+                        <div class="genesis-terminal-chart-header">
+                            <div class="genesis-terminal-chart-pair">
+                                <span class="genesis-terminal-chart-pair-name">PLEX/USDT</span>
+                                <span class="genesis-terminal-chart-pair-price">$0.85</span>
+                                <span class="genesis-terminal-chart-pair-change genesis-terminal-chart-pair-change-positive">+12.5%</span>
+                            </div>
+                            <div class="genesis-terminal-chart-controls">
+                                <button class="genesis-terminal-chart-btn" data-timeframe="1m">1m</button>
+                                <button class="genesis-terminal-chart-btn genesis-terminal-chart-btn-active" data-timeframe="5m">5m</button>
+                                <button class="genesis-terminal-chart-btn" data-timeframe="15m">15m</button>
+                                <button class="genesis-terminal-chart-btn" data-timeframe="1h">1h</button>
+                                <button class="genesis-terminal-chart-btn" data-timeframe="4h">4h</button>
+                                <button class="genesis-terminal-chart-btn" data-timeframe="1d">1d</button>
+                            </div>
+                        </div>
+                        <div class="genesis-terminal-chart-area">
+                            <div class="genesis-terminal-chart-placeholder">
+                                <div class="genesis-terminal-chart-loading">
+                                    <div class="genesis-terminal-chart-loading-spinner"></div>
+                                    <span>Загрузка графика...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="genesis-terminal-sidebar">
+                        <div class="genesis-terminal-orderbook">
+                            <h4 class="genesis-terminal-orderbook-title">Книга ордеров</h4>
+                            <div class="genesis-terminal-orderbook-content">
+                                <div class="genesis-terminal-orderbook-header">
+                                    <span>Цена</span>
+                                    <span>Объем</span>
+                                    <span>Всего</span>
+                                </div>
+                                <div class="genesis-terminal-orderbook-asks">
+                                    <div class="genesis-terminal-orderbook-row genesis-terminal-orderbook-ask">
+                                        <span class="genesis-terminal-orderbook-price">0.8512</span>
+                                        <span class="genesis-terminal-orderbook-volume">1,234</span>
+                                        <span class="genesis-terminal-orderbook-total">1,234</span>
+                                    </div>
+                                    <div class="genesis-terminal-orderbook-row genesis-terminal-orderbook-ask">
+                                        <span class="genesis-terminal-orderbook-price">0.8510</span>
+                                        <span class="genesis-terminal-orderbook-volume">2,567</span>
+                                        <span class="genesis-terminal-orderbook-total">3,801</span>
+                                    </div>
+                                    <div class="genesis-terminal-orderbook-row genesis-terminal-orderbook-ask">
+                                        <span class="genesis-terminal-orderbook-price">0.8508</span>
+                                        <span class="genesis-terminal-orderbook-volume">3,890</span>
+                                        <span class="genesis-terminal-orderbook-total">7,691</span>
+                                    </div>
+                                </div>
+                                <div class="genesis-terminal-orderbook-spread">
+                                    <span>Спред: 0.0002 (0.02%)</span>
+                                </div>
+                                <div class="genesis-terminal-orderbook-bids">
+                                    <div class="genesis-terminal-orderbook-row genesis-terminal-orderbook-bid">
+                                        <span class="genesis-terminal-orderbook-price">0.8506</span>
+                                        <span class="genesis-terminal-orderbook-volume">4,123</span>
+                                        <span class="genesis-terminal-orderbook-total">4,123</span>
+                                    </div>
+                                    <div class="genesis-terminal-orderbook-row genesis-terminal-orderbook-bid">
+                                        <span class="genesis-terminal-orderbook-price">0.8504</span>
+                                        <span class="genesis-terminal-orderbook-volume">5,678</span>
+                                        <span class="genesis-terminal-orderbook-total">9,801</span>
+                                    </div>
+                                    <div class="genesis-terminal-orderbook-row genesis-terminal-orderbook-bid">
+                                        <span class="genesis-terminal-orderbook-price">0.8502</span>
+                                        <span class="genesis-terminal-orderbook-volume">6,789</span>
+                                        <span class="genesis-terminal-orderbook-total">16,590</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="genesis-terminal-trades">
+                            <h4 class="genesis-terminal-trades-title">Последние сделки</h4>
+                            <div class="genesis-terminal-trades-content">
+                                <div class="genesis-terminal-trades-header">
+                                    <span>Цена</span>
+                                    <span>Объем</span>
+                                    <span>Время</span>
+                                </div>
+                                <div class="genesis-terminal-trades-list">
+                                    <div class="genesis-terminal-trade genesis-terminal-trade-buy">
+                                        <span class="genesis-terminal-trade-price">0.8512</span>
+                                        <span class="genesis-terminal-trade-volume">123.45</span>
+                                        <span class="genesis-terminal-trade-time">12:34:56</span>
+                                    </div>
+                                    <div class="genesis-terminal-trade genesis-terminal-trade-sell">
+                                        <span class="genesis-terminal-trade-price">0.8510</span>
+                                        <span class="genesis-terminal-trade-volume">67.89</span>
+                                        <span class="genesis-terminal-trade-time">12:34:52</span>
+                                    </div>
+                                    <div class="genesis-terminal-trade genesis-terminal-trade-buy">
+                                        <span class="genesis-terminal-trade-price">0.8508</span>
+                                        <span class="genesis-terminal-trade-volume">234.56</span>
+                                        <span class="genesis-terminal-trade-time">12:34:48</span>
+                                    </div>
+                                    <div class="genesis-terminal-trade genesis-terminal-trade-sell">
+                                        <span class="genesis-terminal-trade-price">0.8506</span>
+                                        <span class="genesis-terminal-trade-volume">89.12</span>
+                                        <span class="genesis-terminal-trade-time">12:34:44</span>
+                                    </div>
+                                    <div class="genesis-terminal-trade genesis-terminal-trade-buy">
+                                        <span class="genesis-terminal-trade-price">0.8504</span>
+                                        <span class="genesis-terminal-trade-volume">345.67</span>
+                                        <span class="genesis-terminal-trade-time">12:34:40</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="genesis-terminal-footer">
+                    <div class="genesis-terminal-footer-left">
+                        <div class="genesis-terminal-footer-info">
+                            <span class="genesis-terminal-footer-label">24h Объем:</span>
+                            <span class="genesis-terminal-footer-value">$1,234,567</span>
+                        </div>
+                        <div class="genesis-terminal-footer-info">
+                            <span class="genesis-terminal-footer-label">24h Изменение:</span>
+                            <span class="genesis-terminal-footer-value genesis-terminal-footer-value-positive">+12.5%</span>
+                        </div>
+                        <div class="genesis-terminal-footer-info">
+                            <span class="genesis-terminal-footer-label">Макс. цена:</span>
+                            <span class="genesis-terminal-footer-value">$0.89</span>
+                        </div>
+                        <div class="genesis-terminal-footer-info">
+                            <span class="genesis-terminal-footer-label">Мин. цена:</span>
+                            <span class="genesis-terminal-footer-value">$0.82</span>
+                        </div>
+                    </div>
+                    
+                    <div class="genesis-terminal-footer-right">
+                        <button class="genesis-terminal-btn genesis-terminal-btn-secondary" data-action="fullscreen">
+                            <span class="genesis-terminal-btn-icon">⛶</span>
+                            <span class="genesis-terminal-btn-text">Полный экран</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Информация о терминале -->
+            <div class="genesis-terminal-info">
+                <div class="genesis-terminal-info-grid">
+                    <div class="genesis-terminal-info-item">
+                        <div class="genesis-terminal-info-icon">📊</div>
+                        <h4 class="genesis-terminal-info-title">Реальное время</h4>
+                        <p class="genesis-terminal-info-description">
+                            Все данные обновляются в реальном времени с минимальной задержкой
+                        </p>
+                    </div>
+                    
+                    <div class="genesis-terminal-info-item">
+                        <div class="genesis-terminal-info-icon">🔒</div>
+                        <h4 class="genesis-terminal-info-title">Безопасность</h4>
+                        <p class="genesis-terminal-info-description">
+                            Защищенное соединение и шифрование всех данных
+                        </p>
+                    </div>
+                    
+                    <div class="genesis-terminal-info-item">
+                        <div class="genesis-terminal-info-icon">⚡</div>
+                        <h4 class="genesis-terminal-info-title">Высокая скорость</h4>
+                        <p class="genesis-terminal-info-description">
+                            Молниеносное исполнение ордеров и обновление данных
+                        </p>
+                    </div>
+                    
+                    <div class="genesis-terminal-info-item">
+                        <div class="genesis-terminal-info-icon">🎯</div>
+                        <h4 class="genesis-terminal-info-title">Точность</h4>
+                        <p class="genesis-terminal-info-description">
+                            Точные котировки и надежные данные для принятия решений
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

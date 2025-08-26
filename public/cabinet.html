@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru" itemscope itemtype="https://schema.org/WebApplication">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Primary Meta Tags -->
+    <title>Личный кабинет - GENESIS 1.1 | Управление аккаунтом</title>
+    <meta name="title" content="Личный кабинет - GENESIS 1.1 | Управление аккаунтом">
+    <meta name="description" content="Личный кабинет GENESIS 1.1. Управление депозитами, просмотр балансов, настройка профиля и мониторинг доходности.">
+    <meta name="keywords" content="личный кабинет, GENESIS, депозиты, баланс, профиль, доходность, криптовалюта">
+    <meta name="author" content="GENESIS Team">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://api.bscscan.com https://api.ipapi.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
+    
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#0d1117">
+    <meta name="msapplication-TileColor" content="#0d1117">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon-better.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Основные стили -->
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/mobile.css">
+    
+    <!-- Базовые стили для модульной системы -->
+    <style>
+        /* Базовые стили для модульной системы */
+        [data-module] {
+            min-height: 100px;
+            position: relative;
+        }
+        
+        [data-module]:not([data-module-loaded])::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid #4ecdc4;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* Основные стили приложения */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .genesis-cabinet {
+            min-height: 100vh;
+            width: 100%;
+        }
+        
+        .genesis-cabinet-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .genesis-cabinet-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Экран загрузки -->
+    <div id="genesis-loading" class="genesis-loading-screen">
+        <div class="genesis-loading-content">
+            <div class="genesis-logo-loading">
+                <span class="genesis-logo-text">GENESIS</span>
+                <span class="genesis-logo-number">1.1</span>
+            </div>
+            <div class="genesis-loading-bar">
+                <div class="genesis-loading-progress" id="loading-progress"></div>
+            </div>
+            <p class="genesis-loading-status" id="loading-status">Загрузка личного кабинета...</p>
+        </div>
+    </div>
+
+    <!-- Основное приложение -->
+    <main id="genesis-cabinet" class="genesis-cabinet hidden-initially" role="main">
+        <!-- MODULE: cabinet/shell START -->
+        <section data-module="cabinet/shell"></section>
+        <!-- MODULE: cabinet/shell END -->
+    </main>
+
+    <!-- Скрипт инициализации модульной системы -->
+    <script type="module" src="/app/bootstrap.js"></script>
+    
+    <!-- Скрипт для скрытия экрана загрузки -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const app = document.getElementById('genesis-cabinet');
+                const loading = document.getElementById('genesis-loading');
+                
+                if (app) app.classList.remove('hidden-initially');
+                if (loading) {
+                    loading.style.opacity = '0';
+                    setTimeout(() => loading.style.display = 'none', 300);
+                }
+            }, 1000);
+        });
+    </script>
+    
+    <!-- Стили для экрана загрузки -->
+    <style>
+        .genesis-loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+        
+        .genesis-loading-content {
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .genesis-logo-loading {
+            margin-bottom: 2rem;
+        }
+        
+        .genesis-logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: block;
+        }
+        
+        .genesis-logo-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #4ecdc4;
+            display: block;
+            margin-top: 0.5rem;
+        }
+        
+        .genesis-loading-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+        }
+        
+        .genesis-loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+            border-radius: 2px;
+            animation: loading 2s ease-in-out infinite;
+        }
+        
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+        
+        .genesis-loading-status {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+        
+        .hidden-initially {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</body>
+
+</html>

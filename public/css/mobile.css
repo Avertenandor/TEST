@@ -1,0 +1,272 @@
+/* Мобильные стили для GENESIS Website Clean */
+
+/* Основные мобильные настройки */
+@media (max-width: 768px) {
+    /* Уменьшаем размеры шрифтов */
+    h1 {
+        font-size: 2rem !important;
+    }
+    
+    h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    h3 {
+        font-size: 1.25rem !important;
+    }
+    
+    /* Уменьшаем отступы */
+    .genesis-container {
+        padding: 0 1rem !important;
+    }
+    
+    /* Адаптируем кнопки */
+    .genesis-btn {
+        padding: 0.75rem 1.25rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .genesis-btn-lg {
+        padding: 1rem 1.5rem !important;
+        font-size: 1rem !important;
+    }
+    
+    /* Адаптируем формы */
+    .genesis-form-input {
+        padding: 0.875rem !important;
+        font-size: 0.95rem !important;
+    }
+    
+    /* Адаптируем карточки */
+    .genesis-card {
+        padding: 1rem !important;
+    }
+    
+    /* Скрываем некоторые элементы на мобильных */
+    .genesis-desktop-only {
+        display: none !important;
+    }
+    
+    /* Показываем мобильные элементы */
+    .genesis-mobile-only {
+        display: block !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Еще больше уменьшаем для маленьких экранов */
+    h1 {
+        font-size: 1.75rem !important;
+    }
+    
+    h2 {
+        font-size: 1.25rem !important;
+    }
+    
+    h3 {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Уменьшаем отступы еще больше */
+    .genesis-container {
+        padding: 0 0.75rem !important;
+    }
+    
+    /* Адаптируем кнопки для маленьких экранов */
+    .genesis-btn {
+        padding: 0.625rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    /* Адаптируем формы для маленьких экранов */
+    .genesis-form-input {
+        padding: 0.75rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Уменьшаем размеры иконок */
+    .genesis-btn-icon {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Портретная ориентация */
+@media (max-width: 768px) and (orientation: portrait) {
+    /* Дополнительные настройки для портретной ориентации */
+    .genesis-hero {
+        min-height: 80vh !important;
+    }
+    
+    .genesis-hero-content {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+}
+
+/* Ландшафтная ориентация на мобильных */
+@media (max-width: 768px) and (orientation: landscape) {
+    /* Настройки для ландшафтной ориентации */
+    .genesis-hero {
+        min-height: 60vh !important;
+    }
+    
+    .genesis-header-content {
+        height: 60px !important;
+    }
+}
+
+/* Высокие экраны (iPhone X и подобные) */
+@media (min-height: 800px) and (max-width: 768px) {
+    .genesis-hero {
+        min-height: 90vh !important;
+    }
+}
+
+/* Планшеты */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .genesis-container {
+        padding: 0 1.5rem !important;
+    }
+    
+    .genesis-hero-title-main {
+        font-size: 3rem !important;
+    }
+    
+    .genesis-hero-title-sub {
+        font-size: 2rem !important;
+    }
+}
+
+/* Большие планшеты */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .genesis-container {
+        padding: 0 2rem !important;
+    }
+}
+
+/* Touch устройства */
+@media (hover: none) and (pointer: coarse) {
+    /* Увеличиваем области касания */
+    .genesis-btn {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+    
+    .genesis-nav-link {
+        padding: 1rem 0.75rem !important;
+    }
+    
+    /* Убираем hover эффекты */
+    .genesis-btn:hover {
+        transform: none !important;
+    }
+    
+    .genesis-card:hover {
+        transform: none !important;
+    }
+    
+    /* Добавляем активные состояния */
+    .genesis-btn:active {
+        transform: scale(0.95) !important;
+    }
+    
+    .genesis-card:active {
+        transform: scale(0.98) !important;
+    }
+}
+
+/* Устройства с поддержкой hover */
+@media (hover: hover) and (pointer: fine) {
+    /* Восстанавливаем hover эффекты */
+    .genesis-btn:hover {
+        transform: translateY(-2px) !important;
+    }
+    
+    .genesis-card:hover {
+        transform: translateY(-5px) !important;
+    }
+}
+
+/* Темная тема (если поддерживается) */
+@media (prefers-color-scheme: dark) {
+    /* Дополнительные настройки для темной темы */
+    .genesis-card {
+        background: rgba(255, 255, 255, 0.03) !important;
+    }
+}
+
+/* Светлая тема (если поддерживается) */
+@media (prefers-color-scheme: light) {
+    /* Настройки для светлой темы (если понадобится) */
+}
+
+/* Устройства с высоким DPI */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Улучшаем качество изображений и иконок */
+    .genesis-logo img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Устройства с низким DPI */
+@media (-webkit-max-device-pixel-ratio: 1), (max-resolution: 96dpi) {
+    /* Упрощаем некоторые эффекты */
+    .genesis-card {
+        backdrop-filter: none !important;
+    }
+}
+
+/* Устройства с ограниченной анимацией */
+@media (prefers-reduced-motion: reduce) {
+    /* Отключаем анимации */
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .genesis-loading-spinner {
+        animation: none !important;
+    }
+}
+
+/* Устройства с поддержкой анимации */
+@media (prefers-reduced-motion: no-preference) {
+    /* Восстанавливаем анимации */
+    .genesis-fade-in {
+        animation: fadeIn 0.6s ease-out !important;
+    }
+    
+    .genesis-slide-in {
+        animation: slideIn 0.6s ease-out !important;
+    }
+    
+    .genesis-spin {
+        animation: spin 1s linear infinite !important;
+    }
+}
+
+/* Устройства с ограниченной цветовой палитрой */
+@media (prefers-contrast: high) {
+    /* Увеличиваем контрастность */
+    .genesis-btn {
+        border: 2px solid var(--text-primary) !important;
+    }
+    
+    .genesis-form-input {
+        border: 2px solid var(--text-primary) !important;
+    }
+}
+
+/* Устройства с ограниченной цветовой палитрой */
+@media (prefers-contrast: low) {
+    /* Уменьшаем контрастность */
+    .genesis-text-secondary {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    .genesis-text-muted {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+}

@@ -1,0 +1,380 @@
+/* Стили для модуля footer */
+:where([data-module="footer"]) .genesis-footer {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4rem 0 2rem 0;
+    position: relative;
+}
+
+/* Основной контент */
+:where([data-module="footer"]) .genesis-footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* Основная секция */
+:where([data-module="footer"]) .genesis-footer-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+/* Брендинг */
+:where([data-module="footer"]) .genesis-footer-brand {
+    max-width: 400px;
+}
+
+:where([data-module="footer"]) .genesis-footer-logo {
+    margin-bottom: 1.5rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-logo-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: block;
+}
+
+:where([data-module="footer"]) .genesis-footer-logo-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    color: #4ecdc4;
+    font-weight: 700;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 2rem 0;
+}
+
+/* Социальные сети */
+:where([data-module="footer"]) .genesis-footer-social {
+    display: flex;
+    gap: 1rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-social-link {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:where([data-module="footer"]) .genesis-footer-social-link:hover {
+    background: rgba(78, 205, 196, 0.2);
+    border-color: rgba(78, 205, 196, 0.3);
+    transform: translateY(-3px);
+}
+
+:where([data-module="footer"]) .genesis-footer-social-icon {
+    font-size: 1.5rem;
+}
+
+/* Ссылки */
+:where([data-module="footer"]) .genesis-footer-links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 1rem 0;
+}
+
+:where([data-module="footer"]) .genesis-footer-section-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+:where([data-module="footer"]) .genesis-footer-section-list li {
+    margin-bottom: 0.75rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+:where([data-module="footer"]) .genesis-footer-link:hover {
+    color: #4ecdc4;
+    transform: translateX(5px);
+}
+
+/* Дополнительная секция */
+:where([data-module="footer"]) .genesis-footer-extra {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Статистика */
+:where([data-module="footer"]) .genesis-footer-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-stat {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+:where([data-module="footer"]) .genesis-footer-stat:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+:where([data-module="footer"]) .genesis-footer-stat-number {
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4ecdc4;
+    margin-bottom: 0.5rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+/* Newsletter */
+:where([data-module="footer"]) .genesis-footer-newsletter {
+    max-width: 400px;
+}
+
+:where([data-module="footer"]) .genesis-footer-newsletter-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+}
+
+:where([data-module="footer"]) .genesis-footer-newsletter-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 1.5rem 0;
+}
+
+:where([data-module="footer"]) .genesis-footer-newsletter-form {
+    display: flex;
+    gap: 0.75rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-newsletter-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+:where([data-module="footer"]) .genesis-footer-newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+:where([data-module="footer"]) .genesis-footer-newsletter-input:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+:where([data-module="footer"]) .genesis-footer-newsletter-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+/* Нижняя часть */
+:where([data-module="footer"]) .genesis-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:where([data-module="footer"]) .genesis-footer-copyright {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-copyright p {
+    margin: 0 0 0.25rem 0;
+}
+
+:where([data-module="footer"]) .genesis-footer-legal {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+:where([data-module="footer"]) .genesis-footer-legal-link {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+:where([data-module="footer"]) .genesis-footer-legal-link:hover {
+    color: #4ecdc4;
+}
+
+:where([data-module="footer"]) .genesis-footer-legal-separator {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+}
+
+/* Кнопки */
+:where([data-module="footer"]) .genesis-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+:where([data-module="footer"]) .genesis-btn-primary {
+    background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(78, 205, 196, 0.3);
+}
+
+:where([data-module="footer"]) .genesis-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    :where([data-module="footer"]) .genesis-footer-main {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-extra {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    :where([data-module="footer"]) .genesis-footer {
+        padding: 3rem 0 1.5rem 0;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-links {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-newsletter-form {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-legal {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    :where([data-module="footer"]) .genesis-footer {
+        padding: 2rem 0 1rem 0;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-logo-text {
+        font-size: 1.8rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-social {
+        gap: 0.75rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-social-link {
+        width: 45px;
+        height: 45px;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-social-icon {
+        font-size: 1.3rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-stat {
+        padding: 1rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-stat-number {
+        font-size: 1.3rem;
+    }
+    
+    :where([data-module="footer"]) .genesis-footer-newsletter-title {
+        font-size: 1.1rem;
+    }
+}

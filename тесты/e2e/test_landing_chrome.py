@@ -5,6 +5,8 @@ E2E: Проверка главной страницы в системном Chro
 - Нет сырых тройных бэктиков ``` на странице
 - Нет дублирующихся id в DOM
 - Ошибки "Ошибка генерации QR кода через мост" не спамятся
+- Проверка консольных ошибок и предупреждений
+- Проверка сетевых ошибок
 
 Запуск (PowerShell):
     $env:BROWSER_CHANNEL='chrome'; python .\тесты\e2e\test_landing_chrome.py --url https://crypto-processing.net/ --timeout 25000 --headless 1

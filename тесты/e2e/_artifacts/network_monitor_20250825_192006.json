@@ -1,0 +1,10 @@
+{
+  "request_failures": [
+    {
+      "url": "https://api.btloader.com/pv?nlf=false&tid=qYT2vzSC-uICKniSo-98e207b708&sid=paCMWdLvX-fbNp9af5j-98e207b708&cv=2.1.141-1-g96694ab&upapi=true",
+      "method": "POST",
+      "reason": "unknown"
+    }
+  ],
+  "http_errors": []
+}

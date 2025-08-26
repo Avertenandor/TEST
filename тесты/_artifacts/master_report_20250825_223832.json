@@ -1,0 +1,92 @@
+{
+  "url": "https://crypto-processing.net/",
+  "timestamp": "20250825_223832",
+  "test_type": "full_test_suite",
+  "total_execution_time": 63.956451416015625,
+  "summary": {
+    "total_suites": 6,
+    "passed": 5,
+    "failed": 1,
+    "skipped": 0,
+    "success_rate": "83.3%"
+  },
+  "suite_results": [
+    {
+      "name": "test_landing_chrome",
+      "status": "PASS",
+      "exit_code": 0,
+      "output": "{\n  \"url\": \"https://crypto-processing.net/\",\n  \"time\": \"20250825_223832\",\n  \"console_artifact\": \"тесты\\\\e2e\\\\_artifacts\\\\console_20250825_223832.json\",\n  \"results\": {\n    \"modular_terminal_count\": 1,\n    \"static_terminal_count\": 0,\n    \"has_triple_backticks\": false,\n    \"duplicate_ids\": [],\n    \"qr_error_count\": 1\n  },\n  \"status\": \"PASS\",\n  \"failures\": []\n}\n",
+      "execution_time": 11.888624429702759,
+      "error": "",
+      "all_errors": [],
+      "suite_name": "Landing Chrome Test",
+      "description": "Базовая проверка терминалов и DOM",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\e2e\\test_landing_chrome.py"
+    },
+    {
+      "name": "test_full_landing",
+      "status": "PASS",
+      "exit_code": 0,
+      "output": "[responsive][warn] overflow 592px > 380px on Tablet\n{\n  \"url\": \"https://crypto-processing.net/\",\n  \"time\": \"20250825_223844\",\n  \"console_artifact\": \"тесты\\\\e2e\\\\_artifacts\\\\console_full_20250825_223844.json\",\n  \"screenshot_artifact\": \"тесты\\\\e2e\\\\_artifacts\\\\screenshot_full_20250825_223844.png\",\n  \"results\": {\n    \"total_failures\": 0,\n    \"console_messages\": 23,\n    \"critical_errors\": 0\n  },\n  \"status\": \"PASS\",\n  \"failures\": []\n}\n",
+      "execution_time": 27.603220462799072,
+      "error": "",
+      "all_errors": [],
+      "suite_name": "Full Landing Test",
+      "description": "Полная проверка функциональности лендинга",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\e2e\\test_full_landing.py"
+    },
+    {
+      "name": "test_console_monitor",
+      "status": "FAIL",
+      "exit_code": 2,
+      "output": "usage: test_console_monitor.py [-h] [--url URL] [--duration DURATION]\n                               [--headless HEADLESS]\ntest_console_monitor.py: error: unrecognized arguments: --timeout 30000\n",
+      "execution_time": 0.6157400608062744,
+      "error": "Test failed",
+      "all_errors": [],
+      "suite_name": "Console Monitor",
+      "description": "Мониторинг консоли и сетевых запросов",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\e2e\\test_console_monitor.py"
+    },
+    {
+      "name": "test_functional",
+      "status": "PASS",
+      "exit_code": 0,
+      "output": "{\n  \"url\": \"https://crypto-processing.net/\",\n  \"time\": \"20250825_223912\",\n  \"results\": {\n    \"total_tests\": 3,\n    \"passed\": 3,\n    \"failed\": 0,\n    \"tests\": [\n      {\n        \"name\": \"authorization_flow\",\n        \"status\": \"PASS\",\n        \"details\": \"Проверено: QR секция, адрес, код. Ошибок: 0\",\n        \"errors\": []\n      },\n      {\n        \"name\": \"cabinet_access\",\n        \"status\": \"PASS\",\n        \"details\": \"Проверен переход в кабинет. Ошибок: 0\",\n        \"errors\": []\n      },\n      {\n        \"name\": \"terminal_in_cabinet\",\n        \"status\": \"PASS\",\n        \"details\": \"Пропущено: не страница кабинета (внешний сайт)\",\n        \"errors\": []\n      }\n    ]\n  },\n  \"status\": \"PASS\",\n  \"failures\": []\n}\n",
+      "execution_time": 8.469362497329712,
+      "error": "",
+      "all_errors": [],
+      "suite_name": "Functional Tests",
+      "description": "Функциональные тесты авторизации и кабинета",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\e2e\\test_functional.py"
+    },
+    {
+      "name": "test_js_modules",
+      "status": "PASS",
+      "exit_code": 0,
+      "output": "{\n  \"url\": \"https://crypto-processing.net/\",\n  \"time\": \"20250825_223921\",\n  \"results\": {\n    \"total_modules\": 3,\n    \"passed\": 3,\n    \"failed\": 0,\n    \"modules\": [\n      {\n        \"module\": \"globals_smoke\",\n        \"status\": \"PASS\",\n        \"details\": \"Проверены глобальные функции QR. Ошибок: 0\",\n        \"errors\": []\n      },\n      {\n        \"module\": \"terminal\",\n        \"status\": \"PASS\",\n        \"details\": \"API терминала ограничен/недоступен: отсутствуют ['show', 'hide', 'toggle']\",\n        \"errors\": []\n      },\n      {\n        \"module\": \"auth\",\n        \"status\": \"PASS\",\n        \"details\": \"Пропущено: AUTH_CONFIG не определён на внешнем лендинге\",\n        \"errors\": []\n      }\n    ]\n  },\n  \"status\": \"PASS\",\n  \"failures\": []\n}\n",
+      "execution_time": 6.554441928863525,
+      "error": "",
+      "all_errors": [],
+      "suite_name": "JavaScript Unit Tests",
+      "description": "Unit тесты JavaScript модулей",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\unit\\test_js_modules.py"
+    },
+    {
+      "name": "test_performance",
+      "status": "PASS",
+      "exit_code": 0,
+      "output": "[perf][warn] Высокий CLS: 1.380 > 0.25\n{\n  \"url\": \"https://crypto-processing.net/\",\n  \"time\": \"20250825_223927\",\n  \"metrics\": {\n    \"page_load_time\": 2.8412999999523163,\n    \"dom_content_loaded\": 0.5736000000238418,\n    \"lcp\": 0.312,\n    \"cls\": 1.3795912940502166,\n    \"memory_used\": 2.439732551574707,\n    \"network_requests\": 24\n  },\n  \"results\": {\n    \"performance_score\": \"good\",\n    \"total_failures\": 0,\n    \"analysis\": {\n      \"page_load_ok\": true,\n      \"lcp_ok\": true,\n      \"cls_ok\": false,\n      \"memory_ok\": true,\n      \"requests_ok\": true\n    }\n  },\n  \"status\": \"PASS\",\n  \"failures\": []\n}\n",
+      "execution_time": 8.817776441574097,
+      "error": "",
+      "all_errors": [],
+      "suite_name": "Performance Tests",
+      "description": "Performance, accessibility, SEO тесты",
+      "file_path": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\performance\\test_performance.py"
+    }
+  ],
+  "all_errors": [
+    "Console Monitor: Test failed"
+  ],
+  "artifacts_directory": "C:\\Users\\konfu\\Desktop\\Sites\\Experiment\\Experiment1\\GENESIS-Website-Clean\\тесты\\_artifacts",
+  "status": "FAIL"
+}

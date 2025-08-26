@@ -11,6 +11,7 @@
 Кратко: главная страница переведена на модульный режим без инициализации кабинета, QR стабилизирован, сетевые диагностики отключены для лендинга, добавлены кэш-бастеры. Требуется обновление прод-кэша/Service Worker и проверка иконки manifest на сервере.
 
 ## Что сделано
+
 - Лендинг
   - Отключены `terminal.js` и `app.js`; добавлен `GenesisApp` noop.
   - Подключён `shared/services/qr-generator.js` + глобальный мост `window.generateQRCode` и shim `toCanvas` для DIV.
@@ -23,13 +24,16 @@
   - `/` -> Home, кабинет только на `/dashboard`; index редиректит `/home` и `/dashboard` в `app.html`.
 
 ## Что проверить/сделать на проде
+
 1) Сбросить Service Worker: DevTools → Application → Unregister → Ctrl+F5.
 2) Проверить, что на `/` не грузятся `terminal.js` и `app.js`, а грузится `shared/services/qr-generator.js`.
 3) Проверить manifest icon 144× на сервере: корректный PNG и `Content-Type: image/png`.
 
 ## Следующие шаги
+
 - Открыть PR из ветки `feature/modularize-site`.
 - При необходимости, заменить/переуказать пути иконок в `assets/manifest.json` под домен.
+
 # 🎯 **ПОЛНОЕ ИСПРАВЛЕНИЕ ВСЕХ ОШИБОК В ТЕСТАХ** - 13.08.2025
 
 ## 24.08.2025 — Модульная интеграция главной страницы (Home)
@@ -3088,3 +3092,111 @@ tolerances: {
 ✅ Система готова к работе с новой структурой
 
 **Изменения вступают в силу немедленно!** 🎉
+
+## Test Run: 20250825_115253
+
+- **URL**: <https://crypto-processing.net/>
+- **Status**: ❌ FAIL
+- **Success Rate**: 33.3%
+- **Passed/Total**: 2/6
+- **Execution Time**: 103.73s
+
+### Suite Results
+
+- ✅ **Landing Chrome Test**: PASS (12.69s)
+- ❌ **Full Landing Test**: FAIL (26.09s)
+- ✅ **Console Monitor**: PASS (0.11s)
+- ❌ **Functional Tests**: FAIL (40.44s)
+- ❌ **JavaScript Unit Tests**: FAIL (11.63s)
+- ❌ **Performance Tests**: FAIL (12.77s)
+
+### Errors
+
+- Full Landing Test: Test failed
+- Functional Tests: Test failed
+- JavaScript Unit Tests: Test failed
+- Performance Tests: Test failed
+
+---
+
+## Test Run: 20250825_130624
+- **URL**: https://crypto-processing.net/
+- **Status**: ❌ FAIL
+- **Success Rate**: 83.3%
+- **Passed/Total**: 5/6
+- **Execution Time**: 57.66s
+
+### Suite Results:
+- ✅ **Landing Chrome Test**: PASS (10.18s)
+- ❌ **Full Landing Test**: FAIL (24.67s)
+- ✅ **Console Monitor**: PASS (0.07s)
+- ✅ **Functional Tests**: PASS (7.79s)
+- ✅ **JavaScript Unit Tests**: PASS (5.75s)
+- ✅ **Performance Tests**: PASS (9.20s)
+
+### Errors:
+- Full Landing Test: Test failed
+
+---
+
+## Test Run: 20250825_131331
+- **URL**: https://crypto-processing.net/
+- **Status**: ❌ FAIL
+- **Success Rate**: 83.3%
+- **Passed/Total**: 5/6
+- **Execution Time**: 68.03s
+
+### Suite Results:
+- ✅ **Landing Chrome Test**: PASS (11.45s)
+- ❌ **Full Landing Test**: FAIL (35.06s)
+- ✅ **Console Monitor**: PASS (0.15s)
+- ✅ **Functional Tests**: PASS (7.46s)
+- ✅ **JavaScript Unit Tests**: PASS (5.48s)
+- ✅ **Performance Tests**: PASS (8.42s)
+
+### Errors:
+- Full Landing Test: Test failed
+
+---
+
+## Test Run: 20250825_223832
+- **URL**: https://crypto-processing.net/
+- **Status**: ❌ FAIL
+- **Success Rate**: 83.3%
+- **Passed/Total**: 5/6
+- **Execution Time**: 63.96s
+
+### Suite Results:
+- ✅ **Landing Chrome Test**: PASS (11.89s)
+- ✅ **Full Landing Test**: PASS (27.60s)
+- ❌ **Console Monitor**: FAIL (0.62s)
+- ✅ **Functional Tests**: PASS (8.47s)
+- ✅ **JavaScript Unit Tests**: PASS (6.55s)
+- ✅ **Performance Tests**: PASS (8.82s)
+
+### Errors:
+- Console Monitor: Test failed
+
+---
+
+## Test Run: 20250825_233301
+- **URL**: https://crypto-processing.net/
+- **Status**: ❌ FAIL
+- **Success Rate**: 50.0%
+- **Passed/Total**: 3/6
+- **Execution Time**: 75.41s
+
+### Suite Results:
+- ✅ **Landing Chrome Test**: PASS (13.78s)
+- ❌ **Full Landing Test**: FAIL (37.96s)
+- ❌ **Console Monitor**: FAIL (0.58s)
+- ✅ **Functional Tests**: PASS (7.71s)
+- ✅ **JavaScript Unit Tests**: PASS (5.65s)
+- ❌ **Performance Tests**: FAIL (9.72s)
+
+### Errors:
+- Full Landing Test: Test failed
+- Console Monitor: Test failed
+- Performance Tests: Test failed
+
+---

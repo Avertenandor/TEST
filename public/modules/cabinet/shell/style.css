@@ -1,0 +1,329 @@
+/* Стили для модуля cabinet/shell */
+:where([data-module="cabinet/shell"]) .genesis-cabinet-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Боковая панель */
+:where([data-module="cabinet/shell"]) .genesis-cabinet-sidebar {
+    width: 280px;
+    background: rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-sidebar-header {
+    padding: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-logo-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: block;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-logo-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    color: #4ecdc4;
+    font-weight: 700;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* Навигация */
+:where([data-module="cabinet/shell"]) .genesis-cabinet-nav {
+    flex: 1;
+    padding: 1rem 0;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-nav-item {
+    margin-bottom: 0.5rem;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-nav-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border-left-color: rgba(78, 205, 196, 0.5);
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-nav-link-active {
+    background: rgba(78, 205, 196, 0.1);
+    color: #4ecdc4;
+    border-left-color: #4ecdc4;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-nav-icon {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-nav-text {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Футер боковой панели */
+:where([data-module="cabinet/shell"]) .genesis-cabinet-sidebar-footer {
+    padding: 1rem 2rem 2rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-logout-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Основная область */
+:where([data-module="cabinet/shell"]) .genesis-cabinet-main {
+    flex: 1;
+    margin-left: 280px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Верхняя панель */
+:where([data-module="cabinet/shell"]) .genesis-cabinet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-menu-icon {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #ffffff;
+    position: relative;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-menu-icon::before,
+:where([data-module="cabinet/shell"]) .genesis-cabinet-menu-icon::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: #ffffff;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-menu-icon::before {
+    top: -8px;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-menu-icon::after {
+    bottom: -8px;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-page-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-user-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-user-avatar-text {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-user-name {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-user-status {
+    font-size: 0.8rem;
+    color: #4ecdc4;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-notifications {
+    position: relative;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-notifications-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0.5rem;
+    position: relative;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-notifications-icon {
+    font-size: 1.2rem;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-notifications-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ff6b6b;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Контент */
+:where([data-module="cabinet/shell"]) .genesis-cabinet-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-content-area {
+    min-height: 500px;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-welcome {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-welcome h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 1rem 0;
+}
+
+:where([data-module="cabinet/shell"]) .genesis-cabinet-welcome p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    :where([data-module="cabinet/shell"]) .genesis-cabinet-sidebar {
+        transform: translateX(-100%);
+    }
+    
+    :where([data-module="cabinet/shell"]) .genesis-cabinet-sidebar.open {
+        transform: translateX(0);
+    }
+    
+    :where([data-module="cabinet/shell"]) .genesis-cabinet-main {
+        margin-left: 0;
+    }
+    
+    :where([data-module="cabinet/shell"]) .genesis-cabinet-menu-btn {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    :where([data-module="cabinet/shell"]) .genesis-cabinet-header {
+        padding: 1rem;
+    }
+    
+    :where([data-module="cabinet/shell"]) .genesis-cabinet-content {
+        padding: 1rem;
+    }
+    
+    :where([data-module="cabinet/shell"]) .genesis-cabinet-user-details {
+        display: none;
+    }
+}
