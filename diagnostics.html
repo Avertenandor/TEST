@@ -26,8 +26,8 @@
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 900px;
-            width: 90%;
+            max-width: 1200px;
+            width: 95%;
         }
         
         h1 {
@@ -210,6 +210,43 @@
             border-radius: 4px;
         }
         
+        .error-log {
+            background: #2d1b1b;
+            color: #ff6b6b;
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 20px;
+        }
+        
+        .error-entry {
+            border-bottom: 1px solid #444;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+        
+        .error-timestamp {
+            color: #888;
+            font-size: 0.8em;
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .error-stack {
+            color: #ccc;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+        
         .progress-bar {
             width: 100%;
             height: 30px;
@@ -275,12 +312,39 @@
         .result-actions button {
             flex: 1;
         }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🔍 GENESIS Diagnostics Panel</h1>
-        <p class="subtitle">Комплексная диагностика для AI/ChatGPT анализа</p>
+        <p class="subtitle">Комплексная диагностика с интеграцией Error Guard</p>
         
         <div class="instructions">
             <h4>📋 Инструкция для использования:</h4>
@@ -288,7 +352,7 @@
                 <li>Откройте основной сайт GENESIS в соседней вкладке</li>
                 <li>Выберите тип диагностики ниже</li>
                 <li>Дождитесь завершения анализа</li>
-                <li>Скопируйте результаты для ChatGPT</li>
+                <li>Просматривайте ошибки из Error Guard в реальном времени</li>
             </ol>
         </div>
         
@@ -316,6 +380,14 @@
         
         <div class="control-panel">
             <div class="control-card">
+                <h3>🔍 Error Guard Logs</h3>
+                <p>Просмотр ошибок из window.__diagBuffer в реальном времени</p>
+                <button class="btn-primary" onclick="loadErrorLogs()">
+                    Загрузить логи
+                </button>
+            </div>
+            
+            <div class="control-card">
                 <h3>⚡ Быстрый анализ</h3>
                 <p>10-секундная проверка основных компонентов системы</p>
                 <button class="btn-primary" onclick="runQuickAnalysis()">
@@ -333,7 +405,7 @@
             
             <div class="control-card">
                 <h3>🎯 Проверка модулей</h3>
-                <p>Быстрая проверка доступности всех 20 модулей</p>
+                <p>Быстрая проверка доступности всех модулей</p>
                 <button class="btn-warning" onclick="checkModules()">
                     Проверить модули
                 </button>
@@ -344,14 +416,6 @@
                 <p>Проверка интеграции с BSCScan API</p>
                 <button class="btn-info" onclick="testBlockchain()">
                     Тест BSC API
-                </button>
-            </div>
-            
-            <div class="control-card">
-                <h3>📱 PWA проверка</h3>
-                <p>Проверка функций Progressive Web App</p>
-                <button class="btn-secondary" onclick="checkPWA()">
-                    Проверить PWA
                 </button>
             </div>
             
@@ -368,9 +432,22 @@
             <div class="progress-fill" id="progressFill">0%</div>
         </div>
         
-        <div class="console-output" id="consoleOutput">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('console')">Консоль</div>
+            <div class="tab" onclick="switchTab('errors')">Error Guard Logs</div>
+        </div>
+        
+        <div class="tab-content active" id="consoleTab">
+            <div class="console-output" id="consoleOutput">
 Готов к запуску диагностики...
 Выберите тип анализа выше.
+            </div>
+        </div>
+        
+        <div class="tab-content" id="errorsTab">
+            <div class="error-log" id="errorLog">
+Ошибки из Error Guard будут отображаться здесь...
+            </div>
         </div>
         
         <div class="result-section" id="resultSection">
@@ -384,6 +461,17 @@
     </div>
     
     <script>
+        // Переключение вкладок
+        function switchTab(tabName) {
+            // Убираем активный класс со всех вкладок
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Добавляем активный класс к выбранной вкладке
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+        
         // Загружаем диагностические скрипты
         const loadScript = (src) => {
             return new Promise((resolve, reject) => {
@@ -416,6 +504,54 @@
             output.textContent += `\n[${timestamp}] ${prefix} ${message}`;
             output.scrollTop = output.scrollHeight;
         };
+        
+        // Загрузка логов Error Guard
+        function loadErrorLogs() {
+            try {
+                // Проверяем, есть ли доступ к window.__diagBuffer
+                if (typeof window.__diagBuffer === 'undefined') {
+                    log('Error Guard не инициализирован. Откройте основную страницу GENESIS', 'warning');
+                    return;
+                }
+                
+                const errorLog = document.getElementById('errorLog');
+                const errors = window.__diagBuffer;
+                
+                if (errors.length === 0) {
+                    errorLog.innerHTML = '<div style="color: #28a745; text-align: center; padding: 20px;">✅ Ошибок не обнаружено</div>';
+                    log('Error Guard: ошибок не найдено', 'success');
+                    return;
+                }
+                
+                let html = '';
+                errors.forEach((error, index) => {
+                    html += `
+                        <div class="error-entry">
+                            <div class="error-timestamp">${error.timestamp}</div>
+                            <div class="error-message">${error.message}</div>
+                            ${error.stack ? `<div class="error-stack">${error.stack}</div>` : ''}
+                            ${error.context ? `<div class="error-stack">Context: ${JSON.stringify(error.context, null, 2)}</div>` : ''}
+                        </div>
+                    `;
+                });
+                
+                errorLog.innerHTML = html;
+                log(`Error Guard: загружено ${errors.length} ошибок`, 'success');
+                
+                // Обновляем счетчик ошибок
+                document.getElementById('status-errors').textContent = errors.length;
+                
+            } catch (error) {
+                log(`Ошибка загрузки логов: ${error.message}`, 'error');
+            }
+        }
+        
+        // Автообновление логов каждые 5 секунд
+        setInterval(() => {
+            if (document.getElementById('errorsTab').classList.contains('active')) {
+                loadErrorLogs();
+            }
+        }, 5000);
         
         // Прогресс бар
         const showProgress = (duration) => {
@@ -558,48 +694,6 @@
             }
         }
         
-        // Проверка PWA
-        async function checkPWA() {
-            try {
-                log('Проверка PWA функций...', 'info');
-                
-                // Service Worker
-                if ('serviceWorker' in navigator) {
-                    const registration = await navigator.serviceWorker.getRegistration();
-                    if (registration) {
-                        log('Service Worker зарегистрирован ✅', 'success');
-                    } else {
-                        log('Service Worker не найден ⚠️', 'warning');
-                    }
-                }
-                
-                // Manifest
-                const manifestLink = document.querySelector('link[rel="manifest"]');
-                if (manifestLink) {
-                    log(`Manifest найден: ${manifestLink.href} ✅`, 'success');
-                } else {
-                    log('Manifest не найден ⚠️', 'warning');
-                }
-                
-                // Install prompt
-                if (window.matchMedia('(display-mode: standalone)').matches) {
-                    log('Приложение установлено как PWA ✅', 'success');
-                } else {
-                    log('Приложение работает в браузере', 'info');
-                }
-                
-                // Push notifications
-                if ('Notification' in window) {
-                    const permission = Notification.permission;
-                    log(`Push уведомления: ${permission}`, 
-                        permission === 'granted' ? 'success' : 'info');
-                }
-                
-            } catch (error) {
-                log(`Ошибка проверки PWA: ${error.message}`, 'error');
-            }
-        }
-        
         // Обновление статистики
         function updateStats(results) {
             if (results.modules) {
@@ -686,6 +780,7 @@
         window.addEventListener('load', () => {
             log('GENESIS Diagnostics Panel готов к работе!', 'success');
             log('Выберите тип диагностики выше для начала анализа', 'info');
+            log('Для просмотра Error Guard логов перейдите на вкладку "Error Guard Logs"', 'info');
         });
     </script>
 </body>

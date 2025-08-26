@@ -1,7 +1,6 @@
 // modules/home/index.ts
 // Главный модуль Home, объединяющий все подмодули
 
-import { Module } from '../../core/router';
 import { HeroModule } from './hero';
 import { TokenInfoModule } from './tokenInfo';
 import { CtaGridModule } from './ctaGrid';
@@ -16,8 +15,36 @@ export interface HomeProps {
     showStats?: boolean;
 }
 
-export class HomeModule implements Module {
-    id = 'home';
+export const module = {
+    id: 'home',
+    route: '/',
+    
+    mount(el: HTMLElement, props?: HomeProps): void {
+        const homeModule = new HomeModule(props);
+        homeModule.mount(el);
+        
+        // Сохраняем ссылку на модуль для возможности unmount
+        (el as any)._homeModule = homeModule;
+    },
+    
+    unmount(el: HTMLElement): void {
+        const homeModule = (el as any)._homeModule;
+        if (homeModule && typeof homeModule.unmount === 'function') {
+            homeModule.unmount();
+        }
+        (el as any)._homeModule = null;
+    },
+    
+    canActivate(ctx?: any): boolean {
+        return true; // Home модуль всегда доступен
+    },
+    
+    init(): void {
+        console.log('Home module initialized');
+    }
+};
+
+export class HomeModule {
     private element: HTMLElement | null = null;
     private props: HomeProps;
     private subModules: Map<string, any> = new Map();
@@ -233,5 +260,5 @@ export class HomeModule implements Module {
     }
 }
 
-// Экспорт по умолчанию для совместимости с router
-export default HomeModule;
+// Экспорт по умолчанию для совместимости
+export default module;

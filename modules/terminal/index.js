@@ -1,13 +1,40 @@
 // modules/terminal/index.js
-// Инициализация модуля терминала для модульной системы GENESIS
+// Модуль терминала для модульной системы GENESIS
 
-export default class TerminalModule {
+import CONFIG from '../../shared/config.js';
+
+class TerminalModule {
     constructor() {
         this.name = 'terminal';
         this.version = '2.0.0';
         this.dependencies = [];
         this.isLoaded = false;
         this.container = null;
+        this.state = this.loadState();
+    }
+
+    /**
+     * Загрузка состояния из localStorage
+     */
+    loadState() {
+        try {
+            const saved = localStorage.getItem(CONFIG.terminal.localStorageKey);
+            return saved ? JSON.parse(saved) : { ...CONFIG.terminal.defaultState };
+        } catch (error) {
+            console.warn('Failed to load terminal state:', error);
+            return { ...CONFIG.terminal.defaultState };
+        }
+    }
+
+    /**
+     * Сохранение состояния в localStorage
+     */
+    saveState() {
+        try {
+            localStorage.setItem(CONFIG.terminal.localStorageKey, JSON.stringify(this.state));
+        } catch (error) {
+            console.warn('Failed to save terminal state:', error);
+        }
     }
 
     /**
@@ -35,6 +62,7 @@ export default class TerminalModule {
                 if (window.CabinetTerminal) {
                     window.CabinetTerminal.init();
                     this.setupEventListeners();
+                    this.applyState();
                 }
             }, 100);
             
@@ -49,6 +77,26 @@ export default class TerminalModule {
         } catch (error) {
             console.error('❌ Failed to initialize terminal module:', error);
             throw error;
+        }
+    }
+
+    /**
+     * Применение сохраненного состояния
+     */
+    applyState() {
+        if (!window.CabinetTerminal) return;
+
+        if (this.state.minimized) {
+            window.CabinetTerminal.minimize();
+        }
+        if (this.state.fullscreen) {
+            window.CabinetTerminal.fullscreen();
+        }
+        if (this.state.mute) {
+            window.CabinetTerminal.mute();
+        }
+        if (this.state.filters) {
+            window.CabinetTerminal.setFilters(this.state.filters);
         }
     }
 
@@ -152,6 +200,27 @@ export default class TerminalModule {
         window.eventBus.on('system:event', (data) => {
             this.onSystemEvent(data.event, data.data);
         });
+
+        // Слушаем события терминала для сохранения состояния
+        window.eventBus.on('terminal:minimize', (minimized) => {
+            this.state.minimized = minimized;
+            this.saveState();
+        });
+
+        window.eventBus.on('terminal:fullscreen', (fullscreen) => {
+            this.state.fullscreen = fullscreen;
+            this.saveState();
+        });
+
+        window.eventBus.on('terminal:mute', (mute) => {
+            this.state.mute = mute;
+            this.saveState();
+        });
+
+        window.eventBus.on('terminal:filters', (filters) => {
+            this.state.filters = filters;
+            this.saveState();
+        });
     }
 
     /**
@@ -230,6 +299,10 @@ export default class TerminalModule {
             window.eventBus.off('api:call');
             window.eventBus.off('error');
             window.eventBus.off('system:event');
+            window.eventBus.off('terminal:minimize');
+            window.eventBus.off('terminal:fullscreen');
+            window.eventBus.off('terminal:mute');
+            window.eventBus.off('terminal:filters');
         }
 
         // Очищаем контейнер
@@ -241,3 +314,35 @@ export default class TerminalModule {
         console.log('🗑️ Terminal module destroyed');
     }
 }
+
+// Стандартный экспорт модуля
+export const module = {
+    id: 'terminal',
+    
+    mount(el, props) {
+        const terminalModule = new TerminalModule();
+        terminalModule.init({ container: el });
+        
+        // Сохраняем ссылку на модуль для возможности unmount
+        el._terminalModule = terminalModule;
+    },
+    
+    unmount(el) {
+        const terminalModule = el._terminalModule;
+        if (terminalModule && typeof terminalModule.destroy === 'function') {
+            terminalModule.destroy();
+        }
+        el._terminalModule = null;
+    },
+    
+    canActivate(ctx) {
+        return true; // Терминал всегда доступен
+    },
+    
+    init() {
+        console.log('Terminal module initialized');
+    }
+};
+
+// Экспорт по умолчанию для совместимости
+export default module;

@@ -108,7 +108,7 @@ async function loadLibrary(config: LibraryConfig): Promise<any> {
 }
 
 /**
- * Axios fallback с исправленным API
+ * Axios fallback с исправленным API и обработкой ошибок
  */
 function createAxiosFallback(): any {
     const axiosFallback = {
@@ -118,7 +118,18 @@ function createAxiosFallback(): any {
                 ...config
             });
 
-            const data = await response.json();
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
+            }
+
+            let data;
+            try {
+                data = await response.json();
+            } catch (error) {
+                throw new Error(`Failed to parse JSON response: ${error}`);
+            }
+
             return {
                 data,
                 status: response.status,
@@ -138,7 +149,18 @@ function createAxiosFallback(): any {
                 ...config
             });
 
-            const responseData = await response.json();
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
+            }
+
+            let responseData;
+            try {
+                responseData = await response.json();
+            } catch (error) {
+                throw new Error(`Failed to parse JSON response: ${error}`);
+            }
+
             return {
                 data: responseData,
                 status: response.status,
@@ -158,7 +180,18 @@ function createAxiosFallback(): any {
                 ...config
             });
 
-            const responseData = await response.json();
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
+            }
+
+            let responseData;
+            try {
+                responseData = await response.json();
+            } catch (error) {
+                throw new Error(`Failed to parse JSON response: ${error}`);
+            }
+
             return {
                 data: responseData,
                 status: response.status,
@@ -173,13 +206,30 @@ function createAxiosFallback(): any {
                 ...config
             });
 
-            const data = await response.json();
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
+            }
+
+            let data;
+            try {
+                data = await response.json();
+            } catch (error) {
+                throw new Error(`Failed to parse JSON response: ${error}`);
+            }
+
             return {
                 data,
                 status: response.status,
                 ok: response.ok,
                 statusText: response.statusText
             };
+        },
+
+        defaults: {
+            headers: {
+                common: {}
+            }
         }
     };
 

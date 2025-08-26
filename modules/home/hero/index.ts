@@ -1,7 +1,6 @@
 // modules/home/hero/index.ts
 // Модуль Hero для главной страницы
 
-import { Module } from '../../../core/router';
 import './hero.module.css';
 
 export interface HeroProps {
@@ -12,8 +11,7 @@ export interface HeroProps {
     ctaLink?: string;
 }
 
-export class HeroModule implements Module {
-    id = 'hero';
+export class HeroModule {
     private element: HTMLElement | null = null;
     private props: HeroProps;
 
@@ -93,5 +91,34 @@ export class HeroModule implements Module {
     }
 }
 
-// Экспорт по умолчанию для совместимости с router
-export default HeroModule;
+// Стандартный экспорт модуля
+export const module = {
+    id: 'hero',
+    
+    mount(el: HTMLElement, props?: HeroProps): void {
+        const heroModule = new HeroModule(props);
+        heroModule.mount(el);
+        
+        // Сохраняем ссылку на модуль для возможности unmount
+        (el as any)._heroModule = heroModule;
+    },
+    
+    unmount(el: HTMLElement): void {
+        const heroModule = (el as any)._heroModule;
+        if (heroModule && typeof heroModule.unmount === 'function') {
+            heroModule.unmount();
+        }
+        (el as any)._heroModule = null;
+    },
+    
+    canActivate(ctx?: any): boolean {
+        return true;
+    },
+    
+    init(): void {
+        console.log('Hero module initialized');
+    }
+};
+
+// Экспорт по умолчанию для совместимости
+export default module;
