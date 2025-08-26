@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +13,19 @@
             color: white;
             font-family: Arial, sans-serif;
         }
+
         .test-container {
             max-width: 1200px;
             margin: 0 auto;
         }
+
         .debug-info {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
         }
+
         .test-button {
             background: #4ecdc4;
             color: white;
@@ -31,20 +35,22 @@
             cursor: pointer;
             margin: 5px;
         }
+
         .test-button:hover {
             background: #45b7d1;
         }
     </style>
 </head>
+
 <body>
     <div class="test-container">
         <h1>🔧 Тест терминала</h1>
-        
+
         <div class="debug-info">
             <h3>Отладочная информация:</h3>
             <div id="debug-output">Загрузка...</div>
         </div>
-        
+
         <div class="debug-info">
             <h3>Тестовые кнопки:</h3>
             <button class="test-button" onclick="testTerminalMount()">Смонтировать терминал</button>
@@ -52,36 +58,36 @@
             <button class="test-button" onclick="testPubSub()">Тест PubSub</button>
             <button class="test-button" onclick="clearDebug()">Очистить лог</button>
         </div>
-        
+
         <div id="terminal-test" data-module="terminal"></div>
     </div>
 
     <script type="module">
         import { emit } from './app/pubsub.js';
-        
-        window.testTerminalMount = async function() {
+
+        window.testTerminalMount = async function () {
             try {
                 log('Начинаем монтирование терминала...');
-                
+
                 const terminalElement = document.getElementById('terminal-test');
                 const module = await import('./modules/terminal/index.js');
-                
+
                 log('Модуль загружен, монтируем...');
                 const unmount = await module.default.mount(terminalElement, {});
-                
+
                 log('Терминал смонтирован успешно!');
                 window.terminalUnmount = unmount;
-                
+
             } catch (error) {
                 log('Ошибка монтирования: ' + error.message);
                 console.error(error);
             }
         };
-        
-        window.testTerminalToggle = function() {
+
+        window.testTerminalToggle = function () {
             const terminalWidget = document.querySelector('.genesis-terminal-widget');
             const toggleBtn = document.querySelector('[data-action="toggle-terminal"]');
-            
+
             if (terminalWidget && toggleBtn) {
                 log('Нажимаем кнопку сворачивания...');
                 toggleBtn.click();
@@ -89,40 +95,41 @@
                 log('Терминал не найден или кнопка не найдена');
             }
         };
-        
-        window.testPubSub = function() {
+
+        window.testPubSub = function () {
             log('Тестируем PubSub...');
             emit('test:event', { message: 'Тестовое событие' });
             log('Событие отправлено');
         };
-        
-        window.clearDebug = function() {
+
+        window.clearDebug = function () {
             document.getElementById('debug-output').innerHTML = '';
         };
-        
+
         function log(message) {
             const debugOutput = document.getElementById('debug-output');
             const timestamp = new Date().toLocaleTimeString();
             debugOutput.innerHTML += `<div>[${timestamp}] ${message}</div>`;
             console.log(`[DEBUG] ${message}`);
         }
-        
+
         // Подписываемся на события
         import { on } from './app/pubsub.js';
-        
+
         on('terminal:collapsed', (data) => {
             log('Событие: terminal:collapsed');
         });
-        
+
         on('terminal:expanded', (data) => {
             log('Событие: terminal:expanded');
         });
-        
+
         on('test:event', (data) => {
             log('Получено тестовое событие: ' + JSON.stringify(data));
         });
-        
+
         log('Тестовая страница загружена');
     </script>
 </body>
+
 </html>
