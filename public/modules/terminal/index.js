@@ -22,26 +22,39 @@ export default {
         const connectBtn = root.querySelector('[data-action="connect"]');
         const settingsBtn = root.querySelector('[data-action="settings"]');
         const fullscreenBtn = root.querySelector('[data-action="fullscreen"]');
+        const toggleBtn = root.querySelector('[data-action="toggle-terminal"]');
         const timeframeBtns = root.querySelectorAll('[data-timeframe]');
+        const terminalWidget = root.querySelector('.genesis-terminal-widget');
         
+        // Кнопка сворачивания/разворачивания
+        if (toggleBtn && terminalWidget) {
+            toggleBtn.addEventListener('click', () => {
+                this.toggleTerminal(terminalWidget, toggleBtn);
+            });
+        }
+        
+        // Кнопка подключения кошелька
         if (connectBtn) {
             connectBtn.addEventListener('click', () => {
                 emit('wallet:connect', { source: 'terminal' });
             });
         }
         
+        // Кнопка настроек
         if (settingsBtn) {
             settingsBtn.addEventListener('click', () => {
                 emit('terminal:settings', {});
             });
         }
         
+        // Кнопка полного экрана
         if (fullscreenBtn) {
             fullscreenBtn.addEventListener('click', () => {
                 emit('terminal:fullscreen', {});
             });
         }
         
+        // Кнопки временных интервалов
         timeframeBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const timeframe = btn.getAttribute('data-timeframe');
@@ -50,6 +63,42 @@ export default {
         });
         
         this.startDataUpdates(root);
+    },
+    
+    toggleTerminal(widget, button) {
+        const isCollapsed = widget.classList.contains('collapsed');
+        const toggleIcon = button.querySelector('.genesis-terminal-toggle-icon');
+        const buttonText = button.querySelector('.genesis-terminal-btn-text');
+        
+        if (isCollapsed) {
+            // Разворачиваем терминал
+            widget.classList.remove('collapsed');
+            toggleIcon.textContent = '📉';
+            buttonText.textContent = 'Свернуть';
+            
+            // Эмитим событие
+            emit('terminal:expanded', {});
+            
+            console.log('[TERMINAL] Терминал развернут');
+        } else {
+            // Сворачиваем терминал
+            widget.classList.add('collapsed');
+            toggleIcon.textContent = '📈';
+            buttonText.textContent = 'Развернуть';
+            
+            // Эмитим событие
+            emit('terminal:collapsed', {});
+            
+            console.log('[TERMINAL] Терминал свернут');
+        }
+        
+        // Плавная прокрутка к терминалу
+        setTimeout(() => {
+            widget.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }, 300);
     },
     
     switchTimeframe(timeframe, activeBtn) {

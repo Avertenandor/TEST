@@ -547,3 +547,80 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Стили для сворачивания/разворачивания терминала */
+:where([data-module="terminal"]) .genesis-terminal-widget {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    margin-bottom: 4rem;
+    transition: all 0.3s ease;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-widget.collapsed {
+    max-height: 80px;
+    overflow: hidden;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-widget.collapsed .genesis-terminal-main,
+:where([data-module="terminal"]) .genesis-terminal-widget.collapsed .genesis-terminal-footer {
+    display: none;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-widget.collapsed .genesis-terminal-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Анимация сворачивания */
+:where([data-module="terminal"]) .genesis-terminal-main {
+    transition: all 0.3s ease;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-footer {
+    transition: all 0.3s ease;
+}
+
+/* Стили для кнопки переключения */
+:where([data-module="terminal"]) .genesis-terminal-btn[data-action="toggle-terminal"] {
+    background: rgba(78, 205, 196, 0.1);
+    border-color: rgba(78, 205, 196, 0.3);
+    color: #4ecdc4;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-btn[data-action="toggle-terminal"]:hover {
+    background: rgba(78, 205, 196, 0.2);
+    border-color: rgba(78, 205, 196, 0.5);
+}
+
+/* Стили для состояния свернутого терминала */
+:where([data-module="terminal"]) .genesis-terminal-widget.collapsed {
+    background: rgba(78, 205, 196, 0.05);
+    border-color: rgba(78, 205, 196, 0.2);
+}
+
+:where([data-module="terminal"]) .genesis-terminal-widget.collapsed .genesis-terminal-toolbar {
+    background: rgba(78, 205, 196, 0.1);
+}
+
+/* Адаптивность для сворачивания */
+@media (max-width: 768px) {
+    :where([data-module="terminal"]) .genesis-terminal-widget.collapsed {
+        max-height: 70px;
+    }
+    
+    :where([data-module="terminal"]) .genesis-terminal-btn[data-action="toggle-terminal"] .genesis-terminal-btn-text {
+        display: none;
+    }
+    
+    :where([data-module="terminal"]) .genesis-terminal-btn[data-action="toggle-terminal"] {
+        padding: 0.5rem;
+        min-width: 44px;
+    }
+}

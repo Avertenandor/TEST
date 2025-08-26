@@ -27,6 +27,7 @@ export default {
         // Элементы
         const startBtn = root.querySelector('[data-action="start-earning"]');
         const learnBtn = root.querySelector('[data-action="learn-more"]');
+        const terminalBtn = root.querySelector('[data-action="open-terminal"]');
         const stats = root.querySelectorAll('.genesis-hero-stat');
         const card = root.querySelector('.genesis-hero-card');
         
@@ -34,6 +35,13 @@ export default {
         if (startBtn) {
             startBtn.addEventListener('click', () => {
                 emit('auth:open', { type: 'register' });
+            });
+        }
+        
+        // Кнопка "Открыть терминал"
+        if (terminalBtn) {
+            terminalBtn.addEventListener('click', () => {
+                this.openTerminal();
             });
         }
         
@@ -159,17 +167,39 @@ export default {
         this.eventHandlers = {
             startBtn,
             learnBtn,
-            statsObserver,
-            scrollHandler: () => {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.5;
-                
-                bgElements.forEach((element, index) => {
-                    const speed = 0.5 + (index * 0.2);
-                    element.style.transform = `translateY(${rate * speed}px)`;
-                });
-            }
+            terminalBtn,
+            stats: Array.from(stats)
         };
+    },
+    
+    openTerminal() {
+        console.log('[HERO] Открытие терминала');
+        
+        // Эмитим событие для других модулей
+        emit('terminal:open', { source: 'hero' });
+        
+        // Плавная прокрутка к терминалу
+        const terminalSection = document.getElementById('terminal');
+        if (terminalSection) {
+            const headerHeight = document.querySelector('.genesis-header')?.offsetHeight || 80;
+            const targetPosition = terminalSection.offsetTop - headerHeight - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Разворачиваем терминал если он свернут
+            setTimeout(() => {
+                const terminalWidget = terminalSection.querySelector('.genesis-terminal-widget');
+                const toggleBtn = terminalSection.querySelector('[data-action="toggle-terminal"]');
+                
+                if (terminalWidget && terminalWidget.classList.contains('collapsed') && toggleBtn) {
+                    // Эмулируем клик по кнопке разворачивания
+                    toggleBtn.click();
+                }
+            }, 1000);
+        }
     },
     
     cleanup(root) {
