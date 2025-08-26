@@ -1,0 +1,271 @@
+/* modules/home/tokenInfo/tokenInfo.module.css */
+/* Стили для TokenInfo модуля */
+
+.token-info {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.token-info__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.token-info__header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.token-info__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.token-info__logo {
+    font-size: 2rem;
+    animation: pulse 2s infinite;
+}
+
+.token-info__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.token-info__card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.token-info__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.token-info__label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.token-info__value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    word-break: break-all;
+}
+
+.token-info__address {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.token-info__address-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #34495e;
+    flex: 1;
+}
+
+.token-info__copy-btn {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.token-info__copy-btn:hover {
+    background: linear-gradient(45deg, #2980b9, #3498db);
+    transform: scale(1.05);
+}
+
+.token-info__price {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.token-info__price-amount {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #27ae60;
+}
+
+.token-info__price-change {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.token-info__price-change--positive {
+    background: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+}
+
+.token-info__price-change--negative {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+.token-info__actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.token-info__btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.token-info__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+    background: linear-gradient(45deg, #2980b9, #3498db);
+}
+
+.token-info__btn--secondary {
+    background: transparent;
+    color: #3498db;
+    border: 2px solid #3498db;
+    box-shadow: none;
+}
+
+.token-info__btn--secondary:hover {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+}
+
+.token-info__notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #27ae60;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    z-index: 1000;
+    animation: slideInRight 0.3s ease-out;
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* Анимации */
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .token-info {
+        padding: 60px 0;
+    }
+
+    .token-info__title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .token-info__content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .token-info__card {
+        padding: 25px;
+    }
+
+    .token-info__actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .token-info__btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .token-info__title {
+        font-size: 1.8rem;
+    }
+
+    .token-info__card {
+        padding: 20px;
+    }
+
+    .token-info__value {
+        font-size: 1rem;
+    }
+
+    .token-info__address-text {
+        font-size: 0.8rem;
+    }
+
+    .token-info__notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        text-align: center;
+    }
+}

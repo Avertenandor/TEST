@@ -1,0 +1,277 @@
+/* modules/home/ctaGrid/ctaGrid.module.css */
+/* Стили для CTA Grid модуля */
+
+.cta-grid {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.cta-grid__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cta-grid__header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.cta-grid__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    background: linear-gradient(45deg, #fff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cta-grid__subtitle {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.cta-grid__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.cta-grid__item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-grid__item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cta-grid__item:hover::before {
+    opacity: 1;
+}
+
+.cta-grid__item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.cta-grid__item--hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.cta-grid__item-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-grid__item-content {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-grid__item-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: white;
+}
+
+.cta-grid__item-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    color: #e0e0e0;
+    opacity: 0.9;
+}
+
+.cta-grid__item-arrow {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-grid__item:hover .cta-grid__item-arrow {
+    transform: translateX(5px);
+    color: white;
+}
+
+/* Анимации для элементов при загрузке */
+.cta-grid__item {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.cta-grid__item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.cta-grid__item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.cta-grid__item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.cta-grid__item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.cta-grid__item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.cta-grid__item:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Эффект пульсации для иконок */
+.cta-grid__item-icon {
+    animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .cta-grid {
+        padding: 60px 0;
+    }
+
+    .cta-grid__title {
+        font-size: 2rem;
+    }
+
+    .cta-grid__subtitle {
+        font-size: 1.1rem;
+    }
+
+    .cta-grid__content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cta-grid__item {
+        padding: 25px;
+        gap: 15px;
+    }
+
+    .cta-grid__item-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .cta-grid__item-title {
+        font-size: 1.2rem;
+    }
+
+    .cta-grid__item-description {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-grid__title {
+        font-size: 1.8rem;
+    }
+
+    .cta-grid__subtitle {
+        font-size: 1rem;
+    }
+
+    .cta-grid__item {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .cta-grid__item-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+
+    .cta-grid__item-arrow {
+        display: none;
+    }
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+    .cta-grid {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    }
+}
+
+/* Высокий контраст */
+@media (prefers-contrast: high) {
+    .cta-grid__item {
+        border: 2px solid white;
+    }
+
+    .cta-grid__item:hover {
+        border-color: #ff6b6b;
+    }
+}
