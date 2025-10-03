@@ -41,6 +41,11 @@ class CompleteChromeTest {
         };
     }
 
+    // Кросс-совместимая задержка
+    async sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     async initialize() {
         console.log('🚀 Запуск Chrome браузера...');
 
@@ -174,9 +179,8 @@ class CompleteChromeTest {
             const loadTime = Date.now() - startTime;
             console.log(`✅ Страница загружена за ${loadTime}ms (HTTP ${response.status()})`);
 
-            // Ждём дополнительную стабилизацию без использования устаревших API
-            await this.page.waitForNetworkIdle({ timeout: 5000 }).catch(() => { });
-            await this.page.evaluate(() => new Promise(r => setTimeout(r, 2000)));
+            // Ждем дополнительную загрузку
+            await this.sleep(3000);
 
             return response;
         } catch (error) {
@@ -254,7 +258,7 @@ class CompleteChromeTest {
                 images: document.querySelectorAll('img')
             };
 
-            // Проверка на сырой код
+            // Проверка на сыром код
             const bodyText = document.body.innerText || '';
             const hasRawCode = bodyText.includes('```') || bodyText.includes('<?php') || bodyText.includes('{{');
 

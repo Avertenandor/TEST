@@ -7,10 +7,10 @@
     "test": "node run_all_tests.js",
     "test:chrome": "node e2e/test_complete_chrome.js",
     "test:console": "node e2e/test_console_monitor.js",
-    "test:quick": "node e2e/test_complete_chrome.js --timeout=30000",
-    "test:headed": "cross-env HEADLESS=false node run_all_tests.js",
-    "test:prod": "cross-env TEST_URL=https://crypto-processing.net/ node run_all_tests.js",
-    "test:local": "cross-env TEST_URL=http://localhost:5500/ node run_all_tests.js",
+    "test:quick": "npm run test:chrome -- --timeout=30000",
+    "test:headed": "HEADLESS=false npm run test",
+    "test:prod": "TEST_URL=https://crypto-processing.net/ npm run test",
+    "test:local": "TEST_URL=http://localhost:5500/ npm run test",
     "test:howitworks": "node browser/test_console_how_it_works.mjs",
     "test:routes": "node browser/test_console_routes.mjs",
     "test:python": "python тесты/e2e/test_landing_chrome.py --url https://crypto-processing.net/",
@@ -23,8 +23,7 @@
   "devDependencies": {
     "puppeteer": "^22.8.0",
     "playwright": "^1.40.0",
-    "eslint": "^8.0.0",
-    "cross-env": "^7.0.3"
+    "eslint": "^8.0.0"
   },
   "engines": {
     "node": ">=14.0.0"

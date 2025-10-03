@@ -8,46 +8,11 @@
  */
 
 // MCP-MARKER:SECTION:CACHE_CONFIG - Конфигурация кэша
-const CACHE_NAME = 'genesis-v1.2.0';
+const CACHE_NAME = 'genesis-v1.1.1';
 const urlsToCache = [
-    // Основные страницы
     '/',
     '/index.html',
     '/app.html',
-    '/diagnostics.html',
-    
-    // Core модули
-    '/core/bootstrap.ts',
-    '/core/error-guard.ts',
-    '/core/library-loader.ts',
-    '/core/router.ts',
-    '/core/store.ts',
-    '/core/event-bus.ts',
-    
-    // Shared модули
-    '/shared/config.ts',
-    '/shared/services/bscscan.ts',
-    
-    // Home модули
-    '/modules/home/index.ts',
-    '/modules/home/hero/index.ts',
-    '/modules/home/tokenInfo/index.ts',
-    '/modules/home/ctaGrid/index.ts',
-    
-    // Вендоры (локальные бандлы)
-    '/assets/vendor/qrcode.min.js',
-    '/assets/vendor/chart.umd.js',
-    '/assets/vendor/axios.min.js',
-    
-    // Стили
-    '/shared/styles/reset.css',
-    '/shared/styles/typography.css',
-    '/modules/home/home.module.css',
-    '/modules/home/hero/hero.module.css',
-    '/modules/home/tokenInfo/tokenInfo.module.css',
-    '/modules/home/ctaGrid/ctaGrid.module.css',
-    
-    // Старые файлы для совместимости
     '/css/styles.css',
     '/css/mobile.css',
     '/css/pwa-visibility-fix.css',
@@ -60,14 +25,11 @@ const urlsToCache = [
     '/js/services/terminal.js',
     '/js/services/transaction.js',
     '/js/services/utils.js',
-    
-    // Иконки и ресурсы
     '/assets/favicon.ico',
     '/assets/manifest.json',
     '/assets/icons/favicon-16x16.png',
     '/assets/icons/favicon-32x32.png',
-    '/assets/icons/favicon-48x48.png',
-    '/assets/icons/icon-192x192.png'
+    '/assets/icons/favicon-48x48.png'
 ];
 
 // Установка Service Worker
@@ -134,42 +96,6 @@ self.addEventListener('fetch', event => {
             request.method !== 'GET' ||
             url.protocol === 'chrome-extension:' ||
             url.protocol === 'moz-extension:') {
-            return;
-        }
-        
-        // Специальная обработка для вендоров - Cache First
-        if (url.pathname.includes('/assets/vendor/')) {
-            event.respondWith(
-                caches.match(request)
-                    .then(response => {
-                        if (response) {
-                            return response;
-                        }
-                        
-                        return fetch(request)
-                            .then(response => {
-                                if (!response || response.status !== 200) {
-                                    return response;
-                                }
-                                
-                                const responseToCache = response.clone();
-                                caches.open(CACHE_NAME)
-                                    .then(cache => {
-                                        cache.put(request, responseToCache);
-                                    });
-                                
-                                return response;
-                            })
-                            .catch(() => {
-                                // Возвращаем заглушку для недоступных вендоров
-                                return new Response('console.warn("Vendor library not available");', { 
-                                    status: 200, 
-                                    statusText: 'OK',
-                                    headers: { 'Content-Type': 'application/javascript' }
-                                });
-                            });
-                    })
-            );
             return;
         }
         
@@ -275,7 +201,7 @@ self.addEventListener('push', event => {
     };
     
     event.waitUntil(
-        self.registration.showNotification('GENESIS 1.2', options)
+        self.registration.showNotification('GENESIS 1.1', options)
             .catch(error => {
                 console.error('[ServiceWorker] Failed to show notification:', error);
             })
@@ -341,27 +267,6 @@ self.addEventListener('message', event => {
                         type: 'CACHE_STATUS_ERROR',
                         error: error.message
                     });
-                })
-        );
-    }
-    
-    // Новое сообщение для unregister старого SW
-    if (event.data && event.data.type === 'UNREGISTER_OLD_SW') {
-        event.waitUntil(
-            self.registration.unregister()
-                .then(() => {
-                    console.log('[ServiceWorker] Old SW unregistered');
-                    return self.clients.matchAll();
-                })
-                .then(clients => {
-                    clients.forEach(client => {
-                        client.postMessage({
-                            type: 'SW_UNREGISTERED'
-                        });
-                    });
-                })
-                .catch(error => {
-                    console.error('[ServiceWorker] Failed to unregister:', error);
                 })
         );
     }

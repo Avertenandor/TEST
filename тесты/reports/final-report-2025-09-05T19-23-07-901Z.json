@@ -1,0 +1,56 @@
+{
+  "url": "https://crypto-processing.net/",
+  "startTime": "2025-09-05T19:22:08.029Z",
+  "endTime": "2025-09-05T19:23:07.901Z",
+  "totalDuration": 59872,
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "successRate": "100.00%"
+  },
+  "tests": [
+    {
+      "name": "Complete Chrome E2E Test",
+      "status": "PASSED",
+      "duration": 3539,
+      "error": null,
+      "result": 1,
+      "timestamp": "2025-09-05T19:22:11.573Z"
+    },
+    {
+      "name": "Console Monitor (30s)",
+      "status": "PASSED",
+      "duration": 36052,
+      "error": null,
+      "result": {
+        "startTime": "2025-09-05T19:22:11.576Z",
+        "endTime": "2025-09-05T19:22:44.256Z",
+        "errorCount": 9,
+        "warningCount": 0,
+        "totalLogs": 9
+      },
+      "timestamp": "2025-09-05T19:22:47.627Z"
+    },
+    {
+      "name": "Landing Chrome Test (Python)",
+      "status": "PASSED",
+      "duration": 20263,
+      "error": null,
+      "result": {
+        "status": "FAILED",
+        "output": "{\r\n  \"url\": \"https://crypto-processing.net/\",\r\n  \"time\": \"20250905_222248\",\r\n  \"console_artifact\": \"тесты\\\\e2e\\\\_artifacts\\\\console_20250905_222248.json\",\r\n  \"results\": {\r\n    \"modular_terminal_count\": 0,\r\n    \"static_terminal_count\": 0,\r\n    \"has_triple_backticks\": false,\r\n    \"duplicate_ids\": [],\r\n    \"qr_error_count\": 0\r\n  },\r\n  \"status\": \"FAIL\",\r\n  \"failures\": [\r\n    \"Ожидался ровно один модульный терминал (#cabinet-genesis-terminal), найдено: 0\"\r\n  ]\r\n}\r\n",
+        "error": ""
+      },
+      "timestamp": "2025-09-05T19:23:07.890Z"
+    },
+    {
+      "name": "Module Tests",
+      "status": "PASSED",
+      "duration": 8,
+      "error": null,
+      "result": [],
+      "timestamp": "2025-09-05T19:23:07.900Z"
+    }
+  ]
+}

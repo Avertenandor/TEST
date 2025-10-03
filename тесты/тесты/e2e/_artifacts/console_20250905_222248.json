@@ -1,0 +1,65 @@
+[
+  {
+    "type": "error",
+    "text": "Refused to load the stylesheet 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap' because it violates the following Content Security Policy directive: \"style-src 'self' 'unsafe-inline'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.\n",
+    "location": {
+      "url": "https://crypto-processing.net/",
+      "lineNumber": 25,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "error",
+    "text": "Refused to load the stylesheet 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap' because it violates the following Content Security Policy directive: \"style-src 'self' 'unsafe-inline'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.\n",
+    "location": {
+      "url": "https://crypto-processing.net/",
+      "lineNumber": 0,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "error",
+    "text": "Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of \"video/mp2t\". Strict MIME type checking is enforced for module scripts per HTML spec.",
+    "location": {
+      "url": "https://crypto-processing.net/core/library-loader.ts",
+      "lineNumber": 0,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "error",
+    "text": "Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of \"video/mp2t\". Strict MIME type checking is enforced for module scripts per HTML spec.",
+    "location": {
+      "url": "https://crypto-processing.net/modules/home/tokenInfo/index.ts",
+      "lineNumber": 0,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "error",
+    "text": "Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of \"video/mp2t\". Strict MIME type checking is enforced for module scripts per HTML spec.",
+    "location": {
+      "url": "https://crypto-processing.net/modules/home/hero/index.ts",
+      "lineNumber": 0,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "error",
+    "text": "Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of \"video/mp2t\". Strict MIME type checking is enforced for module scripts per HTML spec.",
+    "location": {
+      "url": "https://crypto-processing.net/modules/home/ctaGrid/index.ts",
+      "lineNumber": 0,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "error",
+    "text": "Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of \"video/mp2t\". Strict MIME type checking is enforced for module scripts per HTML spec.",
+    "location": {
+      "url": "https://crypto-processing.net/core/error-guard.ts",
+      "lineNumber": 0,
+      "columnNumber": 0
+    }
+  }
+]
