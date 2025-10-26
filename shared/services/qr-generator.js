@@ -1,7 +1,7 @@
 // shared/utils/qr-generator.js
 // QR код генератор для платежей в GENESIS DeFi Platform
 
-export class QRGenerator {
+class QRGenerator {
     constructor() {
         this.qrLibraryLoaded = false;
         this.loadingPromise = null;
@@ -366,7 +366,7 @@ export class QRGenerator {
 }
 
 // Создаём глобальный экземпляр для использования в HTML-обработчиках
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && !window.QRGenerator) {
     window.QRGenerator = new QRGenerator();
     // Backward-compatible bridge for legacy calls
     window.generateQRCode = async function(container, data) {
@@ -458,8 +458,7 @@ if (typeof window !== 'undefined') {
     window.QR_BRIDGE_VERSION = '2.1';
 }
 
-// Создаем глобальный экземпляр
-window.QRGenerator = new QRGenerator();
-
-// Экспортируем для модулей
-export default QRGenerator;
+// Экспортируем для модулей (если поддерживается)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = QRGenerator;
+}
