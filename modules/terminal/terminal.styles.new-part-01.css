@@ -1,0 +1,164 @@
+    content: "•";
+    color: #4ecdc4;
+    position: absolute;
+    left: 0;
+}
+
+.info-panel code {
+    background: rgba(10, 10, 15, 0.8);
+    color: #4ecdc4;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.85rem;
+}
+
+.settings-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: #b0b0b0;
+    transition: color 0.2s ease;
+}
+
+.setting-item:hover {
+    color: #ffffff;
+}
+
+.setting-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #4ecdc4;
+}
+
+.setting-item select {
+    background: rgba(10, 10, 15, 0.8);
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    color: #ffffff;
+    font-size: 0.85rem;
+}
+
+.setting-item select:focus {
+    outline: none;
+    border-color: #4ecdc4;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+    .terminal-container {
+        padding: 1rem;
+    }
+
+    .genesis-terminal.cabinet-fullscreen {
+        height: 70vh;
+    }
+
+    .genesis-terminal-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .terminal-stats {
+        gap: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .genesis-terminal-toolbar {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .terminal-filters {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .quick-commands-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .terminal-info-panels {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .terminal-stats-panel {
+        width: 95vw;
+        left: 2.5vw;
+        right: auto;
+    }
+
+    .terminal-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .commands-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== ТЕМЫ ===== */
+.genesis-terminal.theme-light {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+}
+
+.genesis-terminal.theme-light .genesis-terminal-header {
+    background: rgba(240, 240, 240, 0.95);
+}
+
+.genesis-terminal.theme-light .terminal-title {
+    color: #2c5282;
+}
+
+.genesis-terminal.theme-matrix {
+    background: rgba(0, 20, 0, 0.95);
+}
+
+.genesis-terminal.theme-matrix .terminal-title {
+    color: #00ff00;
+}
+
+.genesis-terminal.theme-matrix .terminal-info,
+.genesis-terminal.theme-matrix .terminal-success {
+    color: #00ff00;
+}
+
+.genesis-terminal.theme-retro {
+    background: rgba(40, 40, 60, 0.95);
+    border-color: #ff6b35;
+}
+
+.genesis-terminal.theme-retro .terminal-title {
+    color: #ff6b35;
+}
+
+.genesis-terminal.theme-cyber {
+    background: rgba(20, 0, 40, 0.95);
+    border-color: #ff00ff;
+}
+
+.genesis-terminal.theme-cyber .terminal-title {
+    color: #ff00ff;
+}
+
+.genesis-terminal.theme-neon {
+    background: rgba(10, 10, 30, 0.95);
+    border-color: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.genesis-terminal.theme-neon .terminal-title {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+}

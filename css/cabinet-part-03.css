@@ -1,0 +1,412 @@
+.border-color-success {
+    border-color: var(--success-color);
+}
+
+.border-color-secondary {
+    border-color: var(--secondary-color);
+}
+
+.border-color-primary {
+    border-color: var(--primary-color);
+}
+
+.background-warning {
+    background: var(--warning-color);
+}
+
+.background-success {
+    background: var(--success-color);
+}
+
+.background-secondary {
+    background: var(--secondary-color);
+}
+
+.background-primary {
+    background: var(--primary-color);
+}
+
+.color-white {
+    color: white;
+}
+
+.word-break-break-all {
+    word-break: break-all;
+}
+
+/* ===== МОДАЛЬНЫЕ ОКНА И ДИАЛОГИ ===== */
+/* MCP-MARKER:SECTION:MODAL_STYLES - Стили модальных окон */
+
+.modal-content-center {
+    text-align: center;
+}
+
+.modal-icon-large {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.modal-icon-primary {
+    color: var(--primary-color);
+}
+
+.modal-warning-text {
+    color: var(--warning-color);
+    margin-bottom: 1rem;
+}
+
+.modal-secondary-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.modal-warning-box {
+    background: var(--bg-tertiary);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.primary-strong {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.line-height-1-6 {
+    line-height: 1.6;
+}
+
+.font-size-0-9rem {
+    font-size: 0.9rem;
+}
+
+/* ===== ПРОГРЕСС-БАРЫ И ШИРИНА ===== */
+/* MCP-MARKER:SECTION:PROGRESS_BARS - Стили прогресс-баров */
+
+.width-72-percent {
+    width: 72%;
+}
+
+.width-53-percent {
+    width: 53%;
+}
+
+.width-97-percent {
+    width: 97%;
+}
+
+.background-success {
+    background: var(--success-color);
+}
+
+.background-secondary {
+    background: var(--secondary-color);
+}
+
+.background-warning {
+    background: var(--warning-color);
+}
+
+.background-primary {
+    background: var(--primary-color);
+}
+
+/* ===== ДОПОЛНИТЕЛЬНЫЕ ЦВЕТА ===== */
+.border-color-warning {
+    border-color: var(--warning-color);
+}
+
+.color-white {
+    color: white;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.font-weight-700 {
+    font-weight: 700;
+}
+
+/* ===== РАЗМЕРЫ И ОТСТУПЫ ===== */
+.margin-top-2rem {
+    margin-top: 2rem;
+}
+
+.margin-bottom-1rem {
+    margin-bottom: 1rem;
+}
+
+.margin-bottom-2rem {
+    margin-bottom: 2rem;
+}
+
+.padding-1-5rem {
+    padding: 1.5rem;
+}
+
+.border-radius-12px {
+    border-radius: 12px;
+}
+
+.font-size-0-8rem {
+    font-size: 0.8rem;
+}
+
+.font-size-3rem {
+    font-size: 3rem;
+}
+
+.font-size-0-875rem {
+    font-size: 0.875rem;
+}
+
+.word-break-break-all {
+    word-break: break-all;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.line-height-1-6 {
+    line-height: 1.6;
+}
+
+/* ===== КЛАССЫ ДЛЯ ЗАМЕНЫ INLINE СТИЛЕЙ ===== */
+.font-size-1rem { font-size: 1rem; }
+.font-size-1-1rem { font-size: 1.1rem; }
+.font-size-1-5rem { font-size: 1.5rem; }
+.padding-left-1-5rem { padding-left: 1.5rem; }
+.margin-top-0-5rem { margin-top: 0.5rem; }
+.margin-left-1rem { margin-left: 1rem; }
+.padding-2rem { padding: 2rem; }
+.border-1px-solid-border { border: 1px solid var(--border-color); }
+.width-100-percent { width: 100%; }
+.min-height-420px { min-height: 420px; }
+.overflow-hidden { overflow: hidden; }
+.overflow-y-auto { overflow-y: auto; }
+.max-height-400px { max-height: 400px; }
+.text-align-right { text-align: right; }
+.flex-1 { flex: 1; }
+.padding-1rem { padding: 1rem; }
+.accent-text-color { color: var(--accent-color); }
+.font-weight-700-font-size-1-1rem { font-weight: 700; font-size: 1.1rem; }
+.font-size-0-9rem-margin-zero { font-size: 0.9rem; margin: 0; }
+.bg-secondary-card { background: var(--bg-secondary); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color); }
+.bg-primary-box { background: var(--bg-primary); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; }
+.text-primary-font-weight-600 { color: var(--text-primary); font-weight: 600; }
+.iframe-chart { width: 100%; height: 420px; border: none; border-radius: 12px; }
+.chart-container { width: 100%; min-height: 420px; background: var(--bg-tertiary); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); }
+.display-flex-gap-1rem { display: flex; gap: 1rem; }
+.flex-gap { display: flex; gap: 1rem; }
+.justify-content-space-between { justify-content: space-between; }
+
+/* Дополнительные служебные классы */
+.margin-bottom-0-5rem { margin-bottom: 0.5rem; }
+.margin-top-2rem { margin-top: 2rem; }
+.font-size-0-875rem { font-size: 0.875rem; }
+
+/* ===== ПЛАНЫ ДЕПОЗИТОВ ===== */
+/* MCP-MARKER:SECTION:DEPOSIT_PLANS - Стили для планов депозитов */
+
+.deposit-plan-card {
+    /* MCP-MARKER:STYLE:DEPOSIT_PLAN_CARD - Карточка плана депозита */
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    margin-bottom: 1rem;
+}
+
+.deposit-plan-card:hover {
+    border-color: var(--plan-color, var(--primary-color));
+    transform: translateY(-2px);
+}
+
+/* Cards list (overview) */
+.plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.plan-card {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    transition: var(--transition-normal);
+}
+.plan-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+.plan-card-available { border-color: var(--primary-color); }
+.plan-card-purchased { border-color: var(--success-color); }
+.plan-card-locked { opacity: 0.7; filter: grayscale(0.2); }
+.deposit-status-purchased { background: rgba(0,255,65,0.12); border: 1px solid var(--success-color); color: var(--success-color); padding: 2px 8px; border-radius: 8px; font-size: 0.8rem; }
+.deposit-status-available { background: rgba(255,107,53,0.12); border: 1px solid var(--primary-color); color: var(--primary-color); padding: 2px 8px; border-radius: 8px; font-size: 0.8rem; }
+
+.deposit-plan-layout {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.deposit-plan-content {
+    flex: 1;
+}
+
+.deposit-plan-title {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.deposit-plan-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.deposit-plan-right {
+    text-align: right;
+}
+
+.deposit-plan-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--plan-color, var(--primary-color));
+}
+
+.deposit-plan-term {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.modal-content-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.modal-content-center {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.modal-icon-3rem {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.modal-title-secondary {
+    margin-bottom: 0.5rem;
+}
+
+.modal-description-secondary {
+    color: var(--text-secondary);
+}
+
+.modal-details-box {
+    background: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.modal-details-title {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.modal-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.modal-grid-card {
+    text-align: center;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+}
+
+.modal-grid-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.modal-grid-value-primary {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.modal-grid-value-success {
+    color: var(--success-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.modal-grid-value-gold {
+    color: var(--gold-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.modal-grid-value-accent {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.max-height-400-overflow-auto {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.text-center-secondary-color-margin-bottom-2rem {
+    text-align: center;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+}
+
+.flex-2-padding-1rem {
+    flex: 2;
+    padding: 1rem;
+}
+
+/* MCP-MARKER:SECTION:DEPOSIT_PLAN_THEMES - Темы цветов планов (CSS-переменные) */
+.plan-theme-trial { --plan-color: #00ff41; }
+.plan-theme-starter { --plan-color: #ff6b35; }
+.plan-theme-progressive1 { --plan-color: #ffa726; }
+.plan-theme-progressive2 { --plan-color: #ffeb3b; }
+.plan-theme-progressive3 { --plan-color: #4caf50; }
+.plan-theme-progressive4 { --plan-color: #00bcd4; }
+.plan-theme-progressive5 { --plan-color: #2196f3; }
+.plan-theme-progressive6 { --plan-color: #3f51b5; }
+.plan-theme-progressive7 { --plan-color: #673ab7; }
+.plan-theme-progressive8 { --plan-color: #9c27b0; }
+.plan-theme-recommended { --plan-color: #e91e63; }
+.plan-theme-platinum { --plan-color: #ff5722; }
+.plan-theme-maximum { --plan-color: #ffd700; }
+
+/* MCP-MARKER:UTILITY:PLAN_COLOR_HELPERS - Утилиты для применения цвета плана */
+.plan-color-text { color: var(--plan-color, var(--primary-color)); }
+.btn.plan-bg { background: var(--plan-color, var(--primary-color)); color: #fff; }
+.btn.plan-bg:hover { filter: brightness(1.05); }

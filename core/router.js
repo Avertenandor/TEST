@@ -14,7 +14,6 @@ export class Router {
             '/': 'home',
             '/home': 'home',
             '/dashboard': 'dashboard',
-            '/dashboard': 'dashboard',
             '/auth': 'auth',
             '/deposits': 'deposits',
             '/portfolio': 'portfolio',

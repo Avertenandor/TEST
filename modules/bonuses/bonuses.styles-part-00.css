@@ -1,0 +1,450 @@
+/* modules/bonuses/bonuses.styles.css */
+
+.bonuses-module {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Module Header */
+.module-header {
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.module-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-family: 'Orbitron', monospace;
+}
+
+.title-icon {
+    font-size: 2.5rem;
+}
+
+.header-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ff6b35;
+    font-family: 'Orbitron', monospace;
+}
+
+.stat-value.multiplier {
+    color: #ffd700;
+}
+
+/* Content Grid */
+.bonuses-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+/* Bonus Cards */
+.bonus-card {
+    background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bonus-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.card-title .icon {
+    font-size: 1.5rem;
+}
+
+/* Daily Bonus Card */
+.daily-bonus-card {
+    background: linear-gradient(135deg, #2e1e3e 0%, #3e2a4e 100%);
+}
+
+.streak-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 107, 53, 0.2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #ff6b35;
+}
+
+.daily-bonus-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bonus-amount {
+    margin-bottom: 15px;
+}
+
+.amount-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffd700;
+    font-family: 'Orbitron', monospace;
+}
+
+.amount-currency {
+    font-size: 1.2rem;
+    color: #999;
+    margin-left: 10px;
+}
+
+.bonus-timer {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.timer-label {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.timer-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    font-family: 'Orbitron', monospace;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.btn-gradient:hover {
+    background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.btn-large {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+.btn-icon {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* Multipliers */
+.multipliers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.multiplier-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.multiplier-item:hover {
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.multiplier-item.premium {
+    border-color: #ffd700;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+}
+
+.multiplier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.multiplier-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffd700;
+    font-family: 'Orbitron', monospace;
+}
+
+.multiplier-duration {
+    font-size: 0.85rem;
+    color: #999;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.multiplier-bonus {
+    font-size: 0.9rem;
+    color: #4caf50;
+    margin-bottom: 10px;
+}
+
+.multiplier-cost {
+    margin-bottom: 10px;
+}
+
+.cost-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.cost-currency {
+    font-size: 0.9rem;
+    color: #999;
+    margin-left: 5px;
+}
+
+.btn-multiplier {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.9rem;
+    background: rgba(255, 107, 53, 0.2);
+    color: #ff6b35;
+    border: 1px solid #ff6b35;
+}
+
+.btn-multiplier:hover {
+    background: #ff6b35;
+    color: white;
+}
+
+/* Active Bonuses */
+.active-bonuses-list {
+    min-height: 150px;
+}
+
+.active-bonus-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border-left: 3px solid #ff6b35;
+}
+
+.bonus-icon {
+    font-size: 2rem;
+}
+
+.bonus-details {
+    flex: 1;
+}
+
+.bonus-name {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.bonus-value {
+    color: #4caf50;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.bonus-timer {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.no-bonuses {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+}
+
+.no-bonuses-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.no-bonuses-text {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.no-bonuses-hint {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Achievements */
+.achievements-progress {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.progress-value {
+    color: #ff6b35;
+    font-weight: 600;
+}
+
+.achievements-list {
+    display: grid;
+    gap: 15px;
+}
+
+.achievement-card {
+    display: flex;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.achievement-card.completed {
+    border-color: #4caf50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.achievement-icon {
+    font-size: 2rem;
+}
+
+.achievement-details {
+    flex: 1;
+}
+
+.achievement-name {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.achievement-description {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.achievement-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-bar-container {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b35 0%, #ffd700 100%);
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.claim-achievement-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.claim-achievement-btn:hover {
+    background: #45a049;
+}
+
+/* Special Offers */
+.special-offers-card {
+    grid-column: 1 / -1;

@@ -1,0 +1,450 @@
+/* modules/plex-coin/plex-coin.styles.css */
+
+.plex-coin-module {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.module-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.module-header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.module-header .subtitle {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+/* Main Info Card */
+.token-card {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.token-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.token-logo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+}
+
+.logo-text {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Orbitron', monospace;
+}
+
+.token-title h2 {
+    color: var(--text-primary);
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.token-title p {
+    color: var(--text-secondary);
+    margin: 0.25rem 0 0 0;
+}
+
+/* Price Section */
+.token-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background: var(--bg-primary);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.price-main {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.price-label {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.price-value {
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Orbitron', monospace;
+}
+
+.price-change {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.price-change.positive {
+    background: rgba(0, 255, 65, 0.1);
+    color: var(--success-color);
+}
+
+.price-change.negative {
+    background: rgba(255, 71, 87, 0.1);
+    color: var(--error-color);
+}
+
+/* Stats Grid */
+.token-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-item {
+    padding: 1rem;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.stat-value {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Token Actions */
+.token-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.token-actions .btn {
+    flex: 1 1 200px;
+}
+
+/* Contract Info */
+.contract-info {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.contract-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.contract-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contract-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contract-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.contract-address-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-primary);
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+
+#contract-address {
+    flex: 1;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    word-break: break-all;
+}
+
+.copy-btn {
+    padding: 0.5rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.copy-btn.copied {
+    background: var(--success-color);
+    color: white;
+}
+
+.contract-value {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Usage Grid */
+.plex-usage {
+    margin: 3rem 0;
+}
+
+.plex-usage h3 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.usage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.usage-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.usage-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-color);
+}
+
+.usage-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.usage-content h4 {
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
+}
+
+.usage-content p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Advantages */
+.plex-advantages {
+    margin: 3rem 0;
+}
+
+.plex-advantages h3 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.advantages-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.advantage-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.advantage-icon {
+    font-size: 1.5rem;
+    color: var(--success-color);
+    flex-shrink: 0;
+}
+
+.advantage-content h4 {
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
+}
+
+.advantage-content p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Tokenomics */
+.plex-tokenomics {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 3rem 0;
+    border: 1px solid var(--border-color);
+}
+
+.plex-tokenomics h3 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.tokenomics-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.supply-info h4 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.supply-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.supply-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.supply-bar {
+    height: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.supply-bar:hover {
+    transform: translateX(5px);
+}
+
+.supply-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.tokenomics-features h4 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.tokenomics-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tokenomics-features li {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.tokenomics-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+}
+
+/* Exchanges */
+.plex-exchanges {
+    margin: 3rem 0;
+}
+
+.plex-exchanges h3 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.exchanges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.exchange-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.exchange-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.exchange-logo {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.exchange-card h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.exchange-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}

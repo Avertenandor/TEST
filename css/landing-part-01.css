@@ -1,0 +1,450 @@
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: #ffd700;
+            margin-left: 1rem;
+            /* animation: apiIndicatorPulse 3s ease-in-out infinite; */
+        }
+        
+        @keyframes apiIndicatorPulse {
+            0%, 100% {
+                opacity: 0.8;
+                /* transform: scale(1); */ /* ОТКЛЮЧЕНО - вызывает дёргание */
+            }
+            50% {
+                opacity: 1;
+                /* transform: scale(1.05); */ /* ОТКЛЮЧЕНО - вызывает дёргание */
+            }
+        }
+        
+        .genesis-api-indicator .api-icon {
+            font-size: 1rem;
+        }
+        
+        .genesis-api-indicator .api-text {
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Показываем индикатор только в режиме разработки */
+        body.dev-mode .genesis-api-indicator {
+            display: flex !important;
+        }
+
+        /* Скрываем индикатор по умолчанию (если не dev-mode) */
+        .api-indicator-hidden {
+            display: none !important;
+        }
+
+        /* Скрываем cache controls в production */
+        .genesis-cache-controls {
+            display: none !important;
+        }
+
+        body.dev-mode .genesis-cache-controls {
+            display: flex !important;
+        }
+
+        /* Маленькие зеленые галочки для технических карточек */
+        .genesis-info-card {
+            position: relative;
+        }
+        
+        .tech-card-checkmark {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.4);
+            opacity: 0;
+            /* transform: scale(0); */ /* ОТКЛЮЧЕНО - вызывает дёргание */
+            animation: techCardCheckShow 0.6s ease-out forwards;
+            z-index: 10;
+        }
+        
+        .tech-card-checkmark.show {
+            opacity: 1;
+            /* transform: scale(1); */ /* ОТКЛЮЧЕНО - вызывает дёргание */
+        }
+        
+        @keyframes techCardCheckShow {
+            0% {
+                opacity: 0;
+                /* transform: scale(0) rotate(-180deg); */ /* ОТКЛЮЧЕНО */
+            }
+            70% {
+                opacity: 1;
+                /* transform: scale(1.2) rotate(10deg); */ /* ОТКЛЮЧЕНО */
+            }
+            100% {
+                opacity: 1;
+                /* transform: scale(1) rotate(0deg); */ /* ОТКЛЮЧЕНО */
+            }
+        }
+        
+        /* Адаптивность галочек для мобильных */
+        @media (max-width: 768px) {
+            .tech-card-checkmark {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+                top: 10px;
+                right: 10px;
+            }
+        }
+        
+        /* Дополнительный эффект мерцания */
+        .genesis-brand-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: genesisShimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes genesisShimmer {
+            0% {
+                left: -100%;
+            }
+            50% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        /* Улучшение видимости на разных фонах */
+        .genesis-brand-header {
+            position: relative;
+        }
+        
+        .genesis-brand-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(0, 0, 0, 0.1) 0%,
+                transparent 70%
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Privacy Notice Styles */
+        .genesis-privacy-notice {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin-top: 1.5rem;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: genesisFadeInUp 1.5s ease-out 3s forwards;
+        }
+        
+        .genesis-privacy-notice::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #28a745,
+                transparent
+            );
+            animation: genesisPrivacySweep 4s ease-in-out infinite;
+        }
+        
+        @keyframes genesisPrivacySweep {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        .privacy-icon {
+            font-size: 2rem;
+            color: #28a745;
+            text-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+            /* animation: genesisPrivacyPulse 3s ease-in-out infinite; */
+        }
+        
+        @keyframes genesisPrivacyPulse {
+            0%, 100% {
+                /* transform: scale(1); */ /* ОТКЛЮЧЕНО - вызывает дёргание */
+                filter: drop-shadow(0 0 5px rgba(40, 167, 69, 0.3));
+            }
+            50% {
+                /* transform: scale(1.1); */ /* ОТКЛЮЧЕНО - вызывает дёргание */
+                filter: drop-shadow(0 0 15px rgba(40, 167, 69, 0.6));
+            }
+        }
+        
+        .privacy-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .privacy-text strong {
+            color: #28a745;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+        }
+        
+        /* Hover effect for privacy notice */
+        .genesis-privacy-notice:hover {
+            background: rgba(40, 167, 69, 0.15);
+            border-color: rgba(40, 167, 69, 0.5);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        
+        .genesis-privacy-notice:hover .privacy-icon {
+            /* transform: scale(1.2); */ /* ОТКЛЮЧЕНО - вызывает дёргание */
+            transition: transform 0.3s ease;
+        }
+        
+        /* Mobile adaptation for privacy notice */
+        @media (max-width: 768px) {
+            .genesis-privacy-notice {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 1rem;
+                text-align: center;
+                margin-top: 1rem;
+            }
+            
+            .privacy-icon {
+                font-size: 1.5rem;
+            }
+            
+            .privacy-text {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* MCP-MARKER:SECTION:PLEX_CHART_STYLES - Стили для секции графика PLEX токена */
+        /* MCP-MARKER:CHARTS:TRADING_CHART - Торговый график */
+        /* Стили для секции графика PLEX токена */
+        .genesis-chart-section {
+            background: linear-gradient(135deg, rgba(13, 17, 23, 0.95), rgba(22, 27, 34, 0.95));
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 0;
+            height: auto;
+        }
+        
+        .genesis-chart-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(40, 167, 69, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .genesis-chart-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: genesisFadeInUp 1s ease-out 0.2s forwards;
+        }
+        
+        .genesis-chart-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #28a745, #ffd700, #20c997);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .genesis-chart-header p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .genesis-chart-container {
+            background: rgba(255, 255, 255, 0.03);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: genesisFadeInUp 1s ease-out 0.4s forwards;
+            position: relative;
+            margin: 2rem auto;
+            min-height: 600px;
+            height: auto;
+            max-width: 95%;
+            width: 95%;
+        }
+        
+        .genesis-chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #28a745, #ffd700, #20c997, transparent);
+            animation: genesisChartSweep 4s ease-in-out infinite;
+        }
+        
+        @keyframes genesisChartSweep {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        .genesis-chart-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 15px;
+            background: #1a1a1a;
+            transition: all 0.3s ease;
+            display: block;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Стили для встроенного графика */
+        #geckoterminal-embed,
+        .geckoterminal-iframe-fixed {
+            height: 600px;
+            width: 100%;
+            border: none;
+            border-radius: 15px;
+            background: #1a1a1a;
+            position: relative;
+            z-index: 10;
+            display: block;
+            box-sizing: border-box;
+        }
+        
+        /* Hover эффект отключен для предотвращения прыжков страницы */
+        .genesis-chart-container:hover iframe {
+            /* transform: scale(1.01); */
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.2);
+        }
+        
+        /* Убираем margin/padding которые могут мешать */
+        body, html {
+            overflow-x: hidden !important;
+        }
+        
+        /* Медиа запросы для мобильных */
+        @media (max-width: 768px) {
+            .genesis-chart-section {
+                min-height: 0;
+                padding: 2rem 0;
+            }
+            
+            .genesis-chart-container {
+                padding: 1rem;
+                margin: 1rem auto;
+                height: auto;
+                min-height: 400px;
+            }
+            
+            .genesis-chart-container iframe,
+            #geckoterminal-embed {
+                height: 400px;
+            }
+            
+            .genesis-chart-header {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .genesis-chart-container {
+                padding: 0.5rem;
+                min-height: 350px;
+            }
+            
+            .genesis-chart-container iframe,
+            #geckoterminal-embed {
+                height: 350px;
+            }
+            
+            .genesis-chart-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .genesis-chart-header p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Контейнер для кнопок авторизации и покупки */
+        .genesis-buttons-container {
+            display: flex !important;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        /* Анимированная кнопка покупки PLEX */
+        .genesis-btn-buy {
+            position: relative !important;
+            padding: 1rem 2rem !important;
+            border: none !important;
+            border-radius: 12px !important;
+            font-size: 1.1rem !important;
+            font-weight: 600 !important;
+            color: #ffffff !important;
+            cursor: pointer !important;

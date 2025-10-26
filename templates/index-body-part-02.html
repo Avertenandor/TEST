@@ -1,0 +1,201 @@
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Шифрование:</span>
+                                <span class="info-value" id="security-encryption">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Do Not Track:</span>
+                                <span class="info-value" id="security-dnt">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Cookies:</span>
+                                <span class="info-value" id="security-cookies">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Local Storage:</span>
+                                <span class="info-value" id="security-local-storage">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Session Storage:</span>
+                                <span class="info-value" id="security-session-storage">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">IndexedDB:</span>
+                                <span class="info-value" id="security-indexeddb">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Web Workers:</span>
+                                <span class="info-value" id="security-web-workers">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Content Security Policy:</span>
+                                <span class="info-value" id="security-csp">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Важная надпись о конфиденциальности -->
+                    <div class="privacy-notice genesis-panel-glass">
+                        <div class="privacy-icon">🔒</div>
+                        <div class="privacy-content">
+                            <h4>🔒 Конфиденциальность данных</h4>
+                            <p><strong>Важно:</strong> Мы НЕ собираем и НЕ сохраняем ваши персональные данные. Вся информация о вашем устройстве и соединении отображается только для вас в реальном времени и не передается на наши серверы. Ваша приватность — наш приоритет.</p>
+                            <div class="privacy-features">
+                                <span class="privacy-feature">✅ Данные не сохраняются</span>
+                                <span class="privacy-feature">✅ Нет трекинга</span>
+                                <span class="privacy-feature">✅ Локальная обработка</span>
+                                <span class="privacy-feature">✅ Безопасное соединение</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MCP-MARKER:TASK:4_COMPLETED - ЗАДАЧА 4 ЗАВЕРШЕНА: ТЕХНИЧЕСКИЕ ДАННЫЕ ПРИВЕДЕНЫ В ПОРЯДОК -->
+                    <!-- MCP-MARKER:TASK:5_COMPLETED - ЗАДАЧА 5 ЗАВЕРШЕНА: МОНИТОРИНГ СИСТЕМЫ ИНТЕГРИРОВАН -->
+                </div>
+            </section>
+            <!-- MCP-MARKER:SECTION:PWA_INSTALL_SECTION - Секция установки PWA -->
+            <section id="pwa-install-section" class="genesis-section genesis-pwa-section" role="region" aria-label="Установка приложения">
+                <div class="genesis-container">
+                    <div class="genesis-pwa-header">
+                        <h2>📱 Установите GENESIS 1.1 как приложение</h2>
+                        <p>Получите быстрый доступ к платформе прямо с вашего устройства</p>
+                    </div>
+                    
+                    <div class="genesis-pwa-content">
+                        <!-- Преимущества PWA -->
+                        <div class="genesis-pwa-benefits genesis-panel-glass">
+                            <h3>✨ Преимущества приложения</h3>
+                            <ul class="features-list">
+                                <li class="feature-item">
+                                    <span class="feature-icon">⚡</span>
+                                    <span>Мгновенный запуск без браузера</span>
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-icon">📡</span>
+                                    <span>Работа без интернета (офлайн режим)</span>
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-icon">🔔</span>
+                                    <span>Push-уведомления о транзакциях</span>
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-icon">🔒</span>
+                                    <span>Повышенная безопасность данных</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Инструкции по установке -->
+                        <div class="genesis-pwa-instructions genesis-panel-glass">
+                            <h3>📥 Как установить</h3>
+                            
+                            <!-- Desktop Chrome/Edge -->
+                            <div class="instructions-section">
+                                <h4 class="instructions-title">🖥️ На компьютере (Chrome/Edge)</h4>
+                                <ol class="instructions-list">
+                                    <li>Нажмите на значок ➕ в адресной строке</li>
+                                    <li>Выберите "Установить приложение"</li>
+                                    <li>Подтвердите установку</li>
+                                </ol>
+                            </div>
+                            
+                            <!-- Mobile iOS -->
+                            <div class="instructions-section">
+                                <h4 class="instructions-title">🍎 iOS (Safari)</h4>
+                                <ol class="instructions-list">
+                                    <li>Нажмите кнопку "Поделиться" 📤</li>
+                                    <li>Выберите "На экран «Домой»"</li>
+                                    <li>Нажмите "Добавить"</li>
+                                </ol>
+                            </div>
+                            
+                            <!-- Mobile Android -->
+                            <div class="instructions-section">
+                                <h4 class="instructions-title">🤖 Android (Chrome)</h4>
+                                <ol class="instructions-list">
+                                    <li>Нажмите на три точки ⋮</li>
+                                    <li>Выберите "Установить приложение"</li>
+                                    <li>Подтвердите установку</li>
+                                </ol>
+                            </div>
+                            
+                            <button class="pwa-install-btn pwa-install-btn-margin" onclick="window.showPWAInstallPrompt()">
+                                <span class="btn-icon">📥</span>
+                                <span>Установить сейчас</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- MCP-MARKER:TASK:6_COMPLETED - ЗАДАЧА 6 ЗАВЕРШЕНА: PWA УСТАНОВКА ПРИВЕДЕНА В ПОРЯДОК -->
+            
+            <!-- MCP-MARKER:ALL_TASKS_COMPLETED - ВСЕ ЗАДАЧИ ЗАВЕРШЕНЫ УСПЕШНО -->
+        </main>
+        
+        <!-- MCP-MARKER:SECTION:INDEX_NOTIFICATION_DISABLED - Отключён контейнер уведомлений на главной -->
+        <!-- Notification Container ОТКЛЮЧЕН для продакшена -->
+        <!-- <div id="genesis-notifications" class="genesis-notifications" role="status" aria-live="polite" aria-label="Уведомления"></div> -->
+        
+        <!-- MCP-MARKER:SCRIPTS:EXTERNAL_LIBS - Внешние библиотеки -->
+        <!-- MCP-MARKER:SECTION:JAVASCRIPT_CORE - Основные JavaScript модули -->
+        <!-- Cache Buster System - Должен загружаться первым -->
+    <!-- Удалено: cache-buster.js отсутствует на сервере -->
+        
+        <!-- MCP-MARKER:JS:CORE_MODULES - Основные модули приложения -->
+        <!-- Основные скрипты приложения -->
+        <!-- MCP-MARKER:JS:CONFIG - Конфигурация приложения -->
+    <script src="./js/config.js?v=3.7"></script>
+        <!-- MCP-MARKER:JS:MODELS - Модели данных -->
+    <script src="./js/models.js?v=3.7"></script>
+        <!-- MCP-MARKER:JS:UTILS - Утилиты -->
+    <script src="./js/services/utils.js?v=3.7"></script>
+    <!-- MCP-MARKER:JS:TERMINАЛ - Терминал -->
+    <!-- ОТКЛЮЧЕНО: терминал не должен подключаться на главной -->
+    <!-- <script src="./js/services/terminal.js?v=3.7"></script> -->
+        <!-- MCP-MARKER:JS:API - API сервисы -->
+    <script src="./js/services/api.js?v=3.7"></script>
+        <!-- MCP-MARKER:JS:AUTH - Авторизация -->
+    <script src="./js/services/auth.js?v=3.7"></script>
+        <!-- MCP-MARKER:JS:TRANSACTIONS - Транзакции -->
+    <script src="./js/services/transaction.js?v=3.7"></script>
+    <!-- MCP-MARKER:JS:CABINET - Кабинет пользователя -->
+    <!-- ОТКЛЮЧЕНО: кабинет не должен инициализироваться на главной
+    <script src="./js/services/cabinet.js?v=3.7"></script>
+    -->
+        <!-- MCP-MARKER:JS:TECH_INFO - Техническая информация -->
+    <script src="./js/services/techInfo.js?v=3.7"></script>
+        <!-- MCP-MARKER:JS:DEPOSITS_ENHANCED - Улучшенная система депозитов -->
+    <script src="./js/services/deposits-enhanced.js?v=3.7"></script>
+    <!-- MCP-MARKER:JS:MAIN_APP - Главное приложение -->
+    <!-- ОТКЛЮЧЕНО: кабинет/приложение не должно инициализироваться на главной -->
+    <!-- <script src="./js/app.js?v=3.7"></script> -->
+        
+        <!-- MCP-MARKER:SCRIPTS:TOKEN_FUNCTIONS - Функции для работы с PLEX ONE Token -->
+        <!-- MCP-MARKER:TOKEN:TRADING_FUNCTIONS - Торговые функции -->
+        <!-- Дополнительные функции для PLEX ONE Token -->
+        <!-- Script moved to js/landing-extracted.js -->
+        
+        <!-- MCP-MARKER:SCRIPTS:ANIMATIONS_STYLES - Стили для анимаций -->
+        <!-- MCP-MARKER:CSS:ANIMATIONS - Анимации -->
+        <!-- Стили для анимаций -->
+        <!-- Styles moved to css/landing-extracted.css -->
+        
+        <!-- MCP-MARKER:SCRIPTS:QR_CODE_SYSTEM - Система QR кодов -->
+        <!-- MCP-MARKER:QR:GENERATION - Генерация QR кодов -->
+        <!-- JavaScript для QR кода -->
+        <!-- Script moved to js/landing-extracted.js -->
+        
+    <!-- Удалён старый встроенный терминал v2.1: используется модульный через bootstrap.js -->
+
+    <!-- MCP-MARKER:LANDING:BOOTSTRAP - Лёгкий bootstrap для лендинга (без app.js) -->
+    <!-- Script moved to js/landing-extracted.js -->
+
+    <!-- Универсальный Terminal Bootstrap для лендинга -->
+    <script src="./shared/components/terminal/bootstrap.js?v=1"></script>
+
+    <!-- MCP-MARKER:DOCUMENT:END_BODY - Конец тела документа -->
+    <!-- Landing JS Modules -->
+    <script src="js/landing-part-00.js"></script>
+    <script src="js/landing-part-01.js"></script>
+    <script src="js/landing-part-02.js"></script>
+    <script src="js/landing-part-03.js"></script>
+    <script src="js/landing-part-04.js"></script>

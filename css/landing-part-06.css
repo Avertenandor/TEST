@@ -1,0 +1,450 @@
+            }
+            
+            .genesis-section {
+                padding: 2rem 0;
+            }
+            
+            .genesis-info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .genesis-info-card {
+                padding: 1.5rem;
+            }
+            
+            .genesis-tech-header h2 {
+                font-size: 2rem;
+            }
+            
+            .genesis-pwa-content {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .genesis-info-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .info-value {
+                text-align: left;
+            }
+        }
+        
+        /* MCP-MARKER:FIX:PWA_INSTALL_BUTTON - Стили кнопки установки PWA */
+        .pwa-install-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+        }
+        
+        .pwa-install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+            background: linear-gradient(135deg, #45b7d1, #4ecdc4);
+        }
+        
+        .pwa-install-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .pwa-install-btn .btn-icon {
+            font-size: 1.3rem;
+        }
+        
+        /* MCP-MARKER:FIX:RESPONSIVE_IMPROVEMENTS - Улучшения адаптивности */
+        @media (max-width: 768px) {
+            .genesis-qr-section {
+                padding: 1.5rem 1rem;
+            }
+            
+            .genesis-pwa-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .genesis-pwa-benefits,
+            .genesis-pwa-instructions {
+                padding: 1.5rem;
+            }
+            
+            .pwa-install-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* Плавные переходы для всех элементов интерфейса */
+        .genesis-section {
+            background: linear-gradient(135deg, 
+                rgba(13, 17, 23, 0.98) 0%,
+                rgba(22, 27, 34, 0.98) 50%,
+                rgba(13, 17, 23, 0.98) 100%
+            );
+            background-size: 400% 400%;
+            animation: smoothBackgroundShift 30s ease-in-out infinite;
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes smoothBackgroundShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Плавные переходы для кнопок */
+        .genesis-btn, .genesis-btn-neon, .genesis-btn-buy {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            background-size: 400% 400%;
+        }
+        
+        .genesis-btn:hover, .genesis-btn-neon:hover, .genesis-btn-buy:hover {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* Плавные переходы для панелей */
+        .genesis-panel-glass {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(78, 205, 196, 0.02) 25%,
+                rgba(69, 183, 209, 0.02) 50%,
+                rgba(255, 255, 255, 0.05) 75%,
+                rgba(78, 205, 196, 0.02) 100%
+            );
+            background-size: 400% 400%;
+            animation: smoothGradientShift 25s ease-in-out infinite;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .genesis-panel-glass:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(78, 205, 196, 0.04) 25%,
+                rgba(69, 183, 209, 0.04) 50%,
+                rgba(255, 255, 255, 0.08) 75%,
+                rgba(78, 205, 196, 0.04) 100%
+            );
+            background-size: 400% 400%;
+            transform: translateY(-2px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Плавные переходы для элементов информации */
+        .info-item {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .info-item:hover {
+            background: linear-gradient(135deg, 
+                rgba(78, 205, 196, 0.05) 0%,
+                rgba(78, 205, 196, 0.02) 50%,
+                rgba(78, 205, 196, 0.05) 100%
+            );
+            background-size: 200% 200%;
+            animation: smoothGradientShift 15s ease-in-out infinite;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Плавные переходы для заголовков */
+        .section-title, .genesis-info-card h3 {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Плавные переходы для значений */
+        .info-value {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .info-value.updating {
+            animation: smoothValueUpdate 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes smoothValueUpdate {
+            0% { 
+                opacity: 0.7; 
+                transform: scale(0.98); 
+                color: rgba(255, 255, 255, 0.8);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.02); 
+                color: #4ecdc4;
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1); 
+                color: #ffffff;
+            }
+        }
+        
+        /* Плавные переходы для статусов */
+        .wallet-status {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .wallet-status.loading {
+            animation: smoothPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes smoothPulse {
+            0%, 100% { 
+                opacity: 0.8; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.05);
+            }
+        }
+        
+        /* Плавные переходы для галочек */
+        .tech-card-checkmark {
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .tech-card-checkmark.show {
+            animation: smoothCheckShow 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes smoothCheckShow {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotate(-180deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1) rotate(10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        
+        /* Плавные переходы для уведомлений */
+        .copy-notification {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Плавные переходы для модальных окон */
+        .safepal-modal .modal-content {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Плавные переходы для терминала */
+        .genesis-terminal {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(78, 205, 196, 0.03) 25%,
+                rgba(69, 183, 209, 0.03) 50%,
+                rgba(255, 255, 255, 0.05) 75%,
+                rgba(78, 205, 196, 0.03) 100%
+            );
+            background-size: 400% 400%;
+            animation: smoothGradientShift 35s ease-in-out infinite;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Плавные переходы для форм */
+        .genesis-form-input {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .genesis-form-input:focus {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border-color: rgba(78, 205, 196, 0.5);
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+        }
+        
+        /* Плавные переходы для карточек кошельков */
+        .wallet-card {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .wallet-card:hover {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-5px);
+        }
+        
+        /* Плавные переходы для инструкций */
+        .instruction-toggle {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .instruction-toggle:hover {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .instruction-content {
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Плавные переходы для шагов */
+        .step-item {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .step-item:hover {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(5px);
+        }
+        
+        /* Плавные переходы для кнопок копирования */
+        .copy-address-btn {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .copy-address-btn:hover {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* Плавные переходы для информационных карточек */
+        .info-card {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .info-card:hover {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-3px);
+        }
+        
+        /* Плавные переходы для заголовков секций */
+        .genesis-brand-title {
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .genesis-brand-title:hover {
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* === ДОПОЛНИТЕЛЬНЫЕ ИСПРАВЛЕНИЯ ЦЕНТРИРОВАНИЯ === */
+        .genesis-auth-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .genesis-auth-form {
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .genesis-form-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+        
+        .genesis-buttons-container {
+            display: flex !important;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 2rem;
+        }
+        
+        .genesis-brand-header {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .genesis-auth-header {
+            text-align: center;
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+        
+        .auth-instructions-card {
+            margin: 1.5rem auto;
+            max-width: 600px;
+        }
+        
+        .genesis-auth-instruction {
+            margin: 1.5rem auto;
+            max-width: 700px;
+        }
+        
+        @media (max-width: 768px) {
+            .genesis-buttons-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .genesis-auth-container {
+                padding: 1rem;
+            }
+        }
+        
+        /* === ИСПРАВЛЕНИЕ ОСНОВНЫХ КЛАССОВ === */
+        .genesis-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+        }
+        
+        /* === ФИНАЛЬНЫЕ ИСПРАВЛЕНИЯ ВЕРСТКИ === */
+        
+        /* === СТИЛИ ДЛЯ НОВОГО РАЗДЕЛА ДОХОДОВ === */
+        /* MCP-MARKER:STYLES:INCOME_OVERVIEW - Стили раздела доходов */
+        .genesis-income-overview {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.05), rgba(69, 183, 209, 0.05));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .genesis-income-overview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4ecdc4, #45b7d1, transparent);
+            animation: overviewSweep 4s ease-in-out infinite;
+        }
+        
+        @keyframes overviewSweep {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        .income-header {
+            text-align: center;

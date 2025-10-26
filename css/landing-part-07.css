@@ -1,0 +1,450 @@
+            margin-bottom: 3rem;
+        }
+        
+        .income-header h2 {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .income-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .income-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .income-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .income-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(78, 205, 196, 0.2);
+            border-color: rgba(78, 205, 196, 0.4);
+        }
+        
+        .passive-income {
+            border-left: 4px solid #ffd700;
+        }
+        
+        .active-income {
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .income-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .income-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 2px 8px rgba(78, 205, 196, 0.3));
+        }
+        
+        .income-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4ecdc4;
+            margin: 0;
+        }
+        
+        .income-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .income-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+            transition: all 0.3s ease;
+        }
+        
+        .income-list li:hover {
+            color: #4ecdc4;
+            transform: translateX(5px);
+        }
+        
+        .bullet {
+            color: #4ecdc4;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
+        }
+        
+        /* Секция "Почему ты здесь" */
+        .why-here-section {
+            margin: 3rem 0;
+        }
+        
+        .quote-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+        }
+        
+        .quote-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(255, 215, 0, 0.2);
+        }
+        
+        .quote-icon {
+            font-size: 2.5rem;
+            color: #ffd700;
+            flex-shrink: 0;
+        }
+        
+        .quote-content h4 {
+            color: #ffd700;
+            font-size: 1.3rem;
+            margin: 0 0 1rem 0;
+            font-weight: 600;
+        }
+        
+        .quote-content blockquote {
+            margin: 0;
+            padding: 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        /* Секция введения */
+        .intro-section {
+            margin: 3rem 0;
+        }
+        
+        .intro-section h3 {
+            color: #4ecdc4;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .intro-content p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .intro-content strong {
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+        
+        /* Информация о монете */
+        .coin-info-section {
+            margin: 3rem 0;
+        }
+        
+        .coin-card {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(69, 183, 209, 0.05));
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .coin-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(78, 205, 196, 0.2);
+        }
+        
+        .coin-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .coin-icon {
+            font-size: 2rem;
+            color: #4ecdc4;
+        }
+        
+        .coin-header h4 {
+            color: #4ecdc4;
+            font-size: 1.4rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .coin-card p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        /* Универсальные секции */
+        .utility-section,
+        .tax-model-section,
+        .stabilization-section,
+        .tool-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 4px solid #4ecdc4;
+        }
+        
+        .utility-section h4,
+        .tax-model-section h4,
+        .stabilization-section h4,
+        .tool-section h4 {
+            color: #4ecdc4;
+            font-size: 1.4rem;
+            margin: 0 0 1rem 0;
+            font-weight: 600;
+        }
+        
+        .utility-section p,
+        .tax-model-section p,
+        .stabilization-section p,
+        .tool-section p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+        
+        /* MEV-бот пример */
+        .mev-example-section {
+            margin: 3rem 0;
+        }
+        
+        .mev-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .mev-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.2);
+        }
+        
+        .mev-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .mev-icon {
+            font-size: 2rem;
+            color: #667eea;
+        }
+        
+        .mev-header h4 {
+            color: #667eea;
+            font-size: 1.4rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .mev-stats p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .mev-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .mev-features li {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .mev-cost {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            color: #ffd700 !important;
+            font-weight: 500;
+        }
+        
+        /* Призыв к действию */
+        .cta-section {
+            margin: 3rem 0;
+        }
+        
+        .cta-card {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.15), rgba(32, 201, 151, 0.1));
+            border: 2px solid rgba(40, 167, 69, 0.4);
+            border-radius: 20px;
+            padding: 2.5rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(40, 167, 69, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .cta-card:hover::before {
+            left: 100%;
+        }
+        
+        .cta-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(40, 167, 69, 0.3);
+            border-color: rgba(40, 167, 69, 0.6);
+        }
+        
+        .cta-icon {
+            font-size: 3rem;
+            color: #28a745;
+            flex-shrink: 0;
+            filter: drop-shadow(0 4px 8px rgba(40, 167, 69, 0.4));
+        }
+        
+        .cta-content h4 {
+            color: #28a745;
+            font-size: 1.6rem;
+            margin: 0 0 1rem 0;
+            font-weight: 700;
+        }
+        
+        .cta-content p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .cta-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .genesis-income-overview {
+                padding: 2rem 1.5rem;
+                margin: 1rem 0;
+            }
+            
+            .income-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .income-card {
+                padding: 1.5rem;
+            }
+            
+            .income-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .income-subtitle {
+                font-size: 1rem;
+            }
+            
+            .quote-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .cta-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+            
+            .intro-section h3 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .genesis-income-overview {
+                padding: 1.5rem 1rem;
+            }
+            
+            .income-card {
+                padding: 1rem;
+            }
+            
+            .income-card-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .utility-section,
+            .tax-model-section,
+            .stabilization-section,
+            .tool-section {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Анимации появления */
+        .genesis-income-overview {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1s ease-out 0.3s forwards;
+        }
+        
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);

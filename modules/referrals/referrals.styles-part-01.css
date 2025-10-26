@@ -1,0 +1,104 @@
+    height: 20px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    background: linear-gradient(135deg, #ff6b35 0%, #ff4757 100%);
+    height: 100%;
+    transition: width 0.3s ease;
+    width: 35%;
+}
+
+.progress-text {
+    text-align: center;
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.loyalty-benefits h4 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.benefit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15, 15, 26, 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.benefit-level {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.benefit-bonus {
+    color: #ff6b35;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .referrals-container {
+        padding: 1rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .referral-link-container {
+        flex-direction: column;
+    }
+    
+    .table-header,
+    .table-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .table-header > div,
+    .table-row > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .table-header > div::before,
+    .table-row > div::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #ff6b35;
+    }
+    
+    .commission-levels {
+        gap: 0.5rem;
+    }
+    
+    .commission-level {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .level-icon {
+        margin-bottom: 0.5rem;
+    }
+    
+    .promotion-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+}

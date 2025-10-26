@@ -1,0 +1,450 @@
+        
+        .qr-instructions {
+            margin: 2rem 0;
+        }
+        
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .instruction-item.primary {
+            background: rgba(78, 205, 196, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+        }
+        
+        .instruction-item.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .instruction-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .instruction-icon {
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+        
+        .instruction-text {
+            flex: 1;
+            text-align: left;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+        
+        .qr-actions {
+            margin-top: 2rem;
+        }
+        
+        /* Адаптивность QR секции */
+        @media (max-width: 768px) {
+            .qr-main-card {
+                margin: 0 1rem;
+            }
+            
+            #genesis-qr-code {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .instruction-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .instruction-text {
+                text-align: center;
+            }
+        }
+        
+        /* Адаптивность для QR секции */
+        @media (max-width: 768px) {
+            .genesis-qr-section {
+                padding: 1.5rem 1rem;
+                max-width: 100%;
+            }
+            
+            .qr-address-container {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .qr-address-value {
+                width: 100%;
+                text-align: center;
+                font-size: 0.8rem;
+            }
+            
+            .qr-copy-btn {
+                width: 100%;
+            }
+        }
+        
+        /* MCP-MARKER:FIX:PWA_SECTION_ENHANCED - Улучшенные стили PWA секции */
+        /* Исправления для PWA секции */
+        .genesis-pwa-section {
+            background: linear-gradient(135deg, rgba(13, 17, 23, 0.95), rgba(22, 27, 34, 0.95));
+            margin-top: 3rem;
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+        
+        .genesis-pwa-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(78, 205, 196, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .genesis-pwa-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .genesis-pwa-header h2 {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        /* MCP-MARKER:FIX:PWA_CONTENT_GRID - Улучшенная сетка PWA контента */
+        .genesis-pwa-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .genesis-pwa-benefits,
+        .genesis-pwa-instructions {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .genesis-pwa-benefits:hover,
+        .genesis-pwa-instructions:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Подсветка секции при переходе */
+        .genesis-section.highlight {
+            animation: highlightSection 2s ease;
+        }
+        
+        @keyframes highlightSection {
+            0%, 100% {
+                background-color: transparent;
+            }
+            50% {
+                background-color: rgba(78, 205, 196, 0.1);
+            }
+        }
+        
+        /* MCP-MARKER:SECTION:TECH_INFO_STYLES - Стили секции технических данных */
+        /* Исправления для tech info секции */
+        .genesis-tech-info-section {
+            background: linear-gradient(135deg, rgba(13, 17, 23, 0.98), rgba(22, 27, 34, 0.98));
+            padding: 4rem 0;
+        }
+        
+        .genesis-tech-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .genesis-tech-header h2 {
+            font-size: 2.5rem;
+            color: #4ecdc4;
+            margin-bottom: 0.5rem;
+        }
+        
+        .genesis-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Плавные градиентные переходы для всех карточек */
+        .genesis-info-card {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(78, 205, 196, 0.03) 25%,
+                rgba(69, 183, 209, 0.03) 50%,
+                rgba(255, 255, 255, 0.05) 75%,
+                rgba(78, 205, 196, 0.03) 100%
+            );
+            background-size: 400% 400%;
+            animation: smoothGradientShift 20s ease-in-out infinite;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Очень плавная анимация градиента */
+        @keyframes smoothGradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 0%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 50% 100%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Плавные hover эффекты */
+        .genesis-info-card:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(78, 205, 196, 0.06) 25%,
+                rgba(69, 183, 209, 0.06) 50%,
+                rgba(255, 255, 255, 0.08) 75%,
+                rgba(78, 205, 196, 0.06) 100%
+            );
+            background-size: 400% 400%;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.15);
+            border-color: rgba(78, 205, 196, 0.2);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Специальные очень плавные стили для карточек производительности и безопасности */
+        .genesis-info-card:nth-child(3) {
+            background: linear-gradient(135deg, 
+                rgba(255, 193, 7, 0.05) 0%,
+                rgba(255, 193, 7, 0.02) 25%,
+                rgba(255, 152, 0, 0.03) 50%,
+                rgba(255, 193, 7, 0.05) 75%,
+                rgba(255, 193, 7, 0.02) 100%
+            );
+            background-size: 400% 400%;
+            animation: smoothGradientShift 25s ease-in-out infinite;
+            border-color: rgba(255, 193, 7, 0.15);
+        }
+        
+        .genesis-info-card:nth-child(3):hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 193, 7, 0.08) 0%,
+                rgba(255, 193, 7, 0.04) 25%,
+                rgba(255, 152, 0, 0.06) 50%,
+                rgba(255, 193, 7, 0.08) 75%,
+                rgba(255, 193, 7, 0.04) 100%
+            );
+            background-size: 400% 400%;
+            border-color: rgba(255, 193, 7, 0.25);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.15);
+        }
+        
+        .genesis-info-card:nth-child(3) h3 {
+            color: #ffc107;
+            transition: color 0.8s ease;
+        }
+        
+        .genesis-info-card:nth-child(6) {
+            background: linear-gradient(135deg, 
+                rgba(220, 53, 69, 0.05) 0%,
+                rgba(220, 53, 69, 0.02) 25%,
+                rgba(198, 35, 51, 0.03) 50%,
+                rgba(220, 53, 69, 0.05) 75%,
+                rgba(220, 53, 69, 0.02) 100%
+            );
+            background-size: 400% 400%;
+            animation: smoothGradientShift 30s ease-in-out infinite;
+            border-color: rgba(220, 53, 69, 0.15);
+        }
+        
+        .genesis-info-card:nth-child(6):hover {
+            background: linear-gradient(135deg, 
+                rgba(220, 53, 69, 0.08) 0%,
+                rgba(220, 53, 69, 0.04) 25%,
+                rgba(198, 35, 51, 0.06) 50%,
+                rgba(220, 53, 69, 0.08) 75%,
+                rgba(220, 53, 69, 0.04) 100%
+            );
+            background-size: 400% 400%;
+            border-color: rgba(220, 53, 69, 0.25);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.15);
+        }
+        
+        .genesis-info-card:nth-child(6) h3 {
+            color: #dc3545;
+            transition: color 0.8s ease;
+        }
+        
+        /* Адаптивность для разных размеров экранов */
+        @media (max-width: 1200px) {
+            .genesis-info-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Стили для длинных значений */
+        .info-value.long-value {
+            font-size: 0.8rem;
+            word-break: break-all;
+            max-width: 200px;
+        }
+        
+        /* Анимации для обновления значений */
+        .info-value.updating {
+            animation: valueUpdate 0.5s ease;
+        }
+        
+        @keyframes valueUpdate {
+            0% { opacity: 0.5; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Стили для статусов */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-indicator.success {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+        
+        .status-indicator.error {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+        
+        .status-indicator.warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+        
+        .status-indicator.info {
+            background: rgba(23, 162, 184, 0.2);
+            color: #17a2b8;
+        }
+        
+        .genesis-info-card {
+            padding: 2rem;
+            border-radius: 15px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* MCP-MARKER:FIX:TECH_CARD_ENHANCED - Улучшенный дизайн технических карточек */
+        .genesis-info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+            animation: techCardSweep 4s ease-in-out infinite;
+        }
+        
+        @keyframes techCardSweep {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        .genesis-info-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .genesis-info-card h3 {
+            color: #4ecdc4;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+        
+        /* MCP-MARKER:FIX:INFO_ITEM_ENHANCED - Улучшенные стили элементов информации */
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .info-item:hover {
+            padding-left: 0.5rem;
+            background: rgba(78, 205, 196, 0.05);
+            margin: 0 -0.5rem;
+            padding-right: 0.5rem;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+        
+        .info-value {
+            color: #ffffff;
+            font-weight: 500;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Глобальные исправления для всех панелей */
+        .genesis-panel-glass {
+            background: rgba(255, 255, 255, 0.05);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Адаптивность общая */
+        @media (max-width: 768px) {
+            .genesis-container {
+                padding: 0 1rem;

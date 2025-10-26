@@ -1,0 +1,70 @@
+    color: #bbb;
+}
+
+.permission-status {
+    font-weight: 500;
+}
+
+.permission-status.status-granted {
+    color: #4ade80;
+}
+
+.permission-status.status-denied {
+    color: #f87171;
+}
+
+.permission-status.status-prompt {
+    color: #fbbf24;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .device-module {
+        padding: 15px;
+    }
+    
+    .module-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .module-title {
+        font-size: 1.5rem;
+    }
+    
+    .device-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pwa-status-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Утилиты */
+.hidden {
+    display: none !important;
+}
+
+.text-success {
+    color: #4ade80 !important;
+}
+
+.text-danger {
+    color: #f87171 !important;
+}
+
+.text-warning {
+    color: #fbbf24 !important;
+}
+
+.text-primary {
+    color: #ff6b35 !important;
+}

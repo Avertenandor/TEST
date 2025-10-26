@@ -1,0 +1,376 @@
+}
+
+.rank-coin-section h3 {
+    color: #ff6b35;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.coin-details-card {
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.coin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.coin-visual {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.coin-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.3));
+}
+
+.coin-name {
+    font-size: 2rem;
+    color: #ffc107;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+}
+
+.coin-balance-info {
+    text-align: right;
+}
+
+.balance-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.balance-amount span:first-child {
+    font-size: 2.5rem;
+    color: #ffc107;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+}
+
+.currency {
+    font-size: 1rem;
+    color: #b0b0b0;
+}
+
+.balance-label {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.coin-mechanics,
+.coin-usage,
+.earning-schedule {
+    margin-bottom: 2rem;
+}
+
+.coin-mechanics h4,
+.coin-usage h4,
+.earning-schedule h4 {
+    color: #ff6b35;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.mechanics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.mechanic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: rgba(15, 15, 26, 0.5);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 107, 53, 0.05);
+}
+
+.mechanic-icon {
+    font-size: 2rem;
+    min-width: 50px;
+    text-align: center;
+}
+
+.mechanic-content h5 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.mechanic-content p {
+    color: #b0b0b0;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.usage-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.usage-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(15, 15, 26, 0.5);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 107, 53, 0.05);
+    transition: all 0.3s ease;
+}
+
+.usage-item:hover {
+    border-color: #ff6b35;
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.1);
+}
+
+.usage-icon {
+    font-size: 1.5rem;
+}
+
+.usage-text {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.schedule-table {
+    background: rgba(15, 15, 26, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 107, 53, 0.05);
+}
+
+.schedule-header,
+.schedule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 80px;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: center;
+}
+
+.schedule-header {
+    background: rgba(255, 107, 53, 0.1);
+    color: #ff6b35;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.schedule-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.schedule-row:last-child {
+    border-bottom: none;
+}
+
+.schedule-row.completed {
+    background: rgba(74, 222, 128, 0.05);
+}
+
+.schedule-row.current {
+    background: rgba(255, 193, 7, 0.05);
+}
+
+.status-completed {
+    color: #4ade80;
+    font-size: 1.2rem;
+}
+
+.status-pending {
+    color: #ffc107;
+    font-size: 1.2rem;
+}
+
+.status-future {
+    color: #888;
+    font-size: 1.2rem;
+}
+
+/* Benefits Section */
+.rank-benefits-section h3 {
+    color: #ff6b35;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.benefit-card {
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.benefit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.1);
+}
+
+.benefit-card.active {
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.05);
+}
+
+.benefit-card.locked {
+    opacity: 0.5;
+    background: rgba(15, 15, 26, 0.3);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    min-width: 60px;
+    text-align: center;
+    filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.2));
+}
+
+.benefit-content {
+    flex: 1;
+}
+
+.benefit-content h4 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.benefit-content p {
+    color: #b0b0b0;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.benefit-value {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 80px;
+    text-align: center;
+}
+
+.benefit-card.locked .benefit-value {
+    background: rgba(128, 128, 128, 0.2);
+    color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .rank-container {
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .main-rank {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .rank-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .ranks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .next-rank-preview {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .coin-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .mechanics-grid,
+    .usage-list,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .schedule-header,
+    .schedule-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .benefit-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .rank-badge-large {
+        min-width: 80px;
+    }
+
+    .rank-icon {
+        font-size: 3rem;
+    }
+
+    .rank-info h3 {
+        font-size: 1.5rem;
+    }
+
+    .coin-icon {
+        font-size: 2.5rem;
+    }
+
+    .coin-name {
+        font-size: 1.5rem;
+    }
+
+    .balance-amount span:first-child {
+        font-size: 2rem;
+    }
+}

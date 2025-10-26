@@ -1,0 +1,450 @@
+/* ===== Style Block 1 ===== */
+/* MCP-MARKER:COMPONENT:BRAND_HEADER - Брендированный заголовок */
+        /* GENESIS 1.1 Animated Brand Header */
+        .genesis-brand-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .genesis-brand-title {
+            font-family: 'Orbitron', 'Arial Black', sans-serif;
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 900;
+            margin: 0;
+            padding: 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            
+            /* Animated gradient background */
+            background: linear-gradient(
+            45deg,
+            #ff6b6b,    /* Красный */
+            #4ecdc4,    /* Бирюзовый */
+            #45b7d1,    /* Синий */
+            #96ceb4,    /* Зеленый */
+            #feca57,    /* Желтый */
+            #ff9ff3,    /* Розовый */
+            #54a0ff,    /* Голубой */
+            #5f27cd,    /* Фиолетовый */
+            #ff6b6b     /* Возврат к красному для плавности */
+            );
+            
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* Анимация переливания цветов */
+            animation: genesisGradientShift 8s ease-in-out infinite;
+            
+            /* Дополнительные эффекты */
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            
+            /* Плавное появление */
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: genesisGradientShift 8s ease-in-out infinite,
+                      genesisFadeInUp 1.5s ease-out 0.5s forwards;
+        }
+        
+        /* Анимация переливания градиента */
+        @keyframes genesisGradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 0%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 50% 100%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Анимация появления */
+        @keyframes genesisFadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Эффект свечения при hover - scale отключен для предотвращения прыжков */
+        .genesis-brand-title:hover {
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))
+                   drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+            /* transform: scale(1.02); */
+            transition: all 0.3s ease;
+        }
+        
+        /* Подзаголовок с улучшенным стилем */
+        .genesis-brand-subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0.5rem 0 0 0;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            animation: genesisFadeInUp 1.5s ease-out 1s forwards;
+        }
+        
+        /* Улучшенный дизайн инструкций */
+        .genesis-auth-instruction {
+            background: rgba(255, 255, 255, 0.05);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: genesisFadeInUp 1s ease-out 1.5s forwards;
+        }
+        
+        .genesis-auth-instruction::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #4ecdc4,
+                #45b7d1,
+                #96ceb4,
+                transparent
+            );
+            animation: genesisInstructionSweep 3s ease-in-out infinite;
+        }
+        
+        @keyframes genesisInstructionSweep {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        .genesis-auth-instruction h3 {
+            color: #4ecdc4;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 1.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .genesis-step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            counter-reset: step-counter;
+        }
+        
+        .genesis-step-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding: 1rem 0 1rem 4rem;
+            margin: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.5;
+            border-left: 2px solid transparent;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: genesisStepFadeIn 0.8s ease-out forwards;
+        }
+        
+        .genesis-step-list li:nth-child(1) { 
+            animation-delay: 2s; 
+        }
+        .genesis-step-list li:nth-child(2) { 
+            animation-delay: 2.2s; 
+        }
+        .genesis-step-list li:nth-child(3) { 
+            animation-delay: 2.4s; 
+        }
+        .genesis-step-list li:nth-child(4) { 
+            animation-delay: 2.6s; 
+        }
+        
+
+        
+        @keyframes genesisStepFadeIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Новые стили для анимации слов */
+        .genesis-step-list li .word {
+            opacity: 0.3;
+            transition: opacity 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+            display: inline;
+        }
+        
+        .genesis-step-list li .word.active {
+            opacity: 1;
+            color: #4ecdc4;
+            text-shadow: 0 0 12px rgba(78, 205, 196, 0.6);
+        }
+        
+        .genesis-step-list li .word.completed {
+            opacity: 1;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+        
+        .genesis-step-list li.step-active {
+            border-left-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.05);
+            transition: all 0.5s ease;
+        }
+        
+        .genesis-step-list li.step-active::before {
+            opacity: 1;
+            box-shadow: 0 6px 25px rgba(78, 205, 196, 0.8);
+            /* transform: translateY(-50%) scale(1.1); */
+            transform: translateY(-50%);
+            transition: all 0.5s ease;
+        }
+        
+        /* Зеленая галочка завершения цикла - ТОЛЬКО СИМВОЛ */
+        .genesis-cycle-complete {
+            position: absolute;
+            top: 50%;
+            right: 60px;
+            transform: translateY(-50%) scale(0);
+            width: clamp(120px, 35vw, 250px);
+            height: clamp(120px, 35vw, 250px);
+            max-width: 35%;
+            max-height: 35%;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(3rem, 12vw, 6rem);
+            color: transparent;
+            opacity: 0;
+            z-index: 100;
+            pointer-events: none;
+            overflow: visible;
+        }
+        
+        /* Градиентное освещение символа галочки - ЗЕЛЕНО-ЗОЛОТИСТЫЕ ПЕРЕЛИВЫ */
+        .genesis-cycle-complete::after {
+            content: "✓";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: inherit;
+            font-weight: bold;
+            background: linear-gradient(
+                45deg,
+                #28a745 0%,
+                #20c997 25%,
+                #ffd700 50%,
+                #ffb347 75%,
+                #28a745 100%
+            );
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: genesisGoldGreenShimmer 6s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        @keyframes genesisGoldGreenShimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 100%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 50% 0%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .genesis-cycle-complete.show {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+            animation: genesisCycleCompleteShow 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+        
+        .genesis-cycle-complete.hide {
+            animation: genesisCycleCompleteHide 0.6s ease-in forwards;
+        }
+        
+        @keyframes genesisCycleCompleteShow {
+            0% {
+                opacity: 0;
+                transform: translateY(-50%) scale(0) rotate(-180deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1.1) rotate(10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1) rotate(0deg);
+            }
+        }
+        
+        @keyframes genesisCycleCompleteHide {
+            0% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50%) scale(0.6);
+            }
+        }
+        
+        /* Мягкий эффект пульсации для большой галочки - ОТКЛЮЧЕН */
+        .genesis-cycle-complete.show::before {
+            display: none;
+        }
+        
+        @keyframes genesisCyclePulseSoft {
+            0%, 100% {
+                /* transform: scale(1); */
+                opacity: 0.3;
+            }
+            50% {
+                /* transform: scale(1.2); */
+                opacity: 0.1;
+            }
+        }
+        
+        .genesis-step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        
+
+        
+
+        
+        .genesis-step-list li:hover {
+            border-left-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.05);
+            transform: translateX(5px);
+            padding-left: 4.5rem;
+        }
+        
+        .genesis-step-list li:hover::before {
+            background: linear-gradient(135deg, #45b7d1, #4ecdc4);
+            /* transform: translateY(-50%) scale(1.1); */
+            transform: translateY(-50%);
+            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+        }
+        
+        /* MCP-MARKER:SECTION:MOBILE_RESPONSIVE - Адаптивные стили для мобильных устройств */
+        /* MCP-MARKER:RESPONSIVE:MOBILE_FIRST - Мобильные устройства в приоритете */
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .genesis-brand-title {
+                font-size: clamp(2.5rem, 12vw, 4rem);
+                letter-spacing: 0.05em;
+            }
+            
+            .genesis-brand-header {
+                margin-bottom: 1.5rem;
+                padding: 0.5rem 0;
+            }
+            
+            .genesis-auth-instruction {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+            
+            .genesis-step-list li {
+                padding: 0.8rem 0 0.8rem 3.5rem;
+                font-size: 1rem;
+            }
+            
+            .genesis-step-list li::before {
+                width: 2rem;
+                height: 2rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Адаптивная галочка для мобильных */
+            .genesis-cycle-complete {
+                width: clamp(80px, 30vw, 130px);
+                height: clamp(80px, 30vw, 130px);
+                font-size: clamp(2rem, 8vw, 3.5rem);
+                right: 30px;
+            }
+        }
+        
+        /* Адаптивность для планшетов */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .genesis-cycle-complete {
+                width: clamp(120px, 25vw, 180px);
+                height: clamp(120px, 25vw, 180px);
+                font-size: clamp(3rem, 6vw, 4.5rem);
+                right: 45px;
+            }
+        }
+        
+        /* Адаптивность для больших экранов */
+        @media (min-width: 1025px) {
+            .genesis-cycle-complete {
+                width: clamp(150px, 20vw, 220px);
+                height: clamp(150px, 20vw, 220px);
+                font-size: clamp(4rem, 5vw, 5.5rem);
+                right: 60px;
+            }
+        }
+        
+        /* API Key Indicator Styles */
+        .genesis-api-indicator {
