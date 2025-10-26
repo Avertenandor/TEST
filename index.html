@@ -1066,299 +1066,312 @@
                 </div>
             </div>
         </div>
-        
-    <!-- Терминал на главной не встраивается статически: UI подключится через shared/components/terminal/bootstrap.js по требованию -->
-                            <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
-                            <h3>📱 Ваше устройство</h3>
-                            <div class="info-item">
-                                <span class="info-label">Платформа:</span>
-                                <span class="info-value" id="device-platform">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Операционная система:</span>
-                                <span class="info-value" id="device-os">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Браузер:</span>
-                                <span class="info-value" id="device-browser">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Версия браузера:</span>
-                                <span class="info-value" id="device-browser-version">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Разрешение экрана:</span>
-                                <span class="info-value" id="device-resolution">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Размер окна:</span>
-                                <span class="info-value" id="device-viewport">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Плотность пикселей:</span>
-                                <span class="info-value" id="device-pixel-ratio">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Цветовая глубина:</span>
-                                <span class="info-value" id="device-color-depth">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Язык системы:</span>
-                                <span class="info-value" id="device-language">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Часовой пояс:</span>
-                                <span class="info-value" id="device-timezone">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Время загрузки:</span>
-                                <span class="info-value" id="device-load-time">-</span>
-                            </div>
+
+        <!-- MCP-MARKER:SECTION:TECH_INFO_SECTION - Секция технической информации о устройстве -->
+        <!-- Терминал на главной не встраивается статически: UI подключится через shared/components/terminal/bootstrap.js по требованию -->
+        <section id="tech-info-section" class="genesis-section" role="region" aria-label="Техническая информация">
+            <div class="genesis-container">
+                <!-- Заголовок секции -->
+                <div class="section-header">
+                    <h2 class="section-title">🖥️ ТЕХНИЧЕСКАЯ ИНФОРМАЦИЯ</h2>
+                    <p class="section-subtitle">Подробные данные о вашем устройстве, сети и безопасности</p>
+                </div>
+
+                <!-- Сетка с карточками технической информации -->
+                <div class="genesis-info-grid">
+                    <!-- Карточка устройства -->
+                    <div class="genesis-info-card genesis-panel-glass">
+                        <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
+                        <h3>📱 Ваше устройство</h3>
+                        <div class="info-item">
+                            <span class="info-label">Платформа:</span>
+                            <span class="info-value" id="device-platform">-</span>
                         </div>
-                        
-                        <!-- Карточка сети -->
-                        <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
-                            <h3>🌐 Сетевая информация</h3>
-                            <div class="info-item">
-                                <span class="info-label">IP адрес:</span>
-                                <span class="info-value" id="network-ip">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Локация:</span>
-                                <span class="info-value" id="network-location">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Провайдер:</span>
-                                <span class="info-value" id="network-provider">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Организация:</span>
-                                <span class="info-value" id="network-organization">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Тип соединения:</span>
-                                <span class="info-value" id="network-connection-type">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Скорость соединения:</span>
-                                <span class="info-value" id="network-connection-speed">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Задержка сети:</span>
-                                <span class="info-value" id="network-latency">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Пинг до BSC:</span>
-                                <span class="info-value" id="network-bsc-ping">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Статус Web3:</span>
-                                <span class="info-value" id="network-web3-status">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">RPC Endpoint:</span>
-                                <span class="info-value" id="network-rpc-endpoint">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">User Agent:</span>
-                                <span class="info-value" id="network-user-agent">-</span>
-                            </div>
+                        <div class="info-item">
+                            <span class="info-label">Операционная система:</span>
+                            <span class="info-value" id="device-os">-</span>
                         </div>
-                        
-                        <!-- Карточка производительности -->
-                        <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
-                            <h3>⚡ Производительность</h3>
-                            <div class="info-item">
-                                <span class="info-label">Процессор:</span>
-                                <span class="info-value" id="performance-cpu-cores">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Память устройства:</span>
-                                <span class="info-value" id="performance-device-memory">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Память браузера:</span>
-                                <span class="info-value" id="performance-browser-memory">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Время загрузки страницы:</span>
-                                <span class="info-value" id="performance-page-load">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Время DOM:</span>
-                                <span class="info-value" id="performance-dom-time">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Время рендеринга:</span>
-                                <span class="info-value" id="performance-render-time">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">FPS (кадры в секунду):</span>
-                                <span class="info-value" id="performance-fps">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Поддержка WebGL:</span>
-                                <span class="info-value" id="performance-webgl">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Поддержка WebRTC:</span>
-                                <span class="info-value" id="performance-webrtc">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Поддержка Service Workers:</span>
-                                <span class="info-value" id="performance-service-workers">-</span>
-                            </div>
+                        <div class="info-item">
+                            <span class="info-label">Браузер:</span>
+                            <span class="info-value" id="device-browser">-</span>
                         </div>
-                        
-                        <!-- Карточка системы -->
-                        <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
-                            <h3>⚙️ Параметры системы</h3>
-                            <div class="info-item">
-                                <span class="info-label">Основной адрес:</span>
-                                <span class="info-value" id="system-main-address">0x399B...fFCD</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Адрес доступа:</span>
-                                <span class="info-value" id="system-access-address">0x2891...Af76</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Контракт токена:</span>
-                                <span class="info-value" id="system-token-contract">0xdf17...e6c1</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Сеть:</span>
-                                <span class="info-value" id="system-network">BSC Mainnet</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Статус API:</span>
-                                <span class="info-value" id="system-api-status">✅ Активно</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Версия приложения:</span>
-                                <span class="info-value" id="system-app-version">GENESIS 1.1</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Версия протокола:</span>
-                                <span class="info-value" id="system-protocol-version">BEP-20</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Блокчейн ID:</span>
-                                <span class="info-value" id="system-blockchain-id">56</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">RPC URL:</span>
-                                <span class="info-value" id="system-rpc-url">https://bsc-dataseed.binance.org/</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Explorer URL:</span>
-                                <span class="info-value" id="system-explorer-url">https://bscscan.com/</span>
-                            </div>
+                        <div class="info-item">
+                            <span class="info-label">Версия браузера:</span>
+                            <span class="info-value" id="device-browser-version">-</span>
                         </div>
-                        
-                        <!-- Карточка статистики -->
-                        <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
-                            <h3>📊 Статистика использования</h3>
-                            <div class="info-item">
-                                <span class="info-label">Время в системе:</span>
-                                <span class="info-value" id="stats-session-time">00:00:00</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">API запросов:</span>
-                                <span class="info-value" id="stats-api-calls">0</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Логов в терминале:</span>
-                                <span class="info-value" id="stats-terminal-logs">0</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Ошибок:</span>
-                                <span class="info-value" id="stats-errors">0</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Кэш:</span>
-                                <span class="info-value" id="stats-cache-size">0 KB</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Память браузера:</span>
-                                <span class="info-value" id="stats-memory-usage">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Загрузка CPU:</span>
-                                <span class="info-value" id="stats-cpu-usage">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Активные вкладки:</span>
-                                <span class="info-value" id="stats-active-tabs">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Время последнего обновления:</span>
-                                <span class="info-value" id="stats-last-update">-</span>
-                            </div>
+                        <div class="info-item">
+                            <span class="info-label">Разрешение экрана:</span>
+                            <span class="info-value" id="device-resolution">-</span>
                         </div>
-                        
-                        <!-- Карточка безопасности -->
-                        <div class="genesis-info-card genesis-panel-glass">
-                            <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
-                            <h3>🔒 Безопасность и конфиденциальность</h3>
-                            <div class="info-item">
-                                <span class="info-label">Протокол соединения:</span>
-                                <span class="info-value" id="security-protocol">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Шифрование:</span>
-                                <span class="info-value" id="security-encryption">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Do Not Track:</span>
-                                <span class="info-value" id="security-dnt">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Cookies:</span>
-                                <span class="info-value" id="security-cookies">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Local Storage:</span>
-                                <span class="info-value" id="security-local-storage">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Session Storage:</span>
-                                <span class="info-value" id="security-session-storage">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">IndexedDB:</span>
-                                <span class="info-value" id="security-indexeddb">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Web Workers:</span>
-                                <span class="info-value" id="security-web-workers">-</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Content Security Policy:</span>
-                                <span class="info-value" id="security-csp">-</span>
-                            </div>
+                        <div class="info-item">
+                            <span class="info-label">Размер окна:</span>
+                            <span class="info-value" id="device-viewport">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Плотность пикселей:</span>
+                            <span class="info-value" id="device-pixel-ratio">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Цветовая глубина:</span>
+                            <span class="info-value" id="device-color-depth">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Язык системы:</span>
+                            <span class="info-value" id="device-language">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Часовой пояс:</span>
+                            <span class="info-value" id="device-timezone">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Время загрузки:</span>
+                            <span class="info-value" id="device-load-time">-</span>
                         </div>
                     </div>
-                    
-                    <!-- Важная надпись о конфиденциальности -->
-                    <div class="privacy-notice genesis-panel-glass">
-                        <div class="privacy-icon">🔒</div>
-                        <div class="privacy-content">
-                            <h4>🔒 Конфиденциальность данных</h4>
-                            <p><strong>Важно:</strong> Мы НЕ собираем и НЕ сохраняем ваши персональные данные. Вся информация о вашем устройстве и соединении отображается только для вас в реальном времени и не передается на наши серверы. Ваша приватность — наш приоритет.</p>
-                            <div class="privacy-features">
-                                <span class="privacy-feature">✅ Данные не сохраняются</span>
-                                <span class="privacy-feature">✅ Нет трекинга</span>
-                                <span class="privacy-feature">✅ Локальная обработка</span>
-                                <span class="privacy-feature">✅ Безопасное соединение</span>
-                            </div>
+
+                    <!-- Карточка сети -->
+                    <div class="genesis-info-card genesis-panel-glass">
+                        <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
+                        <h3>🌐 Сетевая информация</h3>
+                        <div class="info-item">
+                            <span class="info-label">IP адрес:</span>
+                            <span class="info-value" id="network-ip">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Локация:</span>
+                            <span class="info-value" id="network-location">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Провайдер:</span>
+                            <span class="info-value" id="network-provider">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Организация:</span>
+                            <span class="info-value" id="network-organization">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Тип соединения:</span>
+                            <span class="info-value" id="network-connection-type">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Скорость соединения:</span>
+                            <span class="info-value" id="network-connection-speed">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Задержка сети:</span>
+                            <span class="info-value" id="network-latency">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Пинг до BSC:</span>
+                            <span class="info-value" id="network-bsc-ping">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Статус Web3:</span>
+                            <span class="info-value" id="network-web3-status">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">RPC Endpoint:</span>
+                            <span class="info-value" id="network-rpc-endpoint">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">User Agent:</span>
+                            <span class="info-value" id="network-user-agent">-</span>
                         </div>
                     </div>
-                    <!-- MCP-MARKER:TASK:4_COMPLETED - ЗАДАЧА 4 ЗАВЕРШЕНА: ТЕХНИЧЕСКИЕ ДАННЫЕ ПРИВЕДЕНЫ В ПОРЯДОК -->
-                    <!-- MCP-MARKER:TASK:5_COMPLETED - ЗАДАЧА 5 ЗАВЕРШЕНА: МОНИТОРИНГ СИСТЕМЫ ИНТЕГРИРОВАН -->
+
+                    <!-- Карточка производительности -->
+                    <div class="genesis-info-card genesis-panel-glass">
+                        <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
+                        <h3>⚡ Производительность</h3>
+                        <div class="info-item">
+                            <span class="info-label">Процессор:</span>
+                            <span class="info-value" id="performance-cpu-cores">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Память устройства:</span>
+                            <span class="info-value" id="performance-device-memory">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Память браузера:</span>
+                            <span class="info-value" id="performance-browser-memory">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Время загрузки страницы:</span>
+                            <span class="info-value" id="performance-page-load">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Время DOM:</span>
+                            <span class="info-value" id="performance-dom-time">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Время рендеринга:</span>
+                            <span class="info-value" id="performance-render-time">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">FPS (кадры в секунду):</span>
+                            <span class="info-value" id="performance-fps">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Поддержка WebGL:</span>
+                            <span class="info-value" id="performance-webgl">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Поддержка WebRTC:</span>
+                            <span class="info-value" id="performance-webrtc">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Поддержка Service Workers:</span>
+                            <span class="info-value" id="performance-service-workers">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Карточка системы -->
+                    <div class="genesis-info-card genesis-panel-glass">
+                        <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
+                        <h3>⚙️ Параметры системы</h3>
+                        <div class="info-item">
+                            <span class="info-label">Основной адрес:</span>
+                            <span class="info-value" id="system-main-address">0x399B...fFCD</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Адрес доступа:</span>
+                            <span class="info-value" id="system-access-address">0x2891...Af76</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Контракт токена:</span>
+                            <span class="info-value" id="system-token-contract">0xdf17...e6c1</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Сеть:</span>
+                            <span class="info-value" id="system-network">BSC Mainnet</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Статус API:</span>
+                            <span class="info-value" id="system-api-status">✅ Активно</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Версия приложения:</span>
+                            <span class="info-value" id="system-app-version">GENESIS 1.1</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Версия протокола:</span>
+                            <span class="info-value" id="system-protocol-version">BEP-20</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Блокчейн ID:</span>
+                            <span class="info-value" id="system-blockchain-id">56</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">RPC URL:</span>
+                            <span class="info-value" id="system-rpc-url">https://bsc-dataseed.binance.org/</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Explorer URL:</span>
+                            <span class="info-value" id="system-explorer-url">https://bscscan.com/</span>
+                        </div>
+                    </div>
+
+                    <!-- Карточка статистики -->
+                    <div class="genesis-info-card genesis-panel-glass">
+                        <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
+                        <h3>📊 Статистика использования</h3>
+                        <div class="info-item">
+                            <span class="info-label">Время в системе:</span>
+                            <span class="info-value" id="stats-session-time">00:00:00</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">API запросов:</span>
+                            <span class="info-value" id="stats-api-calls">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Логов в терминале:</span>
+                            <span class="info-value" id="stats-terminal-logs">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Ошибок:</span>
+                            <span class="info-value" id="stats-errors">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Кэш:</span>
+                            <span class="info-value" id="stats-cache-size">0 KB</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Память браузера:</span>
+                            <span class="info-value" id="stats-memory-usage">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Загрузка CPU:</span>
+                            <span class="info-value" id="stats-cpu-usage">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Активные вкладки:</span>
+                            <span class="info-value" id="stats-active-tabs">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Время последнего обновления:</span>
+                            <span class="info-value" id="stats-last-update">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Карточка безопасности -->
+                    <div class="genesis-info-card genesis-panel-glass">
+                        <div class="tech-card-checkmark tech-card-checkmark-hidden">✓</div>
+                        <h3>🔒 Безопасность и конфиденциальность</h3>
+                        <div class="info-item">
+                            <span class="info-label">Протокол соединения:</span>
+                            <span class="info-value" id="security-protocol">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Шифрование:</span>
+                            <span class="info-value" id="security-encryption">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Do Not Track:</span>
+                            <span class="info-value" id="security-dnt">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Cookies:</span>
+                            <span class="info-value" id="security-cookies">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Local Storage:</span>
+                            <span class="info-value" id="security-local-storage">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Session Storage:</span>
+                            <span class="info-value" id="security-session-storage">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">IndexedDB:</span>
+                            <span class="info-value" id="security-indexeddb">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Web Workers:</span>
+                            <span class="info-value" id="security-web-workers">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Content Security Policy:</span>
+                            <span class="info-value" id="security-csp">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Важная надпись о конфиденциальности -->
+                <div class="privacy-notice genesis-panel-glass">
+                    <div class="privacy-icon">🔒</div>
+                    <div class="privacy-content">
+                        <h4>🔒 Конфиденциальность данных</h4>
+                        <p><strong>Важно:</strong> Мы НЕ собираем и НЕ сохраняем ваши персональные данные. Вся информация о вашем устройстве и соединении отображается только для вас в реальном времени и не передается на наши серверы. Ваша приватность — наш приоритет.</p>
+                        <div class="privacy-features">
+                        <span class="privacy-feature">✅ Данные не сохраняются</span>
+                        <span class="privacy-feature">✅ Нет трекинга</span>
+                        <span class="privacy-feature">✅ Локальная обработка</span>
+                        <span class="privacy-feature">✅ Безопасное соединение</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- MCP-MARKER:TASK:4_COMPLETED - ЗАДАЧА 4 ЗАВЕРШЕНА: ТЕХНИЧЕСКИЕ ДАННЫЕ ПРИВЕДЕНЫ В ПОРЯДОК -->
+                <!-- MCP-MARKER:TASK:5_COMPLETED - ЗАДАЧА 5 ЗАВЕРШЕНА: МОНИТОРИНГ СИСТЕМЫ ИНТЕГРИРОВАН -->
                 </div>
             </section>
             <!-- MCP-MARKER:SECTION:PWA_INSTALL_SECTION - Секция установки PWA -->
