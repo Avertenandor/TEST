@@ -1,12 +1,16 @@
 // vite.config.ts
 // Минимальная конфигурация Vite для сборки TypeScript
 
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import { resolve } from 'path';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => {
+    // Загружаем переменные окружения
+    const env = loadEnv(mode, process.cwd(), '');
+
+    return {
     // Режим сборки
-    mode: 'production',
+    mode: mode,
 
     // Корневая директория проекта
     root: '.',
@@ -80,5 +84,17 @@ export default defineConfig({
     },
 
     // Плагины
-    plugins: []
+    plugins: [],
+
+    // Определяем глобальные константы для замены во время сборки
+    define: {
+        '__VITE_BSCSCAN_API_KEY_AUTHORIZATION__': JSON.stringify(env.VITE_BSCSCAN_API_KEY_AUTHORIZATION || ''),
+        '__VITE_BSCSCAN_API_KEY_DEPOSITS__': JSON.stringify(env.VITE_BSCSCAN_API_KEY_DEPOSITS || ''),
+        '__VITE_BSCSCAN_API_KEY_SUBSCRIPTION__': JSON.stringify(env.VITE_BSCSCAN_API_KEY_SUBSCRIPTION || ''),
+        '__VITE_GENESIS_VERSION__': JSON.stringify(env.VITE_GENESIS_VERSION || '1.4.2'),
+        '__VITE_SYSTEM_ADDRESS__': JSON.stringify(env.VITE_SYSTEM_ADDRESS || ''),
+        '__VITE_ACCESS_ADDRESS__': JSON.stringify(env.VITE_ACCESS_ADDRESS || ''),
+        '__VITE_DEBUG_MODE__': env.VITE_DEBUG_MODE === 'true'
+    }
+};
 });
