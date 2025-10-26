@@ -312,6 +312,9 @@ window.CabinetTerminal = {
             copyAll: () => this.copyAll(),
             exportLogs: () => this.exportLogs(),
             minimize: () => this.minimize(),
+            maximize: () => this.maximize(),
+            close: () => this.close(),
+            open: () => this.open(),
             toggleFullscreen: () => this.toggleFullscreen(),
             toggleStats: () => this.toggleStats(),
             toggleTheme: () => this.toggleTheme(),
@@ -522,15 +525,145 @@ window.CabinetTerminal = {
     },
 
     minimize() {
-        const root = this.elements.container; if (!root) return;
-        root.classList.toggle('is-minimized');
+        const root = this.elements.container;
+        if (!root) return;
+
+        const isMinimized = root.classList.contains('is-minimized');
+
+        if (isMinimized) {
+            // Разворачиваем
+            this.maximize();
+        } else {
+            // Сворачиваем
+            root.classList.add('is-minimized');
+            const body = this.elements.body;
+            const inputWrap = root.querySelector('.genesis-terminal-input-wrapper');
+            const toolbar = root.querySelector('.genesis-terminal-toolbar');
+            const info = root.querySelector('.terminal-info-panels');
+            const quick = root.querySelector('.terminal-quick-commands');
+
+            [body, inputWrap, toolbar, info, quick].forEach(el => {
+                if (el) el.style.display = 'none';
+            });
+
+            // Меняем иконку кнопки
+            const minimizeBtn = root.querySelector('[title="Свернуть"]');
+            if (minimizeBtn) {
+                minimizeBtn.innerHTML = '⬜<span class="tooltip">Развернуть</span>';
+                minimizeBtn.setAttribute('title', 'Развернуть');
+            }
+
+            // Уменьшаем размер терминала
+            root.style.height = 'auto';
+
+            this.log('Терминал свернут', 'system');
+        }
+    },
+
+    maximize() {
+        const root = this.elements.container;
+        if (!root) return;
+
+        root.classList.remove('is-minimized');
         const body = this.elements.body;
         const inputWrap = root.querySelector('.genesis-terminal-input-wrapper');
         const toolbar = root.querySelector('.genesis-terminal-toolbar');
         const info = root.querySelector('.terminal-info-panels');
         const quick = root.querySelector('.terminal-quick-commands');
-        const show = !root.classList.contains('is-minimized');
-        [body, inputWrap, toolbar, info, quick].forEach(el => { if (el) el.style.display = show ? '' : 'none'; });
+
+        [body, inputWrap, toolbar, info, quick].forEach(el => {
+            if (el) el.style.display = '';
+        });
+
+        // Меняем иконку кнопки
+        const minimizeBtn = root.querySelector('[title="Развернуть"]');
+        if (minimizeBtn) {
+            minimizeBtn.innerHTML = '—<span class="tooltip">Свернуть</span>';
+            minimizeBtn.setAttribute('title', 'Свернуть');
+        }
+
+        // Восстанавливаем размер
+        root.style.height = '';
+
+        this.log('Терминал развернут', 'system');
+    },
+
+    close() {
+        const root = this.elements.container;
+        if (!root) return;
+
+        root.classList.add('is-closed');
+        root.style.display = 'none';
+
+        // Создаем кнопку для открытия терминала
+        this.createOpenButton();
+
+        this.log('Терминал закрыт', 'system');
+    },
+
+    open() {
+        const root = this.elements.container;
+        if (!root) return;
+
+        root.classList.remove('is-closed');
+        root.style.display = '';
+
+        // Удаляем кнопку открытия
+        this.removeOpenButton();
+
+        this.log('Терминал открыт', 'system');
+    },
+
+    createOpenButton() {
+        // Проверяем, не существует ли уже кнопка
+        let openBtn = document.getElementById('terminal-open-button');
+        if (openBtn) return;
+
+        openBtn = document.createElement('button');
+        openBtn.id = 'terminal-open-button';
+        openBtn.className = 'terminal-open-btn';
+        openBtn.innerHTML = '⚡ Открыть терминал';
+        openBtn.title = 'Открыть GENESIS Terminal';
+        openBtn.onclick = () => this.open();
+
+        // Добавляем стили для кнопки
+        openBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.9), rgba(78, 205, 196, 0.7));
+            border: 2px solid rgba(78, 205, 196, 1);
+            border-radius: 30px;
+            padding: 12px 24px;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+        `;
+
+        // Добавляем эффекты при наведении
+        openBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 6px 20px rgba(78, 205, 196, 0.6)';
+        });
+
+        openBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 4px 15px rgba(78, 205, 196, 0.4)';
+        });
+
+        document.body.appendChild(openBtn);
+    },
+
+    removeOpenButton() {
+        const openBtn = document.getElementById('terminal-open-button');
+        if (openBtn) {
+            openBtn.remove();
+        }
     },
 
     toggleFullscreen() {
