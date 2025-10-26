@@ -8,11 +8,16 @@
 @media (max-width: 1024px) {
     .genesis-container {
         max-width: 100%;
-        padding: 0 1rem;
+        padding: 0 clamp(1rem, 2vw, 2rem);
+        width: 100%;
+        box-sizing: border-box;
     }
-    
+
     .genesis-section {
-        padding: 3rem 0;
+        padding: clamp(2rem, 4vw, 3rem) 0;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: clip;
     }
     
     /* Header для планшетов */
@@ -37,9 +42,21 @@
     
     /* Сетки для планшетов */
     .genesis-info-grid,
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+    .stats-grid,
+    .unified-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+        gap: clamp(1rem, 2vw, 1.5rem);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .plex-tech-grid,
+    .plex-benefits-grid,
+    .genesis-pwa-features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+        gap: clamp(1rem, 2vw, 1.5rem);
+        width: 100%;
+        box-sizing: border-box;
     }
 }
 
@@ -48,11 +65,14 @@
     /* Базовые стили */
     html {
         font-size: 14px;
+        overflow-x: clip;
     }
-    
+
     body {
         -webkit-text-size-adjust: 100%;
         -webkit-tap-highlight-color: transparent;
+        overflow-x: clip;
+        max-width: 100vw;
     }
     
     /* Заголовки */
@@ -63,8 +83,18 @@
     h5, h6 { font-size: 1rem; }
     
     /* Контейнеры */
+    .genesis-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     .genesis-section {
         padding: 2rem 0;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: clip;
     }
     
     /* Header мобильный */
@@ -324,15 +354,28 @@
     
     /* Сетки мобильные */
     .genesis-info-grid,
-    .stats-grid {
+    .stats-grid,
+    .unified-grid,
+    .plex-tech-grid,
+    .plex-benefits-grid,
+    .genesis-pwa-features-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+        padding: 0;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     /* Карточки мобильные */
     .genesis-info-card,
-    .stats-card {
+    .stats-card,
+    .unified-card,
+    .plex-tech-card,
+    .plex-benefit-card,
+    .pwa-feature {
         padding: 1.25rem;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .stats-value {
@@ -550,28 +593,55 @@
 
 /* Маленькие мобильные телефоны */
 @media (max-width: 480px) {
+    /* Базовые стили */
+    html {
+        font-size: 14px;
+        overflow-x: clip;
+    }
+
+    body {
+        overflow-x: clip;
+        max-width: 100vw;
+    }
+
+    /* Контейнеры */
+    .genesis-container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .genesis-section {
+        padding: 1.5rem 0;
+    }
+
     /* Еще более компактные стили */
     .genesis-brand-title {
         font-size: 2rem;
     }
-    
+
     .genesis-step-list li {
         font-size: 0.875rem;
         padding-left: 2.5rem;
     }
-    
+
     .stats-value {
         font-size: 1.5rem;
     }
-    
+
     .genesis-info-card,
-    .stats-card {
+    .stats-card,
+    .unified-card,
+    .pwa-feature {
         padding: 1rem;
+        width: 100%;
+        box-sizing: border-box;
     }
-    
+
     .btn, .genesis-btn {
         padding: 0.75rem 1rem;
         font-size: 0.9rem;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     /* График мобильный */

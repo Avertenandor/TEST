@@ -1,0 +1,514 @@
+/**
+ * LAYOUT FIXES - Исправления проблем с выравниванием и сеткой
+ * Дата: 2025-10-26
+ * Описание: Комплексные исправления для улучшения layout и адаптивности
+ */
+
+/* ===== ГЛОБАЛЬНЫЕ ИСПРАВЛЕНИЯ ===== */
+
+/* Исправляем overflow проблемы */
+html {
+    overflow-x: clip !important;
+    max-width: 100vw;
+}
+
+body {
+    overflow-x: clip !important;
+    max-width: 100vw;
+    position: relative;
+}
+
+/* Убираем горизонтальный скролл */
+* {
+    max-width: 100%;
+}
+
+/* ===== КОНТЕЙНЕРЫ ===== */
+
+/* Улучшенный genesis-container */
+.genesis-container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 3vw, 2rem);
+    padding-right: clamp(1rem, 3vw, 2rem);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Секции с правильными отступами */
+.genesis-section {
+    padding-top: clamp(2rem, 5vw, 4rem);
+    padding-bottom: clamp(2rem, 5vw, 4rem);
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip;
+}
+
+/* ===== GRID СИСТЕМЫ ===== */
+
+/* Унифицированная grid система */
+.genesis-info-grid,
+.stats-grid,
+.unified-grid,
+.plex-tech-grid,
+.plex-benefits-grid,
+.genesis-pwa-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    width: 100%;
+    margin: clamp(1rem, 3vw, 2rem) auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Специальные сетки для разного количества колонок */
+.grid-2-cols {
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+}
+
+.grid-3-cols {
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+}
+
+.grid-4-cols {
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+}
+
+/* ===== КАРТОЧКИ ===== */
+
+/* Унифицированные стили карточек */
+.genesis-info-card,
+.stats-card,
+.unified-card,
+.plex-tech-card,
+.plex-benefit-card,
+.pwa-feature {
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Убираем проблему с переполнением в карточках */
+.genesis-info-card * ,
+.stats-card *,
+.unified-card * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* ===== FLEXBOX КОНТЕЙНЕРЫ ===== */
+
+/* Исправляем flex контейнеры */
+.genesis-header-content,
+.genesis-header-actions,
+.genesis-buttons-container,
+.buttons-container-styled,
+.terminal-controls,
+.terminal-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Кнопки должны иметь минимальную ширину */
+.genesis-btn,
+.btn,
+.genesis-btn-buy,
+.genesis-btn-neon {
+    min-width: min-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* ===== ГРАФИКИ И IFRAME ===== */
+
+/* Исправляем контейнер графика */
+.genesis-chart-container,
+.chart-container {
+    width: 100%;
+    max-width: 100%;
+    padding: clamp(1rem, 2.5vw, 2rem);
+    box-sizing: border-box;
+    margin: clamp(1rem, 3vw, 2rem) auto;
+}
+
+/* Адаптивные iframe */
+.genesis-chart-container iframe,
+#geckoterminal-embed,
+.geckoterminal-iframe-fixed {
+    width: 100% !important;
+    height: auto;
+    min-height: clamp(350px, 50vw, 600px);
+    max-height: 600px;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+/* ===== QR SECTION ===== */
+
+/* Улучшенная QR секция */
+.genesis-qr-section {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: clamp(1rem, 3vw, 2rem);
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.genesis-qr-container {
+    padding: clamp(1rem, 3vw, 2rem);
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#genesis-qr-code {
+    width: clamp(150px, 40vw, 200px);
+    height: clamp(150px, 40vw, 200px);
+    max-width: 200px;
+    max-height: 200px;
+}
+
+#genesis-qr-code canvas,
+#genesis-qr-code img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+/* ===== INFO ITEMS ===== */
+
+/* Исправляем info items для переполнения */
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.info-label {
+    flex: 0 0 auto;
+    min-width: 0;
+    max-width: 45%;
+    word-wrap: break-word;
+}
+
+.info-value {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 55%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: right;
+}
+
+/* ===== WALLET SECTION ===== */
+
+.wallet-section,
+.wallet-container {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip;
+}
+
+.address-container,
+.contract-address-section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Большие десктопы (1920px+) */
+@media (min-width: 1920px) {
+    .genesis-container {
+        max-width: 1600px;
+    }
+
+    .genesis-info-grid,
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+/* Десктопы (1200px - 1919px) */
+@media (min-width: 1200px) and (max-width: 1919px) {
+    .genesis-container {
+        max-width: 1200px;
+    }
+}
+
+/* Планшеты (768px - 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .genesis-container {
+        max-width: 100%;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .genesis-info-grid,
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+        gap: 1.25rem;
+    }
+
+    .genesis-chart-container iframe,
+    #geckoterminal-embed {
+        min-height: 450px;
+    }
+}
+
+/* Мобильные устройства (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+    .genesis-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .genesis-info-grid,
+    .stats-grid,
+    .unified-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .genesis-chart-container iframe,
+    #geckoterminal-embed {
+        min-height: 400px;
+    }
+
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .info-label,
+    .info-value {
+        max-width: 100%;
+        text-align: left;
+    }
+}
+
+/* Маленькие мобильные (до 480px) */
+@media (max-width: 480px) {
+    .genesis-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .genesis-section {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .genesis-info-grid,
+    .stats-grid,
+    .unified-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        margin: 1rem auto;
+    }
+
+    .genesis-info-card,
+    .stats-card,
+    .unified-card {
+        padding: 1rem;
+    }
+
+    .genesis-chart-container {
+        padding: 1rem;
+    }
+
+    .genesis-chart-container iframe,
+    #geckoterminal-embed {
+        min-height: 350px;
+    }
+
+    .genesis-buttons-container {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .genesis-btn,
+    .btn {
+        width: 100%;
+    }
+
+    #genesis-qr-code {
+        width: clamp(120px, 50vw, 150px);
+        height: clamp(120px, 50vw, 150px);
+    }
+}
+
+/* Очень маленькие экраны (до 360px) */
+@media (max-width: 360px) {
+    .genesis-container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .genesis-info-card,
+    .stats-card {
+        padding: 0.75rem;
+    }
+
+    .genesis-chart-container iframe,
+    #geckoterminal-embed {
+        min-height: 300px;
+    }
+}
+
+/* ===== LANDSCAPE MODE ===== */
+
+/* Планшеты в landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .genesis-section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .genesis-info-grid,
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    }
+}
+
+/* Мобильные в landscape */
+@media (max-width: 767px) and (orientation: landscape) {
+    .genesis-section {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .genesis-chart-container iframe,
+    #geckoterminal-embed {
+        min-height: 300px;
+        max-height: 400px;
+    }
+
+    .genesis-qr-section {
+        padding: 1rem;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+    .genesis-container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .genesis-info-grid,
+    .stats-grid {
+        display: block;
+    }
+
+    .genesis-info-card,
+    .stats-card {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+/* Улучшаем focus states */
+.genesis-info-card:focus-within,
+.stats-card:focus-within,
+.unified-card:focus-within {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Убираем проблемы с overflow для длинных ссылок */
+a {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* ===== ДОПОЛНИТЕЛЬНЫЕ ИСПРАВЛЕНИЯ ===== */
+
+/* Исправляем проблемы с auth container */
+.genesis-auth-container {
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: clamp(1rem, 3vw, 2rem);
+    box-sizing: border-box;
+}
+
+/* Исправляем income overview */
+.genesis-income-overview {
+    width: 100%;
+    padding: clamp(1rem, 3vw, 2rem);
+    box-sizing: border-box;
+}
+
+.income-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    width: 100%;
+}
+
+.income-card {
+    width: 100%;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    box-sizing: border-box;
+}
+
+/* Исправляем section headers */
+.section-header,
+.genesis-tech-header,
+.genesis-pwa-header {
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Исправляем PWA features */
+.pwa-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    min-height: 150px;
+}
+
+/* Исправляем payment block */
+.genesis-payment-block {
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: clamp(1rem, 3vw, 2rem);
+    box-sizing: border-box;
+}

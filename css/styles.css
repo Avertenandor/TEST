@@ -57,9 +57,10 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: clip;
     min-height: 100vh;
     position: relative;
+    max-width: 100vw;
 }
 
 /* MCP-MARKER:STYLE:ENHANCED_BACKGROUND - Улучшенный фон главной страницы */
@@ -193,11 +194,13 @@ a:hover {
 /* MCP-MARKER:SECTION:CONTAINERS - Контейнеры */
 /* Контейнеры */
 .genesis-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 clamp(1rem, 3vw, 2rem);
     position: relative;
     margin-bottom: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .genesis-container::before {
@@ -216,9 +219,12 @@ a:hover {
 }
 
 .genesis-section {
-    padding: 4rem 0;
+    padding: clamp(2rem, 5vw, 4rem) 0;
     position: relative;
     margin-bottom: 3rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip;
 }
 
 .genesis-section::before {
@@ -1477,14 +1483,16 @@ h1:hover::after, h2:hover::after, h3:hover::after {
 /* MCP-MARKER:STYLE:TECH_DATA_FIXED - Исправленные стили технических данных */
 .genesis-info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-    padding: 0 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    margin: clamp(1rem, 3vw, 2rem) auto;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .genesis-info-card {
-    padding: 1.5rem;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
     min-width: 0;
     border-radius: 15px;
     font-size: 1rem;
@@ -1495,6 +1503,10 @@ h1:hover::after, h2:hover::after, h3:hover::after {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .genesis-info-card:hover {
@@ -2068,29 +2080,35 @@ h1:hover::after, h2:hover::after, h3:hover::after {
 /* MCP-MARKER:STYLE:PWA_FEATURES_FIXED - Исправленные стили PWA функций */
 .genesis-pwa-features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-  padding: 0 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  margin: clamp(1rem, 3vw, 2rem) auto;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .pwa-feature {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 15px;
-  padding: 2rem 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.5rem);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   font-size: 1.1rem;
   font-weight: 600;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  min-height: 150px;
 }
 
 .pwa-feature::before {
