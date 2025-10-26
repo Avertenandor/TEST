@@ -1278,6 +1278,9 @@ body[data-terminal-theme="neon"] .genesis-terminal {
     text-align: right;
     max-width: 60%;
     word-break: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .info-value.updated {
@@ -1392,14 +1395,20 @@ body[data-terminal-theme="neon"] .genesis-terminal {
         font-size: 1rem;
     }
     
-    .info-label, .info-value {
-    .pwa-feature {
-        padding: 1.5rem;
-    }
-    
-    .feature-icon {
-        font-size: 2.5rem;
-    }
+    .info-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pwa-feature {
+    padding: 1.5rem;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
 }
 
 /* MCP-MARKER:STYLE:GLOW_EFFECT - Эффект свечения для заголовков */
