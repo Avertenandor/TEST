@@ -22,9 +22,13 @@ export class Application {
             // 1. Initialize global services
             window.eventBus = new EventBus();
             window.store = new Store(this.getInitialState());
-            
-            // Enable debug mode for event bus
-            window.eventBus.debug = true;
+
+            // Enable debug mode based on environment
+            const debugMode = import.meta.env.VITE_DEBUG_MODE === 'true' || config.environment === 'development';
+            window.eventBus.debug = debugMode;
+            if (debugMode) {
+                console.log('🐛 Debug mode enabled');
+            }
             
             // 2. Load configuration
             await this.loadConfig();

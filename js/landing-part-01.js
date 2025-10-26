@@ -21,19 +21,19 @@
                             else document.addEventListener('DOMContentLoaded', fn);
                         }
                         onReady(function() {
-                            var steps = document.querySelectorAll('#instructions-steps .step-text');
-                            var checkmark = document.getElementById('instructions-checkmark');
+                            const steps = document.querySelectorAll('#instructions-steps .step-text');
+                            const checkmark = document.getElementById('instructions-checkmark');
                             if (!steps.length || !checkmark) return;
-                            var readingSpeed = 250; // мс на слово
-                            var pauseBetweenSteps = 400;
-                            var pauseAfterAll = 20000; // 20 секунд
+                            const readingSpeed = 250; // мс на слово
+                            const pauseBetweenSteps = 400;
+                            const pauseAfterAll = 20000; // 20 секунд
                             // MCP-MARKER:FUNCTION:SPLIT_WORDS - Разделение текста на слова для анимации
                             function splitWords(stepEl) {
-                                var fullText = stepEl.getAttribute('data-full');
-                                var words = fullText.split(' ');
+                                const fullText = stepEl.getAttribute('data-full');
+                                const words = fullText.split(' ');
                                 stepEl.innerHTML = '';
                                 words.forEach(function(word, idx) {
-                                    var span = document.createElement('span');
+                                    const span = document.createElement('span');
                                     span.textContent = word + (idx < words.length-1 ? ' ' : '');
                                     span.className = 'word-to-fill';
                                     stepEl.appendChild(span);
@@ -41,12 +41,12 @@
                             }
                             // MCP-MARKER:FUNCTION:ANIMATE_WORDS_STEPS - Анимация слов по шагам
                             function animateWords(stepEls, cb) {
-                                var stepIdx = 0;
+                                let stepIdx = 0;
                                 // MCP-MARKER:FUNCTION:ANIMATE_STEP - Анимация одного шага
                                 function animateStep() {
                                     if (stepIdx >= stepEls.length) { cb && cb(); return; }
-                                    var wordSpans = stepEls[stepIdx].querySelectorAll('.word-to-fill');
-                                    var wordIdx = 0;
+                                    const wordSpans = stepEls[stepIdx].querySelectorAll('.word-to-fill');
+                                    let wordIdx = 0;
                                     // MCP-MARKER:FUNCTION:FILL_WORD - Заполнение слова в анимации
                                     function fillWord() {
                                         if (wordIdx < wordSpans.length) {
@@ -79,7 +79,7 @@
                                 });
                             }
                             // Стили для заливки
-                            var style = document.createElement('style');
+                            const style = document.createElement('style');
                             style.textContent = `
                                 .word-to-fill { transition: color 0.3s, background 0.3s; color: #8b949e; background: none; }
                                 .word-to-fill.word-filled { color: #f0f6fc; background: linear-gradient(90deg, #58a6ff22, #22c55e22); border-radius: 4px; }
