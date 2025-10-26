@@ -428,40 +428,100 @@ body {
     justify-content: flex-end;
 }
 
-/* Адаптивность */
-@media (max-width: 1024px) {
-    .genesis-container,
-    .genesis-container-wide {
-        padding: 0 1.5rem;
-    }
-    
-    .genesis-grid-4 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+/* Адаптивность - улучшенная */
 
-@media (max-width: 768px) {
+/* Очень маленькие экраны (до 374px) */
+@media (max-width: 374px) {
     .genesis-container,
     .genesis-container-wide {
-        padding: 0 1rem;
+        padding: 0 0.75rem;
+        max-width: 100%;
     }
-    
+
+    .genesis-grid,
     .genesis-grid-2,
     .genesis-grid-3,
     .genesis-grid-4 {
         grid-template-columns: 1fr;
+        gap: 0.75rem;
     }
-    
+
+    .genesis-btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.85rem;
+    }
+
     .genesis-btn-lg {
-        padding: 1rem 2rem;
+        padding: 0.875rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .genesis-form-input {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .genesis-card {
+        padding: 0.875rem;
+        border-radius: 12px;
+    }
+
+    .genesis-modal {
+        margin: 0.5rem;
+        max-height: calc(100vh - 1rem);
+        border-radius: 16px;
+    }
+
+    .genesis-modal-header,
+    .genesis-modal-body,
+    .genesis-modal-footer {
+        padding: 0.875rem;
+    }
+
+    .genesis-modal-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Маленькие телефоны (375px - 480px) */
+@media (min-width: 375px) and (max-width: 480px) {
+    .genesis-container,
+    .genesis-container-wide {
+        padding: 0 0.875rem;
+    }
+
+    .genesis-grid,
+    .genesis-grid-2,
+    .genesis-grid-3,
+    .genesis-grid-4 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .genesis-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+    }
+
+    .genesis-btn-lg {
+        padding: 1rem 1.75rem;
         font-size: 1rem;
     }
-    
-    .genesis-modal {
-        margin: 1rem;
-        max-height: calc(100vh - 2rem);
+
+    .genesis-form-input {
+        padding: 0.875rem;
+        font-size: 0.95rem;
     }
-    
+
+    .genesis-card {
+        padding: 1rem;
+    }
+
+    .genesis-modal {
+        margin: 0.75rem;
+        max-height: calc(100vh - 1.5rem);
+    }
+
     .genesis-modal-header,
     .genesis-modal-body,
     .genesis-modal-footer {
@@ -469,14 +529,326 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .genesis-btn {
-        padding: 0.75rem 1.25rem;
-        font-size: 0.9rem;
+/* Обычные телефоны (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+    .genesis-container {
+        padding: 0 1rem;
     }
-    
-    .genesis-form-input {
-        padding: 0.875rem;
+
+    .genesis-container-wide {
+        padding: 0 1.25rem;
+    }
+
+    .genesis-grid-2,
+    .genesis-grid-3,
+    .genesis-grid-4 {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .genesis-btn {
+        padding: 0.75rem 1.5rem;
         font-size: 0.95rem;
+    }
+
+    .genesis-btn-lg {
+        padding: 1.125rem 2rem;
+        font-size: 1.05rem;
+    }
+
+    .genesis-form-input {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .genesis-card {
+        padding: 1.25rem;
+    }
+
+    .genesis-modal {
+        margin: 1rem;
+        max-height: calc(100vh - 2rem);
+    }
+}
+
+/* Общие стили для всех мобильных (до 768px) */
+@media (max-width: 768px) {
+    .genesis-flex-between {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .genesis-notification {
+        left: 1rem;
+        right: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+}
+
+/* Маленькие планшеты (768px - 834px) */
+@media (min-width: 768px) and (max-width: 834px) {
+    .genesis-container {
+        padding: 0 1.5rem;
+        max-width: 720px;
+    }
+
+    .genesis-container-wide {
+        padding: 0 1.75rem;
+        max-width: 800px;
+    }
+
+    .genesis-grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .genesis-grid-3,
+    .genesis-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .genesis-btn {
+        padding: 0.875rem 1.75rem;
+        font-size: 1rem;
+    }
+
+    .genesis-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Планшеты стандартные (835px - 1024px) */
+@media (min-width: 835px) and (max-width: 1024px) {
+    .genesis-container {
+        padding: 0 2rem;
+        max-width: 960px;
+    }
+
+    .genesis-container-wide {
+        padding: 0 2.5rem;
+        max-width: 1000px;
+    }
+
+    .genesis-grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .genesis-grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.75rem;
+    }
+
+    .genesis-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.75rem;
+    }
+
+    .genesis-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+
+    .genesis-card {
+        padding: 1.75rem;
+    }
+}
+
+/* Маленькие ноутбуки (1025px - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .genesis-container {
+        padding: 0 2rem;
+        max-width: 1100px;
+    }
+
+    .genesis-container-wide {
+        padding: 0 2.5rem;
+        max-width: 1200px;
+    }
+
+    .genesis-grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .genesis-grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .genesis-grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.75rem;
+    }
+}
+
+/* Стандартные ноутбуки (1281px - 1440px) */
+@media (min-width: 1281px) and (max-width: 1440px) {
+    .genesis-container {
+        padding: 0 2.5rem;
+        max-width: 1200px;
+    }
+
+    .genesis-container-wide {
+        padding: 0 3rem;
+        max-width: 1320px;
+    }
+
+    .genesis-grid-2 {
+        gap: 2.5rem;
+    }
+
+    .genesis-grid-3 {
+        gap: 2.25rem;
+    }
+
+    .genesis-grid-4 {
+        gap: 2rem;
+    }
+
+    .genesis-card {
+        padding: 2rem;
+    }
+}
+
+/* Большие десктопы (1441px - 1920px) */
+@media (min-width: 1441px) and (max-width: 1920px) {
+    .genesis-container {
+        padding: 0 3rem;
+        max-width: 1400px;
+    }
+
+    .genesis-container-wide {
+        padding: 0 3.5rem;
+        max-width: 1600px;
+    }
+
+    .genesis-grid-2 {
+        gap: 3rem;
+    }
+
+    .genesis-grid-3 {
+        gap: 2.5rem;
+    }
+
+    .genesis-grid-4 {
+        gap: 2.25rem;
+    }
+
+    .genesis-card {
+        padding: 2.25rem;
+    }
+
+    .genesis-btn {
+        padding: 0.875rem 1.75rem;
+        font-size: 1rem;
+    }
+
+    .genesis-btn-lg {
+        padding: 1.375rem 2.75rem;
+        font-size: 1.15rem;
+    }
+}
+
+/* Ультра-широкие экраны (1921px - 2560px) */
+@media (min-width: 1921px) and (max-width: 2560px) {
+    .genesis-container {
+        padding: 0 4rem;
+        max-width: 1600px;
+    }
+
+    .genesis-container-wide {
+        padding: 0 5rem;
+        max-width: 1800px;
+    }
+
+    .genesis-grid-2 {
+        gap: 3.5rem;
+    }
+
+    .genesis-grid-3 {
+        gap: 3rem;
+    }
+
+    .genesis-grid-4 {
+        gap: 2.5rem;
+    }
+
+    .genesis-card {
+        padding: 2.5rem;
+    }
+
+    .genesis-btn {
+        padding: 1rem 2rem;
+        font-size: 1.05rem;
+    }
+
+    .genesis-btn-lg {
+        padding: 1.5rem 3rem;
+        font-size: 1.25rem;
+    }
+
+    .genesis-modal {
+        max-width: 600px;
+    }
+}
+
+/* 4K и выше (2561px+) */
+@media (min-width: 2561px) {
+    .genesis-container {
+        padding: 0 5rem;
+        max-width: 2000px;
+    }
+
+    .genesis-container-wide {
+        padding: 0 6rem;
+        max-width: 2400px;
+    }
+
+    .genesis-grid-2 {
+        gap: 4rem;
+    }
+
+    .genesis-grid-3 {
+        gap: 3.5rem;
+    }
+
+    .genesis-grid-4 {
+        gap: 3rem;
+    }
+
+    .genesis-card {
+        padding: 3rem;
+        border-radius: 24px;
+    }
+
+    .genesis-btn {
+        padding: 1.25rem 2.5rem;
+        font-size: 1.125rem;
+        border-radius: 14px;
+    }
+
+    .genesis-btn-lg {
+        padding: 1.75rem 3.5rem;
+        font-size: 1.375rem;
+        border-radius: 16px;
+    }
+
+    .genesis-form-input {
+        padding: 1.25rem;
+        font-size: 1.125rem;
+        border-radius: 14px;
+    }
+
+    .genesis-modal {
+        max-width: 700px;
+        border-radius: 24px;
+    }
+
+    .genesis-notification {
+        max-width: 500px;
+        padding: 1.5rem 2rem;
+        border-radius: 16px;
     }
 }

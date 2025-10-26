@@ -199,43 +199,184 @@
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
-    :where([data-module="header"]) .genesis-nav {
-        display: none;
+
+/* Очень маленькие экраны (до 374px) */
+@media (max-width: 374px) {
+    :where([data-module="header"]) .genesis-header-content {
+        padding: 0.5rem 0;
+        height: 56px;
     }
-    
-    :where([data-module="header"]) .genesis-header-actions {
-        display: none;
+
+    :where([data-module="header"]) .genesis-logo-text {
+        font-size: 1.1rem;
     }
-    
+
+    :where([data-module="header"]) .genesis-logo-number {
+        font-size: 0.65rem;
+    }
+
     :where([data-module="header"]) .genesis-mobile-menu-btn {
-        display: block;
+        padding: 0.375rem;
     }
-    
+
+    :where([data-module="header"]) .genesis-mobile-menu-icon {
+        width: 20px;
+    }
+
+    :where([data-module="header"]) .genesis-mobile-menu-icon::before,
+    :where([data-module="header"]) .genesis-mobile-menu-icon::after {
+        width: 20px;
+    }
+}
+
+/* Маленькие телефоны (375px - 480px) */
+@media (min-width: 375px) and (max-width: 480px) {
+    :where([data-module="header"]) .genesis-header-content {
+        padding: 0.5rem 0;
+        height: 60px;
+    }
+
+    :where([data-module="header"]) .genesis-logo-text {
+        font-size: 1.2rem;
+    }
+
+    :where([data-module="header"]) .genesis-logo-number {
+        font-size: 0.7rem;
+    }
+}
+
+/* Обычные телефоны (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
     :where([data-module="header"]) .genesis-header-content {
         height: 70px;
     }
-    
+
     :where([data-module="header"]) .genesis-logo-text {
-        font-size: 1.3rem;
+        font-size: 1.35rem;
     }
-    
+
     :where([data-module="header"]) .genesis-logo-number {
         font-size: 0.8rem;
     }
 }
 
-@media (max-width: 480px) {
+/* Общие стили для всех мобильных (до 768px) */
+@media (max-width: 768px) {
+    :where([data-module="header"]) .genesis-nav {
+        display: none;
+    }
+
+    :where([data-module="header"]) .genesis-header-actions {
+        display: none;
+    }
+
+    :where([data-module="header"]) .genesis-mobile-menu-btn {
+        display: block;
+    }
+}
+
+/* Планшеты портретная ориентация (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
     :where([data-module="header"]) .genesis-header-content {
-        padding: 0.5rem 0;
-        height: 60px;
+        height: 75px;
+        padding: 0.875rem 0;
     }
-    
+
+    :where([data-module="header"]) .genesis-nav-list {
+        gap: 1.5rem;
+    }
+
+    :where([data-module="header"]) .genesis-nav-link {
+        font-size: 0.9rem;
+    }
+
     :where([data-module="header"]) .genesis-logo-text {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
-    
+
     :where([data-module="header"]) .genesis-logo-number {
-        font-size: 0.7rem;
+        font-size: 0.85rem;
+    }
+
+    :where([data-module="header"]) .genesis-header-actions {
+        gap: 0.75rem;
+    }
+}
+
+/* Стандартные десктопы (1025px - 1440px) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    :where([data-module="header"]) .genesis-header-content {
+        height: 80px;
+    }
+
+    :where([data-module="header"]) .genesis-nav-list {
+        gap: 2rem;
+    }
+}
+
+/* Большие десктопы (1441px - 1920px) */
+@media (min-width: 1441px) and (max-width: 1920px) {
+    :where([data-module="header"]) .genesis-header-content {
+        height: 85px;
+        padding: 1.125rem 0;
+    }
+
+    :where([data-module="header"]) .genesis-nav-list {
+        gap: 2.5rem;
+    }
+
+    :where([data-module="header"]) .genesis-nav-link {
+        font-size: 1rem;
+    }
+
+    :where([data-module="header"]) .genesis-logo-text {
+        font-size: 1.6rem;
+    }
+
+    :where([data-module="header"]) .genesis-logo-number {
+        font-size: 0.95rem;
+    }
+}
+
+/* Ультра-широкие экраны (1921px+) */
+@media (min-width: 1921px) {
+    :where([data-module="header"]) .genesis-header-content {
+        height: 90px;
+        padding: 1.25rem 0;
+    }
+
+    :where([data-module="header"]) .genesis-nav-list {
+        gap: 3rem;
+    }
+
+    :where([data-module="header"]) .genesis-nav-link {
+        font-size: 1.05rem;
+    }
+
+    :where([data-module="header"]) .genesis-logo-text {
+        font-size: 1.75rem;
+    }
+
+    :where([data-module="header"]) .genesis-logo-number {
+        font-size: 1rem;
+    }
+}
+
+/* Оптимизация для touch устройств */
+@media (hover: none) and (pointer: coarse) {
+    :where([data-module="header"]) .genesis-mobile-menu-btn {
+        min-width: 48px;
+        min-height: 48px;
+        padding: 0.625rem;
+    }
+
+    :where([data-module="header"]) .genesis-mobile-nav-link {
+        padding: 1.25rem 0;
+        min-height: 48px;
+    }
+
+    :where([data-module="header"]) .genesis-nav-link {
+        padding: 0.75rem 1rem;
+        min-height: 44px;
     }
 }
