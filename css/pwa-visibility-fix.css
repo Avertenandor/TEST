@@ -52,7 +52,7 @@
             right: 0;
             height: env(safe-area-inset-top);
             background: var(--bg-primary);
-            z-index: 1000;
+            z-index: 999;
         }
         
         /* Корректировка скролла */
@@ -169,7 +169,7 @@
     bottom: env(safe-area-inset-bottom, 0);
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: 10000;
 }
 
 /* Улучшение контрастности в PWA */
@@ -209,11 +209,8 @@ html, body {
 /* Обеспечение видимости при виртуальной клавиатуре */
 @media (max-height: 500px) {
     .genesis-form-input:focus {
-        position: fixed;
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
-        z-index: 9999;
+        position: relative;
+        z-index: 100;
     }
 }
 

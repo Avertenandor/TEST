@@ -213,6 +213,8 @@
 .terminal-content {
     flex: 1;
     word-break: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
 }
 
 /* Цвета для разных типов сообщений */
@@ -286,15 +288,17 @@
     top: 100%;
     right: 0;
     width: 400px;
+    max-width: 95vw;
     display: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    display: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 0.5rem;
 }
 
 .terminal-stats-panel.show {

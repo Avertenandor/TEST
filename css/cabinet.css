@@ -167,6 +167,10 @@ body {
     border: 1px solid var(--border-color);
     cursor: pointer;
     transition: var(--transition-normal);
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .user-address:hover {
@@ -394,6 +398,8 @@ body {
 .page-subtitle {
     color: var(--text-secondary);
     font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ===== CARDS & STATS ===== */
@@ -1072,6 +1078,9 @@ body {
 .transaction-type {
     font-weight: 600;
     margin-bottom: 0.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .transaction-date {
