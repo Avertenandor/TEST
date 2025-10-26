@@ -1108,7 +1108,21 @@
         body.dev-mode .genesis-api-indicator {
             display: flex !important;
         }
-        
+
+        /* Скрываем индикатор по умолчанию (если не dev-mode) */
+        .api-indicator-hidden {
+            display: none !important;
+        }
+
+        /* Скрываем cache controls в production */
+        .genesis-cache-controls {
+            display: none !important;
+        }
+
+        body.dev-mode .genesis-cache-controls {
+            display: flex !important;
+        }
+
         /* Маленькие зеленые галочки для технических карточек */
         .genesis-info-card {
             position: relative;
