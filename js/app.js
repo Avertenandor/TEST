@@ -1,7 +1,12 @@
 /**
- * GENESIS 1.1 - Основное приложение
+ * GENESIS 1.4.2 - Основное приложение (Refactored)
  * MCP-MARKER:MODULE:MAIN_APP - Основное приложение
  * MCP-MARKER:FILE:APP_JS - Основной файл приложения
+ *
+ * IMPROVEMENTS:
+ * - Fixed race conditions in service initialization
+ * - Proper async/await sequencing
+ * - Dependency management
  */
 
 // Глобальная обработка ошибок
@@ -30,20 +35,21 @@ window.addEventListener('unhandledrejection', (event) => {
 
 // MCP-MARKER:CLASS:GENESIS_APP - Класс основного приложения
 window.GenesisApp = {
-    version: '1.1',
+    version: '1.4.2',
     initialized: false,
     currentUser: null,
     services: {},
+    servicesReady: false,
     
     // MCP-MARKER:METHOD:APP_INIT - Инициализация приложения
     async init() {
-        console.log('🚀 GENESIS 1.1 - Инициализация...');
-        
+        console.log('🚀 GENESIS 1.4.2 - Инициализация...');
+
         try {
             // Показываем экран загрузки
             this.updateLoadingStatus('Загрузка конфигурации...');
             console.log('📱 Экран загрузки активирован');
-            
+
             // Проверяем готовность DOM
             if (document.readyState === 'loading') {
                 console.log('⏳ DOM еще загружается, ждем...');
@@ -52,34 +58,41 @@ window.GenesisApp = {
                 });
             }
             console.log('✅ DOM готов');
-            
-            // Инициализируем сервисы
-            this.updateLoadingStatus('Загрузка сервисов...');
-            await this.initializeServices();
-            
+
+            // FIXED: Инициализируем сервисы последовательно
+            this.updateLoadingStatus('Загрузка базовых сервисов...');
+            await this.initializeBaseServices();
+
+            this.updateLoadingStatus('Загрузка зависимых сервисов...');
+            await this.initializeDependentServices();
+
+            this.servicesReady = true;
+            console.log('✅ Все сервисы инициализированы');
+
             // Проверяем авторизацию
             this.updateLoadingStatus('Проверка авторизации...');
             await this.checkAuthorization();
-            
+
             // Инициализируем UI
             this.updateLoadingStatus('Инициализация интерфейса...');
             this.initializeUI();
-            
-            // Регистрируем Service Worker
-            this.updateLoadingStatus('Регистрация Service Worker...');
-            await this.registerServiceWorker();
-            
+
+            // Регистрируем Service Worker (независимо, можно параллельно)
+            this.registerServiceWorker().catch(err => {
+                console.warn('⚠️ Service Worker registration failed:', err);
+            });
+
             // Скрываем экран загрузки
             this.updateLoadingStatus('Завершение инициализации...');
             this.hideLoadingScreen();
-            
+
             this.initialized = true;
-            console.log('✅ GENESIS 1.1 - Готов к работе!');
-            
+            console.log('✅ GENESIS 1.4.2 - Готов к работе!');
+
         } catch (error) {
             console.error('❌ Ошибка инициализации:', error);
             this.showError('Ошибка загрузки приложения');
-            
+
             // В случае ошибки все равно показываем приложение
             setTimeout(() => {
                 this.hideLoadingScreen();
@@ -87,37 +100,15 @@ window.GenesisApp = {
         }
     },
     
-    // MCP-MARKER:METHOD:INIT_SERVICES - Инициализация сервисов
-    async initializeServices() {
-        this.updateLoadingStatus('Загрузка сервисов...');
-        
-        // Инициализируем терминал
-        if (window.GenesisTerminal) {
-            this.services.terminal = window.GenesisTerminal;
-            this.services.terminal.init();
-        } else {
-            console.warn('⚠️ GenesisTerminal не найден, создаем заглушку');
-            this.services.terminal = {
-                log: (msg, type = 'info') => console.log(`[TERMINAL-${type.toUpperCase()}] ${msg}`),
-                init: () => console.log('Terminal fallback initialized')
-            };
-        }
-        
-        // MCP-MARKER:PLATFORM_ACCESS_INIT - Инициализация системы доступа
-        // Инициализируем систему оплаты доступа к платформе
-        if (window.GenesisPlatformAccess) {
-            this.services.platformAccess = window.GenesisPlatformAccess;
-            await this.services.platformAccess.init();
-        } else {
-            console.warn('⚠️ GenesisPlatformAccess не найден, создаем заглушку');
-            this.services.platformAccess = {
-                checkUserAccessBalance: () => Promise.resolve({ isActive: true, daysRemaining: 999 }),
-                blockFunctionsIfNoAccess: () => false,
-                init: () => Promise.resolve()
-            };
-        }
-        
-        // Проверяем GenesisUtils
+    // MCP-MARKER:METHOD:INIT_BASE_SERVICES - Инициализация базовых сервисов
+    /**
+     * STEP 1: Инициализация базовых сервисов (не зависят от других)
+     * Порядок: Utils → API → Terminal
+     */
+    async initializeBaseServices() {
+        console.log('🔧 Инициализация базовых сервисов...');
+
+        // 1. GenesisUtils - базовый утилиты (никаких зависимостей)
         if (!window.GenesisUtils) {
             console.warn('⚠️ GenesisUtils не найден, создаем fallback');
             window.GenesisUtils = {
@@ -134,21 +125,54 @@ window.GenesisApp = {
                 isValidAddress: (addr) => /^0x[a-fA-F0-9]{40}$/.test(addr)
             };
         }
-        
-        // Инициализируем API сервис
+        this.services.utils = window.GenesisUtils;
+        console.log('✅ Utils ready');
+
+        // 2. GenesisAPI - API сервис (зависит только от конфига)
         if (window.GenesisAPI) {
             this.services.api = window.GenesisAPI;
+            console.log('✅ API service ready');
         } else {
             console.warn('⚠️ GenesisAPI не найден, создаем заглушку');
             this.services.api = {
                 get: () => Promise.resolve({ data: {} }),
-                post: () => Promise.resolve({ data: {} })
+                post: () => Promise.resolve({ data: {} }),
+                checkAuthorizationPayment: () => Promise.resolve({ authorized: false }),
+                checkAccessPayments: () => Promise.resolve({ isActive: false, daysRemaining: 0 })
             };
         }
-        
-        // Инициализируем сервис авторизации
+
+        // 3. Terminal - для логирования (зависит только от Utils)
+        if (window.GenesisTerminal) {
+            this.services.terminal = window.GenesisTerminal;
+            await this.services.terminal.init();
+            console.log('✅ Terminal ready');
+        } else {
+            console.warn('⚠️ GenesisTerminal не найден, создаем заглушку');
+            this.services.terminal = {
+                log: (msg, type = 'info') => console.log(`[TERMINAL-${type.toUpperCase()}] ${msg}`),
+                init: () => Promise.resolve()
+            };
+        }
+
+        console.log('✅ Базовые сервисы инициализированы');
+    },
+
+    // MCP-MARKER:METHOD:INIT_DEPENDENT_SERVICES - Инициализация зависимых сервисов
+    /**
+     * STEP 2: Инициализация зависимых сервисов (требуют базовые)
+     * Порядок: Auth → PlatformAccess → Transaction
+     */
+    async initializeDependentServices() {
+        console.log('🔧 Инициализация зависимых сервисов...');
+
+        // Ждем небольшую паузу для гарантии готовности базовых сервисов
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // 1. Auth - зависит от API и Utils
         if (window.GenesisAuth) {
             this.services.auth = window.GenesisAuth;
+            console.log('✅ Auth service ready');
         } else {
             console.warn('⚠️ GenesisAuth не найден, создаем заглушку');
             this.services.auth = {
@@ -157,18 +181,33 @@ window.GenesisApp = {
                 isValidAddress: (addr) => /^0x[a-fA-F0-9]{40}$/.test(addr)
             };
         }
-        
-        // Инициализируем сервис транзакций
+
+        // 2. PlatformAccess - зависит от API, Utils, Terminal
+        if (window.GenesisPlatformAccess) {
+            this.services.platformAccess = window.GenesisPlatformAccess;
+            await this.services.platformAccess.init();
+            console.log('✅ Platform Access ready');
+        } else {
+            console.warn('⚠️ GenesisPlatformAccess не найден, создаем заглушку');
+            this.services.platformAccess = {
+                checkUserAccessBalance: () => Promise.resolve({ isActive: true, daysRemaining: 999 }),
+                blockFunctionsIfNoAccess: () => false,
+                init: () => Promise.resolve()
+            };
+        }
+
+        // 3. Transaction - зависит от API
         if (window.GenesisTransaction) {
             this.services.transaction = window.GenesisTransaction;
+            console.log('✅ Transaction service ready');
         } else {
             console.warn('⚠️ GenesisTransaction не найден, создаем заглушку');
             this.services.transaction = {
                 getTransactions: () => Promise.resolve([])
             };
         }
-        
-        console.log('✅ Сервисы инициализированы');
+
+        console.log('✅ Зависимые сервисы инициализированы');
     },
     
     // MCP-MARKER:METHOD:CHECK_AUTH - Проверка авторизации

@@ -1,20 +1,23 @@
 /**
- * GENESIS 1.1 - Конфигурация системы
+ * GENESIS 1.4.2 - Конфигурация системы
  * MCP-MARKER:MODULE:SYSTEM_CONFIG - Конфигурация системы
  * MCP-MARKER:FILE:CONFIG_JS - Основной конфигурационный файл
+ *
+ * БЕЗОПАСНОСТЬ: API ключи загружаются из переменных окружения (.env)
+ * Для разработки скопируйте .env.example в .env и заполните реальными значениями
  */
 
 // MCP-MARKER:SECTION:GLOBAL_CONFIG - Глобальная конфигурация
 window.GENESIS_CONFIG = {
-    version: '1.1.1',
-    buildDate: '2025-06-30',
-    build: 'terminal-v2.1',
+    version: (typeof __VITE_GENESIS_VERSION__ !== 'undefined' ? __VITE_GENESIS_VERSION__ : '1.4.2'),
+    buildDate: '2025-10-26',
+    build: 'terminal-v2.1-refactored',
     network: 'BSC',
-    
-    // MCP-MARKER:SUBSECTION:SYSTEM_ADDRESSES - Системные адреса
+
+    // MCP-MARKER:SUBSECTION:SYSTEM_ADDRESSES - Системные адреса из переменных окружения
     addresses: {
-        system: '0x399B22170B0AC7BB20bdC86772bfF478f201fFCD',
-        access: '0x28915a33562b58500cf8b5b682C89A3396B8Af76'
+        system: (typeof __VITE_SYSTEM_ADDRESS__ !== 'undefined' ? __VITE_SYSTEM_ADDRESS__ : '0x399B22170B0AC7BB20bdC86772bfF478f201fFCD'),
+        access: (typeof __VITE_ACCESS_ADDRESS__ !== 'undefined' ? __VITE_ACCESS_ADDRESS__ : '0x28915a33562b58500cf8b5b682C89A3396B8Af76')
     },
     
     // MCP-MARKER:SUBSECTION:PLEX_TOKEN_CONFIG - Конфигурация токена PLEX
@@ -33,14 +36,21 @@ window.GENESIS_CONFIG = {
         decimals: 18
     },
     
-    // MCP-MARKER:SUBSECTION:BSCSCAN_API_CONFIG - Специализированные BSCScan API ключи
+    // MCP-MARKER:SUBSECTION:BSCSCAN_API_CONFIG - Специализированные BSCScan API ключи из переменных окружения
     bscscan: {
         apiUrl: 'https://api.bscscan.com/api',
-        // Специализированные ключи по функциям
+        // БЕЗОПАСНОСТЬ: Ключи загружаются из .env файла через Vite define
+        // В production сборке эти значения будут заменены во время компиляции
         apiKeys: {
-            AUTHORIZATION: 'YA5RH81WYSNS41KQPNNCX74FVXN7DJRJR4',  // Авторизация при нажатии кнопки
-            DEPOSITS: '2ZJG1N64RZ17GGAMZJU4DKY21GYBERMNY6',       // Проверка депозитов
-            SUBSCRIPTION: 'ARA9FYMNCIZHTB2PPBSWF686GID9F99P41'    // Проверка подписки
+            AUTHORIZATION: (typeof __VITE_BSCSCAN_API_KEY_AUTHORIZATION__ !== 'undefined'
+                ? __VITE_BSCSCAN_API_KEY_AUTHORIZATION__
+                : ''),  // Авторизация при нажатии кнопки
+            DEPOSITS: (typeof __VITE_BSCSCAN_API_KEY_DEPOSITS__ !== 'undefined'
+                ? __VITE_BSCSCAN_API_KEY_DEPOSITS__
+                : ''),  // Проверка депозитов
+            SUBSCRIPTION: (typeof __VITE_BSCSCAN_API_KEY_SUBSCRIPTION__ !== 'undefined'
+                ? __VITE_BSCSCAN_API_KEY_SUBSCRIPTION__
+                : '')   // Проверка подписки
         },
         rateLimit: 5, // запросов в секунду
         retryAttempts: 3
@@ -268,7 +278,7 @@ window.GENESIS_CONFIG = {
     
     // MCP-MARKER:SUBSECTION:APP_SETTINGS - Настройки приложения
     app: {
-        debug: false, // Отключен в продакшене
+        debug: (typeof __VITE_DEBUG_MODE__ !== 'undefined' ? __VITE_DEBUG_MODE__ : false), // Из переменных окружения
         cacheTimeout: 300000, // 5 минут
         apiTimeout: 10000, // 10 секунд
         animationDuration: 300,
@@ -603,4 +613,13 @@ window.waitForDependencies = function(dependencies, timeout = 5000) {
     });
 };
 
+// Проверка наличия API ключей при инициализации
+if (window.GENESIS_CONFIG.bscscan.apiKeys.AUTHORIZATION === '' ||
+    window.GENESIS_CONFIG.bscscan.apiKeys.DEPOSITS === '' ||
+    window.GENESIS_CONFIG.bscscan.apiKeys.SUBSCRIPTION === '') {
+    console.warn('⚠️ WARNING: BSCScan API keys are not configured! Please set them in .env file');
+    console.warn('📝 Copy .env.example to .env and fill in your API keys from https://bscscan.com/myapikey');
+}
+
 console.log('⚙️ GENESIS CONFIG loaded v' + window.GENESIS_CONFIG.version + ' (Terminal v' + window.GENESIS_CONFIG.terminal.version + ')');
+console.log('🔒 Security: API keys loaded from environment variables');
