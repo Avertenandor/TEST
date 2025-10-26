@@ -1,0 +1,450 @@
+/**
+ * GENESIS 1.1 - Мобильные стили
+ * MCP-MARKER:MODULE:MOBILE_STYLES - Мобильные стили
+ * MCP-MARKER:FILE:MOBILE_CSS - Файл мобильных стилей
+ */
+
+/* MCP-MARKER:SECTION:TABLET_STYLES - Планшеты и меньше */
+@media (max-width: 1024px) {
+    .genesis-container {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .genesis-section {
+        padding: 3rem 0;
+    }
+    
+    /* Header для планшетов */
+    .genesis-header-content {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .genesis-header-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    /* Терминал для планшетов */
+    .genesis-terminal {
+        max-height: 350px;
+    }
+    
+    .terminal-controls {
+        flex-wrap: wrap;
+    }
+    
+    /* Сетки для планшетов */
+    .genesis-info-grid,
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* Мобильные телефоны */
+@media (max-width: 768px) {
+    /* Базовые стили */
+    html {
+        font-size: 14px;
+    }
+    
+    body {
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Заголовки */
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.1rem; }
+    h5, h6 { font-size: 1rem; }
+    
+    /* Контейнеры */
+    .genesis-section {
+        padding: 2rem 0;
+    }
+    
+    /* Header мобильный */
+    .genesis-header {
+        padding: 0.75rem 0;
+    }
+    
+    .genesis-header-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .genesis-logo {
+        margin-bottom: 0.5rem;
+    }
+    
+    .genesis-logo-text {
+        font-size: 1.5rem;
+    }
+    
+    .genesis-logo-number {
+        font-size: 1.25rem;
+    }
+    
+    .genesis-header-actions {
+        width: 100%;
+        justify-content: space-between;
+        padding: 0 0.5rem;
+    }
+    
+    .genesis-status-indicator {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    /* Кнопки мобильные */
+    .btn, .genesis-btn {
+        width: 100%;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.95rem;
+    }
+    
+    .genesis-btn-large {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .genesis-buttons-container {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+    
+    /* Формы мобильные */
+    .genesis-form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .genesis-form-input {
+        font-size: 16px; /* Предотвращает zoom на iOS */
+        padding: 0.875rem 1rem;
+    }
+    
+    .genesis-input-group {
+        flex-direction: column;
+    }
+    
+    .genesis-btn-copy {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    
+    /* Терминал мобильный */
+    .genesis-terminal {
+        margin: 1rem 0;
+        max-height: 350px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+    }
+    
+    .genesis-terminal-header {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .terminal-title {
+        font-size: 0.9rem;
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .terminal-status {
+        display: none;
+    }
+    
+    .terminal-controls {
+        gap: 0.25rem;
+        flex-wrap: wrap;
+    }
+    
+    .terminal-btn {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.8rem;
+        min-width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .terminal-btn .tooltip {
+        display: none;
+    }
+    
+    .genesis-terminal-toolbar {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .terminal-search {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .terminal-search input {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .terminal-filters {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .terminal-filter {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.4rem;
+    }
+    
+    .genesis-terminal-body {
+        padding: 0.75rem 1rem;
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+    
+    .terminal-message {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.4rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .terminal-timestamp {
+        display: none;
+    }
+    
+    .terminal-icon {
+        min-width: 16px;
+        font-size: 0.9rem;
+    }
+    
+    .terminal-content {
+        flex: 1;
+        min-width: 200px;
+        word-break: break-word;
+    }
+    
+    .terminal-data {
+        font-size: 0.7rem;
+        padding: 0.5rem;
+        margin-top: 0.4rem;
+    }
+    
+    .genesis-terminal-input-wrapper {
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
+    }
+    
+    .terminal-prompt {
+        font-size: 0.9rem;
+    }
+    
+    .terminal-input {
+        font-size: 0.8rem;
+    }
+    
+    .terminal-autocomplete {
+        max-height: 150px;
+        font-size: 0.75rem;
+    }
+    
+    .autocomplete-item {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.75rem;
+    }
+    
+    .terminal-stats-panel {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 280px;
+        max-width: 90vw;
+        max-height: 80vh;
+        overflow-y: auto;
+        border-radius: 12px;
+        padding: 1.25rem;
+    }
+    
+    .terminal-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .terminal-stat-card {
+        padding: 0.75rem;
+    }
+    
+    .terminal-stat-value {
+        font-size: 1.25rem;
+    }
+    
+    .terminal-stat-label {
+        font-size: 0.7rem;
+    }
+    
+    /* Полноэкранный режим на мобильных */
+    .genesis-terminal.fullscreen {
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    
+    .genesis-terminal.fullscreen .genesis-terminal-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: linear-gradient(90deg, rgba(255, 165, 0, 0.15) 0%, rgba(255, 165, 0, 0.1) 100%);
+    }
+    
+    .genesis-terminal.fullscreen .genesis-terminal-toolbar {
+        position: sticky;
+        top: 60px;
+        z-index: 9;
+        background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .genesis-terminal.fullscreen .genesis-terminal-input-wrapper {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Сетки мобильные */
+    .genesis-info-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    /* Карточки мобильные */
+    .genesis-info-card,
+    .stats-card {
+        padding: 1.25rem;
+    }
+    
+    .stats-value {
+        font-size: 1.75rem;
+    }
+    
+    /* QR код мобильный */
+    .genesis-qr-section {
+        max-width: 100%;
+        padding: 1.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin: 1.5rem auto;
+    }
+    
+    .genesis-qr-section h3 {
+        text-align: center;
+        width: 100%;
+        margin: 0 0 1rem 0;
+        font-size: 1.3rem;
+    }
+    
+    .genesis-qr-container {
+        padding: 0.75rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.5rem 0;
+        width: fit-content;
+    }
+    
+    #genesis-qr-code {
+        min-width: 180px;
+        min-height: 180px;
+        max-width: 180px;
+        max-height: 180px;
+    }
+    
+    #genesis-qr-code canvas,
+    #genesis-qr-code img {
+        max-width: 180px;
+        max-height: 180px;
+        width: auto;
+        height: auto;
+    }
+    
+    .genesis-qr-hint {
+        font-size: 0.9rem;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    /* Уведомления мобильные */
+    .genesis-notifications-container {
+        top: 0.5rem;
+        right: 0.5rem;
+        left: 0.5rem;
+    }
+    
+    .genesis-notification {
+        min-width: auto;
+        font-size: 0.9rem;
+        padding: 0.75rem;
+    }
+    
+    /* Инструкции авторизации мобильные */
+    .genesis-auth-instruction {
+        padding: 1.5rem 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    .genesis-auth-instruction h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .genesis-step-list {
+        padding-left: 0;
+    }
+    
+    .genesis-step-list li {
+        padding: 0.75rem 0 0.75rem 3rem;
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .genesis-step-list li::before {
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Brand заголовок мобильный */
+    .genesis-brand-header {
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 0;
+    }
+    
+    .genesis-brand-title {
+        font-size: 2.5rem;
+        letter-spacing: 0.05em;
+    }
+    
+    .genesis-brand-subtitle {
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+    
+    /* Privacy notice мобильный */
+    .genesis-privacy-notice {
+        flex-direction: column;
+        text-align: center;

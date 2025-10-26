@@ -1,0 +1,191 @@
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+    font-size: 0.8rem;
+    transition: background 0.2s ease;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-trade:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+:where([data-module="terminal"]) .genesis-terminal-trade-buy .genesis-terminal-trade-price {
+    color: #4caf50;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-trade-sell .genesis-terminal-trade-price {
+    color: #f44336;
+}
+
+/* Подвал терминала */
+:where([data-module="terminal"]) .genesis-terminal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:where([data-module="terminal"]) .genesis-terminal-footer-left {
+    display: flex;
+    gap: 2rem;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-footer-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+:where([data-module="terminal"]) .genesis-terminal-footer-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-footer-value-positive {
+    color: #4caf50;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-footer-value-negative {
+    color: #f44336;
+}
+
+/* Информация о терминале */
+:where([data-module="terminal"]) .genesis-terminal-info {
+    margin-top: 3rem;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-info-item {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-info-item:hover {
+    transform: translateY(-5px);
+}
+
+:where([data-module="terminal"]) .genesis-terminal-info-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-info-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+:where([data-module="terminal"]) .genesis-terminal-info-description {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+}
+
+/* Анимации */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    :where([data-module="terminal"]) .genesis-terminal-main {
+        grid-template-columns: 1fr;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-sidebar {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    :where([data-module="terminal"]) .genesis-terminal {
+        padding: 2rem 0;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-content {
+        padding: 0 1rem;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-title-main {
+        font-size: 2rem;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-main {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-toolbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-toolbar-left {
+        justify-content: center;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-toolbar-right {
+        justify-content: center;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-chart-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-footer-left {
+        justify-content: center;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Адаптивность для сворачивания */
+    :where([data-module="terminal"]) .genesis-terminal-widget.collapsed {
+        max-height: 70px;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-btn[data-action="toggle-terminal"] .genesis-terminal-btn-text {
+        display: none;
+    }
+
+    :where([data-module="terminal"]) .genesis-terminal-btn[data-action="toggle-terminal"] {
+        padding: 0.5rem;
+        min-width: 44px;
+    }
+}

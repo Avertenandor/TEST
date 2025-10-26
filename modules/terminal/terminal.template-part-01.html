@@ -1,0 +1,192 @@
+                        <span>Тестовая команда</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Статистика терминала -->
+    <div class="terminal-stats-section">
+        <h3>📈 Статистика терминала</h3>
+        
+        <div class="stats-grid">
+            <div class="stats-card">
+                <div class="stats-icon">💻</div>
+                <div class="stats-content">
+                    <h4>Команды</h4>
+                    <div class="stats-value" id="total-commands">0</div>
+                    <div class="stats-label">Всего выполнено</div>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon">✅</div>
+                <div class="stats-content">
+                    <h4>Успешных</h4>
+                    <div class="stats-value" id="success-commands">0</div>
+                    <div class="stats-label">Без ошибок</div>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon">❌</div>
+                <div class="stats-content">
+                    <h4>Ошибок</h4>
+                    <div class="stats-value" id="error-commands">0</div>
+                    <div class="stats-label">С ошибками</div>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon">⏱️</div>
+                <div class="stats-content">
+                    <h4>Среднее время</h4>
+                    <div class="stats-value" id="avg-time">0ms</div>
+                    <div class="stats-label">Выполнения</div>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon">🔄</div>
+                <div class="stats-content">
+                    <h4>Сессия</h4>
+                    <div class="stats-value" id="session-time">00:00:00</div>
+                    <div class="stats-label">Время работы</div>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon">📊</div>
+                <div class="stats-content">
+                    <h4>Память</h4>
+                    <div class="stats-value" id="memory-usage">0 KB</div>
+                    <div class="stats-label">Использовано</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Настройки терминала -->
+    <div class="terminal-settings-section" id="terminal-settings-panel" style="display: none;">
+        <h3>⚙️ Настройки терминала</h3>
+        
+        <div class="settings-grid">
+            <div class="setting-group">
+                <h4>🎨 Внешний вид</h4>
+                <div class="setting-item">
+                    <label>Тема:</label>
+                    <select id="terminal-theme">
+                        <option value="dark">Темная</option>
+                        <option value="light">Светлая</option>
+                        <option value="matrix">Matrix</option>
+                        <option value="cyber">Cyber</option>
+                        <option value="retro">Retro</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="terminal-animations" checked>
+                        Анимации
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="terminal-sound" checked>
+                        Звуковые эффекты
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <h4>📝 Логирование</h4>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="log-info" checked>
+                        Информационные сообщения
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="log-warnings" checked>
+                        Предупреждения
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="log-errors" checked>
+                        Ошибки
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="log-debug">
+                        Отладочная информация
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <h4>⚡ Производительность</h4>
+                <div class="setting-item">
+                    <label>Максимум сообщений:</label>
+                    <input type="number" id="max-messages" value="1000" min="100" max="5000">
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="auto-scroll" checked>
+                        Автопрокрутка
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="timestamp-show" checked>
+                        Показывать время
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-actions">
+            <button class="btn btn-primary" onclick="saveTerminalSettings()">Сохранить</button>
+            <button class="btn btn-secondary" onclick="resetTerminalSettings()">Сбросить</button>
+            <button class="btn btn-secondary" onclick="closeTerminalSettings()">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Быстрые действия -->
+    <div class="quick-actions-section">
+        <h3>⚡ Быстрые действия</h3>
+        
+        <div class="actions-grid">
+            <button class="action-btn" onclick="executeCommand('balance')">
+                <div class="action-icon">💰</div>
+                <div class="action-text">Баланс</div>
+            </button>
+
+            <button class="action-btn" onclick="executeCommand('deposits')">
+                <div class="action-icon">📊</div>
+                <div class="action-text">Депозиты</div>
+            </button>
+
+            <button class="action-btn" onclick="executeCommand('status')">
+                <div class="action-icon">🔧</div>
+                <div class="action-text">Статус</div>
+            </button>
+
+            <button class="action-btn" onclick="executeCommand('history')">
+                <div class="action-icon">📋</div>
+                <div class="action-text">История</div>
+            </button>
+
+            <button class="action-btn" onclick="executeCommand('referrals')">
+                <div class="action-icon">👥</div>
+                <div class="action-text">Рефералы</div>
+            </button>
+
+            <button class="action-btn" onclick="executeCommand('help')">
+                <div class="action-icon">❓</div>
+                <div class="action-text">Справка</div>
+            </button>
+        </div>
+    </div>
+</div>

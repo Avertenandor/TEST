@@ -1,0 +1,450 @@
+    }
+    
+    .genesis-info-card {
+        padding: 1.5rem;
+    }
+    
+    .genesis-info-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+    
+    .info-value {
+        max-width: 100%;
+        text-align: left;
+        font-size: 0.85rem;
+    }
+    
+    .genesis-tech-actions {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 1rem;
+    }
+    
+    .genesis-tech-actions .genesis-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .genesis-tech-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .genesis-info-card {
+        padding: 1rem;
+    }
+    
+    .genesis-info-card h3 {
+        font-size: 1rem;
+    }
+    
+    .info-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pwa-feature {
+    padding: 1.5rem;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+}
+
+/* MCP-MARKER:STYLE:GLOW_EFFECT - Эффект свечения для заголовков */
+h1::after, h2::after, h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width var(--transition-base);
+}
+
+h1:hover::after, h2:hover::after, h3:hover::after {
+    width: 100%;
+}
+
+/* MCP-MARKER:STYLE:PARTICLES - Анимированные микрочастицы для фона */
+.particles-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: microParticleMove 25s linear infinite;
+}
+
+.particle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { top: 20%; left: 80%; animation-delay: 3s; }
+.particle:nth-child(3) { top: 60%; left: 20%; animation-delay: 6s; }
+.particle:nth-child(4) { top: 80%; left: 70%; animation-delay: 9s; }
+.particle:nth-child(5) { top: 40%; left: 90%; animation-delay: 12s; }
+.particle:nth-child(6) { top: 90%; left: 30%; animation-delay: 15s; }
+.particle:nth-child(7) { top: 30%; left: 60%; animation-delay: 18s; }
+.particle:nth-child(8) { top: 70%; left: 40%; animation-delay: 21s; }
+
+@keyframes microParticleMove {
+    0% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.2;
+    }
+    90% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-150px) translateX(30px);
+        opacity: 0;
+    }
+}
+
+/* MCP-MARKER:STYLE:TECH_DATA_FIXED - Исправленные стили технических данных */
+.genesis-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+    padding: 0 1rem;
+}
+
+.genesis-info-card {
+    padding: 1.5rem;
+    min-width: 0;
+    border-radius: 15px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.genesis-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 107, 53, 0.3);
+}
+
+.genesis-info-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 8px;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: right;
+    max-width: 60%;
+    word-break: break-word;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Убираем анимацию обновления */
+.info-value.updated {
+    color: var(--primary-color);
+    background: none !important;
+    animation: none !important;
+}
+
+/* MCP-MARKER:STYLE:TECH_SECTION - Секция технических данных */
+.genesis-tech-info-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.95), rgba(22, 27, 34, 0.95));
+    position: relative;
+    overflow: hidden;
+}
+
+.genesis-tech-info-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 10% 50%, rgba(255, 107, 53, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+.genesis-tech-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.genesis-tech-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+}
+
+.genesis-tech-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* MCP-MARKER:STYLE:PLEX_SECTION - PLEX TOKEN SECTION STYLES */
+
+.genesis-plex-info-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.05) 0%, rgba(255, 69, 0, 0.05) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.genesis-plex-info-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 69, 0, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.genesis-plex-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.genesis-plex-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), #ff4500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.genesis-plex-header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* MCP-MARKER:STYLE:PLEX_OVERVIEW - PLEX Overview */
+.genesis-plex-overview {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(255, 165, 0, 0.1);
+}
+
+.plex-overview-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.plex-overview-text h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.plex-overview-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.plex-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plex-features-list li {
+    padding: 0.8rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    border-bottom: 1px solid rgba(255, 165, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.plex-features-list li:last-child {
+    border-bottom: none;
+}
+
+.plex-features-list li:hover {
+    color: var(--primary-color);
+    transform: translateX(10px);
+}
+
+.plex-overview-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plex-token-card {
+    background: linear-gradient(135deg, var(--primary-color), #ff4500);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 10px 30px rgba(255, 165, 0, 0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+.plex-token-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.plex-token-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.plex-token-symbol {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.plex-token-network {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+/* MCP-MARKER:STYLE:PLEX_TECHNICAL - PLEX Technical Info */
+.genesis-plex-tech-info {
+    margin-bottom: 3rem;
+}
+
+.genesis-plex-tech-info h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.plex-tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.plex-tech-card {
+    padding: 1.5rem;
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.plex-tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255, 165, 0, 0.2);
+}
+
+.tech-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 165, 0, 0.2);
+}
+
+.tech-icon {
+    font-size: 1.5rem;
+    margin-right: 0.8rem;
+}
+
+.tech-card-header h4 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin: 0;
+}
+
+.tech-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+

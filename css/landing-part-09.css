@@ -1,0 +1,450 @@
+        }
+        
+        .genesis-form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+        
+        .genesis-form-select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .deposit-plans-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .calculation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .enhanced-deposits-section {
+                margin: 1rem 0;
+                padding: 1rem;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Дополнительные стили для гармонии с основной кнопкой */
+        
+        /* CSS классы для замены inline стилей */
+        .auth-container-centered {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .auth-header-centered {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .genesis-title-styled {
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+        }
+        
+        .genesis-subtitle-styled {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .auth-form-styled {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .buttons-container-styled {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .action-btn-margin {
+            margin-left: 10px;
+        }
+        
+        .tech-card-checkmark-hidden {
+            opacity: 0;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+        
+        .instructions-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .instructions-title {
+            color: #4ecdc4;
+            margin-bottom: 0.8rem;
+        }
+        
+        .instructions-list {
+            margin: 0;
+            padding-left: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .pwa-install-btn-margin {
+            margin-top: 2rem;
+        }
+        
+        .qr-fallback-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+        }
+        
+        .qr-fallback-icon {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .qr-fallback-title {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .qr-fallback-text {
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .qr-fallback-address {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            word-break: break-all;
+        }
+        
+        .instructions-checkmark-hidden {
+            display: none;
+        }
+        
+        /* CSS классы для JavaScript fallback элементов */
+        .qr-fallback-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            color: #333;
+            text-align: center;
+            font-size: 12px;
+            padding: 10px;
+        }
+        
+        .chart-fallback-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        /* CSS классы для QR fallback элементов */
+        .qr-text-fallback-container {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(78, 205, 196, 0.5);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            color: #4ecdc4;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            word-break: break-all;
+        }
+        
+        .qr-fallback-icon {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .qr-fallback-title {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .qr-fallback-description {
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .qr-fallback-address-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        
+        .qr-copy-button {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+/* ===== Style Block 2 ===== */
+.auth-instructions-card {
+                            background: linear-gradient(135deg, rgba(88,166,255,0.10), rgba(34,197,94,0.08));
+                            border: 1px solid rgba(88,166,255,0.18);
+                            border-radius: 14px;
+                            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+                            padding: 1.2rem 1.2rem 1.3rem 1.2rem;
+                            margin-bottom: 0.3rem;
+                            max-width: 540px;
+                            margin-left: auto;
+                            margin-right: auto;
+                            position: relative;
+                            overflow: hidden;
+                            text-align: center;
+                        }
+                        .auth-instructions-card .instructions-title {
+                            font-size: 1.15rem;
+                            font-weight: 700;
+                            color: #58a6ff;
+                            margin-bottom: 1.1rem;
+                            letter-spacing: 0.01em;
+                            display: flex;
+                            align-items: center;
+                            gap: 0.7rem;
+                            justify-content: center;
+                        }
+                        .auth-instructions-card .instructions-steps {
+                            counter-reset: step;
+                            list-style: none;
+                            padding: 0;
+                            margin: 0;
+                            text-align: left;
+                            display: inline-block;
+                        }
+                        .auth-instructions-card .instructions-steps li {
+                            position: relative;
+                            padding-left: 2.2rem;
+                            margin-bottom: 0.7rem;
+                            font-size: 1.01rem;
+                            color: #e6eaf3;
+                            min-height: 1.5em;
+                            text-align: left;
+                        }
+                        .auth-instructions-card .instructions-steps li:before {
+                            counter-increment: step;
+                            content: counter(step);
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: 1.4rem;
+                            height: 1.4rem;
+                            background: linear-gradient(135deg, #58a6ff 60%, #22c55e 100%);
+                            color: #fff;
+                            font-weight: 700;
+                            font-size: 1rem;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 2px 8px rgba(88,166,255,0.10);
+                        }
+                        .auth-instructions-card .step-text {
+                            display: inline-block;
+                            white-space: pre-line;
+                            letter-spacing: 0.01em;
+                            min-width: 10px;
+                        }
+                        .auth-instructions-card .instructions-checkmark {
+                            font-size: 2.1rem;
+                            color: #22c55e;
+                            text-align: center;
+                            margin-top: 1.1rem;
+                            font-weight: 900;
+                            background: none;
+                            box-shadow: none;
+                            border-radius: 0;
+                            line-height: 1;
+                        }
+                        .genesis-auth-instruction.genesis-panel-glass {
+                            margin-bottom: 0.3rem !important;
+                        }
+                        .genesis-auth-form {
+                            margin-top: 0.1rem !important;
+                        }
+
+/* ===== Style Block 3 ===== */
+@keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideDown {
+            from { max-height: 0; opacity: 0; }
+            to { max-height: 1000px; opacity: 1; }
+        }
+
+        /* Стили для улучшенного раздела кошельков */
+        .wallet-section {
+            margin-top: 3rem;
+        }
+
+        .wallet-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .wallet-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .wallet-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Быстрые кнопки кошельков */
+        .wallet-quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .wallet-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .wallet-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .wallet-card:hover::before {
+            left: 100%;
+        }
+
+        .wallet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(78, 205, 196, 0.5);
+        }
+
+        .wallet-card-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        .wallet-icon-custom {
+            font-size: 2rem;
+        }
+
+        .wallet-card-content {
+            flex: 1;
+        }
+
+        .wallet-card-content h4 {
+            margin: 0 0 0.5rem 0;
+            color: #4ecdc4;
+            font-size: 1.2rem;
+        }
+
+        .wallet-card-content p {
+            margin: 0 0 0.5rem 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .wallet-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;

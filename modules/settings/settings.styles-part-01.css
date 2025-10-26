@@ -1,0 +1,76 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .settings-module {
+        padding: 1rem;
+    }
+    
+    .module-title {
+        font-size: 2rem;
+    }
+    
+    .settings-tabs {
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    
+    .tab-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .tab-icon {
+        display: none;
+    }
+    
+    .theme-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .data-action {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .action-info {
+        flex-direction: column;
+    }
+    
+    .settings-save-bar {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+    }
+}

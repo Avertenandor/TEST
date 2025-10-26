@@ -1,0 +1,85 @@
+ 2 ===== */
+.auth-instructions-card {
+                            background: linear-gradient(135deg, rgba(88,166,255,0.10), rgba(34,197,94,0.08));
+                            border: 1px solid rgba(88,166,255,0.18);
+                            border-radius: 14px;
+                            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+                            padding: 1.2rem 1.2rem 1.3rem 1.2rem;
+                            margin-bottom: 0.3rem;
+                            max-width: 540px;
+                            margin-left: auto;
+                            margin-right: auto;
+                            position: relative;
+                            overflow: hidden;
+                            text-align: center;
+                        }
+                        .auth-instructions-card .instructions-title {
+                            font-size: 1.15rem;
+                            font-weight: 700;
+                            color: #58a6ff;
+                            margin-bottom: 1.1rem;
+                            letter-spacing: 0.01em;
+                            display: flex;
+                            align-items: center;
+                            gap: 0.7rem;
+                            justify-content: center;
+                        }
+                        .auth-instructions-card .instructions-steps {
+                            counter-reset: step;
+                            list-style: none;
+                            padding: 0;
+                            margin: 0;
+                            text-align: left;
+                            display: inline-block;
+                        }
+                        .auth-instructions-card .instructions-steps li {
+                            position: relative;
+                            padding-left: 2.2rem;
+                            margin-bottom: 0.7rem;
+                            font-size: 1.01rem;
+                            color: #e6eaf3;
+                            min-height: 1.5em;
+                            text-align: left;
+                        }
+                        .auth-instructions-card .instructions-steps li:before {
+                            counter-increment: step;
+                            content: counter(step);
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: 1.4rem;
+                            height: 1.4rem;
+                            background: linear-gradient(135deg, #58a6ff 60%, #22c55e 100%);
+                            color: #fff;
+                            font-weight: 700;
+                            font-size: 1rem;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 2px 8px rgba(88,166,255,0.10);
+                        }
+                        .auth-instructions-card .step-text {
+                            display: inline-block;
+                            white-space: pre-line;
+                            letter-spacing: 0.01em;
+                            min-width: 10px;
+                        }
+                        .auth-instructions-card .instructions-checkmark {
+                            font-size: 2.1rem;
+                            color: #22c55e;
+                            text-align: center;
+                            margin-top: 1.1rem;
+                            font-weight: 900;
+                            background: none;
+                            box-shadow: none;
+                            border-radius: 0;
+                            line-height: 1;
+                        }
+                        .genesis-auth-instruction.genesis-panel-glass {
+                            margin-bottom: 0.3rem !important;
+                        }
+                        .genesis-auth-form {
+                            margin-top: 0.1rem !important;
+                        }
+

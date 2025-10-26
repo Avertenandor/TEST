@@ -1,0 +1,450 @@
+/* modules/deposits/deposits.styles.css */
+
+/* =====================
+   Deposits Module Styles
+   ===================== */
+
+.deposits-module {
+    padding: 2rem;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+}
+
+/* Header and Statistics */
+.deposits-header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.deposits-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ff6b35;
+    margin-bottom: 2rem;
+    font-family: 'Orbitron', monospace;
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+}
+
+.deposits-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: rgba(26, 26, 46, 0.8);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.stat-value.text-success {
+    color: #4ade80;
+}
+
+.stat-value.text-primary {
+    color: #ff6b35;
+}
+
+/* Tabs */
+.deposits-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid rgba(255, 107, 53, 0.2);
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: #999;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #ff6b35;
+}
+
+.tab-btn.active {
+    color: #ff6b35;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ff6b35;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Info Box */
+.info-box {
+    background: rgba(255, 107, 53, 0.1);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.info-box i {
+    font-size: 1.5rem;
+    color: #ff6b35;
+    flex-shrink: 0;
+}
+
+.info-box p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.info-box strong {
+    color: #ff6b35;
+}
+
+/* Deposit Plans Grid */
+.deposit-plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.deposit-card {
+    background: rgba(26, 26, 46, 0.9);
+    border: 2px solid rgba(255, 107, 53, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.deposit-card:hover:not(.disabled) {
+    transform: translateY(-5px);
+    border-color: #ff6b35;
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+}
+
+.deposit-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.deposit-card.has-active {
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.05);
+}
+
+.deposit-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.deposit-card-header h3 {
+    font-size: 1.3rem;
+    color: #ff6b35;
+    margin: 0;
+    font-weight: 700;
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-info {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.badge-premium {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #000;
+}
+
+.deposit-amount {
+    margin-bottom: 1rem;
+}
+
+.amount-usdt {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #4ade80;
+    margin-bottom: 0.5rem;
+}
+
+.amount-plex {
+    font-size: 1.2rem;
+    color: #ff6b35;
+}
+
+.deposit-details {
+    margin-bottom: 1rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-row span {
+    color: #999;
+}
+
+.detail-row strong {
+    color: #fff;
+}
+
+.deposit-description {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.deposit-locked {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ef4444;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(107, 114, 128, 0.2);
+    color: #9ca3af;
+}
+
+.btn-secondary:hover {
+    background: rgba(107, 114, 128, 0.3);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+    color: white;
+}
+
+/* Active Deposits List */
+.deposits-list {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.deposit-item {
+    background: rgba(26, 26, 46, 0.9);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.deposit-item:hover {
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+}
+
+.deposit-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.deposit-item-header h4 {
+    font-size: 1.2rem;
+    color: #ff6b35;
+    margin: 0;
+}
+
+.deposit-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-active {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+}
+
+.status-pending {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+}
+
+.status-completed {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.status-cancelled {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.deposit-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+/* Progress Bar */
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin: 0 1rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b35 0%, #ff8c42 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* No Deposits */
+.no-deposits {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(26, 26, 46, 0.5);
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 107, 53, 0.3);
+}
+
+.no-deposits i {
+    font-size: 3rem;
+    color: #ff6b35;
+    margin-bottom: 1rem;
+}
+
+.no-deposits p {
+    color: #999;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* History List */
+.history-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.history-item {
+    background: rgba(26, 26, 46, 0.6);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    gap: 1rem;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.history-item:hover {
+    background: rgba(26, 26, 46, 0.8);
+}
+
+.history-date {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.history-plan {
+    color: #ff6b35;
+    font-weight: 600;
+}
+
+.history-amount {
+    color: #fff;
+}
+
+.history-profit {
+    font-weight: 600;
+}
+
+/* Modal */

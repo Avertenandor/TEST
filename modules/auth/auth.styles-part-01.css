@@ -1,0 +1,210 @@
+    color: #666;
+}
+
+.qr-placeholder p {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.qr-placeholder small {
+    font-size: 0.7rem;
+    word-break: break-all;
+}
+
+/* Информация о PLEX */
+.plex-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.plex-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.info-label {
+    color: var(--text-secondary, #b0b0b0);
+}
+
+.info-value {
+    color: var(--text-primary, #ffffff);
+    font-weight: 500;
+}
+
+/* Тестовый режим */
+.test-mode-info {
+    margin-top: 1.5rem;
+}
+
+.test-details {
+    background: rgba(0, 123, 255, 0.05);
+    border: 1px solid rgba(0, 123, 255, 0.2);
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.test-details summary {
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--text-secondary, #b0b0b0);
+    font-size: 0.9rem;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.test-details summary:hover {
+    color: var(--text-primary, #ffffff);
+}
+
+.test-content {
+    padding: 1rem;
+    padding-top: 0.5rem;
+}
+
+.test-content p {
+    color: var(--text-secondary, #b0b0b0);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+
+.test-address {
+    display: block;
+    padding: 8px 12px;
+    background: var(--bg-tertiary, #2a2a3e);
+    border: 1px solid var(--border-color, #333344);
+    border-radius: 6px;
+    color: var(--text-primary, #ffffff);
+    font-family: monospace;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+    word-break: break-all;
+}
+
+/* Футер */
+.auth-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-link {
+    color: var(--text-secondary, #b0b0b0);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--primary-color, #ff6b35);
+    text-decoration: underline;
+}
+
+.separator {
+    color: var(--text-secondary, #b0b0b0);
+    opacity: 0.5;
+}
+
+.security-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--success-color, #00ff41);
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.security-icon {
+    font-size: 1rem;
+}
+
+/* Загрузчик */
+.auth-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: var(--bg-secondary, #1a1a2e);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-color, #333344);
+    border-top: 3px solid var(--primary-color, #ff6b35);
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-text {
+    color: var(--text-secondary, #b0b0b0);
+    font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .auth-card {
+        padding: 2rem 1.5rem;
+        width: 95%;
+    }
+    
+    .logo-text {
+        font-size: 2rem;
+    }
+    
+    .auth-title {
+        font-size: 1.3rem;
+    }
+    
+    .auth-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .payment-steps {
+        gap: 0.75rem;
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 1.5rem 1rem;
+        border-radius: 15px;
+    }
+    
+    .form-control {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}

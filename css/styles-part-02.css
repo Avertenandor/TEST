@@ -1,0 +1,450 @@
+}
+
+.terminal-message.terminal-error {
+    border-left-color: #ff4757;
+    background: rgba(255, 71, 87, 0.1);
+    color: #ff4757;
+}
+
+.terminal-message.terminal-warning {
+    border-left-color: #ffa502;
+    background: rgba(255, 165, 2, 0.1);
+    color: #ffa502;
+}
+
+.terminal-message.terminal-success {
+    border-left-color: #2ed573;
+    background: rgba(46, 213, 115, 0.1);
+    color: #2ed573;
+}
+
+.terminal-message.terminal-info {
+    border-left-color: #3742fa;
+    background: rgba(55, 66, 250, 0.1);
+    color: #3742fa;
+}
+
+.terminal-message.terminal-system {
+    border-left-color: #ffa500;
+    background: rgba(255, 165, 0, 0.1);
+    color: #ffa500;
+}
+
+.terminal-message.terminal-debug {
+    border-left-color: #a55eea;
+    background: rgba(165, 94, 234, 0.1);
+    color: #a55eea;
+}
+
+.terminal-message.terminal-api {
+    border-left-color: #00d2d3;
+    background: rgba(0, 210, 211, 0.1);
+    color: #00d2d3;
+}
+
+.terminal-message.terminal-transaction {
+    border-left-color: #ff9ff3;
+    background: rgba(255, 159, 243, 0.1);
+    color: #ff9ff3;
+}
+
+.terminal-message.search-highlight {
+    background: rgba(255, 165, 0, 0.2) !important;
+    border-left-color: #ffa500 !important;
+    color: #ffa500 !important;
+    animation: searchPulse 1s ease-in-out;
+}
+
+@keyframes searchPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.terminal-timestamp {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+    min-width: 80px;
+    font-weight: 500;
+}
+
+.terminal-icon {
+    font-size: 1rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+.terminal-content {
+    flex: 1;
+    color: inherit;
+    word-break: break-word;
+}
+
+.terminal-data {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.75rem;
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.genesis-terminal-input-wrapper {
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(255, 165, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    backdrop-filter: blur(5px);
+}
+
+.terminal-prompt {
+    color: #ffa500;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+    animation: promptBlink 1.5s ease-in-out infinite;
+}
+
+@keyframes promptBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.5; }
+}
+
+.terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.875rem;
+    outline: none;
+    caret-color: #ffa500;
+}
+
+.terminal-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.terminal-autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 165, 0, 0.3);
+    border-radius: 6px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    backdrop-filter: blur(10px);
+}
+
+.terminal-autocomplete:not(:empty) {
+    display: block;
+}
+
+.autocomplete-item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 165, 0, 0.1);
+}
+
+.autocomplete-item:hover {
+    background: rgba(255, 165, 0, 0.2);
+    color: #ffa500;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.terminal-stats-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 165, 0, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    min-width: 300px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-stats-panel.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.terminal-stats-title {
+    color: #ffa500;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.terminal-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.terminal-stat-card {
+    background: rgba(255, 165, 0, 0.1);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.terminal-stat-card:hover {
+    background: rgba(255, 165, 0, 0.2);
+    border-color: rgba(255, 165, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.terminal-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffa500;
+    margin-bottom: 0.5rem;
+}
+
+.terminal-stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Темы терминала */
+body[data-terminal-theme="light"] .genesis-terminal {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 240, 0.95) 100%);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+
+body[data-terminal-theme="matrix"] .genesis-terminal {
+    background: linear-gradient(135deg, rgba(0, 20, 0, 0.9) 0%, rgba(0, 40, 0, 0.95) 100%);
+    border-color: #00ff00;
+    color: #00ff00;
+}
+
+body[data-terminal-theme="retro"] .genesis-terminal {
+    background: linear-gradient(135deg, rgba(40, 20, 0, 0.9) 0%, rgba(60, 30, 0, 0.95) 100%);
+    border-color: #ff8c00;
+    color: #ff8c00;
+}
+
+body[data-terminal-theme="cyber"] .genesis-terminal {
+    background: linear-gradient(135deg, rgba(0, 20, 40, 0.9) 0%, rgba(0, 40, 80, 0.95) 100%);
+    border-color: #00ffff;
+    color: #00ffff;
+}
+
+body[data-terminal-theme="neon"] .genesis-terminal {
+    background: linear-gradient(135deg, rgba(40, 0, 40, 0.9) 0%, rgba(80, 0, 80, 0.95) 100%);
+    border-color: #ff00ff;
+    color: #ff00ff;
+}
+
+/* MCP-MARKER:STYLE:CARDS - Карточки */
+.genesis-info-card, .stats-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.genesis-info-card::before, .stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        var(--primary-color), 
+        var(--secondary-color), 
+        var(--primary-color));
+    background-size: 200% 100%;
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.genesis-info-card:hover, .stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(255, 107, 53, 0.2);
+    border-color: rgba(255, 107, 53, 0.3);
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.stats-title {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.stats-icon {
+    font-size: 1.5rem;
+}
+
+.stats-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'Orbitron', monospace;
+    margin-bottom: 0.5rem;
+}
+
+.stats-change {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.stats-change.positive {
+    color: var(--success-color);
+}
+
+.stats-change.negative {
+    color: var(--error-color);
+}
+
+/* MCP-MARKER:STYLE:INFO_ITEMS - Информационные элементы */
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: right;
+    max-width: 60%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-value.updated {
+    color: var(--primary-color);
+    background: none !important;
+    animation: none !important;
+}
+
+.genesis-tech-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.genesis-tech-actions .genesis-btn {
+    min-width: 180px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Анимации для технической информации */
+@keyframes techUpdate {
+    0% { 
+        background-color: rgba(255, 107, 53, 0.1);
+        transform: scale(1);
+    }
+    50% { 
+        background-color: rgba(255, 107, 53, 0.2);
+        transform: scale(1.02);
+    }
+    100% { 
+        background-color: transparent;
+        transform: scale(1);
+    }
+}
+
+/* MCP-MARKER:STYLE:RESPONSIVE_TECH - Адаптивность для технической информации */
+@media (max-width: 768px) {
+    .genesis-tech-info-section {
+        padding: 2rem 0;
+    }
+    
+    .genesis-tech-header h2 {
+        font-size: 2rem;
+    }
+    
+    .genesis-tech-header p {
+        font-size: 1rem;
+    }
+    
+    .genesis-privacy-notice {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+        margin: 0 1rem;
+    }
+    
+    .genesis-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 0 1rem 2rem 1rem;

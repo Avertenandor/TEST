@@ -1,0 +1,296 @@
+    font-weight: 600;
+    color: var(--primary-color, #667eea);
+}
+
+.goal-progress-bar {
+    height: 8px;
+    background: var(--bg-primary, #e0e0e0);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.goal-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.goal-status {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.goal-status .current {
+    color: var(--text-secondary, #666);
+}
+
+.goal-status .percentage {
+    font-weight: 600;
+    color: var(--primary-color, #667eea);
+}
+
+/* Уровень */
+.level-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.level-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+    margin: 0 0 20px 0;
+}
+
+.level-progress-container {
+    background: var(--bg-secondary, #f8f8f8);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.level-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.current-level {
+    font-weight: 600;
+    color: var(--primary-color, #667eea);
+}
+
+.next-level {
+    color: var(--text-secondary, #666);
+}
+
+.level-progress-bar {
+    height: 20px;
+    background: var(--bg-primary, #e0e0e0);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.level-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    transition: width 0.5s ease;
+}
+
+.level-requirements {
+    font-size: 14px;
+    color: var(--text-secondary, #666);
+}
+
+.level-requirements strong {
+    color: var(--primary-color, #667eea);
+}
+
+/* Отчеты */
+.reports-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.reports-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+    margin: 0 0 20px 0;
+}
+
+.report-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.report-option label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-primary, #333);
+}
+
+.metric-toggle {
+    cursor: pointer;
+}
+
+.btn-generate-report {
+    width: 100%;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-generate-report:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Загрузчик */
+.analytics-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border-color, #e0e0e0);
+    border-top-color: var(--primary-color, #667eea);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loader-text {
+    margin-top: 20px;
+    color: var(--text-secondary, #666);
+}
+
+/* Сообщение об ошибке */
+.error-message {
+    background: #fee;
+    color: #c33;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #c33;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .charts-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .analytics-module {
+        padding: 15px;
+    }
+    
+    .analytics-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .header-controls {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .period-selector {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .metric-row {
+        flex-direction: column;
+    }
+    
+    .analytics-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .goals-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+    .analytics-module {
+        background: #1a1a1a;
+    }
+    
+    .metric-card,
+    .secondary-metrics,
+    .chart-wrapper,
+    .detail-section,
+    .goals-section,
+    .level-section,
+    .reports-section,
+    .period-selector {
+        background: #2a2a2a;
+    }
+    
+    .module-title,
+    .metric-value,
+    .chart-header h3,
+    .detail-section h3,
+    .goals-section h3,
+    .level-section h3,
+    .reports-section h3,
+    .goal-title,
+    .analytics-table td {
+        color: #f0f0f0;
+    }
+    
+    .metric-label,
+    .period-btn,
+    .analytics-table th,
+    .goal-status .current,
+    .next-level,
+    .level-requirements,
+    .report-option label {
+        color: #a0a0a0;
+    }
+    
+    .chart-type-btn {
+        background: #3a3a3a;
+        border-color: #4a4a4a;
+    }
+    
+    .analytics-table thead,
+    .goal-card,
+    .level-progress-container {
+        background: #3a3a3a;
+    }
+    
+    .goal-progress-bar,
+    .level-progress-bar {
+        background: #4a4a4a;
+    }
+}

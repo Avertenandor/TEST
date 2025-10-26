@@ -1,0 +1,450 @@
+.tech-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.tech-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.tech-value {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    text-align: right;
+    word-break: break-all;
+}
+
+/* MCP-MARKER:STYLE:PLEX_LINKS - PLEX Links */
+.genesis-plex-links {
+    margin-bottom: 3rem;
+}
+
+.genesis-plex-links h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.plex-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.plex-links-category h4 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.plex-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.plex-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.plex-link:hover {
+    transform: translateX(5px);
+    box-shadow: 0 8px 25px rgba(255, 165, 0, 0.2);
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.link-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    min-width: 30px;
+}
+
+.link-content {
+    flex: 1;
+}
+
+.link-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.link-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+/* MCP-MARKER:STYLE:PLEX_BENEFITS - PLEX Benefits */
+.genesis-plex-benefits {
+    margin-bottom: 3rem;
+}
+
+.genesis-plex-benefits h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.plex-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.plex-benefit-card {
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.plex-benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(255, 165, 0, 0.2);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.plex-benefit-card h4 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.plex-benefit-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* MCP-MARKER:STYLE:PLEX_CTA - PLEX CTA */
+.genesis-plex-cta {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(255, 165, 0, 0.1);
+}
+
+.plex-cta-content h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.plex-cta-content p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.plex-cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* MCP-MARKER:STYLE:ANIMATIONS - Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 20px rgba(255, 165, 0, 0.5); }
+    to { text-shadow: 0 0 30px rgba(255, 165, 0, 0.8); }
+}
+
+/* MCP-MARKER:STYLE:RESPONSIVE_PLEX - Mobile Responsive */
+@media (max-width: 768px) {
+    .genesis-plex-header h2 {
+        font-size: 2rem;
+    }
+    
+    .genesis-plex-header p {
+        font-size: 1rem;
+    }
+    
+    .plex-overview-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .plex-overview-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .plex-tech-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .plex-links-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .plex-benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .plex-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .plex-cta-buttons .genesis-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .tech-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+    
+    .tech-value {
+        text-align: left;
+        word-break: break-all;
+    }
+}
+
+@media (max-width: 480px) {
+    .genesis-plex-info-section {
+        padding: 2rem 0;
+    }
+    
+    .genesis-plex-overview {
+        padding: 1.5rem;
+    }
+    
+    .plex-token-card {
+        padding: 1.5rem;
+    }
+    
+    .plex-token-icon {
+        font-size: 2.5rem;
+    }
+    
+    .plex-token-name {
+        font-size: 1.3rem;
+    }
+}
+
+/* MCP-MARKER:STYLE:PWA_FEATURES_FIXED - Исправленные стили PWA функций */
+.genesis-pwa-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.pwa-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pwa-feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pwa-feature:hover::before {
+  opacity: 1;
+}
+
+.pwa-feature .feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.pwa-feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 107, 53, 0.3);
+}
+/* MCP-MARKER:STYLE:PWA_INSTALL - Секция PWA установки */
+.genesis-pwa-install-section {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.genesis-pwa-install-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 70%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 30%, rgba(0, 212, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.genesis-pwa-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.genesis-pwa-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+}
+
+.genesis-pwa-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* MCP-MARKER:STYLE:RESPONSIVE_PWA - Адаптивность PWA */
+@media (max-width: 768px) {
+  .genesis-pwa-features-grid { 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .pwa-feature {
+    padding: 1.5rem 1rem;
+  }
+  
+  .pwa-feature .feature-icon {
+    font-size: 2.5rem;
+  }
+  
+  .genesis-pwa-header h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .genesis-pwa-features-grid { 
+    grid-template-columns: 1fr;
+  }
+  
+  .pwa-feature {
+    padding: 1.2rem;
+  }
+  
+  .pwa-feature .feature-icon {
+    font-size: 2rem;
+  }
+  
+  .genesis-pwa-install-section {
+    padding: 2rem 0;
+  }
+}
+.genesis-payment-block {
+  margin: 2.5rem auto 0 auto;
+  max-width: 600px;
+  padding: 2rem 1.5rem;
+  border-radius: 18px;
+  background: var(--bg-glass);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.genesis-buttons-container {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 600px) {
+  .genesis-buttons-container { flex-direction: column; gap: 0.8rem; }
+}
+/* MCP-MARKER:STYLE:QR_CODE_FIXED - Исправленные стили QR кода */
+.genesis-qr-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  box-sizing: border-box;
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
