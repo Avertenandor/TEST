@@ -42,13 +42,13 @@
         "core/**/*",
         "shared/**/*",
         "modules/**/*",
+        "e2e/**/*.ts",
+        "tests/**/*.ts",
         "*.ts",
         "*.js"
     ],
     "exclude": [
         "node_modules",
-        "dist",
-        "**/*.test.ts",
-        "**/*.spec.ts"
+        "dist"
     ]
 }
