@@ -1,203 +1,308 @@
+// MCP-BREADCRUMB:GEN1.1 > sw.js
+// MCP-TAGS:javascript, service-worker, cache, offline, pwa
 /**
  * GENESIS 1.1 - Service Worker
- * Кэширование статики и стратегии работы
+ * MCP-MARKER:MODULE:SERVICE_WORKER - Service Worker
+ * MCP-MARKER:FILE:SW_JS - Основной файл Service Worker
+ * Обеспечивает офлайн функциональность и кэширование
  */
 
-const CACHE_VERSION = 'v1.0.0';
-const CACHE_NAME = `genesis-${CACHE_VERSION}`;
-
-// Статические ресурсы для кэширования
-const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/src/styles/tokens.css',
-  '/src/styles/theme-dark.css',
-  '/src/js/validators.js',
-  '/src/js/clipboard.js',
-  '/src/js/ui.js',
-  '/src/js/chart.js',
-  '/src/js/pwa.js',
-  '/public/icons/icon-192.png',
-  '/public/icons/icon-512.png',
-  '/public/manifest.json'
+// MCP-MARKER:SECTION:CACHE_CONFIG - Конфигурация кэша
+const CACHE_NAME = 'genesis-v1.1.1';
+const urlsToCache = [
+    '/',
+    '/index.html',
+    '/app.html',
+    '/css/styles.css',
+    '/css/mobile.css',
+    '/css/pwa-visibility-fix.css',
+    '/css/fonts-local.css',
+    '/js/config.js',
+    '/js/app.js',
+    '/js/models.js',
+    '/js/services/api.js',
+    '/js/services/auth.js',
+    '/js/services/terminal.js',
+    '/js/services/transaction.js',
+    '/js/services/utils.js',
+    '/assets/favicon.ico',
+    '/assets/manifest.json',
+    '/assets/icons/favicon-16x16.png',
+    '/assets/icons/favicon-32x32.png',
+    '/assets/icons/favicon-48x48.png'
 ];
 
-// ===== INSTALL =====
-self.addEventListener('install', (event) => {
-  console.log(`[SW] Installing ${CACHE_VERSION}...`);
-
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('[SW] Caching static assets');
-
-        // Кэшируем файлы по одному для обработки ошибок
-        return Promise.allSettled(
-          STATIC_ASSETS.map(url =>
-            cache.add(url).catch(err => {
-              console.warn(`[SW] Failed to cache ${url}:`, err.message);
-              return null;
+// Установка Service Worker
+self.addEventListener('install', event => {
+    // MCP-MARKER:FUNCTION:INSTALL_EVENT - Установка Service Worker
+    console.log('[ServiceWorker] Install');
+    
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(cache => {
+                console.log('[ServiceWorker] Caching app shell');
+                // Кэшируем файлы по одному для лучшей обработки ошибок
+                return Promise.allSettled(
+                    urlsToCache.map(url => 
+                        cache.add(url).catch(error => {
+                            console.warn(`[ServiceWorker] Failed to cache ${url}:`, error);
+                            return null;
+                        })
+                    )
+                );
             })
-          )
-        );
-      })
-      .then(() => {
-        console.log(`[SW] ${CACHE_VERSION} installed`);
-        // Skip waiting для немедленной активации
-        return self.skipWaiting();
-      })
-      .catch(err => {
-        console.error('[SW] Install failed:', err);
-      })
-  );
-});
-
-// ===== ACTIVATE =====
-self.addEventListener('activate', (event) => {
-  console.log(`[SW] Activating ${CACHE_VERSION}...`);
-
-  event.waitUntil(
-    caches.keys()
-      .then((cacheNames) => {
-        // Удалить старые кэши
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (cacheName.startsWith('genesis-') && cacheName !== CACHE_NAME) {
-              console.log('[SW] Removing old cache:', cacheName);
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      })
-      .then(() => {
-        console.log(`[SW] ${CACHE_VERSION} activated`);
-        // Взять контроль над всеми клиентами
-        return self.clients.claim();
-      })
-  );
-});
-
-// ===== FETCH =====
-self.addEventListener('fetch', (event) => {
-  const { request } = event;
-
-  try {
-    const url = new URL(request.url);
-
-    // Пропускаем non-GET запросы
-    if (request.method !== 'GET') {
-      return;
-    }
-
-    // Пропускаем chrome-extension и другие протоколы
-    if (url.protocol === 'chrome-extension:' || url.protocol === 'moz-extension:') {
-      return;
-    }
-
-    // Пропускаем внешние API запросы (они должны идти напрямую)
-    if (url.origin !== self.location.origin) {
-      // Network-only для внешних ресурсов
-      event.respondWith(fetch(request));
-      return;
-    }
-
-    // Определяем стратегию
-    const isStaticAsset = STATIC_ASSETS.some(asset => url.pathname === asset || url.pathname.endsWith(asset));
-
-    if (isStaticAsset) {
-      // Cache-First для статики
-      event.respondWith(cacheFirst(request));
-    } else {
-      // Network-First (stale-while-revalidate) для остального
-      event.respondWith(networkFirst(request));
-    }
-  } catch (error) {
-    console.error('[SW] Fetch error:', error);
-  }
-});
-
-// ===== CACHE-FIRST STRATEGY =====
-async function cacheFirst(request) {
-  try {
-    // Проверяем кэш
-    const cachedResponse = await caches.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-
-    // Если не в кэше, запрашиваем из сети
-    const networkResponse = await fetch(request);
-
-    // Кэшируем успешный ответ
-    if (networkResponse && networkResponse.status === 200) {
-      const cache = await caches.open(CACHE_NAME);
-      cache.put(request, networkResponse.clone());
-    }
-
-    return networkResponse;
-  } catch (error) {
-    console.error('[SW] Cache-First failed:', error);
-
-    // Fallback: пытаемся вернуть из кэша
-    const cachedResponse = await caches.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-
-    // Если ничего нет, возвращаем offline-страницу или ошибку
-    return new Response('Offline - ресурс недоступен', {
-      status: 503,
-      statusText: 'Service Unavailable',
-      headers: new Headers({
-        'Content-Type': 'text/plain'
-      })
-    });
-  }
-}
-
-// ===== NETWORK-FIRST STRATEGY (Stale-While-Revalidate) =====
-async function networkFirst(request) {
-  try {
-    // Пытаемся получить из сети
-    const networkResponse = await fetch(request);
-
-    // Кэшируем успешный ответ
-    if (networkResponse && networkResponse.status === 200) {
-      const cache = await caches.open(CACHE_NAME);
-      cache.put(request, networkResponse.clone());
-    }
-
-    return networkResponse;
-  } catch (error) {
-    console.warn('[SW] Network failed, trying cache:', error.message);
-
-    // Если сеть недоступна, берём из кэша
-    const cachedResponse = await caches.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-
-    // Если нет в кэше, возвращаем ошибку
-    return new Response('Offline - страница недоступна', {
-      status: 503,
-      statusText: 'Service Unavailable',
-      headers: new Headers({
-        'Content-Type': 'text/html; charset=utf-8'
-      })
-    });
-  }
-}
-
-// ===== MESSAGE HANDLER =====
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    console.log('[SW] Received SKIP_WAITING message');
+            .catch(error => {
+                console.error('[ServiceWorker] Cache failed:', error);
+            })
+    );
+    
+    // Активируем новый Service Worker сразу
     self.skipWaiting();
-  }
-
-  if (event.data && event.data.type === 'CLIENTS_CLAIM') {
-    self.clients.claim();
-  }
 });
 
-console.log(`[SW] Service Worker ${CACHE_VERSION} loaded`);
+// Активация Service Worker
+self.addEventListener('activate', event => {
+    // MCP-MARKER:FUNCTION:ACTIVATE_EVENT - Активация Service Worker
+    console.log('[ServiceWorker] Activate');
+    
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cacheName => {
+                    if (cacheName !== CACHE_NAME) {
+                        console.log('[ServiceWorker] Removing old cache:', cacheName);
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
+    );
+    
+    // Берем контроль над всеми клиентами
+    self.clients.claim();
+});
+
+// Обработка запросов
+self.addEventListener('fetch', event => {
+    // MCP-MARKER:FUNCTION:FETCH_EVENT - Обработка fetch-запросов
+    const { request } = event;
+    
+    try {
+        const url = new URL(request.url);
+        
+        // Пропускаем запросы к внешним API и не-GET запросы
+        if (url.origin !== location.origin || 
+            url.pathname.includes('/api/') || 
+            request.method !== 'GET' ||
+            url.protocol === 'chrome-extension:' ||
+            url.protocol === 'moz-extension:') {
+            return;
+        }
+        
+        // Специальная обработка для иконок
+        if (url.pathname.includes('/assets/icons/') || url.pathname.includes('icon-')) {
+            event.respondWith(
+                caches.match(request)
+                    .then(response => {
+                        if (response) {
+                            return response;
+                        }
+                        
+                        return fetch(request).catch(() => {
+                            // Возвращаем заглушку для недоступных иконок
+                            return new Response('', { 
+                                status: 204, 
+                                statusText: 'No Content',
+                                headers: { 'Content-Type': 'image/png' }
+                            });
+                        });
+                    })
+            );
+            return;
+        }
+        
+        // Стратегия: Network First с fallback на кэш
+        event.respondWith(
+            fetch(request)
+                .then(response => {
+                    // Проверяем успешность ответа
+                    if (!response || response.status !== 200 || response.type !== 'basic') {
+                        return response;
+                    }
+                    
+                    // Клонируем ответ для кэширования
+                    const responseToCache = response.clone();
+                    
+                    caches.open(CACHE_NAME)
+                        .then(cache => {
+                            cache.put(request, responseToCache);
+                        })
+                        .catch(err => {
+                            console.warn('Cache put failed:', err);
+                        });
+                    
+                    return response;
+                })
+                .catch(() => {
+                    // Network недоступен, пытаемся взять из кэша
+                    return caches.match(request)
+                        .then(response => {
+                            if (response) {
+                                return response;
+                            }
+                            
+                            // Если это HTML страница, возвращаем офлайн страницу
+                            if (request.destination === 'document') {
+                                return caches.match('/index.html');
+                            }
+                            
+                            return new Response('', { 
+                                status: 404, 
+                                statusText: 'Not Found' 
+                            });
+                        });
+                })
+        );
+    } catch (error) {
+        console.warn('Service Worker fetch error:', error);
+        // В случае любой ошибки, просто пропускаем запрос
+        return;
+    }
+});
+
+// Обработка push уведомлений
+self.addEventListener('push', event => {
+    // MCP-MARKER:FUNCTION:PUSH_EVENT - Обработка push-уведомлений
+    console.log('[ServiceWorker] Push received');
+    
+    const options = {
+        body: event.data ? event.data.text() : 'Новое уведомление от GENESIS',
+        icon: '/assets/icons/icon-192x192.png',
+        badge: '/assets/icons/favicon-32x32.png',
+        vibrate: [200, 100, 200],
+        data: {
+            dateOfArrival: Date.now(),
+            primaryKey: 1
+        },
+        actions: [
+            {
+                action: 'explore',
+                title: 'Открыть кабинет',
+                icon: '/assets/icons/shortcut-cabinet.png'
+            },
+            {
+                action: 'close',
+                title: 'Закрыть',
+                icon: '/assets/icons/favicon-32x32.png'
+            }
+        ],
+        requireInteraction: false,
+        silent: false
+    };
+    
+    event.waitUntil(
+        self.registration.showNotification('GENESIS 1.1', options)
+            .catch(error => {
+                console.error('[ServiceWorker] Failed to show notification:', error);
+            })
+    );
+});
+
+// Обработка клика по уведомлению
+self.addEventListener('notificationclick', event => {
+    // MCP-MARKER:FUNCTION:NOTIFICATION_CLICK_EVENT - Клик по уведомлению
+    console.log('[ServiceWorker] Notification click received');
+    
+    event.notification.close();
+    
+    if (event.action === 'explore') {
+        event.waitUntil(
+            clients.openWindow('/app.html')
+                .catch(error => {
+                    console.error('[ServiceWorker] Failed to open window:', error);
+                })
+        );
+    }
+});
+
+// Обработка сообщений от клиента
+self.addEventListener('message', event => {
+    // MCP-MARKER:FUNCTION:MESSAGE_EVENT - Сообщения от клиента
+    if (event.data && event.data.type === 'SKIP_WAITING') {
+        self.skipWaiting();
+    }
+    
+    if (event.data && event.data.type === 'CLEAR_CACHE') {
+        event.waitUntil(
+            caches.delete(CACHE_NAME)
+                .then(() => {
+                    console.log('[ServiceWorker] Cache cleared');
+                    return self.clients.matchAll();
+                })
+                .then(clients => {
+                    clients.forEach(client => {
+                        client.postMessage({
+                            type: 'CACHE_CLEARED'
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('[ServiceWorker] Failed to clear cache:', error);
+                })
+        );
+    }
+    
+    if (event.data && event.data.type === 'GET_CACHE_STATUS') {
+        event.waitUntil(
+            caches.keys()
+                .then(cacheNames => {
+                    event.ports[0].postMessage({
+                        type: 'CACHE_STATUS',
+                        caches: cacheNames
+                    });
+                })
+                .catch(error => {
+                    console.error('[ServiceWorker] Failed to get cache status:', error);
+                    event.ports[0].postMessage({
+                        type: 'CACHE_STATUS_ERROR',
+                        error: error.message
+                    });
+                })
+        );
+    }
+});
+
+// Синхронизация в фоне
+self.addEventListener('sync', event => {
+    // MCP-MARKER:FUNCTION:SYNC_EVENT - Фоновая синхронизация
+    console.log('[ServiceWorker] Sync event:', event.tag);
+    
+    if (event.tag === 'sync-deposits') {
+        event.waitUntil(syncDeposits());
+    }
+});
+
+// Функция синхронизации депозитов
+async function syncDeposits() {
+    // MCP-MARKER:FUNCTION:SYNC_DEPOSITS - Синхронизация депозитов
+    try {
+        const cache = await caches.open(CACHE_NAME);
+        // Здесь можно добавить логику синхронизации с сервером
+        console.log('[ServiceWorker] Deposits synced');
+    } catch (error) {
+        console.error('[ServiceWorker] Sync failed:', error);
+    }
+}
+
+// Обработка ошибок Service Worker
+self.addEventListener('error', event => {
+    // MCP-MARKER:FUNCTION:ERROR_EVENT - Ошибка Service Worker
+    console.error('[ServiceWorker] Error:', event.error);
+});
+
+self.addEventListener('unhandledrejection', event => {
+    // MCP-MARKER:FUNCTION:UNHANDLED_REJECTION - Необработанное исключение
+    console.error('[ServiceWorker] Unhandled rejection:', event.reason);
+});
+
+console.log('[ServiceWorker] Loaded version:', CACHE_NAME);
