@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- DEV GUARD: Доступ только с ?dev=1 -->
+    <script>
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('dev') !== '1') {
+                // Редирект на главную если нет dev=1
+                window.location.replace('/');
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GENESIS Diagnostics Panel</title>
+    <title>GENESIS Diagnostics Panel [DEV]</title>
     <style>
         * {
             margin: 0;
