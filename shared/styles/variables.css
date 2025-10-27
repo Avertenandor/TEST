@@ -110,6 +110,29 @@
     --breakpoint-lg: 1024px;
     --breakpoint-xl: 1280px;
     --breakpoint-2xl: 1536px;
+
+    /* Layout & Container Sizes */
+    --container-max-width: 1200px;
+    --container-max-width-wide: 1400px;
+    --container-max-width-narrow: 800px;
+
+    /* Container Padding */
+    --container-padding: 0 2rem;
+    --container-padding-tablet: 0 1.5rem;
+    --container-padding-mobile: 0 1rem;
+    --container-padding-small-mobile: 0 0.75rem;
+
+    /* Section Padding */
+    --section-padding-y: 4rem;
+    --section-padding-y-small: 2rem;
+    --section-padding-y-large: 6rem;
+    --section-padding-y-tablet: 3rem;
+    --section-padding-y-mobile: 2rem;
+    --section-padding-y-small-mobile: 1rem;
+
+    /* Sidebar */
+    --sidebar-width: 280px;
+    --sidebar-width-tablet: 240px;
 }
 
 /* Dark Theme (default) */
