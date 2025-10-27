@@ -20,18 +20,14 @@
             letter-spacing: 0.1em;
             position: relative;
             
-            /* Animated gradient background */
+            /* Unified gradient background - professional crypto theme */
             background: linear-gradient(
             45deg,
-            #ff6b6b,    /* Красный */
             #4ecdc4,    /* Бирюзовый */
             #45b7d1,    /* Синий */
+            #5fd4f3,    /* Светло-голубой */
             #96ceb4,    /* Зеленый */
-            #feca57,    /* Желтый */
-            #ff9ff3,    /* Розовый */
-            #54a0ff,    /* Голубой */
-            #5f27cd,    /* Фиолетовый */
-            #ff6b6b     /* Возврат к красному для плавности */
+            #4ecdc4     /* Возврат к бирюзовому для плавности */
             );
             
             background-size: 400% 400%;

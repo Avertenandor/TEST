@@ -75,12 +75,12 @@
     toggleFilter: (k) => { if (window.CabinetTerminal) window.CabinetTerminal.toggleFilter(k); }
   };
 
-  // 3) Автоинициализация UI после готовности DOM (чтобы терминал работал на главной без действий)
+  // 3) Терминал больше НЕ открывается автоматически - только по требованию пользователя
+  // Инициализируем только статистику, но НЕ показываем UI терминала
   if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', () => { ensureUI(); startLandingStatsSync(); });
+    document.addEventListener('DOMContentLoaded', () => { startLandingStatsSync(); });
   } else {
-    // DOM уже готов
-    ensureUI();
+    // DOM уже готов - запускаем только синхронизацию статистики
     startLandingStatsSync();
   }
 

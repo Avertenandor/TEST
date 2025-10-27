@@ -448,3 +448,347 @@
         @media (max-width: 768px) {
             .genesis-container {
                 padding: 0 1rem;
+
+/* Hide technical information section by default - too much technical data for regular users */
+#tech-info-section {
+    display: none;
+}
+
+/* Show technical section when developer mode is enabled */
+body.developer-mode #tech-info-section {
+    display: block;
+}
+
+/* Developer mode toggle button styling */
+.developer-mode-toggle {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background: rgba(78, 205, 196, 0.1);
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.developer-mode-toggle:hover {
+    background: rgba(78, 205, 196, 0.2);
+    border-color: rgba(78, 205, 196, 0.5);
+    color: rgba(255, 255, 255, 1);
+}
+
+body.developer-mode .developer-mode-toggle {
+    background: rgba(78, 205, 196, 0.3);
+    border-color: rgba(78, 205, 196, 0.6);
+    color: #fff;
+}
+
+/* Improved text contrast for better readability */
+.genesis-brand-subtitle,
+.section-subtitle,
+.income-subtitle {
+    color: rgba(255, 255, 255, 0.9) !important; /* Increased from 0.7-0.8 */
+}
+
+.info-label,
+.instruction-text {
+    color: rgba(255, 255, 255, 0.95) !important; /* Increased contrast */
+}
+
+.info-value {
+    color: rgba(255, 255, 255, 1) !important; /* Maximum contrast for values */
+}
+
+/* Better contrast for links */
+a,
+.genesis-link {
+    color: rgba(78, 205, 196, 1) !important; /* Full opacity for links */
+    text-decoration: none;
+}
+
+a:hover,
+.genesis-link:hover {
+    color: rgba(95, 212, 243, 1) !important;
+    text-decoration: underline;
+}
+
+/* Improved button contrast */
+.genesis-btn,
+.auth-btn,
+.cta-button {
+    color: rgba(255, 255, 255, 1) !important;
+    background: rgba(78, 205, 196, 0.2) !important;
+    border: 1px solid rgba(78, 205, 196, 0.6) !important;
+}
+
+.genesis-btn:hover,
+.auth-btn:hover,
+.cta-button:hover {
+    background: rgba(78, 205, 196, 0.3) !important;
+    border-color: rgba(78, 205, 196, 0.8) !important;
+}
+
+/* Better card backgrounds for readability */
+.genesis-info-card,
+.income-card,
+.genesis-panel-glass {
+    background: rgba(22, 27, 34, 0.85) !important; /* Darker background */
+}
+
+/* Improved list text contrast */
+.income-list li,
+.feature-list li {
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Footer Styling - Professional branding and information */
+.genesis-footer {
+    background: linear-gradient(180deg, rgba(13, 17, 23, 0.95) 0%, rgba(22, 27, 34, 1) 100%);
+    border-top: 1px solid rgba(78, 205, 196, 0.3);
+    margin-top: 4rem;
+    padding: 3rem 0 1.5rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    color: rgba(78, 205, 196, 1);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.footer-brand .footer-logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-logo-text {
+    font-family: 'Orbitron', 'Arial Black', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: rgba(78, 205, 196, 1);
+    letter-spacing: 0.05em;
+}
+
+.footer-logo-number {
+    font-family: 'Orbitron', 'Arial Black', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: rgba(95, 212, 243, 1);
+}
+
+.footer-description {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: rgba(78, 205, 196, 1);
+    transform: translateX(5px);
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.social-links a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.social-links a:hover {
+    color: rgba(78, 205, 196, 1);
+    background: rgba(78, 205, 196, 0.1);
+    transform: translateX(5px);
+}
+
+.footer-text {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+    font-size: 0.9rem;
+}
+
+.footer-text strong {
+    color: rgba(78, 205, 196, 1);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.footer-copyright {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.footer-disclaimer {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* Mobile responsiveness for footer */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .genesis-footer {
+        padding: 2rem 0 1rem;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .footer-brand .footer-logo {
+        justify-content: center;
+    }
+    
+    .social-links {
+        align-items: center;
+    }
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 992px) {
+    .genesis-brand-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+    }
+    
+    .genesis-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .income-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Header adjustments */
+    .genesis-header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .genesis-header-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    /* Improved touch targets */
+    .genesis-btn,
+    .auth-btn,
+    .cta-button {
+        min-height: 44px;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    /* Better spacing */
+    .genesis-section {
+        padding: 2rem 0;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    /* Card improvements */
+    .genesis-info-card {
+        padding: 1.5rem;
+    }
+    
+    /* Income cards */
+    .income-card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small devices */
+    .genesis-brand-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+    
+    .genesis-logo-text {
+        font-size: 1.5rem;
+    }
+    
+    .genesis-logo-number {
+        font-size: 1rem;
+    }
+    
+    /* Compact header */
+    .genesis-cache-controls {
+        display: none;
+    }
+    
+    /* Better readability */
+    body {
+        font-size: 0.95rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    .genesis-brand-title {
+        font-size: 2.5rem;
+    }
+    
+    .genesis-section {
+        padding: 1.5rem 0;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .genesis-brand-title {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+}
