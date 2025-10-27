@@ -1,0 +1,270 @@
+/* shared/styles/layout.css */
+/* Единая система layout для GENESIS Platform */
+
+/* ============================================
+   АРХИТЕКТУРА КОНТЕЙНЕРОВ
+   ============================================
+
+   Уровень 1: .genesis-app (весь layout)
+   ├── Уровень 2: .genesis-page-wrapper (разметка страницы)
+   │   ├── .genesis-sidebar (опционально, для кабинета)
+   │   └── .genesis-content-area (основная область контента)
+   │       └── Уровень 3: .genesis-container (контент с ограничением ширины)
+   │           ├── .genesis-section (секции контента)
+   │           └── Виджеты и компоненты
+
+   Контейнеры с модификаторами:
+   - .genesis-container-wide (для широкого контента)
+   - .genesis-container-narrow (для узкого контента)
+   - .genesis-container-full (на всю ширину)
+============================================ */
+
+/* ============================================
+   УРОВЕНЬ 1: ГЛАВНЫЙ КОНТЕЙНЕР ПРИЛОЖЕНИЯ
+============================================ */
+
+.genesis-app {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary, #0a0a0f);
+}
+
+/* ============================================
+   УРОВЕНЬ 2: ОБЁРТКА СТРАНИЦЫ
+============================================ */
+
+/* Стандартная обёртка без sidebar */
+.genesis-page-wrapper {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Обёртка с sidebar (для кабинета) */
+.genesis-page-wrapper--with-sidebar {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Sidebar */
+.genesis-sidebar {
+    width: var(--sidebar-width, 280px);
+    min-height: 100vh;
+    background: var(--bg-secondary, #1a1a2e);
+    border-right: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: var(--z-sticky, 200);
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+/* Область контента (работает с sidebar и без) */
+.genesis-content-area {
+    flex: 1;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   УРОВЕНЬ 3: КОНТЕЙНЕРЫ КОНТЕНТА
+============================================ */
+
+/* Основной контейнер (стандартная ширина) */
+.genesis-container {
+    max-width: var(--container-max-width, 1200px);
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--container-padding, 0 2rem);
+    box-sizing: border-box;
+}
+
+/* Широкий контейнер (для dashboard, analytics) */
+.genesis-container-wide {
+    max-width: var(--container-max-width-wide, 1400px);
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--container-padding, 0 2rem);
+    box-sizing: border-box;
+}
+
+/* Узкий контейнер (для форм, текста) */
+.genesis-container-narrow {
+    max-width: var(--container-max-width-narrow, 800px);
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--container-padding, 0 2rem);
+    box-sizing: border-box;
+}
+
+/* Контейнер на всю ширину (без ограничений) */
+.genesis-container-full {
+    max-width: 100%;
+    width: 100%;
+    padding: var(--container-padding, 0 2rem);
+    box-sizing: border-box;
+}
+
+/* Контейнер без padding (для вложенных сеток) */
+.genesis-container--no-padding {
+    padding: 0;
+}
+
+/* ============================================
+   СЕКЦИИ
+============================================ */
+
+.genesis-section {
+    width: 100%;
+    padding: var(--section-padding-y, 4rem) 0;
+    position: relative;
+}
+
+.genesis-section--small {
+    padding: var(--section-padding-y-small, 2rem) 0;
+}
+
+.genesis-section--large {
+    padding: var(--section-padding-y-large, 6rem) 0;
+}
+
+.genesis-section--no-padding {
+    padding: 0;
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ
+============================================ */
+
+/* Планшеты (768px - 1024px) */
+@media (max-width: 1024px) {
+    .genesis-container,
+    .genesis-container-wide,
+    .genesis-container-narrow {
+        padding: var(--container-padding-tablet, 0 1.5rem);
+    }
+
+    .genesis-sidebar {
+        width: var(--sidebar-width-tablet, 240px);
+    }
+
+    .genesis-section {
+        padding: var(--section-padding-y-tablet, 3rem) 0;
+    }
+}
+
+/* Мобильные устройства (до 768px) */
+@media (max-width: 768px) {
+    .genesis-container,
+    .genesis-container-wide,
+    .genesis-container-narrow {
+        padding: var(--container-padding-mobile, 0 1rem);
+        max-width: 100%;
+    }
+
+    /* Sidebar становится оверлеем на мобильных */
+    .genesis-page-wrapper--with-sidebar {
+        flex-direction: column;
+    }
+
+    .genesis-sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 280px;
+        height: 100vh;
+        z-index: var(--z-modal, 500);
+        transition: left var(--transition-base, 300ms ease);
+    }
+
+    .genesis-sidebar--open {
+        left: 0;
+    }
+
+    .genesis-section {
+        padding: var(--section-padding-y-mobile, 2rem) 0;
+    }
+
+    .genesis-section--small {
+        padding: var(--section-padding-y-small-mobile, 1rem) 0;
+    }
+}
+
+/* Малые мобильные устройства (до 480px) */
+@media (max-width: 480px) {
+    .genesis-container,
+    .genesis-container-wide,
+    .genesis-container-narrow,
+    .genesis-container-full {
+        padding: var(--container-padding-small-mobile, 0 0.75rem);
+    }
+
+    .genesis-section {
+        padding: var(--section-padding-y-small-mobile, 1.5rem) 0;
+    }
+}
+
+/* ============================================
+   УТИЛИТЫ
+============================================ */
+
+/* Убрать верхний padding у первой секции */
+.genesis-section:first-child {
+    padding-top: 0;
+}
+
+/* Убрать нижний padding у последней секции */
+.genesis-section:last-child {
+    padding-bottom: 0;
+}
+
+/* Центрирование контента */
+.genesis-container--center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================
+   СОВМЕСТИМОСТЬ СО СТАРЫМИ КЛАССАМИ
+============================================ */
+
+/* Для плавной миграции - алиасы старых классов */
+.dashboard-container,
+.deposits-module,
+.cabinet-container {
+    /* Наследуют стили от genesis-container */
+    max-width: var(--container-max-width, 1200px);
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--container-padding, 0 2rem);
+    box-sizing: border-box;
+}
+
+.genesis-cabinet-container {
+    /* Наследует стили от genesis-container-wide */
+    max-width: var(--container-max-width-wide, 1400px);
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--container-padding, 0 2rem);
+    box-sizing: border-box;
+}
+
+/* Адаптивность для старых классов */
+@media (max-width: 768px) {
+    .dashboard-container,
+    .deposits-module,
+    .cabinet-container,
+    .genesis-cabinet-container {
+        padding: var(--container-padding-mobile, 0 1rem);
+        max-width: 100%;
+    }
+}

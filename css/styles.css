@@ -192,10 +192,9 @@ a:hover {
 
 /* MCP-MARKER:SECTION:CONTAINERS - Контейнеры */
 /* Контейнеры */
+/* Базовые стили теперь в shared/styles/layout.css */
+/* Здесь только декоративные элементы для лендинга */
 .genesis-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
     position: relative;
     margin-bottom: 2rem;
 }

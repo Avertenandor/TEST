@@ -34,17 +34,8 @@ body {
 }
 
 /* Контейнеры */
-.genesis-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.genesis-container-wide {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
+/* Базовые стили контейнеров теперь в shared/styles/layout.css */
+/* Используют CSS переменные для единообразия */
 
 /* Кнопки */
 .genesis-btn {
