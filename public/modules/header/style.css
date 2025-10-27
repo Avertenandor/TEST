@@ -5,10 +5,27 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(13, 17, 23, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, rgba(13, 17, 23, 0.98) 0%, rgba(13, 17, 23, 0.95) 100%);
+    backdrop-filter: blur(30px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
+}
+
+:where([data-module="header"]) .genesis-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(78, 205, 196, 0.3) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+:where([data-module="header"]) .genesis-header:hover::after {
+    opacity: 1;
 }
 
 :where([data-module="header"]) .genesis-header-content {
