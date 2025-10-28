@@ -67,56 +67,86 @@ if (typeof window.GenesisTechInfo === 'undefined') {
                     browserName: this.getBrowserInfo(),
                     platform: this.getPlatformInfo(),
                     language: navigator.language || 'Unknown',
+                    languages: navigator.languages ? navigator.languages.join(', ') : 'Unknown',
                     cookies: navigator.cookieEnabled ? '✅ Включены' : '❌ Отключены',
                     cores: navigator.hardwareConcurrency || 'Unknown',
-                    
+                    vendor: navigator.vendor || 'Unknown',
+                    userAgent: navigator.userAgent || 'Unknown',
+                    maxTouchPoints: navigator.maxTouchPoints || 0,
+                    pdfViewerEnabled: navigator.pdfViewerEnabled ? '✅ Да' : '❌ Нет',
+
                     // Экран и отображение
                     screenResolution: `${screen.width} × ${screen.height}`,
+                    screenAvailable: `${screen.availWidth} × ${screen.availHeight}`,
                     windowSize: `${window.innerWidth} × ${window.innerHeight}`,
                     colorDepth: `${screen.colorDepth} бит`,
+                    pixelDepth: `${screen.pixelDepth} бит`,
                     pixelRatio: window.devicePixelRatio || 1,
                     orientation: this.getOrientation(),
-                    
+
                     // Время и локация
                     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                     utcOffset: this.getUTCOffset(),
                     locale: Intl.DateTimeFormat().resolvedOptions().locale,
+                    calendar: Intl.DateTimeFormat().resolvedOptions().calendar || 'Unknown',
+                    numberingSystem: Intl.DateTimeFormat().resolvedOptions().numberingSystem || 'Unknown',
                     currentTime: new Date().toLocaleString('ru-RU'),
-                    
+
                     // Сеть и подключение
                     onlineStatus: navigator.onLine ? '🟢 Онлайн' : '🔴 Офлайн',
                     connectionType: this.getConnectionType(),
                     downlink: this.getDownlink(),
                     rtt: this.getRTT(),
+                    saveData: this.getSaveData(),
                     ipAddress: 'Загрузка...',
-                    
+
                     // Безопасность
                     dnt: navigator.doNotTrack === '1' ? '✅ Включен' : '❌ Отключен',
                     httpsStatus: location.protocol === 'https:' ? '🔒 Защищено' : '⚠️ Небезопасно',
                     webdriver: navigator.webdriver ? '⚠️ Обнаружен' : '✅ Не обнаружен',
                     pluginsCount: this.getPluginsInfo(),
-                    
+
                     // WebGL и графика
                     webglInfo: this.getWebGLInfo(),
-                    
+                    webglExtensions: 'Загрузка...',
+                    canvasSupport: this.getCanvasSupport(),
+
                     // Память и ресурсы
                     deviceMemory: this.getDeviceMemory(),
                     jsMemory: this.getJSMemory(),
                     storageInfo: 'Загрузка...',
-                    
+                    persistentStorage: 'Загрузка...',
+
                     // Батарея (будет обновлено асинхронно)
                     batteryLevel: 'Загрузка...',
                     batteryCharging: 'Загрузка...',
-                    
+
+                    // Медиа возможности
+                    mediaDevices: this.getMediaDevicesSupport(),
+                    audioContext: this.getAudioContextInfo(),
+
+                    // Разрешения
+                    permissions: 'Загрузка...',
+
                     // Геолокация
-                    geolocation: 'Не запрошено'
+                    geolocation: 'Не запрошено',
+
+                    // PWA и Service Workers
+                    serviceWorkerSupport: 'serviceWorker' in navigator ? '✅ Поддерживается' : '❌ Не поддерживается',
+                    notificationSupport: 'Notification' in window ? '✅ Поддерживается' : '❌ Не поддерживается',
+
+                    // Performance
+                    performanceMemory: this.getPerformanceInfo()
                 };
 
                 // Асинхронные операции
                 this.getBatteryInfo();
                 this.getIPAddress();
                 this.getStorageInfo();
+                this.getPersistentStorage();
                 this.updateConnectionInfo();
+                this.getWebGLExtensions();
+                this.checkAllPermissions();
 
                 console.log('✅ Техническая информация собрана');
                 return this.techData;
@@ -205,6 +235,124 @@ if (typeof window.GenesisTechInfo === 'undefined') {
                 return `${navigator.connection.rtt} ms`;
             }
             return 'Unknown';
+        }
+
+        getSaveData() {
+            if (navigator.connection && 'saveData' in navigator.connection) {
+                return navigator.connection.saveData ? '✅ Включен' : '❌ Отключен';
+            }
+            return 'Unknown';
+        }
+
+        getCanvasSupport() {
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                return ctx ? '✅ Поддерживается' : '❌ Не поддерживается';
+            } catch (e) {
+                return '❌ Ошибка';
+            }
+        }
+
+        getMediaDevicesSupport() {
+            if (!navigator.mediaDevices) {
+                return '❌ Не поддерживается';
+            }
+            const support = [];
+            if (navigator.mediaDevices.getUserMedia) support.push('getUserMedia');
+            if (navigator.mediaDevices.getDisplayMedia) support.push('getDisplayMedia');
+            if (navigator.mediaDevices.enumerateDevices) support.push('enumerateDevices');
+            return support.length > 0 ? `✅ ${support.join(', ')}` : '❌ Не поддерживается';
+        }
+
+        getAudioContextInfo() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return '❌ Не поддерживается';
+
+                const ctx = new AudioContext();
+                const info = `Sample Rate: ${ctx.sampleRate}Hz, State: ${ctx.state}`;
+                ctx.close();
+                return info;
+            } catch (e) {
+                return '❌ Ошибка';
+            }
+        }
+
+        getPerformanceInfo() {
+            if (!performance || !performance.memory) {
+                return 'Unknown';
+            }
+            const used = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
+            const limit = (performance.memory.jsHeapSizeLimit / 1024 / 1024).toFixed(2);
+            const percentage = ((performance.memory.usedJSHeapSize / performance.memory.jsHeapSizeLimit) * 100).toFixed(1);
+            return `${used}MB / ${limit}MB (${percentage}%)`;
+        }
+
+        async getPersistentStorage() {
+            if (navigator.storage && navigator.storage.persisted) {
+                try {
+                    const isPersisted = await navigator.storage.persisted();
+                    this.techData.persistentStorage = isPersisted ? '✅ Постоянное' : '⚠️ Временное';
+                    this.updateElements();
+                } catch (error) {
+                    this.techData.persistentStorage = 'Ошибка проверки';
+                    this.updateElements();
+                }
+            } else {
+                this.techData.persistentStorage = 'Не поддерживается';
+                this.updateElements();
+            }
+        }
+
+        async getWebGLExtensions() {
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                if (gl) {
+                    const extensions = gl.getSupportedExtensions();
+                    this.techData.webglExtensions = extensions ? `${extensions.length} расширений` : '0 расширений';
+                    this.techData.webglExtensionsList = extensions ? extensions.join(', ') : 'Нет';
+                } else {
+                    this.techData.webglExtensions = '❌ WebGL не поддерживается';
+                }
+                this.updateElements();
+            } catch (error) {
+                this.techData.webglExtensions = '❌ Ошибка';
+                this.updateElements();
+            }
+        }
+
+        async checkAllPermissions() {
+            if (!navigator.permissions || !navigator.permissions.query) {
+                this.techData.permissions = 'API недоступен';
+                this.updateElements();
+                return;
+            }
+
+            const permissionsToCheck = [
+                { name: 'notifications', label: 'Уведомления' },
+                { name: 'geolocation', label: 'Геолокация' },
+                { name: 'camera', label: 'Камера' },
+                { name: 'microphone', label: 'Микрофон' }
+            ];
+
+            const results = [];
+
+            for (const perm of permissionsToCheck) {
+                try {
+                    const result = await navigator.permissions.query({ name: perm.name });
+                    const icon = result.state === 'granted' ? '✅' :
+                                 result.state === 'denied' ? '❌' : '⚠️';
+                    results.push(`${icon} ${perm.label}: ${result.state}`);
+                } catch (error) {
+                    results.push(`❓ ${perm.label}: не поддерживается`);
+                }
+            }
+
+            this.techData.permissions = results.join('; ');
+            this.techData.permissionsList = results;
+            this.updateElements();
         }
 
         updateConnectionInfo() {
@@ -353,33 +501,52 @@ if (typeof window.GenesisTechInfo === 'undefined') {
                 'browserName': 'browser-name',
                 'platform': 'platform',
                 'language': 'language',
+                'languages': 'languages',
                 'cookies': 'cookies',
                 'cores': 'cores',
+                'vendor': 'vendor',
+                'userAgent': 'user-agent',
+                'maxTouchPoints': 'max-touch-points',
+                'pdfViewerEnabled': 'pdf-viewer-enabled',
                 'screenResolution': 'screen-resolution',
+                'screenAvailable': 'screen-available',
                 'windowSize': 'window-size',
                 'colorDepth': 'color-depth',
+                'pixelDepth': 'pixel-depth',
                 'pixelRatio': 'pixel-ratio',
                 'orientation': 'orientation',
                 'timezone': 'timezone',
                 'utcOffset': 'utc-offset',
                 'locale': 'locale',
+                'calendar': 'calendar',
+                'numberingSystem': 'numbering-system',
                 'currentTime': 'current-time',
                 'geolocation': 'geolocation',
                 'onlineStatus': 'online-status',
                 'connectionType': 'connection-type',
                 'downlink': 'downlink',
                 'rtt': 'rtt',
+                'saveData': 'save-data',
                 'ipAddress': 'ip-address',
                 'batteryLevel': 'battery-level',
                 'batteryCharging': 'battery-charging',
                 'deviceMemory': 'device-memory',
                 'jsMemory': 'js-memory',
                 'storageInfo': 'storage-info',
+                'persistentStorage': 'persistent-storage',
                 'dnt': 'dnt',
                 'httpsStatus': 'https-status',
                 'webdriver': 'webdriver',
                 'pluginsCount': 'plugins-count',
-                'webglInfo': 'webgl-info'
+                'webglInfo': 'webgl-info',
+                'webglExtensions': 'webgl-extensions',
+                'canvasSupport': 'canvas-support',
+                'mediaDevices': 'media-devices',
+                'audioContext': 'audio-context',
+                'permissions': 'permissions',
+                'serviceWorkerSupport': 'service-worker-support',
+                'notificationSupport': 'notification-support',
+                'performanceMemory': 'performance-memory'
             };
 
             Object.entries(elementMapping).forEach(([dataKey, elementId]) => {
@@ -473,17 +640,57 @@ if (typeof window.GenesisTechInfo === 'undefined') {
             const data = {
                 timestamp: new Date().toISOString(),
                 deviceInfo: this.techData,
-                userAgent: navigator.userAgent,
-                screenInfo: {
-                    width: screen.width,
-                    height: screen.height,
-                    colorDepth: screen.colorDepth,
-                    pixelDepth: screen.pixelDepth
-                },
-                windowInfo: {
-                    width: window.innerWidth,
-                    height: window.innerHeight,
-                    devicePixelRatio: window.devicePixelRatio
+                detailedInfo: {
+                    navigator: {
+                        userAgent: navigator.userAgent,
+                        vendor: navigator.vendor,
+                        platform: navigator.platform,
+                        language: navigator.language,
+                        languages: navigator.languages,
+                        cookieEnabled: navigator.cookieEnabled,
+                        onLine: navigator.onLine,
+                        doNotTrack: navigator.doNotTrack,
+                        hardwareConcurrency: navigator.hardwareConcurrency,
+                        deviceMemory: navigator.deviceMemory,
+                        maxTouchPoints: navigator.maxTouchPoints,
+                        pdfViewerEnabled: navigator.pdfViewerEnabled
+                    },
+                    screen: {
+                        width: screen.width,
+                        height: screen.height,
+                        availWidth: screen.availWidth,
+                        availHeight: screen.availHeight,
+                        colorDepth: screen.colorDepth,
+                        pixelDepth: screen.pixelDepth,
+                        orientation: screen.orientation ? screen.orientation.type : null
+                    },
+                    window: {
+                        innerWidth: window.innerWidth,
+                        innerHeight: window.innerHeight,
+                        outerWidth: window.outerWidth,
+                        outerHeight: window.outerHeight,
+                        devicePixelRatio: window.devicePixelRatio
+                    },
+                    timezone: {
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        locale: Intl.DateTimeFormat().resolvedOptions().locale,
+                        calendar: Intl.DateTimeFormat().resolvedOptions().calendar,
+                        numberingSystem: Intl.DateTimeFormat().resolvedOptions().numberingSystem,
+                        timeZoneOffset: new Date().getTimezoneOffset()
+                    },
+                    connection: navigator.connection ? {
+                        effectiveType: navigator.connection.effectiveType,
+                        downlink: navigator.connection.downlink,
+                        rtt: navigator.connection.rtt,
+                        saveData: navigator.connection.saveData
+                    } : null,
+                    performance: performance.memory ? {
+                        jsHeapSizeLimit: performance.memory.jsHeapSizeLimit,
+                        totalJSHeapSize: performance.memory.totalJSHeapSize,
+                        usedJSHeapSize: performance.memory.usedJSHeapSize
+                    } : null,
+                    permissions: this.techData.permissionsList || [],
+                    webglExtensions: this.techData.webglExtensionsList || []
                 }
             };
 
