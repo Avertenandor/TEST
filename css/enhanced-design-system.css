@@ -1,0 +1,708 @@
+/**
+ * GENESIS 1.1 - Enhanced Design System
+ * Единая система улучшенного дизайна с темной темой, 3D эффектами и полной адаптивностью
+ *
+ * Особенности:
+ * - Единая темная цветовая палитра
+ * - Продвинутые 3D эффекты и анимации
+ * - Полная адаптивность (320px - 4K)
+ * - Оптимизированная производительность
+ * - Единый визуальный стиль
+ */
+
+/* ========================================
+   1. ЦВЕТОВАЯ ПАЛИТРА И CSS ПЕРЕМЕННЫЕ
+   ======================================== */
+
+:root {
+    /* Основные цвета темной темы */
+    --bg-primary: #0a0e14;
+    --bg-secondary: #0d1117;
+    --bg-tertiary: #161b22;
+    --bg-elevated: #1c2128;
+
+    /* Градиенты фона */
+    --bg-gradient-1: linear-gradient(135deg, #0a0e14 0%, #161b22 100%);
+    --bg-gradient-2: linear-gradient(135deg, #0d1117 0%, #1c2128 100%);
+    --bg-gradient-cosmic:
+        radial-gradient(ellipse at top, rgba(78, 205, 196, 0.05), transparent 50%),
+        radial-gradient(ellipse at bottom, rgba(255, 107, 107, 0.05), transparent 50%),
+        linear-gradient(135deg, #0a0e14 0%, #0d1117 50%, #161b22 100%);
+
+    /* Акцентные цвета */
+    --accent-primary: #4ecdc4;      /* Бирюзовый */
+    --accent-secondary: #ff6b6b;    /* Коралловый */
+    --accent-tertiary: #ffd700;     /* Золотой */
+    --accent-success: #28a745;      /* Зеленый */
+    --accent-warning: #feca57;      /* Желтый */
+    --accent-info: #54a0ff;         /* Синий */
+
+    /* Градиенты для кнопок и элементов */
+    --gradient-primary: linear-gradient(135deg, #4ecdc4, #45b7d1);
+    --gradient-secondary: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+    --gradient-success: linear-gradient(135deg, #28a745, #20c997);
+    --gradient-premium: linear-gradient(135deg, #ffd700, #ffb347);
+    --gradient-rainbow: linear-gradient(
+        45deg,
+        #ff6b6b 0%,
+        #4ecdc4 25%,
+        #45b7d1 50%,
+        #feca57 75%,
+        #ff9ff3 100%
+    );
+
+    /* Текст */
+    --text-primary: rgba(255, 255, 255, 0.95);
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --text-tertiary: rgba(255, 255, 255, 0.55);
+    --text-muted: rgba(255, 255, 255, 0.35);
+
+    /* Границы */
+    --border-primary: rgba(255, 255, 255, 0.1);
+    --border-secondary: rgba(255, 255, 255, 0.05);
+    --border-accent: rgba(78, 205, 196, 0.3);
+
+    /* Тени */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 20px rgba(78, 205, 196, 0.4);
+    --shadow-glow-secondary: 0 0 20px rgba(255, 107, 107, 0.4);
+
+    /* Z-index иерархия (исправленная) */
+    --z-background: -1;
+    --z-content: 1;
+    --z-elevated: 10;
+    --z-overlay: 100;
+    --z-modal: 500;
+    --z-notification: 1000;
+    --z-tooltip: 1500;
+
+    /* Скорости анимаций */
+    --transition-fast: 150ms;
+    --transition-base: 300ms;
+    --transition-slow: 500ms;
+    --transition-slower: 800ms;
+
+    /* Размеры */
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 20px;
+    --border-radius-full: 9999px;
+
+    /* Размеры шрифтов (адаптивные) */
+    --font-size-xs: clamp(0.75rem, 2vw, 0.875rem);
+    --font-size-sm: clamp(0.875rem, 2vw, 1rem);
+    --font-size-base: clamp(1rem, 2vw, 1.125rem);
+    --font-size-lg: clamp(1.125rem, 3vw, 1.5rem);
+    --font-size-xl: clamp(1.5rem, 4vw, 2rem);
+    --font-size-2xl: clamp(2rem, 5vw, 3rem);
+    --font-size-3xl: clamp(2.5rem, 6vw, 4rem);
+    --font-size-4xl: clamp(3rem, 8vw, 5rem);
+}
+
+/* ========================================
+   2. УЛУЧШЕННЫЙ ФОН ТЕМНОЙ ТЕМЫ
+   ======================================== */
+
+body {
+    background: var(--bg-primary);
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Космический анимированный фон */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-gradient-cosmic);
+    z-index: var(--z-background);
+    animation: cosmicPulse 20s ease-in-out infinite;
+}
+
+@keyframes cosmicPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Плавающие частицы (3D эффект) */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(78, 205, 196, 0.3), transparent),
+        radial-gradient(2px 2px at 60% 70%, rgba(255, 107, 107, 0.3), transparent),
+        radial-gradient(1px 1px at 50% 50%, rgba(255, 215, 0, 0.3), transparent),
+        radial-gradient(2px 2px at 80% 10%, rgba(84, 160, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 90% 60%, rgba(78, 205, 196, 0.3), transparent);
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    animation: floatingParticles 30s ease-in-out infinite;
+    z-index: var(--z-background);
+    pointer-events: none;
+}
+
+@keyframes floatingParticles {
+    0%, 100% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 50%;
+    }
+    50% {
+        background-position: 50% 100%;
+    }
+    75% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ========================================
+   3. ИСПРАВЛЕНИЕ TOKENINFO СЕКЦИИ
+   ======================================== */
+
+.token-info {
+    padding: 80px 0;
+    background: transparent !important;
+    position: relative;
+    z-index: var(--z-content);
+}
+
+.token-info__title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--text-primary) !important;
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: var(--gradient-rainbow);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbowShift 8s ease-in-out infinite;
+}
+
+@keyframes rainbowShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.token-info__card {
+    background: var(--bg-elevated) !important;
+    border-radius: var(--border-radius-xl);
+    padding: 30px;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base) ease;
+    border: 1px solid var(--border-primary) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* 3D эффект при наведении */
+.token-info__card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--gradient-primary);
+    border-radius: var(--border-radius-xl);
+    opacity: 0;
+    transition: opacity var(--transition-base) ease;
+    z-index: -1;
+}
+
+.token-info__card:hover {
+    transform: translateY(-8px) rotateX(5deg);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+}
+
+.token-info__card:hover::before {
+    opacity: 0.3;
+}
+
+.token-info__label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-tertiary) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.token-info__value {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-primary) !important;
+    word-break: break-all;
+}
+
+.token-info__address-text {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: var(--font-size-sm);
+    color: var(--accent-primary) !important;
+    flex: 1;
+}
+
+.token-info__copy-btn {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all var(--transition-base) ease;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.token-info__copy-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.token-info__copy-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.token-info__copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.token-info__price-amount {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--accent-success) !important;
+    text-shadow: var(--shadow-glow);
+}
+
+.token-info__btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    text-decoration: none;
+    border-radius: var(--border-radius-full);
+    font-weight: 600;
+    font-size: var(--font-size-base);
+    transition: all var(--transition-base) ease;
+    box-shadow: var(--shadow-md);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+.token-info__btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.token-info__btn:hover::before {
+    left: 100%;
+}
+
+.token-info__btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+}
+
+.token-info__notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--gradient-success) !important;
+    color: white !important;
+    padding: 15px 25px;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    z-index: var(--z-notification);
+    animation: slideInRight 0.3s ease-out, glowPulse 2s ease-in-out infinite;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: var(--shadow-lg);
+    }
+    50% {
+        box-shadow: var(--shadow-lg), 0 0 30px rgba(40, 167, 69, 0.6);
+    }
+}
+
+/* ========================================
+   4. УЛУЧШЕННАЯ КНОПКА "КУПИТЬ PLEX"
+   ======================================== */
+
+.genesis-btn-buy,
+#buy-token-btn,
+#buy-plex-btn,
+.btn-buy-plex {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 32px;
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: white !important;
+    background: var(--gradient-premium) !important;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: var(--border-radius-full);
+    cursor: pointer;
+    transition: all var(--transition-base) ease;
+    box-shadow:
+        var(--shadow-lg),
+        0 0 20px rgba(255, 215, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* Анимированный фон */
+.genesis-btn-buy::before,
+#buy-token-btn::before,
+#buy-plex-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent 60deg
+    );
+    animation: rotateGlow 3s linear infinite;
+}
+
+@keyframes rotateGlow {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Шиммер эффект */
+.genesis-btn-buy::after,
+#buy-token-btn::after,
+#buy-plex-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+    );
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+}
+
+.genesis-btn-buy:hover,
+#buy-token-btn:hover,
+#buy-plex-btn:hover {
+    transform: translateY(-4px) scale(1.05) rotateX(5deg);
+    box-shadow:
+        var(--shadow-xl),
+        0 0 40px rgba(255, 215, 0, 0.6),
+        0 0 60px rgba(255, 215, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 215, 0, 0.6);
+}
+
+.genesis-btn-buy:active,
+#buy-token-btn:active,
+#buy-plex-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Пульсирующая рамка */
+@keyframes pulseBorder {
+    0%, 100% {
+        box-shadow:
+            var(--shadow-lg),
+            0 0 20px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        box-shadow:
+            var(--shadow-xl),
+            0 0 40px rgba(255, 215, 0, 0.7);
+    }
+}
+
+/* ========================================
+   5. УЛУЧШЕННАЯ АДАПТИВНОСТЬ
+   ======================================== */
+
+/* Ultra Wide (2K и выше) */
+@media (min-width: 1920px) {
+    :root {
+        --font-size-base: 1.125rem;
+        --font-size-lg: 1.5rem;
+        --font-size-xl: 2rem;
+    }
+
+    .genesis-container {
+        max-width: 1600px;
+    }
+}
+
+/* Desktop (1024px - 1919px) */
+@media (min-width: 1024px) and (max-width: 1919px) {
+    .token-info__content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .token-info {
+        padding: 60px 0;
+    }
+
+    .token-info__content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .token-info__card {
+        padding: 25px;
+    }
+
+    .genesis-btn-buy,
+    #buy-token-btn {
+        padding: 14px 28px;
+        font-size: var(--font-size-base);
+    }
+}
+
+/* Mobile Large (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+    .token-info {
+        padding: 50px 0;
+    }
+
+    .token-info__content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .token-info__card {
+        padding: 20px;
+    }
+
+    .token-info__title {
+        font-size: var(--font-size-xl);
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .genesis-btn-buy,
+    #buy-token-btn {
+        width: 100%;
+        max-width: 400px;
+        padding: 14px 24px;
+    }
+}
+
+/* Mobile Small (320px - 480px) */
+@media (max-width: 480px) {
+    .token-info {
+        padding: 40px 0;
+    }
+
+    .token-info__content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .token-info__card {
+        padding: 18px;
+        border-radius: var(--border-radius-md);
+    }
+
+    .token-info__title {
+        font-size: var(--font-size-lg);
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .token-info__value {
+        font-size: var(--font-size-sm);
+    }
+
+    .token-info__address-text {
+        font-size: 0.75rem;
+    }
+
+    .genesis-btn-buy,
+    #buy-token-btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: var(--font-size-sm);
+    }
+
+    .token-info__notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        text-align: center;
+        font-size: var(--font-size-xs);
+    }
+
+    /* Отключение 3D эффектов на маленьких экранах */
+    .token-info__card:hover {
+        transform: translateY(-4px);
+    }
+}
+
+/* ========================================
+   6. ОПТИМИЗАЦИЯ ПРОИЗВОДИТЕЛЬНОСТИ
+   ======================================== */
+
+/* Использование will-change для улучшения производительности */
+.token-info__card,
+.genesis-btn-buy,
+#buy-token-btn,
+.token-info__notification {
+    will-change: transform, box-shadow;
+}
+
+/* Уменьшение анимаций для пользователей с prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .token-info__card:hover {
+        transform: translateY(-4px);
+    }
+
+    .genesis-btn-buy:hover,
+    #buy-token-btn:hover {
+        transform: translateY(-2px);
+    }
+}
+
+/* Hardware acceleration */
+.token-info__card,
+.genesis-btn-buy,
+#buy-token-btn {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   7. ДОПОЛНИТЕЛЬНЫЕ 3D ЭФФЕКТЫ
+   ======================================== */
+
+/* Голографический эффект для карточек */
+.token-info__card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(78, 205, 196, 0.1) 0%,
+        transparent 30%,
+        transparent 70%,
+        rgba(255, 107, 107, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity var(--transition-base) ease;
+    pointer-events: none;
+}
+
+.token-info__card:hover::after {
+    opacity: 1;
+}
+
+/* Паралакс эффект при движении мыши */
+@media (hover: hover) and (pointer: fine) {
+    .token-info__card {
+        transition:
+            transform var(--transition-base) ease,
+            box-shadow var(--transition-base) ease;
+    }
+}
+
+/* Глубина тени в зависимости от положения */
+.token-info__card[data-depth="1"] {
+    box-shadow: var(--shadow-md);
+}
+
+.token-info__card[data-depth="2"] {
+    box-shadow: var(--shadow-lg);
+}
+
+.token-info__card[data-depth="3"] {
+    box-shadow: var(--shadow-xl);
+}

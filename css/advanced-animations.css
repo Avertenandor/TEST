@@ -1,0 +1,656 @@
+/**
+ * GENESIS 1.1 - Advanced Animations & 3D Effects
+ * Продвинутые анимации и 3D эффекты
+ *
+ * Особенности:
+ * - Оптимизированные анимации для всех элементов
+ * - Интерактивные 3D эффекты
+ * - Паралакс эффекты
+ * - Particle эффекты
+ * - Hover взаимодействия
+ */
+
+/* ========================================
+   1. БАЗОВЫЕ ОПТИМИЗИРОВАННЫЕ АНИМАЦИИ
+   ======================================== */
+
+/* Fade In Up - оптимизированная */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 30px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Fade In Down */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -30px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Fade In Left */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(-30px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Fade In Right */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(30px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale3d(0.9, 0.9, 1);
+    }
+    to {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+/* Bounce In */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale3d(1.05, 1.05, 1);
+    }
+    70% {
+        opacity: 1;
+        transform: scale3d(0.95, 0.95, 1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+/* ========================================
+   2. 3D CARD FLIP ЭФФЕКТ
+   ======================================== */
+
+.card-flip-container {
+    perspective: 1000px;
+    position: relative;
+}
+
+.card-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.card-flip-container:hover .card-flip-inner {
+    transform: rotateY(180deg);
+}
+
+.card-flip-front,
+.card-flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--border-radius-xl);
+}
+
+.card-flip-back {
+    transform: rotateY(180deg);
+}
+
+/* ========================================
+   3. ПАРАЛАКС ЭФФЕКТЫ
+   ======================================== */
+
+.parallax-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
+}
+
+.parallax-layer-1 {
+    transform: translateZ(0);
+}
+
+.parallax-layer-2 {
+    transform: translateZ(20px);
+}
+
+.parallax-layer-3 {
+    transform: translateZ(40px);
+}
+
+/* ========================================
+   4. МОРФИНГ ЭФФЕКТЫ
+   ======================================== */
+
+@keyframes morphShape {
+    0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+}
+
+.morphing-shape {
+    animation: morphShape 10s ease-in-out infinite;
+    background: var(--gradient-primary);
+    filter: blur(40px);
+    opacity: 0.3;
+}
+
+/* ========================================
+   5. СВЕТЯЩИЕСЯ ЧАСТИЦЫ
+   ======================================== */
+
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(
+            calc(var(--particle-x, 0) * 1px),
+            calc(var(--particle-y, -100) * 1px),
+            0
+        ) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    animation: particleFloat 3s ease-in-out infinite;
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* ========================================
+   6. ТЕКСТОВЫЕ ЭФФЕКТЫ
+   ======================================== */
+
+/* Gradient Text Animation */
+@keyframes gradientText {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.text-gradient-animated {
+    background: var(--gradient-rainbow);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientText 5s ease-in-out infinite;
+}
+
+/* Glitch Text Effect */
+@keyframes glitch-1 {
+    0%, 100% {
+        clip-path: inset(40% 0 61% 0);
+        transform: translate(0);
+    }
+    20% {
+        clip-path: inset(92% 0 1% 0);
+        transform: translate(2px, -2px);
+    }
+    40% {
+        clip-path: inset(43% 0 1% 0);
+        transform: translate(-2px, 2px);
+    }
+    60% {
+        clip-path: inset(25% 0 58% 0);
+        transform: translate(2px, 0);
+    }
+    80% {
+        clip-path: inset(54% 0 7% 0);
+        transform: translate(-2px, 2px);
+    }
+}
+
+@keyframes glitch-2 {
+    0%, 100% {
+        clip-path: inset(60% 0 21% 0);
+        transform: translate(0);
+    }
+    20% {
+        clip-path: inset(10% 0 50% 0);
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        clip-path: inset(70% 0 1% 0);
+        transform: translate(2px, -2px);
+    }
+    60% {
+        clip-path: inset(20% 0 65% 0);
+        transform: translate(-2px, 0);
+    }
+    80% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(2px, -2px);
+    }
+}
+
+.text-glitch {
+    position: relative;
+    display: inline-block;
+}
+
+.text-glitch::before,
+.text-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.text-glitch::before {
+    animation: glitch-1 2.5s infinite;
+    color: #00ffff;
+    z-index: -1;
+}
+
+.text-glitch::after {
+    animation: glitch-2 2.5s infinite;
+    color: #ff00ff;
+    z-index: -2;
+}
+
+/* ========================================
+   7. ВОЛНОВЫЕ ЭФФЕКТЫ
+   ======================================== */
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0) translateZ(0);
+    }
+    50% {
+        transform: translateY(-10px) translateZ(10px);
+    }
+}
+
+.wave-text span {
+    display: inline-block;
+    animation: wave 1.5s ease-in-out infinite;
+}
+
+.wave-text span:nth-child(1) { animation-delay: 0s; }
+.wave-text span:nth-child(2) { animation-delay: 0.1s; }
+.wave-text span:nth-child(3) { animation-delay: 0.2s; }
+.wave-text span:nth-child(4) { animation-delay: 0.3s; }
+.wave-text span:nth-child(5) { animation-delay: 0.4s; }
+.wave-text span:nth-child(6) { animation-delay: 0.5s; }
+.wave-text span:nth-child(7) { animation-delay: 0.6s; }
+.wave-text span:nth-child(8) { animation-delay: 0.7s; }
+
+/* ========================================
+   8. HOVER ЭФФЕКТЫ ДЛЯ КНОПОК
+   ======================================== */
+
+/* Ripple Effect */
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-ripple:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Neon Glow Button */
+.btn-neon {
+    position: relative;
+    background: transparent;
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+    text-shadow: 0 0 10px var(--accent-primary);
+    box-shadow:
+        inset 0 0 10px var(--accent-primary),
+        0 0 10px var(--accent-primary);
+    transition: all 0.3s ease;
+}
+
+.btn-neon:hover {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    text-shadow: none;
+    box-shadow:
+        inset 0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 30px var(--accent-primary),
+        0 0 50px var(--accent-primary);
+}
+
+/* Magnetic Button */
+@keyframes magnetic-pull {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(var(--mouse-x, 0), var(--mouse-y, 0));
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.btn-magnetic {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-magnetic:hover {
+    animation: magnetic-pull 0.3s ease-out;
+}
+
+/* ========================================
+   9. LOADER АНИМАЦИИ
+   ======================================== */
+
+/* Pulse Loader */
+@keyframes pulseLoader {
+    0%, 100% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.5;
+    }
+}
+
+.loader-pulse {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    animation: pulseLoader 1.5s ease-in-out infinite;
+}
+
+/* Spinner Loader */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Dots Loader */
+@keyframes dotPulse {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.loader-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.loader-dots span {
+    width: 12px;
+    height: 12px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.loader-dots span:nth-child(1) { animation-delay: 0s; }
+.loader-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loader-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* ========================================
+   10. ПРОГРЕСС-БАР АНИМАЦИИ
+   ======================================== */
+
+@keyframes progressGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 10px var(--accent-primary),
+            inset 0 0 10px var(--accent-primary);
+    }
+    50% {
+        box-shadow:
+            0 0 20px var(--accent-primary),
+            0 0 30px var(--accent-primary),
+            inset 0 0 20px var(--accent-primary);
+    }
+}
+
+.progress-bar-animated {
+    position: relative;
+    height: 8px;
+    background: var(--bg-tertiary);
+    border-radius: var(--border-radius-full);
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--border-radius-full);
+    animation: progressGlow 2s ease-in-out infinite;
+    transition: width 0.5s ease;
+}
+
+/* ========================================
+   11. ТОСТЕР НОТИФИКАЦИИ
+   ======================================== */
+
+@keyframes toastSlideIn {
+    from {
+        transform: translate3d(400px, 0, 0);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    to {
+        transform: translate3d(400px, 0, 0);
+        opacity: 0;
+    }
+}
+
+.toast-enter {
+    animation: toastSlideIn 0.3s ease-out;
+}
+
+.toast-exit {
+    animation: toastSlideOut 0.3s ease-in;
+}
+
+/* ========================================
+   12. СКЕЛЕТОН ЛОАДЕРЫ
+   ======================================== */
+
+@keyframes skeletonShimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--bg-tertiary) 0%,
+        var(--bg-elevated) 20%,
+        var(--bg-tertiary) 40%,
+        var(--bg-tertiary) 100%
+    );
+    background-size: 1000px 100%;
+    animation: skeletonShimmer 1.5s linear infinite;
+    border-radius: var(--border-radius-md);
+}
+
+/* ========================================
+   13. CONFETTI ЭФФЕКТ
+   ======================================== */
+
+@keyframes confettiFall {
+    from {
+        transform:
+            translate3d(0, -100vh, 0)
+            rotateZ(0deg);
+        opacity: 1;
+    }
+    to {
+        transform:
+            translate3d(
+                var(--confetti-x, 0),
+                100vh,
+                0
+            )
+            rotateZ(360deg);
+        opacity: 0;
+    }
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--accent-primary);
+    animation: confettiFall 3s linear;
+    pointer-events: none;
+}
+
+/* ========================================
+   14. ОПТИМИЗАЦИЯ ДЛЯ МОБИЛЬНЫХ
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Упрощаем анимации на мобильных */
+    .card-flip-inner {
+        transition-duration: 0.5s;
+    }
+
+    /* Отключаем сложные эффекты */
+    .morphing-shape,
+    .particle,
+    .confetti {
+        display: none;
+    }
+
+    /* Упрощаем 3D эффекты */
+    .parallax-layer {
+        transform: none !important;
+    }
+}
+
+/* ========================================
+   15. ПРОИЗВОДИТЕЛЬНОСТЬ
+   ======================================== */
+
+/* Использование GPU acceleration */
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+}
+
+/* Reduce motion для пользователей с ограничениями */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .morphing-shape,
+    .particle,
+    .confetti,
+    .text-glitch::before,
+    .text-glitch::after {
+        display: none !important;
+    }
+}
