@@ -61,6 +61,7 @@ Environment: Production
     <link rel="stylesheet" href="shared/styles/animations.css">
     <link rel="stylesheet" href="shared/styles/utilities.css">
     <link rel="stylesheet" href="shared/styles/qr-codes.css">
+    <link rel="stylesheet" href="shared/styles/responsive-improvements.css">
     
     <!-- Base App Styles -->
     <style>
@@ -159,6 +160,7 @@ Environment: Production
     <!-- Core Application Bootstrap -->
     <script type="module">
         import { Application } from './core/bootstrap.js';
+        import { initResponsiveEnhancements } from './shared/utils/responsive-helpers.js';
         
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
