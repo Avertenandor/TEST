@@ -1,9 +1,24 @@
 /* Стили для модуля features */
 :where([data-module="features"]) .genesis-features {
     padding: 6rem 0;
-    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+    background:
+        radial-gradient(ellipse at bottom, #161b22 0%, #0d1117 50%, #0a0e14 100%);
     position: relative;
     overflow: hidden;
+}
+
+:where([data-module="features"]) .genesis-features::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(69, 183, 209, 0.06) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* Заголовок секции */
@@ -57,14 +72,15 @@
 
 /* Карточки возможностей */
 :where([data-module="features"]) .genesis-feature-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 2.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+    border-radius: 24px;
+    padding: 2.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px) saturate(180%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 :where([data-module="features"]) .genesis-feature-card::before {
@@ -73,35 +89,59 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, #4ecdc4 50%, #45b7d1 100%);
     transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:where([data-module="features"]) .genesis-feature-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top right, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
 :where([data-module="features"]) .genesis-feature-card:hover {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(78, 205, 196, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-12px) scale(1.02);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
+    border-color: rgba(78, 205, 196, 0.4);
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(78, 205, 196, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 :where([data-module="features"]) .genesis-feature-card:hover::before {
     transform: scaleX(1);
 }
 
+:where([data-module="features"]) .genesis-feature-card:hover::after {
+    opacity: 1;
+}
+
 /* Иконки возможностей */
 :where([data-module="features"]) .genesis-feature-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(69, 183, 209, 0.2));
-    border-radius: 20px;
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.25), rgba(69, 183, 209, 0.15));
+    border-radius: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     position: relative;
     overflow: hidden;
+    box-shadow:
+        0 8px 24px rgba(78, 205, 196, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 :where([data-module="features"]) .genesis-feature-icon::before {
@@ -111,15 +151,23 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(69, 183, 209, 0.1));
-    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(69, 183, 209, 0.15));
+    border-radius: 24px;
     animation: iconGlow 3s ease-in-out infinite alternate;
 }
 
+:where([data-module="features"]) .genesis-feature-card:hover .genesis-feature-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow:
+        0 12px 32px rgba(78, 205, 196, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
 :where([data-module="features"]) .genesis-feature-emoji {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     position: relative;
     z-index: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 /* Заголовки карточек */
