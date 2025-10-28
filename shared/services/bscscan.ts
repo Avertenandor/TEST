@@ -147,7 +147,7 @@ export class BscScanService {
      * Получить баланс токена
      */
     async getTokenBalance(contractAddress: string, address: string): Promise<string> {
-        const response = await this.makeRequest<{ balance: string }>({
+        const response = await this.makeRequest<string>({
             module: 'account',
             action: 'tokenbalance',
             contractaddress: contractAddress,

@@ -229,9 +229,6 @@ describe('Error Guard', () => {
         // Создаем обычную ошибку (должна быть залогирована)
         const regularError = new Error('Regular application error');
 
-        // Симулируем обработку ошибок
-        const originalLength = window.__diagBuffer.length;
-
         // Ошибки должны обрабатываться без исключений
         expect(() => {
             window.dispatchEvent(new ErrorEvent('error', { error: metaMaskError }));

@@ -104,7 +104,7 @@ function globalErrorHandler(event: ErrorEvent): void {
         filename: event.filename,
         lineno: event.lineno,
         colno: event.colno,
-        url: event.target?.location?.href
+        url: window.location.href
     });
 
     // В режиме разработки показываем ошибку в консоли

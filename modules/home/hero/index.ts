@@ -26,7 +26,7 @@ export class HeroModule {
         };
     }
 
-    mount(el: HTMLElement, context?: any): void {
+    mount(el: HTMLElement): void {
         this.element = el;
 
         el.innerHTML = `
@@ -111,7 +111,7 @@ export const module = {
         (el as any)._heroModule = null;
     },
     
-    canActivate(ctx?: any): boolean {
+    canActivate(): boolean {
         return true;
     },
     

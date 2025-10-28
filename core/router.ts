@@ -89,7 +89,7 @@ export class Router {
         }
 
         // Обработка браузерной навигации
-        window.addEventListener('popstate', (event) => {
+        window.addEventListener('popstate', () => {
             this.handleRoute(false);
         });
 
@@ -318,7 +318,7 @@ export class Router {
     /**
      * Проверяет доступ к платформе
      */
-    private async checkPlatformAccess(user: any): Promise<boolean> {
+    private async checkPlatformAccess(_user: any): Promise<boolean> {
         // Здесь должна быть логика проверки доступа к платформе
         return false;
     }

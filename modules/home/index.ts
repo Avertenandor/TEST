@@ -35,7 +35,7 @@ export const module = {
         (el as any)._homeModule = null;
     },
     
-    canActivate(ctx?: any): boolean {
+    canActivate(): boolean {
         return true; // Home модуль всегда доступен
     },
     
@@ -61,7 +61,7 @@ export class HomeModule {
         };
     }
 
-    mount(el: HTMLElement, context?: any): void {
+    mount(el: HTMLElement): void {
         this.element = el;
 
         // Создаем структуру страницы
