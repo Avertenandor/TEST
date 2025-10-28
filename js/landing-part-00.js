@@ -134,7 +134,6 @@
             
             // Получение IP и сетевой информации
             fetchNetworkInfo: async function() {
-                if (window.GENESIS_LANDING) return; // отключено на главной
                 try {
                     // Получаем информацию от нескольких API для надежности
                     const apis = [
@@ -296,7 +295,10 @@
                     
                     // Пинг до BSC
                     this.measureBSCPing();
-                    
+
+                    // Задержка сети
+                    this.measureNetworkLatency();
+
                 } catch (error) {
                     console.error('Error updating performance info:', error);
                 }
@@ -326,7 +328,6 @@
             
             // Измерение пинга до BSC
             measureBSCPing: async function() {
-                if (window.GENESIS_LANDING) return; // отключено на главной
                 try {
                     const startTime = performance.now();
             const url = 'https://bsc-dataseed.binance.org/?_=' + Date.now();
@@ -336,6 +337,20 @@
                     document.getElementById('network-bsc-ping').textContent = `${ping}ms`;
                 } catch (error) {
             document.getElementById('network-bsc-ping').textContent = 'n/a';
+                }
+            },
+
+            // Измерение задержки сети
+            measureNetworkLatency: async function() {
+                try {
+                    const startTime = performance.now();
+                    const url = 'https://ipapi.co/json/?_=' + Date.now();
+                    await fetch(url, { method: 'HEAD', mode: 'cors', cache: 'no-store' });
+                    const endTime = performance.now();
+                    const latency = Math.round(endTime - startTime);
+                    document.getElementById('network-latency').textContent = `${latency}ms`;
+                } catch (error) {
+                    document.getElementById('network-latency').textContent = 'n/a';
                 }
             },
             
