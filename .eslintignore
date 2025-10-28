@@ -1,0 +1,14 @@
+dist
+node_modules
+*.min.js
+archive/**
+тесты/**
+assets/**
+*.config.js
+*.config.ts
+playwright-report
+test-results
+coverage
+.vscode
+.idea
+*.log
