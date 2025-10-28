@@ -95,9 +95,11 @@ export default class DeviceModule {
             onLine: navigator.onLine,
             doNotTrack: navigator.doNotTrack,
             hardwareConcurrency: navigator.hardwareConcurrency || 'N/A',
-            maxTouchPoints: navigator.maxTouchPoints || 0
+            maxTouchPoints: navigator.maxTouchPoints || 0,
+            pdfViewerEnabled: navigator.pdfViewerEnabled || false,
+            webdriver: navigator.webdriver || false
         };
-        
+
         // Информация об экране
         const screenInfo = {
             width: screen.width,
@@ -147,9 +149,10 @@ export default class DeviceModule {
             connectionInfo.rtt = navigator.connection.rtt + ' ms';
             connectionInfo.saveData = navigator.connection.saveData;
         }
-        
-        // Информация о GPU
+
+        // Информация о GPU и WebGL
         let gpuInfo = 'N/A';
+        let webglExtensions = [];
         try {
             const canvas = document.createElement('canvas');
             const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
@@ -158,10 +161,83 @@ export default class DeviceModule {
                 if (debugInfo) {
                     gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
                 }
+                webglExtensions = gl.getSupportedExtensions() || [];
             }
         } catch (error) {
             console.warn('WebGL not available:', error);
         }
+
+        // Информация о медиа устройствах
+        const mediaInfo = {
+            supported: 'mediaDevices' in navigator,
+            getUserMedia: navigator.mediaDevices && 'getUserMedia' in navigator.mediaDevices,
+            getDisplayMedia: navigator.mediaDevices && 'getDisplayMedia' in navigator.mediaDevices,
+            enumerateDevices: navigator.mediaDevices && 'enumerateDevices' in navigator.mediaDevices
+        };
+
+        // Информация об аудио контексте
+        let audioInfo = { supported: false };
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                const ctx = new AudioContext();
+                audioInfo = {
+                    supported: true,
+                    sampleRate: ctx.sampleRate,
+                    state: ctx.state,
+                    maxChannelCount: ctx.destination.maxChannelCount,
+                    baseLatency: ctx.baseLatency || 'N/A'
+                };
+                ctx.close();
+            }
+        } catch (error) {
+            console.warn('AudioContext not available:', error);
+        }
+
+        // Информация о хранилище
+        let storageInfo = null;
+        try {
+            if (navigator.storage && navigator.storage.estimate) {
+                const estimate = await navigator.storage.estimate();
+                storageInfo = {
+                    usage: Math.round(estimate.usage / 1024 / 1024) + ' MB',
+                    quota: Math.round(estimate.quota / 1024 / 1024) + ' MB',
+                    percentage: Math.round((estimate.usage / estimate.quota) * 100) + '%'
+                };
+            }
+            if (navigator.storage && navigator.storage.persisted) {
+                const persisted = await navigator.storage.persisted();
+                if (storageInfo) {
+                    storageInfo.persisted = persisted;
+                } else {
+                    storageInfo = { persisted };
+                }
+            }
+        } catch (error) {
+            console.warn('Storage API not available:', error);
+        }
+
+        // Информация о canvas
+        const canvasInfo = {
+            supported: false,
+            webglSupported: false
+        };
+        try {
+            const canvas = document.createElement('canvas');
+            canvasInfo.supported = !!canvas.getContext('2d');
+            canvasInfo.webglSupported = !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+        } catch (error) {
+            console.warn('Canvas not available:', error);
+        }
+
+        // Информация о timezone
+        const timezoneInfo = {
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            locale: Intl.DateTimeFormat().resolvedOptions().locale,
+            calendar: Intl.DateTimeFormat().resolvedOptions().calendar,
+            numberingSystem: Intl.DateTimeFormat().resolvedOptions().numberingSystem,
+            offset: new Date().getTimezoneOffset()
+        };
         
         // Определение типа устройства
         const deviceType = this.detectDeviceType();
@@ -190,6 +266,12 @@ export default class DeviceModule {
             battery: batteryInfo,
             connection: connectionInfo,
             gpu: gpuInfo,
+            webglExtensions: webglExtensions,
+            media: mediaInfo,
+            audio: audioInfo,
+            storage: storageInfo,
+            canvas: canvasInfo,
+            timezone: timezoneInfo,
             deviceType: deviceType,
             os: osInfo,
             browserName: browserName,
