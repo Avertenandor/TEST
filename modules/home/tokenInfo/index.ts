@@ -23,7 +23,7 @@ export class TokenInfoModule implements Module {
         };
     }
 
-    mount(el: HTMLElement, context?: any): void {
+    mount(el: HTMLElement): void {
         this.element = el;
 
         el.innerHTML = `

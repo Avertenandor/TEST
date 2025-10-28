@@ -3,7 +3,7 @@
 
 import { initErrorGuard } from './error-guard';
 import { initLibraryLoader } from './library-loader';
-import { Router, Module, RouterContext } from './router';
+import { Router, Module } from './router';
 import { store } from './store';
 import { eventBus } from './event-bus';
 import { config } from '../shared/config';

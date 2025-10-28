@@ -77,7 +77,7 @@ function loadScript(src: string): Promise<void> {
 async function loadLibrary(config: LibraryConfig): Promise<any> {
     // Проверяем, не загружена ли уже
     if (isLibraryLoaded(config)) {
-        return (window as any)[config.globalName] || loadedLibraries.get(config.name);
+        return (config.globalName ? (window as any)[config.globalName] : null) || loadedLibraries.get(config.name);
     }
 
     try {
@@ -98,7 +98,7 @@ async function loadLibrary(config: LibraryConfig): Promise<any> {
     }
 
     // Получаем библиотеку из глобального объекта
-    const library = (window as any)[config.globalName];
+    const library = config.globalName ? (window as any)[config.globalName] : null;
     if (library) {
         loadedLibraries.set(config.name, library);
         return library;

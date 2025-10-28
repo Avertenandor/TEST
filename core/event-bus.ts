@@ -14,6 +14,7 @@ export interface EventHistoryEntry {
 
 export type EventHandler = (data: EventData) => void;
 export type WildcardHandler = (event: string, data: EventData) => void;
+export type AnyHandler = EventHandler | WildcardHandler;
 
 export class EventBus {
     private events: Map<string, Set<EventHandler>>;
@@ -33,20 +34,22 @@ export class EventBus {
     /**
      * Подписаться на событие
      */
-    on(event: string, handler: EventHandler): () => void {
+    on(event: '*', handler: WildcardHandler): () => void;
+    on(event: string, handler: EventHandler): () => void;
+    on(event: string, handler: AnyHandler): () => void {
         if (typeof handler !== 'function') {
             throw new Error('Event handler must be a function');
         }
 
         // Обработка wildcard подписок
         if (event === '*') {
-            this.wildcardHandlers.add(handler as WildcardHandler);
+            this.wildcardHandlers.add(handler as unknown as WildcardHandler);
 
             if (this.debug) {
                 console.log(`[EventBus] Wildcard handler registered`);
             }
 
-            return () => this.wildcardHandlers.delete(handler as WildcardHandler);
+            return () => this.wildcardHandlers.delete(handler as unknown as WildcardHandler);
         }
 
         // Обычная подписка на событие
@@ -54,14 +57,14 @@ export class EventBus {
             this.events.set(event, new Set());
         }
 
-        this.events.get(event)!.add(handler);
+        this.events.get(event)!.add(handler as EventHandler);
 
         if (this.debug) {
             console.log(`[EventBus] Handler registered for: ${event}`);
         }
 
         // Возвращаем функцию отписки
-        return () => this.off(event, handler);
+        return () => this.off(event, handler as EventHandler);
     }
 
     /**
@@ -79,14 +82,14 @@ export class EventBus {
     /**
      * Отписаться от события
      */
-    off(event: string, handler: EventHandler): void {
+    off(event: string, handler: EventHandler | WildcardHandler): void {
         if (event === '*') {
-            this.wildcardHandlers.delete(handler as WildcardHandler);
+            this.wildcardHandlers.delete(handler as unknown as WildcardHandler);
             return;
         }
 
         if (this.events.has(event)) {
-            this.events.get(event)!.delete(handler);
+            this.events.get(event)!.delete(handler as EventHandler);
 
             // Очищаем пустые наборы событий
             if (this.events.get(event)!.size === 0) {
@@ -103,8 +106,6 @@ export class EventBus {
      * Отправить событие
      */
     emit(event: string, data: EventData = {}, source?: string): void {
-        const timestamp = Date.now();
-
         if (this.debug) {
             console.log(`[EventBus] Emit: ${event}`, data);
         }
@@ -137,8 +138,6 @@ export class EventBus {
      * Отправить событие асинхронно
      */
     async emitAsync(event: string, data: EventData = {}, source?: string): Promise<void> {
-        const timestamp = Date.now();
-
         if (this.debug) {
             console.log(`[EventBus] Emit async: ${event}`, data);
         }
@@ -253,29 +252,26 @@ export class EventBus {
     }
 
     /**
-     * Удалить все обработчики для события
+     * Удалить все обработчики для события (или все обработчики, если event не указан)
      */
-    removeAllHandlers(event: string): void {
-        if (event === '*') {
-            this.wildcardHandlers.clear();
+    removeAllHandlers(event?: string): void {
+        if (event) {
+            if (event === '*') {
+                this.wildcardHandlers.clear();
+            } else {
+                this.events.delete(event);
+            }
+
+            if (this.debug) {
+                console.log(`[EventBus] All handlers removed for: ${event}`);
+            }
         } else {
-            this.events.delete(event);
-        }
+            this.events.clear();
+            this.wildcardHandlers.clear();
 
-        if (this.debug) {
-            console.log(`[EventBus] All handlers removed for: ${event}`);
-        }
-    }
-
-    /**
-     * Удалить все обработчики
-     */
-    removeAllHandlers(): void {
-        this.events.clear();
-        this.wildcardHandlers.clear();
-
-        if (this.debug) {
-            console.log(`[EventBus] All handlers removed`);
+            if (this.debug) {
+                console.log(`[EventBus] All handlers removed`);
+            }
         }
     }
 
@@ -354,6 +350,3 @@ export class EventBus {
 
 // Создаем глобальный экземпляр event bus
 export const eventBus = new EventBus();
-
-// Экспортируем типы для использования в других модулях
-export type { EventData, EventHistoryEntry, EventHandler, WildcardHandler };

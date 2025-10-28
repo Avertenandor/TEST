@@ -348,6 +348,3 @@ export class Store {
 
 // Создаем глобальный экземпляр store
 export const store = new Store();
-
-// Экспортируем типы для использования в других модулях
-export type { StoreState, StoreHistoryEntry, StoreSubscriber };
