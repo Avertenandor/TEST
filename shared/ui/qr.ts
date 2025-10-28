@@ -105,7 +105,7 @@ export class QR {
 
             // Добавляем логотип если нужно
             if (showLogo && logoUrl) {
-                await this.addLogo(canvas, logoUrl, logoSize);
+                await this.addLogo(canvas, logoUrl, logoSize ?? 40);
             }
 
             this.throttledLog('QR code generated successfully');

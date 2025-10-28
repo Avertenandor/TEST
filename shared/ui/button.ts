@@ -77,7 +77,7 @@ export class Button {
 
         const button = this.element.querySelector('button, a');
         if (button && this.props.onClick) {
-            button.addEventListener('click', this.props.onClick);
+            button.addEventListener('click', this.props.onClick as EventListener);
         }
     }
 

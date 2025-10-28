@@ -82,10 +82,10 @@ export class Copy {
 
         const button = this.element.querySelector('.ui-copy__button') as HTMLButtonElement;
         if (button) {
-            const originalText = button.textContent;
-            button.textContent = this.props.successMessage;
+            const originalText = button.textContent ?? null;
+            button.textContent = this.props.successMessage ?? 'Скопировано!';
             button.classList.add('ui-copy__button--success');
-            
+
             setTimeout(() => {
                 button.textContent = originalText;
                 button.classList.remove('ui-copy__button--success');
@@ -98,10 +98,10 @@ export class Copy {
 
         const button = this.element.querySelector('.ui-copy__button') as HTMLButtonElement;
         if (button) {
-            const originalText = button.textContent;
-            button.textContent = this.props.errorMessage;
+            const originalText = button.textContent ?? null;
+            button.textContent = this.props.errorMessage ?? 'Ошибка';
             button.classList.add('ui-copy__button--error');
-            
+
             setTimeout(() => {
                 button.textContent = originalText;
                 button.classList.remove('ui-copy__button--error');
