@@ -424,6 +424,11 @@
     <link rel="stylesheet" href="./shared/css/navigation.css">
     <link rel="stylesheet" href="./shared/css/buttons.css">
     <link rel="stylesheet" href="./shared/css/forms.css">
+
+    <!-- MCP-MARKER:UI_UX_ENHANCEMENTS - Улучшения UI/UX от 2025-10-29 -->
+    <!-- Enhanced UI/UX System - Fixes for GENESIS platform according to tech spec -->
+    <link rel="stylesheet" href="./shared/css/buttons-enhanced.css?v=5.0">
+    <link rel="stylesheet" href="./shared/css/wallet-cards-enhanced.css?v=5.0">
     <link rel="stylesheet" href="./shared/css/cards.css">
 </head>
 <body>
@@ -1542,6 +1547,73 @@
     <!-- MCP-MARKER:ENHANCED_INTERACTIONS - Улучшенные интерактивные эффекты -->
     <!-- Enhanced Interactions - 3D эффекты, паралакс, магнитные кнопки, частицы -->
     <script src="./js/enhanced-interactions.js?v=4.0"></script>
+
+    <!-- MCP-MARKER:UI_UX_ENHANCEMENTS_JS - JavaScript для улучшений UI/UX -->
+    <!-- SVG Icon Library -->
+    <script src="./shared/components/icons.js?v=5.0"></script>
+
+    <!-- Wallet Cards Functionality -->
+    <script>
+        // Toggle instructions section
+        function toggleInstructions() {
+            const toggle = document.querySelector('.instruction-toggle');
+            const content = document.querySelector('.instruction-content');
+
+            if (toggle && content) {
+                toggle.classList.toggle('active');
+                content.classList.toggle('active');
+            }
+        }
+
+        // Copy token address to clipboard
+        async function copyTokenAddress() {
+            const address = '0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1';
+            const button = event.currentTarget;
+            const copyText = button.querySelector('.copy-text');
+            const originalText = copyText.textContent;
+
+            try {
+                await navigator.clipboard.writeText(address);
+
+                // Success feedback
+                button.classList.add('copied');
+                copyText.textContent = 'Скопировано!';
+
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    copyText.textContent = originalText;
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                alert('Не удалось скопировать адрес. Пожалуйста, скопируйте вручную.');
+            }
+        }
+
+        // Initialize SVG icons when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Replace emoji icons with SVG icons
+            const infoCards = document.querySelectorAll('.info-card-icon');
+            infoCards.forEach((iconEl, index) => {
+                const iconName = index === 0 ? 'globe' : (index === 1 ? 'lock' : 'lightbulb');
+                if (window.GenesisIcons) {
+                    iconEl.innerHTML = GenesisIcons.get(iconName, 'icon');
+                }
+            });
+
+            // Replace Trust Wallet emoji icon
+            const trustWalletIcon = document.querySelector('.wallet-card:nth-child(2) .wallet-icon-custom');
+            if (trustWalletIcon && window.GenesisIcons) {
+                trustWalletIcon.innerHTML = GenesisIcons.get('trustWallet');
+            }
+
+            // Replace SafePal emoji icon
+            const safePalIcon = document.querySelector('.wallet-card:nth-child(3) .wallet-icon-custom');
+            if (safePalIcon && window.GenesisIcons) {
+                safePalIcon.innerHTML = GenesisIcons.get('safePal');
+            }
+        });
+    </script>
 </body>
 <!-- MCP-MARKER:DOCUMENT:END_HTML - Конец HTML документа -->
 </html>
