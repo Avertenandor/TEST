@@ -1,0 +1,271 @@
+/**
+ * Централизованная система адаптивности GENESIS
+ *
+ * Breakpoints:
+ * - xs: 0-575px     (мобильные, portrait)
+ * - sm: 576-767px   (мобильные, landscape)
+ * - md: 768-991px   (планшеты)
+ * - lg: 992-1199px  (десктопы)
+ * - xl: 1200-1399px (большие десктопы)
+ * - xxl: 1400px+    (wide мониторы)
+ */
+
+:root {
+    /* Breakpoints */
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-xxl: 1400px;
+
+    /* Container widths */
+    --container-sm: 540px;
+    --container-md: 720px;
+    --container-lg: 960px;
+    --container-xl: 1140px;
+    --container-xxl: 1320px;
+
+    /* Spacing (адаптивные) */
+    --spacing-xs: clamp(4px, 1vw, 8px);
+    --spacing-sm: clamp(8px, 2vw, 12px);
+    --spacing-md: clamp(12px, 3vw, 16px);
+    --spacing-lg: clamp(16px, 4vw, 24px);
+    --spacing-xl: clamp(24px, 5vw, 32px);
+
+    /* Typography (адаптивная) */
+    --font-base: clamp(14px, 2vw, 16px);
+    --font-small: clamp(12px, 1.5vw, 14px);
+    --font-large: clamp(16px, 2.5vw, 18px);
+
+    --font-h1: clamp(28px, 5vw, 48px);
+    --font-h2: clamp(24px, 4vw, 36px);
+    --font-h3: clamp(20px, 3vw, 28px);
+    --font-h4: clamp(18px, 2.5vw, 24px);
+    --font-h5: clamp(16px, 2vw, 20px);
+    --font-h6: clamp(14px, 1.8vw, 18px);
+
+    /* Touch targets */
+    --touch-target-min: 44px;
+
+    /* Border radius (адаптивный) */
+    --radius-sm: clamp(4px, 1vw, 6px);
+    --radius-md: clamp(8px, 2vw, 12px);
+    --radius-lg: clamp(12px, 3vw, 16px);
+}
+
+/* ============================================
+   БАЗОВЫЕ СТИЛИ
+   ============================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                 Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: var(--font-base);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Заголовки */
+h1 { font-size: var(--font-h1); line-height: 1.2; margin-bottom: var(--spacing-lg); }
+h2 { font-size: var(--font-h2); line-height: 1.3; margin-bottom: var(--spacing-md); }
+h3 { font-size: var(--font-h3); line-height: 1.4; margin-bottom: var(--spacing-md); }
+h4 { font-size: var(--font-h4); line-height: 1.4; margin-bottom: var(--spacing-sm); }
+h5 { font-size: var(--font-h5); line-height: 1.5; margin-bottom: var(--spacing-sm); }
+h6 { font-size: var(--font-h6); line-height: 1.5; margin-bottom: var(--spacing-xs); }
+
+/* Параграфы */
+p {
+    margin-bottom: var(--spacing-md);
+}
+
+/* Изображения */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Ссылки */
+a {
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/* ============================================
+   CONTAINER SYSTEM
+   ============================================ */
+
+.container {
+    width: 100%;
+    padding-right: var(--spacing-md);
+    padding-left: var(--spacing-md);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container-fluid {
+    width: 100%;
+    padding-right: var(--spacing-md);
+    padding-left: var(--spacing-md);
+}
+
+/* Small devices */
+@media (min-width: 576px) {
+    .container {
+        max-width: var(--container-sm);
+    }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) {
+    .container {
+        max-width: var(--container-md);
+    }
+}
+
+/* Large devices (desktops) */
+@media (min-width: 992px) {
+    .container {
+        max-width: var(--container-lg);
+    }
+}
+
+/* Extra large devices */
+@media (min-width: 1200px) {
+    .container {
+        max-width: var(--container-xl);
+    }
+}
+
+/* Extra extra large devices */
+@media (min-width: 1400px) {
+    .container {
+        max-width: var(--container-xxl);
+    }
+}
+
+/* ============================================
+   GRID SYSTEM
+   ============================================ */
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: calc(var(--spacing-md) * -1);
+    margin-left: calc(var(--spacing-md) * -1);
+}
+
+.col {
+    flex: 1 0 0%;
+    padding-right: var(--spacing-md);
+    padding-left: var(--spacing-md);
+}
+
+/* Mobile (default) */
+.col-1  { flex: 0 0 8.333333%; max-width: 8.333333%; }
+.col-2  { flex: 0 0 16.666667%; max-width: 16.666667%; }
+.col-3  { flex: 0 0 25%; max-width: 25%; }
+.col-4  { flex: 0 0 33.333333%; max-width: 33.333333%; }
+.col-6  { flex: 0 0 50%; max-width: 50%; }
+.col-12 { flex: 0 0 100%; max-width: 100%; }
+
+/* Small devices */
+@media (min-width: 576px) {
+    .col-sm-3 { flex: 0 0 25%; max-width: 25%; }
+    .col-sm-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+    .col-sm-6 { flex: 0 0 50%; max-width: 50%; }
+    .col-sm-12 { flex: 0 0 100%; max-width: 100%; }
+}
+
+/* Medium devices */
+@media (min-width: 768px) {
+    .col-md-3 { flex: 0 0 25%; max-width: 25%; }
+    .col-md-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+    .col-md-6 { flex: 0 0 50%; max-width: 50%; }
+    .col-md-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
+    .col-md-12 { flex: 0 0 100%; max-width: 100%; }
+}
+
+/* Large devices */
+@media (min-width: 992px) {
+    .col-lg-2 { flex: 0 0 16.666667%; max-width: 16.666667%; }
+    .col-lg-3 { flex: 0 0 25%; max-width: 25%; }
+    .col-lg-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+    .col-lg-6 { flex: 0 0 50%; max-width: 50%; }
+    .col-lg-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
+}
+
+/* Extra large devices */
+@media (min-width: 1200px) {
+    .col-xl-2 { flex: 0 0 16.666667%; max-width: 16.666667%; }
+    .col-xl-3 { flex: 0 0 25%; max-width: 25%; }
+    .col-xl-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Display */
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-grid { display: grid !important; }
+
+/* Responsive display */
+@media (max-width: 767px) {
+    .d-md-none { display: none !important; }
+    .d-mobile-block { display: block !important; }
+}
+
+@media (min-width: 768px) {
+    .d-md-block { display: block !important; }
+    .d-mobile-none { display: none !important; }
+}
+
+/* Text alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+@media (max-width: 767px) {
+    .text-mobile-center { text-align: center; }
+}
+
+/* Spacing utilities */
+.m-0 { margin: 0 !important; }
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+
+.p-0 { padding: 0 !important; }
+.p-1 { padding: var(--spacing-xs); }
+.p-2 { padding: var(--spacing-sm); }
+.p-3 { padding: var(--spacing-md); }
+.p-4 { padding: var(--spacing-lg); }
+
+/* Touch targets */
+.touch-target {
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
+}

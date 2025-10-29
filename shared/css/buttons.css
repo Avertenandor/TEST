@@ -1,0 +1,133 @@
+/**
+ * Touch-friendly кнопки GENESIS
+ */
+
+.btn {
+    /* Touch target минимум 44x44px */
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-md);
+
+    font-size: var(--font-base);
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    transition: all 0.2s ease;
+}
+
+/* Touch feedback */
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Варианты */
+.btn-primary {
+    background: var(--primary-color, #007bff);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover, #0056b3);
+}
+
+.btn-secondary {
+    background: var(--secondary-color, #6c757d);
+    color: #fff;
+}
+
+.btn-success {
+    background: var(--success-color, #28a745);
+    color: #fff;
+}
+
+.btn-danger {
+    background: var(--danger-color, #dc3545);
+    color: #fff;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-color, #007bff);
+    color: var(--primary-color, #007bff);
+}
+
+.btn-outline:hover {
+    background: var(--primary-color, #007bff);
+    color: #fff;
+}
+
+/* Размеры */
+.btn-sm {
+    min-height: 36px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-small);
+}
+
+.btn-lg {
+    min-height: 52px;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-large);
+}
+
+/* Ширина */
+.btn-block {
+    display: flex;
+    width: 100%;
+}
+
+/* Группы кнопок */
+.btn-group {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+/* Mobile адаптация */
+@media (max-width: 767px) {
+    .btn {
+        width: 100%;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+    }
+}
+
+/* Иконки в кнопках */
+.btn .icon {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-lg .icon {
+    width: 24px;
+    height: 24px;
+}
+
+.btn-sm .icon {
+    width: 16px;
+    height: 16px;
+}
