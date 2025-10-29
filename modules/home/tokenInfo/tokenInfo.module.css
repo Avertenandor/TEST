@@ -2,48 +2,49 @@
 /* Стили для TokenInfo модуля */
 
 .token-info {
-    padding: 80px 0;
+    padding: clamp(40px, 10vw, 80px) 0;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .token-info__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 clamp(15px, 3vw, 20px);
 }
 
 .token-info__header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: clamp(40px, 8vw, 60px);
 }
 
 .token-info__title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 5vw, 2.5rem);
     font-weight: 700;
     color: #2c3e50;
-    margin: 0 0 20px 0;
+    margin: 0 0 clamp(15px, 3vw, 20px) 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: clamp(10px, 2vw, 15px);
+    flex-wrap: wrap;
 }
 
 .token-info__logo {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 4vw, 2rem);
     animation: pulse 2s infinite;
 }
 
 .token-info__content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(20px, 4vw, 30px);
+    margin-bottom: clamp(35px, 7vw, 50px);
 }
 
 .token-info__card {
     background: white;
-    border-radius: 20px;
-    padding: 30px;
+    border-radius: clamp(15px, 3vw, 20px);
+    padding: clamp(20px, 4vw, 30px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -57,16 +58,16 @@
 }
 
 .token-info__label {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
     font-weight: 600;
     color: #7f8c8d;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 10px;
+    margin-bottom: clamp(8px, 2vw, 10px);
 }
 
 .token-info__value {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
     font-weight: 600;
     color: #2c3e50;
     word-break: break-all;
@@ -81,7 +82,7 @@
 
 .token-info__address-text {
     font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     color: #34495e;
     flex: 1;
 }
@@ -90,10 +91,10 @@
     background: linear-gradient(45deg, #3498db, #2980b9);
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: 8px 12px;
+    border-radius: clamp(6px, 1.5vw, 8px);
+    padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 12px);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     transition: all 0.3s ease;
     flex-shrink: 0;
 }
@@ -110,16 +111,16 @@
 }
 
 .token-info__price-amount {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
     font-weight: 700;
     color: #27ae60;
 }
 
 .token-info__price-change {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
     font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 6px;
+    padding: clamp(3px, 1vw, 4px) clamp(6px, 1.5vw, 8px);
+    border-radius: clamp(5px, 1vw, 6px);
 }
 
 .token-info__price-change--positive {
@@ -135,23 +136,24 @@
 .token-info__actions {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: clamp(15px, 3vw, 20px);
     flex-wrap: wrap;
 }
 
 .token-info__btn {
     display: inline-block;
-    padding: 15px 30px;
+    padding: clamp(12px, 2.5vw, 15px) clamp(24px, 5vw, 30px);
     background: linear-gradient(45deg, #3498db, #2980b9);
     color: white;
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: clamp(0.95rem, 2vw, 1rem);
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
     border: none;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .token-info__btn:hover {
@@ -213,24 +215,38 @@
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
-    .token-info {
-        padding: 60px 0;
-    }
-
+/* Ultra Small Mobile (< 375px) */
+@media (max-width: 374px) {
     .token-info__title {
-        font-size: 2rem;
         flex-direction: column;
-        gap: 10px;
     }
 
     .token-info__content {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 15px;
     }
 
-    .token-info__card {
-        padding: 25px;
+    .token-info__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .token-info__btn {
+        width: 100%;
+    }
+
+    .token-info__notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        text-align: center;
+    }
+}
+
+/* Small Mobile (375px - 640px) */
+@media (min-width: 375px) and (max-width: 640px) {
+    .token-info__content {
+        grid-template-columns: 1fr;
     }
 
     .token-info__actions {
@@ -239,33 +255,60 @@
     }
 
     .token-info__btn {
-        width: 100%;
-        max-width: 300px;
-        text-align: center;
+        min-width: clamp(200px, 80vw, 320px);
     }
 }
 
-@media (max-width: 480px) {
-    .token-info__title {
-        font-size: 1.8rem;
+/* Medium Mobile & Small Tablet (641px - 767px) */
+@media (min-width: 641px) and (max-width: 767px) {
+    .token-info__content {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .token-info__content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large Screens (1920px+) */
+@media (min-width: 1920px) {
+    .token-info__container {
+        max-width: 1600px;
     }
 
-    .token-info__card {
-        padding: 20px;
+    .token-info__content {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+/* Ultra Large Screens (2560px+) */
+@media (min-width: 2560px) {
+    .token-info__container {
+        max-width: 2000px;
     }
 
-    .token-info__value {
-        font-size: 1rem;
+    .token-info__content {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+    .token-info__card:hover,
+    .token-info__btn:hover,
+    .token-info__copy-btn:hover {
+        transform: none;
     }
 
-    .token-info__address-text {
-        font-size: 0.8rem;
+    .token-info__card:active {
+        transform: scale(0.98);
     }
 
-    .token-info__notification {
-        top: 10px;
-        right: 10px;
-        left: 10px;
-        text-align: center;
+    .token-info__btn:active,
+    .token-info__copy-btn:active {
+        transform: scale(0.95);
     }
 }
