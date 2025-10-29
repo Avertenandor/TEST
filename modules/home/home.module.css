@@ -11,45 +11,45 @@
 
 /* FAQ секция */
 .faq {
-    padding: 80px 0;
+    padding: clamp(40px, 10vw, 80px) 0;
     background: #f8f9fa;
 }
 
 .faq__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 clamp(15px, 3vw, 20px);
 }
 
 .faq__header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: clamp(40px, 8vw, 60px);
 }
 
 .faq__title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 5vw, 2.5rem);
     font-weight: 700;
     color: #2c3e50;
-    margin: 0 0 20px 0;
+    margin: 0 0 clamp(15px, 3vw, 20px) 0;
 }
 
 .faq__subtitle {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: #7f8c8d;
     margin: 0;
 }
 
 .faq__content {
     display: grid;
-    gap: 30px;
+    gap: clamp(20px, 4vw, 30px);
     max-width: 800px;
     margin: 0 auto;
 }
 
 .faq__item {
     background: white;
-    border-radius: 15px;
-    padding: 30px;
+    border-radius: clamp(12px, 2vw, 15px);
+    padding: clamp(20px, 4vw, 30px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
@@ -60,14 +60,14 @@
 }
 
 .faq__question {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
     font-weight: 600;
     color: #2c3e50;
-    margin: 0 0 15px 0;
+    margin: 0 0 clamp(12px, 2vw, 15px) 0;
 }
 
 .faq__answer {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     line-height: 1.6;
     color: #7f8c8d;
     margin: 0;
@@ -75,7 +75,7 @@
 
 /* Partners секция */
 .partners {
-    padding: 80px 0;
+    padding: clamp(40px, 10vw, 80px) 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
 }
@@ -83,22 +83,22 @@
 .partners__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 clamp(15px, 3vw, 20px);
 }
 
 .partners__header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: clamp(40px, 8vw, 60px);
 }
 
 .partners__title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 5vw, 2.5rem);
     font-weight: 700;
-    margin: 0 0 20px 0;
+    margin: 0 0 clamp(15px, 3vw, 20px) 0;
 }
 
 .partners__subtitle {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: #e0e0e0;
     opacity: 0.8;
     margin: 0;
@@ -106,15 +106,15 @@
 
 .partners__content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: clamp(25px, 5vw, 40px);
 }
 
 .partners__item {
     text-align: center;
-    padding: 30px;
+    padding: clamp(20px, 4vw, 30px);
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    border-radius: clamp(15px, 3vw, 20px);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -127,19 +127,19 @@
 }
 
 .partners__logo {
-    font-size: 3rem;
-    margin-bottom: 20px;
+    font-size: clamp(2.5rem, 5vw, 3rem);
+    margin-bottom: clamp(15px, 3vw, 20px);
 }
 
 .partners__name {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     font-weight: 600;
     margin: 0;
 }
 
 /* Stats секция */
 .stats {
-    padding: 80px 0;
+    padding: clamp(40px, 10vw, 80px) 0;
     background: #2c3e50;
     color: white;
 }
@@ -147,37 +147,37 @@
 .stats__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 clamp(15px, 3vw, 20px);
 }
 
 .stats__header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: clamp(40px, 8vw, 60px);
 }
 
 .stats__title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 5vw, 2.5rem);
     font-weight: 700;
-    margin: 0 0 20px 0;
+    margin: 0 0 clamp(15px, 3vw, 20px) 0;
 }
 
 .stats__subtitle {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: #bdc3c7;
     margin: 0;
 }
 
 .stats__content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: clamp(25px, 5vw, 40px);
 }
 
 .stats__item {
     text-align: center;
-    padding: 30px;
+    padding: clamp(20px, 4vw, 30px);
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
+    border-radius: clamp(12px, 2vw, 15px);
     transition: all 0.3s ease;
 }
 
@@ -187,91 +187,95 @@
 }
 
 .stats__number {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 5vw, 2.5rem);
     font-weight: 700;
     color: #3498db;
-    margin-bottom: 10px;
+    margin-bottom: clamp(8px, 2vw, 10px);
 }
 
 .stats__label {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     color: #bdc3c7;
     margin: 0;
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
-
-    .faq,
-    .partners,
-    .stats {
-        padding: 60px 0;
-    }
-
-    .faq__title,
-    .partners__title,
-    .stats__title {
-        font-size: 2rem;
-    }
-
-    .faq__subtitle,
-    .partners__subtitle,
-    .stats__subtitle {
-        font-size: 1.1rem;
-    }
-
-    .faq__content {
-        gap: 20px;
-    }
-
-    .faq__item {
-        padding: 25px;
-    }
-
-    .partners__content,
-    .stats__content {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-    }
-
-    .partners__item,
-    .stats__item {
-        padding: 25px;
-    }
-
-    .stats__number {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .faq__title,
-    .partners__title,
-    .stats__title {
-        font-size: 1.8rem;
-    }
-
-    .faq__subtitle,
-    .partners__subtitle,
-    .stats__subtitle {
-        font-size: 1rem;
-    }
-
-    .faq__question {
-        font-size: 1.2rem;
-    }
-
+/* Ultra Small Mobile (< 375px) */
+@media (max-width: 374px) {
     .partners__content,
     .stats__content {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+/* Small Mobile (375px - 640px) */
+@media (min-width: 375px) and (max-width: 640px) {
+    .partners__content {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
     }
 
-    .partners__logo {
-        font-size: 2.5rem;
+    .stats__content {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+    }
+}
+
+/* Tablet (641px - 1023px) */
+@media (min-width: 641px) and (max-width: 1023px) {
+    .partners__content {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .stats__number {
-        font-size: 1.8rem;
+    .stats__content {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    }
+}
+
+/* Large Screens (1920px+) */
+@media (min-width: 1920px) {
+    .faq__container,
+    .partners__container,
+    .stats__container {
+        max-width: 1600px;
+    }
+
+    .partners__content {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .stats__content {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+/* Ultra Large Screens (2560px+) */
+@media (min-width: 2560px) {
+    .faq__container,
+    .partners__container,
+    .stats__container {
+        max-width: 2000px;
+    }
+
+    .partners__content {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .stats__content {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+    .faq__item:hover,
+    .partners__item:hover,
+    .stats__item:hover {
+        transform: none;
+    }
+
+    .faq__item:active,
+    .partners__item:active,
+    .stats__item:active {
+        transform: scale(0.98);
     }
 }

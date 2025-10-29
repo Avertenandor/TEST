@@ -2,7 +2,7 @@
 /* Стили для CTA Grid модуля */
 
 .cta-grid {
-    padding: 80px 0;
+    padding: clamp(40px, 10vw, 80px) 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
 }
@@ -10,7 +10,7 @@
 .cta-grid__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 clamp(15px, 3vw, 20px);
 }
 
 .cta-grid__header {
@@ -37,14 +37,14 @@
 
 .cta-grid__content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(20px, 3vw, 30px);
 }
 
 .cta-grid__item {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 30px;
+    border-radius: clamp(15px, 3vw, 20px);
+    padding: clamp(20px, 4vw, 30px);
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -52,9 +52,10 @@
     -webkit-backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: clamp(15px, 3vw, 20px);
     position: relative;
     overflow: hidden;
+    min-height: clamp(100px, 20vw, 120px);
 }
 
 .cta-grid__item::before {
@@ -86,13 +87,13 @@
 }
 
 .cta-grid__item-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 15px;
+    width: clamp(50px, 10vw, 60px);
+    height: clamp(50px, 10vw, 60px);
+    border-radius: clamp(12px, 2vw, 15px);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
     flex-shrink: 0;
     position: relative;
     z-index: 1;
@@ -106,14 +107,14 @@
 }
 
 .cta-grid__item-title {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
     font-weight: 600;
-    margin: 0 0 10px 0;
+    margin: 0 0 clamp(8px, 2vw, 10px) 0;
     color: white;
 }
 
 .cta-grid__item-description {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     line-height: 1.5;
     margin: 0;
     color: #e0e0e0;
@@ -121,11 +122,12 @@
 }
 
 .cta-grid__item-arrow {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
     color: rgba(255, 255, 255, 0.7);
     transition: all 0.3s ease;
     position: relative;
     z-index: 1;
+    flex-shrink: 0;
 }
 
 .cta-grid__item:hover .cta-grid__item-arrow {
@@ -193,68 +195,77 @@
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
-    .cta-grid {
-        padding: 60px 0;
-    }
-
-    .cta-grid__title {
-        font-size: 2rem;
-    }
-
-    .cta-grid__subtitle {
-        font-size: 1.1rem;
-    }
-
+/* Ultra Small Mobile (< 375px) */
+@media (max-width: 374px) {
     .cta-grid__content {
         grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .cta-grid__item {
-        padding: 25px;
         gap: 15px;
     }
 
-    .cta-grid__item-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-    }
-
-    .cta-grid__item-title {
-        font-size: 1.2rem;
-    }
-
-    .cta-grid__item-description {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .cta-grid__title {
-        font-size: 1.8rem;
-    }
-
-    .cta-grid__subtitle {
-        font-size: 1rem;
-    }
-
     .cta-grid__item {
-        padding: 20px;
         flex-direction: column;
         text-align: center;
-        gap: 15px;
-    }
-
-    .cta-grid__item-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.8rem;
+        min-height: auto;
     }
 
     .cta-grid__item-arrow {
-        display: none;
+        transform: rotate(90deg);
+        margin-top: 8px;
+    }
+}
+
+/* Small Mobile (375px - 640px) */
+@media (min-width: 375px) and (max-width: 640px) {
+    .cta-grid__content {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-grid__item {
+        flex-direction: row;
+        text-align: left;
+    }
+}
+
+/* Tablet (641px - 1023px) */
+@media (min-width: 641px) and (max-width: 1023px) {
+    .cta-grid__content {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    .cta-grid__content {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    }
+}
+
+/* Large Screens (1920px+) */
+@media (min-width: 1920px) {
+    .cta-grid__container {
+        max-width: 1600px;
+    }
+}
+
+/* Ultra Large Screens (2560px+) */
+@media (min-width: 2560px) {
+    .cta-grid__container {
+        max-width: 2000px;
+    }
+
+    .cta-grid__content {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+    .cta-grid__item:hover {
+        transform: none;
+    }
+
+    .cta-grid__item:active {
+        transform: scale(0.98);
     }
 }
 

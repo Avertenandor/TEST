@@ -81,7 +81,7 @@
     max-width: var(--container-max-width, 1200px);
     width: 100%;
     margin: 0 auto;
-    padding: var(--container-padding, 0 2rem);
+    padding: var(--container-padding, 0 clamp(15px, 3vw, 2rem));
     box-sizing: border-box;
 }
 
@@ -90,7 +90,7 @@
     max-width: var(--container-max-width-wide, 1400px);
     width: 100%;
     margin: 0 auto;
-    padding: var(--container-padding, 0 2rem);
+    padding: var(--container-padding, 0 clamp(15px, 3vw, 2rem));
     box-sizing: border-box;
 }
 
@@ -99,7 +99,7 @@
     max-width: var(--container-max-width-narrow, 800px);
     width: 100%;
     margin: 0 auto;
-    padding: var(--container-padding, 0 2rem);
+    padding: var(--container-padding, 0 clamp(15px, 3vw, 2rem));
     box-sizing: border-box;
 }
 
@@ -107,7 +107,7 @@
 .genesis-container-full {
     max-width: 100%;
     width: 100%;
-    padding: var(--container-padding, 0 2rem);
+    padding: var(--container-padding, 0 clamp(15px, 3vw, 2rem));
     box-sizing: border-box;
 }
 
@@ -211,6 +211,50 @@
     }
 }
 
+/* Ультра малые мобильные устройства (до 375px) */
+@media (max-width: 374px) {
+    .genesis-container,
+    .genesis-container-wide,
+    .genesis-container-narrow,
+    .genesis-container-full {
+        padding: 0 0.65rem;
+    }
+
+    .genesis-section {
+        padding: 1.25rem 0;
+    }
+}
+
+/* Большие экраны (1920px+) */
+@media (min-width: 1920px) {
+    .genesis-container {
+        max-width: 1600px;
+    }
+
+    .genesis-container-wide {
+        max-width: 1800px;
+    }
+
+    .genesis-container-narrow {
+        max-width: 900px;
+    }
+}
+
+/* Ультра большие экраны (2560px+) */
+@media (min-width: 2560px) {
+    .genesis-container {
+        max-width: 2000px;
+    }
+
+    .genesis-container-wide {
+        max-width: 2200px;
+    }
+
+    .genesis-container-narrow {
+        max-width: 1000px;
+    }
+}
+
 /* ============================================
    УТИЛИТЫ
 ============================================ */
@@ -259,6 +303,15 @@
 }
 
 /* Адаптивность для старых классов */
+@media (max-width: 1024px) {
+    .dashboard-container,
+    .deposits-module,
+    .cabinet-container,
+    .genesis-cabinet-container {
+        padding: var(--container-padding-tablet, 0 1.5rem);
+    }
+}
+
 @media (max-width: 768px) {
     .dashboard-container,
     .deposits-module,
@@ -266,5 +319,38 @@
     .genesis-cabinet-container {
         padding: var(--container-padding-mobile, 0 1rem);
         max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container,
+    .deposits-module,
+    .cabinet-container,
+    .genesis-cabinet-container {
+        padding: var(--container-padding-small-mobile, 0 0.75rem);
+    }
+}
+
+@media (min-width: 1920px) {
+    .dashboard-container,
+    .deposits-module,
+    .cabinet-container {
+        max-width: 1600px;
+    }
+
+    .genesis-cabinet-container {
+        max-width: 1800px;
+    }
+}
+
+@media (min-width: 2560px) {
+    .dashboard-container,
+    .deposits-module,
+    .cabinet-container {
+        max-width: 2000px;
+    }
+
+    .genesis-cabinet-container {
+        max-width: 2200px;
     }
 }
