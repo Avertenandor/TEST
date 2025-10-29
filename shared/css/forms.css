@@ -1,0 +1,181 @@
+/**
+ * Адаптивные формы GENESIS
+ */
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+    font-size: var(--font-base);
+    color: var(--text-color);
+}
+
+.form-label.required:after {
+    content: " *";
+    color: var(--danger-color, #dc3545);
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    min-height: var(--touch-target-min);
+    padding: var(--spacing-sm) var(--spacing-md);
+
+    font-size: var(--font-base);
+    font-family: inherit;
+    line-height: 1.5;
+    color: var(--text-color);
+
+    background: var(--input-bg, #fff);
+    border: 2px solid var(--border-color, #dee2e6);
+    border-radius: var(--radius-md);
+
+    transition: all 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color, #007bff);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-control:disabled {
+    background: var(--disabled-bg, #e9ecef);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.form-control.is-invalid {
+    border-color: var(--danger-color, #dc3545);
+}
+
+.form-control.is-valid {
+    border-color: var(--success-color, #28a745);
+}
+
+/* Текстовые области */
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Select */
+select.form-control {
+    cursor: pointer;
+    padding-right: var(--spacing-xl);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--spacing-md) center;
+    appearance: none;
+}
+
+/* Feedback */
+.form-feedback {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-small);
+}
+
+.form-feedback.invalid {
+    color: var(--danger-color, #dc3545);
+}
+
+.form-feedback.valid {
+    color: var(--success-color, #28a745);
+}
+
+/* Подсказки */
+.form-text {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-small);
+    color: var(--text-muted, #6c757d);
+}
+
+/* Checkbox & Radio */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.form-check-label {
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Input group */
+.input-group {
+    display: flex;
+    width: 100%;
+}
+
+.input-group .form-control {
+    flex: 1;
+    border-radius: 0;
+}
+
+.input-group .form-control:first-child {
+    border-top-left-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+}
+
+.input-group .form-control:last-child {
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-base);
+    background: var(--input-addon-bg, #e9ecef);
+    border: 2px solid var(--border-color, #dee2e6);
+    border-left: 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 767px) {
+    .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+
+    /* Увеличить размер для touch */
+    .form-control {
+        min-height: 48px;
+        font-size: 16px; /* Предотвращает zoom на iOS */
+    }
+
+    /* Input group вертикально */
+    .input-group {
+        flex-direction: column;
+    }
+
+    .input-group .form-control,
+    .input-group-text {
+        border-radius: var(--radius-md);
+        border: 2px solid var(--border-color, #dee2e6);
+    }
+
+    .input-group .form-control:not(:last-child) {
+        margin-bottom: var(--spacing-xs);
+    }
+}
