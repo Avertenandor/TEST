@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true  # Отменяем предыдущие запуски, если новый уже начался
 
 jobs:
   build:
