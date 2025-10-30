@@ -1,5 +1,5 @@
 // playwright.config.js
-const { defineConfig, devices } = require('@playwright/test');
+import { defineConfig, devices } from '@playwright/test';
 
 module.exports = defineConfig({
   testDir: './tests/e2e',
