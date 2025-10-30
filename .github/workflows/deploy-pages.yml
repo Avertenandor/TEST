@@ -11,9 +11,10 @@ permissions:
   pages: write
   id-token: write
 
+# Важно: отменяем предыдущие запуски, чтобы не копились
 concurrency:
   group: "pages"
-  cancel-in-progress: true  # Отменяем предыдущие запуски, если новый уже начался
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -55,4 +56,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
