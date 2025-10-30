@@ -41,23 +41,47 @@
   const ensureStyles = () => {
     const need = './modules/terminal/terminal.styles.css';
     if (!document.querySelector(`link[href*="terminal.styles.css"]`)){
-      const l=document.createElement('link'); l.rel='stylesheet'; l.href=need; document.head.appendChild(l);
+      const l=document.createElement('link'); 
+      l.rel='stylesheet'; 
+      l.href=need; 
+      // Не блокируем инициализацию если CSS не загрузился
+      l.onerror = () => { console.warn('Terminal styles not found, continuing without them'); };
+      document.head.appendChild(l);
     }
   };
   const ensureTemplate = async () => {
     if (document.getElementById('cabinet-genesis-terminal')) return;
     try{
-      const resp = await fetch('./modules/terminal/terminal.template.html', { cache:'no-store' });
+      const resp = await fetch('./modules/terminal/terminal.template.html', { cache:'no-store', signal: AbortSignal.timeout(5000) });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const html = await resp.text();
       const wrap = document.createElement('div'); wrap.innerHTML = html;
       document.body.appendChild(wrap.firstElementChild);
-    }catch(e){ console.warn('Terminal template load failed', e); }
+    }catch(e){ 
+      console.warn('Terminal template load failed, continuing without terminal UI:', e);
+      // Не блокируем работу сайта если терминал не загрузился
+    }
   };
   const ensureScript = () => new Promise((res, rej)=>{
     if (window.CabinetTerminal) return res();
     const s = document.createElement('script'); s.src = './modules/terminal/terminal.module.js'; s.onload=()=>res(); s.onerror=()=>rej(new Error('terminal.module.js failed')); document.head.appendChild(s);
   });
-  async function ensureUI(){ try{ ensureStyles(); await ensureTemplate(); await ensureScript(); if (window.CabinetTerminal && !window.CabinetTerminal.state?.isInitialized){ window.CabinetTerminal.init(); } } catch(e){ console.error('Terminal UI init failed', e); } }
+  async function ensureUI(){ 
+    try{ 
+      ensureStyles(); 
+      // Не блокируем основную загрузку страницы
+      Promise.all([
+        ensureTemplate().catch(e => console.warn('Template load error:', e)),
+        ensureScript().catch(e => console.warn('Script load error:', e))
+      ]).then(() => {
+        if (window.CabinetTerminal && !window.CabinetTerminal.state?.isInitialized){ 
+          window.CabinetTerminal.init(); 
+        }
+      }).catch(e => console.warn('Terminal init error (non-blocking):', e));
+    } catch(e){ 
+      console.warn('Terminal UI init failed (non-blocking):', e); 
+    } 
+  }
 
   // Минимальный API до загрузки UI
   window.GenesisTerminal = window.GenesisTerminal || {
@@ -75,13 +99,23 @@
     toggleFilter: (k) => { if (window.CabinetTerminal) window.CabinetTerminal.toggleFilter(k); }
   };
 
-  // 3) Автоинициализация UI после готовности DOM (чтобы терминал работал на главной без действий)
+  // 3) Автоинициализация UI после готовности DOM (не блокирующая)
+  // Задержка инициализации чтобы не мешать основной загрузке страницы
+  const initTerminalDelayed = () => {
+    setTimeout(() => {
+      try {
+        ensureUI(); 
+        startLandingStatsSync();
+      } catch(e) {
+        console.warn('Delayed terminal init error (non-blocking):', e);
+      }
+    }, 100);
+  };
+  
   if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', () => { ensureUI(); startLandingStatsSync(); });
+    document.addEventListener('DOMContentLoaded', initTerminalDelayed);
   } else {
-    // DOM уже готов
-    ensureUI();
-    startLandingStatsSync();
+    initTerminalDelayed();
   }
 
 })();
