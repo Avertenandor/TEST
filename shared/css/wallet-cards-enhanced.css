@@ -1,0 +1,472 @@
+/**
+ * GENESIS - Enhanced Wallet Cards Styling
+ * Fixed UI/UX issues according to technical specification
+ * Version: 2.0
+ * Date: 2025-10-29
+ */
+
+/* ============================================
+   WALLET CARDS GRID LAYOUT
+   ============================================ */
+
+.wallet-quick-actions {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 32px;
+
+    /* Mobile: 1 column */
+    grid-template-columns: 1fr;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) {
+    .wallet-quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 1024px) {
+    .wallet-quick-actions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ============================================
+   WALLET CARD STYLING
+   ============================================ */
+
+.wallet-card {
+    background: var(--bg-tertiary, rgba(255, 255, 255, 0.05));
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    border-radius: 16px;
+    padding: 32px 24px;
+    min-height: 280px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.wallet-card:hover {
+    background: var(--bg-hover, rgba(255, 255, 255, 0.08));
+    border-color: var(--border-hover, rgba(255, 255, 255, 0.2));
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.wallet-card:active {
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   WALLET CARD ICONS
+   ============================================ */
+
+.wallet-card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.wallet-card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.wallet-card-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Custom icon wrapper for emoji replacement */
+.wallet-icon-custom {
+    font-size: 48px;
+    line-height: 1;
+}
+
+/* ============================================
+   WALLET CARD CONTENT
+   ============================================ */
+
+.wallet-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.wallet-card-content h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary, #ffffff);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.wallet-card-content p {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+}
+
+/* ============================================
+   WALLET STATUS BUTTON (Replacing "Готов")
+   ============================================ */
+
+.wallet-status {
+    background: linear-gradient(135deg, var(--success-color, #4CAF50), var(--success-dark, #45a049));
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.wallet-status::after {
+    content: '→';
+    margin-left: 8px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.wallet-card:hover .wallet-status {
+    background: linear-gradient(135deg, var(--success-dark, #45a049), var(--success-color, #4CAF50));
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.wallet-card:hover .wallet-status::after {
+    transform: translateX(4px);
+}
+
+.wallet-card:active .wallet-status {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   WALLET CARD ARROW (Optional decoration)
+   ============================================ */
+
+.wallet-card-arrow {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.3));
+    font-size: 24px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.wallet-card:hover .wallet-card-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+/* ============================================
+   EXPANDABLE INSTRUCTIONS SECTION
+   ============================================ */
+
+.wallet-instructions {
+    background: var(--bg-tertiary, rgba(255, 255, 255, 0.03));
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 32px 0;
+    transition: all 0.3s ease;
+}
+
+.wallet-instructions:hover {
+    background: var(--bg-hover, rgba(255, 255, 255, 0.05));
+    border-color: var(--border-hover, rgba(255, 255, 255, 0.15));
+}
+
+/* Toggle Header */
+.instruction-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.toggle-icon {
+    font-size: 24px;
+    margin-right: 12px;
+}
+
+.toggle-text {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary, rgba(255, 255, 255, 0.9));
+}
+
+.toggle-arrow {
+    font-size: 20px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+    transition: transform 0.3s ease;
+}
+
+.instruction-toggle.active .toggle-arrow {
+    transform: rotate(180deg);
+}
+
+/* Expandable Content */
+.instruction-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+}
+
+.instruction-content.active {
+    max-height: 2000px;
+    opacity: 1;
+    padding: 16px 24px 24px;
+}
+
+/* ============================================
+   INFO CARDS (BSC Network, Security, Tips)
+   ============================================ */
+
+.wallet-info-cards {
+    display: grid;
+    gap: 24px;
+    margin-top: 32px;
+
+    /* Mobile: 1 column */
+    grid-template-columns: 1fr;
+}
+
+/* Desktop: 2 columns */
+@media (min-width: 768px) {
+    .wallet-info-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Wide: 3 columns */
+@media (min-width: 1024px) {
+    .wallet-info-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.info-card {
+    background: var(--bg-tertiary, rgba(255, 255, 255, 0.05));
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    background: var(--bg-hover, rgba(255, 255, 255, 0.08));
+    border-color: var(--border-hover, rgba(255, 255, 255, 0.2));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon Wrapper */
+.info-card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: var(--bg-primary, rgba(0, 0, 0, 0.2));
+}
+
+.info-card-icon svg {
+    width: 32px;
+    height: 32px;
+    color: var(--primary-color, #ff6b35);
+}
+
+/* Emoji fallback */
+.info-card-icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+/* Content */
+.info-card-content {
+    flex: 1;
+}
+
+.info-card-content h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary, #ffffff);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.info-card-content p {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ============================================
+   COPY BUTTON STYLING
+   ============================================ */
+
+.copy-address-btn,
+.copy-btn {
+    background: transparent;
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-primary, rgba(255, 255, 255, 0.9));
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.copy-address-btn:hover,
+.copy-btn:hover {
+    background: var(--bg-hover, rgba(255, 255, 255, 0.1));
+    border-color: var(--border-hover, rgba(255, 255, 255, 0.3));
+}
+
+.copy-address-btn:active,
+.copy-btn:active {
+    background: var(--bg-tertiary, rgba(255, 255, 255, 0.15));
+}
+
+/* Copied state (success feedback) */
+.copy-address-btn.copied,
+.copy-btn.copied {
+    background: var(--success-bg, rgba(76, 175, 80, 0.2));
+    border-color: var(--success-color, #4CAF50);
+    color: var(--success-color, #4CAF50);
+}
+
+.copy-icon {
+    font-size: 16px;
+}
+
+/* ============================================
+   RESPONSIVE TOUCH TARGETS (Mobile)
+   ============================================ */
+
+@media (max-width: 767px) {
+    .wallet-card {
+        min-height: 240px;
+        padding: 24px 20px;
+    }
+
+    .wallet-status,
+    .copy-address-btn,
+    .copy-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .instruction-toggle {
+        padding: 16px 20px;
+        min-height: 44px;
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes slideDown {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 2000px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation to instruction steps */
+.instruction-content.active .step-item {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.instruction-content.active .step-item:nth-child(1) { animation-delay: 0.1s; }
+.instruction-content.active .step-item:nth-child(2) { animation-delay: 0.2s; }
+.instruction-content.active .step-item:nth-child(3) { animation-delay: 0.3s; }
+.instruction-content.active .step-item:nth-child(4) { animation-delay: 0.4s; }
+.instruction-content.active .step-item:nth-child(5) { animation-delay: 0.5s; }
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-center {
+    text-align: center;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gap-sm {
+    gap: 8px;
+}
+
+.gap-md {
+    gap: 16px;
+}
+
+.gap-lg {
+    gap: 24px;
+}
