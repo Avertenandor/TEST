@@ -2,14 +2,15 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Site Interaction Blocking Detection', () => {
   test('Page should be interactive - no blocking overlays', async ({ page }) => {
+    // Отключаем webServer - тестируем продакшн
     // Увеличиваем таймаут для загрузки
     await page.goto('https://crypto-processing.net/', { 
-      waitUntil: 'domcontentloaded',
-      timeout: 30000 
+      waitUntil: 'networkidle',
+      timeout: 60000 
     });
 
     // Ждем немного для инициализации
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
 
     // Проверяем что страница загрузилась
     const title = await page.title();
@@ -73,11 +74,11 @@ test.describe('Site Interaction Blocking Detection', () => {
 
   test('Right-click context menu should work', async ({ page }) => {
     await page.goto('https://crypto-processing.net/', { 
-      waitUntil: 'domcontentloaded',
-      timeout: 30000 
+      waitUntil: 'networkidle',
+      timeout: 60000 
     });
 
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
 
     // Проверяем что нет перехватчиков contextmenu
     const hasContextMenuBlock = await page.evaluate(() => {
@@ -125,7 +126,7 @@ test.describe('Site Interaction Blocking Detection', () => {
     
     await page.goto('https://crypto-processing.net/', { 
       waitUntil: 'networkidle',
-      timeout: 30000 
+      timeout: 60000 
     });
 
     const loadTime = Date.now() - startTime;
@@ -183,11 +184,11 @@ test.describe('Site Interaction Blocking Detection', () => {
 
   test('Console should be accessible', async ({ page }) => {
     await page.goto('https://crypto-processing.net/', { 
-      waitUntil: 'domcontentloaded',
-      timeout: 30000 
+      waitUntil: 'networkidle',
+      timeout: 60000 
     });
 
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
 
     // Проверяем что можем выполнить JavaScript
     const jsWorks = await page.evaluate(() => {

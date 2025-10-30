@@ -300,6 +300,14 @@ a:hover {
     transition: opacity var(--transition-slow);
 }
 
+/* КРИТИЧНО: Скрытый loading screen НЕ должен блокировать взаимодействие */
+.genesis-loading-screen[style*="display: none"],
+.genesis-loading-screen[style*="opacity: 0"],
+.genesis-loading-screen.hidden {
+    pointer-events: none !important;
+    display: none !important;
+}
+
 .genesis-loading-content {
     text-align: center;
     max-width: 400px;

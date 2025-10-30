@@ -51,8 +51,17 @@
                     if (appEl) appEl.classList.remove('hidden-initially');
                     const loading = document.getElementById('genesis-loading');
                     if (loading){
+                        // КРИТИЧНО: Полностью отключаем pointer-events перед скрытием
+                        loading.style.pointerEvents = 'none';
                         loading.style.opacity = '0';
-                        setTimeout(() => { loading.style.display = 'none'; }, 300);
+                        setTimeout(() => { 
+                            loading.style.display = 'none';
+                            loading.classList.add('hidden');
+                            // Дополнительная гарантия - удаляем элемент
+                            if (loading.parentNode) {
+                                loading.remove();
+                            }
+                        }, 300);
                     }
                     const statusEl = document.getElementById('loading-status');
                     if (statusEl) statusEl.textContent = 'Готово';
