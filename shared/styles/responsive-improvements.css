@@ -460,16 +460,31 @@ button[aria-label*="Terminal"] {
 }
 
 /* Защита от перекрытия при скролле */
-body:has(.terminal-open-btn),
-body:has(.floating-terminal-btn) {
+/* Класс добавляется через JavaScript для поддержки старых браузеров */
+body.has-terminal-btn {
     /* Добавляем отступ снизу для контента */
     padding-bottom: 80px;
 }
 
 @media (max-width: 768px) {
+    body.has-terminal-btn {
+        padding-bottom: 88px;
+    }
+}
+
+/* Современные браузеры с поддержкой :has() */
+@supports selector(:has(*)) {
     body:has(.terminal-open-btn),
     body:has(.floating-terminal-btn) {
-        padding-bottom: 88px;
+        /* Добавляем отступ снизу для контента */
+        padding-bottom: 80px;
+    }
+
+    @media (max-width: 768px) {
+        body:has(.terminal-open-btn),
+        body:has(.floating-terminal-btn) {
+            padding-bottom: 88px;
+        }
     }
 }
 
@@ -534,7 +549,7 @@ small, .text-sm {
 input,
 textarea,
 select {
-    font-size: clamp(14px, 2vw, 16px); /* Минимум 14px для предотвращения zoom */
+    font-size: clamp(16px, 2vw, 16px); /* Минимум 16px для предотвращения авто-zoom на iOS */
     padding: clamp(0.75rem, 2vw, 1rem);
     line-height: 1.5;
 }
@@ -550,6 +565,24 @@ label {
 /* ============================================
    УЛУЧШЕНИЯ ДОСТУПНОСТИ
 ============================================ */
+
+/* Touch target enhancements для устройств с сенсорным экраном */
+.touch-device .touch-target-enhanced {
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.touch-device .touch-target-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    z-index: -1;
+}
 
 /* Focus states - видимые на всех устройствах */
 *:focus-visible {
