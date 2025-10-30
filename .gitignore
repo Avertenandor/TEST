@@ -76,6 +76,10 @@ debug/
 archive/*.zip
 archive/*.tar.gz
 archive/*.rar
+архив/
 
 # Generated documentation
 docs/generated/
+
+# GitHub Pages specific
+# .github/workflows/ - оставляем workflows для автоматического деплоя

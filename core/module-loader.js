@@ -50,7 +50,8 @@ export class ModuleLoader {
             window.eventBus.emit('module:loading', { name: moduleName });
             
             // Dynamic import of module
-            const modulePath = `/modules/${moduleName}/index.js`;
+            // Используем относительный путь для Vite
+            const modulePath = `../modules/${moduleName}/index.js`;
             console.log(`📂 Importing module from: ${modulePath}`);
             
             const moduleExports = await import(modulePath);

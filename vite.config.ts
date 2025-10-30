@@ -12,6 +12,10 @@ export default defineConfig(({ mode }) => {
     // Режим сборки
     mode: mode,
 
+    // Базовый путь для GitHub Pages
+    // Для кастомного домена используем '/', для подпапки - '/TEST/'
+    base: env.VITE_BASE_PATH || (process.env.GITHUB_PAGES && !process.env.CUSTOM_DOMAIN ? '/TEST/' : '/'),
+
     // Корневая директория проекта
     root: '.',
 
@@ -21,6 +25,13 @@ export default defineConfig(({ mode }) => {
         assetsDir: 'assets',
         sourcemap: false,
         minify: 'terser',
+        terserOptions: {
+            compress: {
+                drop_console: mode === 'production', // Удаляем console в продакшене
+                drop_debugger: true,
+                pure_funcs: mode === 'production' ? ['console.log', 'console.info', 'console.debug'] : []
+            }
+        },
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'index.html'),
@@ -81,7 +92,8 @@ export default defineConfig(({ mode }) => {
 
     // Настройки для TypeScript
     esbuild: {
-        target: 'es2020'
+        target: 'es2020',
+        drop: mode === 'production' ? ['console', 'debugger'] : []
     },
 
     // Плагины
