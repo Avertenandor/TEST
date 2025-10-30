@@ -52,13 +52,26 @@
   const ensureTemplate = async () => {
     if (document.getElementById('cabinet-genesis-terminal')) return;
     try{
-      const resp = await fetch('./modules/terminal/terminal.template.html', { cache:'no-store', signal: AbortSignal.timeout(5000) });
+      // Таймаут для загрузки (5 секунд)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      
+      const resp = await fetch('./modules/terminal/terminal.template.html', { 
+        cache:'no-store', 
+        signal: controller.signal 
+      });
+      
+      clearTimeout(timeoutId);
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const html = await resp.text();
       const wrap = document.createElement('div'); wrap.innerHTML = html;
       document.body.appendChild(wrap.firstElementChild);
     }catch(e){ 
-      console.warn('Terminal template load failed, continuing without terminal UI:', e);
+      if (e.name === 'AbortError') {
+        console.warn('Terminal template load timeout (5s), continuing without terminal UI');
+      } else {
+        console.warn('Terminal template load failed, continuing without terminal UI:', e);
+      }
       // Не блокируем работу сайта если терминал не загрузился
     }
   };
