@@ -99,12 +99,16 @@
         // Универсальная функция для открытия торговых и информационных ссылок
         function openTradingLink(type) {
             const links = {
-                ...PLEX_TOKEN_CONFIG.tradingLinks,
-                ...PLEX_TOKEN_CONFIG.bscScanLinks
+                pancakeswap: 'https://pancakeswap.finance/swap?outputCurrency=0x02e933d2caA284b2c8DBEE1Dca0b713Bde5B4c82',
+                dextools: 'https://www.dextools.io/app/bnb/pair-explorer/0xb66b5ddb746d9e4ca1f8c1f3c6e1d9e3e5c7e7e7',
+                dexscreener: 'https://dexscreener.com/bsc/0xb66b5ddb746d9e4ca1f8c1f3c6e1d9e3e5c7e7e7',
+                bscscan: 'https://bscscan.com/token/0x02e933d2caA284b2c8DBEE1Dca0b713Bde5B4c82',
+                holders: 'https://bscscan.com/token/0x02e933d2caA284b2c8DBEE1Dca0b713Bde5B4c82#balances'
             };
             if (links[type]) {
                 window.open(links[type], '_blank');
             } else {
+                console.error('Ссылка не найдена:', type);
                 alert('Ссылка не найдена или не задана!');
             }
         }

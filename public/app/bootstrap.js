@@ -26,21 +26,33 @@ class ModuleManager {
   async mountModule(element, moduleName) {
     try {
       console.log(`[MODULE] Монтирование модуля: ${moduleName}`);
-      
+
       const paths = pathsOf(moduleName);
-      
+
       // Подключаем CSS
       await this.loadCSS(paths.css);
-      
+
       // Загружаем и монтируем модуль
       const module = await import(paths.js);
+
+      // Проверяем наличие default export и метода mount
+      if (!module.default) {
+        throw new Error(`Модуль ${moduleName} не имеет default export`);
+      }
+
+      if (typeof module.default.mount !== 'function') {
+        throw new Error(`Модуль ${moduleName} не имеет метода mount`);
+      }
+
       const unmount = await module.default.mount(element, CONFIG);
-      
+
       this.mountedModules.set(moduleName, { element, unmount });
-      
+
       console.log(`[MODULE] Модуль ${moduleName} успешно смонтирован`);
     } catch (error) {
       console.error(`[MODULE ERROR] Ошибка монтирования модуля ${moduleName}:`, error);
+      // Показываем ошибку пользователю
+      element.innerHTML = `<div style="color: red; padding: 20px;">Ошибка загрузки модуля: ${moduleName}</div>`;
     }
   }
 
