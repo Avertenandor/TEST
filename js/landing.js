@@ -563,81 +563,26 @@
         // MCP-MARKER:FUNCTION:OPEN_TRADING_LINK - Открытие торговых ссылок
         // Универсальная функция для открытия торговых и информационных ссылок
         function openTradingLink(type) {
+            // Определяем ссылки локально
             const links = {
-                ...PLEX_TOKEN_CONFIG.tradingLinks,
-                ...PLEX_TOKEN_CONFIG.bscScanLinks
+                pancakeswap: 'https://pancakeswap.finance/swap?outputCurrency=0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1',
+                bscscan: 'https://bscscan.com/token/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1',
+                contract: 'https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1',
+                holders: 'https://bscscan.com/token/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#balances'
             };
             if (links[type]) {
                 window.open(links[type], '_blank');
             } else {
-                alert('Ссылка не найдена или не задана!');
+                console.warn('Ссылка не найдена:', type);
             }
         }
 
-        // MCP-MARKER:FUNCTION:COPY_TOKEN_ADDRESS - Копирование адреса токена
-        // MCP-MARKER:FUNCTION:COPY_ADDRESS - Копирование адреса
-        // Функция копирования адреса токена
-        function copyTokenAddress() {
-            const address = '0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1';
-            navigator.clipboard.writeText(address).then(() => {
-                // Показываем уведомление об успешном копировании
-                const notification = document.createElement('div');
-                notification.className = 'copy-notification';
-                notification.textContent = 'Адрес скопирован!';
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: #4ecdc4;
-                    color: white;
-                    padding: 10px 20px;
-                    border-radius: 5px;
-                    z-index: 10000;
-                    animation: slideIn 0.3s ease;
-                `;
-                document.body.appendChild(notification);
-                setTimeout(() => {
-                    notification.remove();
-                }, 2000);
-            });
-        }
+        // MCP-MARKER:FUNCTION:COPY_TOKEN_ADDRESS - Копирование адреса токена (удалена старая версия, используется улучшенная ниже)
 
-        // MCP-MARKER:WALLET:INTEGRATION_FUNCTIONS - Функции интеграции с кошельками
-        // Функции добавления в кошельки
-        // MCP-MARKER:WALLET:METAMASK_INTEGRATION - Интеграция с MetaMask
-        function addToMetaMask() {
-            if (typeof window.ethereum !== 'undefined') {
-                window.ethereum.request({
-                    method: 'wallet_watchAsset',
-                    params: {
-                        type: 'ERC20',
-                        options: {
-                            address: '0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1',
-                            symbol: 'PLEX',
-                            decimals: 9,
-                            image: 'https://your-token-image-url.com/plex-icon.png'
-                        }
-                    }
-                }).then((success) => {
-                    if (success) {
-                        alert('PLEX ONE успешно добавлен в MetaMask!');
-                    }
-                }).catch(console.error);
-            } else {
-                alert('MetaMask не установлен. Установите MetaMask и попробуйте снова.');
-            }
-        }
+        // MCP-MARKER:WALLET:INTEGRATION_FUNCTIONS - Функции интеграции с кошельками (удалена старая версия, используется улучшенная ниже)
 
-        // MCP-MARKER:WALLET:TRUST_WALLET_INTEGRATION - Интеграция с Trust Wallet
-        function addToTrustWallet() {
-            const trustWalletUrl = `https://link.trustwallet.com/add_asset?asset=c20_0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1`;
-            window.open(trustWalletUrl, '_blank');
-        }
-
-        // MCP-MARKER:WALLET:SAFEPAL_INTEGRATION - Интеграция с SafePal
-        function addToSafePal() {
-            alert('Для добавления в SafePal:\n1. Откройте SafePal\n2. Нажмите "Добавить токен"\n3. Вставьте адрес: 0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1\n4. Подтвердите добавление');
-        }
+        // MCP-MARKER:WALLET:TRUST_WALLET_INTEGRATION - Интеграция с Trust Wallet (удалена старая версия, используется улучшенная ниже)
+        // MCP-MARKER:WALLET:SAFEPAL_INTEGRATION - Интеграция с SafePal (удалена старая версия, используется улучшенная ниже)
 
         // MCP-MARKER:INIT:PAGE_LOAD_HANDLER - Обработчик загрузки страницы
         // MCP-MARKER:INIT:QR_CODE_INITIALIZATION - Инициализация QR кода
