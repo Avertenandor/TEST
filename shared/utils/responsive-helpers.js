@@ -40,9 +40,9 @@ export function createTruncatedAddressElement(fullAddress, enableCopy = true) {
     addressDisplay.setAttribute('aria-label', `Адрес кошелька: ${fullAddress}`);
 
     // Проверяем размер экрана
-    const isMobile = window.innerWidth < 768;
+    const deviceType = getDeviceType();
 
-    if (isMobile) {
+    if (deviceType.isMobile) {
         // На мобильных показываем truncated версию
         const start = document.createElement('span');
         start.className = 'address-start';
@@ -186,13 +186,16 @@ export function initResponsiveAddresses() {
 
             // Добавляем возможность показать полный адрес по клику
             element.style.cursor = 'pointer';
-            element.addEventListener('click', function() {
-                if (this.textContent === truncated) {
-                    this.textContent = fullAddress;
-                } else {
-                    this.textContent = truncated;
-                }
-            });
+            if (!element.hasAttribute('data-listener-added')) {
+                element.addEventListener('click', function() {
+                    if (this.textContent === truncated) {
+                        this.textContent = fullAddress;
+                    } else {
+                        this.textContent = truncated;
+                    }
+                });
+                element.setAttribute('data-listener-added', 'true');
+            }
         }
     });
 }
@@ -204,6 +207,9 @@ export function enhanceTouchTargets() {
     const deviceType = getDeviceType();
 
     if (deviceType.isTouchDevice) {
+        // Добавляем класс к body для применения touch-стилей из CSS
+        document.body.classList.add('touch-device');
+        
         // Все кнопки и интерактивные элементы
         const interactiveElements = document.querySelectorAll('button, a, .clickable, [role="button"]');
 
@@ -216,31 +222,6 @@ export function enhanceTouchTargets() {
                 element.classList.add('touch-target-enhanced');
             }
         });
-
-        // Добавляем соответствующие стили динамически
-        if (!document.getElementById('touch-enhancements-style')) {
-            const style = document.createElement('style');
-            style.id = 'touch-enhancements-style';
-            style.textContent = `
-                .touch-target-enhanced {
-                    position: relative;
-                    min-width: 44px;
-                    min-height: 44px;
-                }
-
-                .touch-target-enhanced::before {
-                    content: '';
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: max(100%, 44px);
-                    height: max(100%, 44px);
-                    z-index: -1;
-                }
-            `;
-            document.head.appendChild(style);
-        }
     }
 }
 
@@ -283,9 +264,31 @@ export function initResponsiveEnhancements() {
         document.body.classList.add('touch-device');
     }
 
+    // Проверяем наличие кнопки терминала и добавляем класс для fallback
+    // для браузеров без поддержки :has()
+    const terminalBtn = document.querySelector('.terminal-open-btn, .floating-terminal-btn');
+    if (terminalBtn) {
+        document.body.classList.add('has-terminal-btn');
+    }
+    
+    // Наблюдаем за добавлением кнопки терминала в DOM
+    const observer = new MutationObserver(() => {
+        const btn = document.querySelector('.terminal-open-btn, .floating-terminal-btn');
+        if (btn) {
+            document.body.classList.add('has-terminal-btn');
+        } else {
+            document.body.classList.remove('has-terminal-btn');
+        }
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
+
     // Обработчик изменения размера окна
+    let previousDeviceType = deviceType.isMobile ? 'mobile' : deviceType.isTablet ? 'tablet' : 'desktop';
+    
     const handleResize = debounceResize(() => {
         const newDeviceType = getDeviceType();
+        const currentDeviceType = newDeviceType.isMobile ? 'mobile' : newDeviceType.isTablet ? 'tablet' : 'desktop';
 
         // Обновляем классы устройства
         document.body.classList.remove('device-mobile', 'device-tablet', 'device-desktop');
@@ -295,8 +298,16 @@ export function initResponsiveEnhancements() {
             'device-desktop'
         );
 
-        // Переинициализируем адреса при изменении размера
-        initResponsiveAddresses();
+        // Переинициализируем адреса только при изменении типа устройства
+        if (previousDeviceType !== currentDeviceType) {
+            // Сбрасываем атрибуты для повторной инициализации
+            const addressElements = document.querySelectorAll('.system-address, .genesis-address, .wallet-address');
+            addressElements.forEach(element => {
+                element.removeAttribute('data-listener-added');
+            });
+            initResponsiveAddresses();
+            previousDeviceType = currentDeviceType;
+        }
     });
 
     window.addEventListener('resize', handleResize);
