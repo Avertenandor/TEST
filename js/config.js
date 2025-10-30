@@ -37,8 +37,9 @@ window.GENESIS_CONFIG = {
     },
     
     // MCP-MARKER:SUBSECTION:BSCSCAN_API_CONFIG - Специализированные BSCScan API ключи из переменных окружения
+    // ОБНОВЛЕНО: Используем новый Etherscan API v2 (BSCScan V1 отключен с 15.08.2025)
     bscscan: {
-        apiUrl: 'https://api.bscscan.com/api',
+        apiUrl: 'https://api.etherscan.io/v2/api?chainid=56',
         // БЕЗОПАСНОСТЬ: Ключи загружаются из .env файла через Vite define
         // В production сборке эти значения будут заменены во время компиляции
         apiKeys: {
@@ -613,12 +614,17 @@ window.waitForDependencies = function(dependencies, timeout = 5000) {
     });
 };
 
-// Проверка наличия API ключей при инициализации
-if (window.GENESIS_CONFIG.bscscan.apiKeys.AUTHORIZATION === '' ||
+// Проверка наличия API ключей при инициализации (только в dev режиме)
+const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+if (!isProduction && (
+    window.GENESIS_CONFIG.bscscan.apiKeys.AUTHORIZATION === '' ||
     window.GENESIS_CONFIG.bscscan.apiKeys.DEPOSITS === '' ||
-    window.GENESIS_CONFIG.bscscan.apiKeys.SUBSCRIPTION === '') {
+    window.GENESIS_CONFIG.bscscan.apiKeys.SUBSCRIPTION === ''
+)) {
     console.warn('⚠️ WARNING: BSCScan API keys are not configured! Please set them in .env file');
     console.warn('📝 Copy .env.example to .env and fill in your API keys from https://bscscan.com/myapikey');
+} else if (!isProduction) {
+    console.log('✅ BSCScan API keys configured');
 }
 
 console.log('⚙️ GENESIS CONFIG loaded v' + window.GENESIS_CONFIG.version + ' (Terminal v' + window.GENESIS_CONFIG.terminal.version + ')');

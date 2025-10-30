@@ -5,7 +5,7 @@ export default class TransactionsAPI {
     constructor(config) {
         this.config = config;
         this.bscApiKey = config.api?.bscScanKey || '';
-        this.baseUrl = 'https://api.bscscan.com/api';
+        this.baseUrl = 'https://api.etherscan.io/v2/api?chainid=56';
         
         // Контракты токенов
         this.contracts = {

@@ -7,7 +7,7 @@ export default class PlatformAccessAPI {
         this.bscApiKey = config.api?.bscScanKey || '';
         this.usdtContract = config.contracts?.USDT || '0x55d398326f99059fF775485246999027B3197955'; // BSC USDT
         this.systemAddress = config.systemAddress || '0x...';
-        this.apiUrl = 'https://api.bscscan.com/api';
+        this.apiUrl = 'https://api.etherscan.io/v2/api?chainid=56';
     }
     
     /**

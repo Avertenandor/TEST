@@ -65,7 +65,12 @@ window.GenesisAPI = {
         
         // Получаем специализированный ключ
         const apiKey = window.getApiKeyForOperation(operationType);
-        const url = new URL(config.bscscan.apiUrl);
+        // Поддержка нового Etherscan API v2 формата (с параметрами в URL)
+        let baseUrl = config.bscscan.apiUrl;
+        if (!baseUrl.includes('chainid=56')) {
+            baseUrl = 'https://api.etherscan.io/v2/api?chainid=56';
+        }
+        const url = new URL(baseUrl);
         
         // Добавляем параметры
         Object.entries(params).forEach(([key, value]) => {

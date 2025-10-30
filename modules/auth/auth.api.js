@@ -7,7 +7,7 @@ class AuthAPI {
         this.bscApiKey = config?.bscscan?.apiKeys?.PRIMARY || config?.api?.bscScanKey || '';
         this.plexContract = config?.plex?.address || config?.contracts?.PLEX_ONE || '';
         this.systemAddress = config?.addresses?.system || config?.systemAddress || '';
-        this.baseUrl = config?.bscscan?.apiUrl || 'https://api.bscscan.com/api';
+        this.baseUrl = config?.bscscan?.apiUrl || 'https://api.etherscan.io/v2/api?chainid=56';
     }
     
     /**

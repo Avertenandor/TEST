@@ -243,7 +243,7 @@
         
         try {
             // Use a simple request to measure network latency
-            await fetch('https://api.bscscan.com/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken', {
+            await fetch('https://api.etherscan.io/v2/api?chainid=56&module=gastracker&action=gasoracle&apikey=YourApiKeyToken', {
                 method: 'GET',
                 mode: 'cors'
             });
