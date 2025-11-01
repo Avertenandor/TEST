@@ -298,13 +298,29 @@ a:hover {
     align-items: center;
     z-index: 9999;
     transition: opacity var(--transition-slow);
+    /* КРИТИЧНО: По умолчанию разрешаем взаимодействие через loading screen */
+    pointer-events: auto;
 }
 
 /* КРИТИЧНО: Скрытый loading screen НЕ должен блокировать взаимодействие */
 .genesis-loading-screen[style*="display: none"],
 .genesis-loading-screen[style*="opacity: 0"],
-.genesis-loading-screen.hidden {
+.genesis-loading-screen.hidden,
+.genesis-loading-screen[style*="pointer-events: none"] {
     pointer-events: none !important;
+    display: none !important;
+    z-index: -1 !important;
+}
+
+/* КРИТИЧНО: Автоматически отключаем pointer-events при низкой opacity */
+.genesis-loading-screen[style*="opacity: 0"] {
+    pointer-events: none !important;
+}
+
+/* КРИТИЧНО: Через 3 секунды после загрузки автоматически скрываем */
+body:not(.loading-active) .genesis-loading-screen {
+    pointer-events: none !important;
+    opacity: 0 !important;
     display: none !important;
 }
 

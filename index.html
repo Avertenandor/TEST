@@ -435,7 +435,7 @@
     <link rel="stylesheet" href="./shared/css/wallet-cards-enhanced.css?v=5.0">
     <link rel="stylesheet" href="./shared/css/cards.css">
 </head>
-<body>
+<body class="loading-active">
     <!-- MCP-MARKER:BODY:DOCUMENT_BODY - Тело документа -->
     <!-- MCP-MARKER:UI:LOADING_SCREEN - Экран загрузки -->
     <!-- MCP-MARKER:COMPONENT:LOADING_SCREEN - Экран загрузки -->
@@ -1544,35 +1544,70 @@
     <!-- КРИТИЧНО: Принудительное удаление блокирующего loading screen -->
     <script>
         // INLINE: Немедленное удаление loading screen при загрузке
+        // ВАЖНО: Этот скрипт выполняется СРАЗУ при парсинге HTML
         (function() {
+            'use strict';
+            
             function forceRemoveLoading() {
                 const loading = document.getElementById('genesis-loading');
                 if (loading) {
-                    loading.style.pointerEvents = 'none';
-                    loading.style.opacity = '0';
-                    loading.style.display = 'none';
+                    // КРИТИЧНО: Сразу отключаем pointer-events
+                    loading.style.setProperty('pointer-events', 'none', 'important');
+                    loading.style.setProperty('opacity', '0', 'important');
+                    loading.style.setProperty('display', 'none', 'important');
+                    loading.style.setProperty('z-index', '-1', 'important');
                     loading.classList.add('hidden');
+                    
+                    // Удаляем body класс loading-active
+                    document.body.classList.remove('loading-active');
+                    
+                    // Удаляем элемент из DOM
                     setTimeout(() => {
-                        if (loading.parentNode) loading.remove();
+                        if (loading.parentNode) {
+                            loading.remove();
+                        }
                     }, 100);
+                    
+                    return true;
                 }
+                return false;
             }
             
-            // Удаляем сразу
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', forceRemoveLoading, { once: true });
-            } else {
+            // ВАЖНО: Удаляем МГНОВЕННО если элемент уже есть
+            if (document.getElementById('genesis-loading')) {
                 forceRemoveLoading();
             }
             
-            // Fallback через 2-5 секунд
-            setTimeout(forceRemoveLoading, 2000);
-            setTimeout(forceRemoveLoading, 5000);
+            // Удаляем при DOMContentLoaded
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    forceRemoveLoading();
+                }, { once: true });
+            } else {
+                // DOM уже готов
+                forceRemoveLoading();
+            }
             
-            // Экстренное удаление при взаимодействии
-            ['click', 'contextmenu', 'mousedown', 'touchstart'].forEach(type => {
-                document.addEventListener(type, forceRemoveLoading, { once: true, passive: true });
+            // Fallback через короткие интервалы
+            setTimeout(forceRemoveLoading, 500);
+            setTimeout(forceRemoveLoading, 1000);
+            setTimeout(forceRemoveLoading, 2000);
+            setTimeout(forceRemoveLoading, 3000);
+            
+            // КРИТИЧНО: Экстренное удаление при ЛЮБОМ взаимодействии (самый важный механизм!)
+            ['click', 'contextmenu', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'keydown', 'keypress'].forEach(type => {
+                document.addEventListener(type, function emergencyRemove(e) {
+                    if (document.getElementById('genesis-loading')) {
+                        console.warn('⚠️ Emergency: removing blocking loading screen on', type);
+                        forceRemoveLoading();
+                    }
+                }, { once: true, passive: true, capture: true });
             });
+            
+            // Убираем loading-active класс через 3 секунды
+            setTimeout(function() {
+                document.body.classList.remove('loading-active');
+            }, 3000);
         })();
     </script>
     <script src="./js/force-remove-loading.js?v=1"></script>
