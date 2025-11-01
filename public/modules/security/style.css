@@ -1,0 +1,6 @@
+.security { padding: 3rem 0; }
+.security-title { text-align:center; margin:0 0 1.5rem; font-size:2rem; }
+.security-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
+.sc-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:1rem; }
+.sc-card h4 { margin:.25rem 0 .5rem; }
+

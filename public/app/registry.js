@@ -7,6 +7,12 @@ export const REGISTRY = {
   'how-it-works': { base: '/public/modules/how-it-works', lazy: false },
   partners: { base: '/public/modules/partners', lazy: false },
   testimonials: { base: '/public/modules/testimonials', lazy: false },
+  roadmap: { base: '/public/modules/roadmap', lazy: false },
+  security: { base: '/public/modules/security', lazy: false },
+  'platform-access': { base: '/public/modules/platform-access', lazy: false },
+  'deposits-overview': { base: '/public/modules/deposits-overview', lazy: false },
+  team: { base: '/public/modules/team', lazy: false },
+  'final-cta': { base: '/public/modules/final-cta', lazy: false },
   textblock:{ base: '/public/modules/textblock',lazy: false },
   // На лендинге не монтируем терминал
   terminal: { base: '/public/modules/terminal', lazy: true, disabledOnLanding: true },

@@ -1,0 +1,8 @@
+.team { padding: 3rem 0; }
+.team-title { text-align:center; margin:0 0 1.5rem; font-size:2rem; }
+.team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+.tm-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:1rem; text-align:center; }
+.tm-avatar { width:72px; height:72px; border-radius:50%; margin:0 auto .5rem; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; font-weight:700; }
+.tm-name { font-weight:700; margin:.25rem 0; }
+.tm-role { opacity:.85; font-size:.95rem; }
+
