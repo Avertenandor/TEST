@@ -4,6 +4,9 @@ export const REGISTRY = {
   hero:     { base: '/public/modules/hero',     lazy: false },
   features: { base: '/public/modules/features', lazy: false },
   coin:     { base: '/public/modules/coin',     lazy: false },
+  'how-it-works': { base: '/public/modules/how-it-works', lazy: false },
+  partners: { base: '/public/modules/partners', lazy: false },
+  testimonials: { base: '/public/modules/testimonials', lazy: false },
   textblock:{ base: '/public/modules/textblock',lazy: false },
   // На лендинге не монтируем терминал
   terminal: { base: '/public/modules/terminal', lazy: true, disabledOnLanding: true },

@@ -1,0 +1,6 @@
+.testimonials { padding: 3rem 0; }
+.testimonials-title { text-align:center; margin:0 0 1.5rem; font-size:2rem; }
+.testimonials-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
+.t-card { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1rem; }
+.t-author { font-weight:600; margin-top:.5rem; opacity:.9; }
+

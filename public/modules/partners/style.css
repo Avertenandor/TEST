@@ -1,0 +1,7 @@
+.partners { padding: 3rem 0; }
+.partners-title { text-align:center; margin:0 0 1.5rem; font-size:2rem; }
+.partners-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1rem; align-items:center; }
+.partner-card { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1rem; display:flex; justify-content:center; align-items:center; height:80px; }
+.partner-card img { max-width:120px; max-height:48px; opacity:.9; filter: grayscale(100%); }
+.partner-card img:hover { filter:none; opacity:1; }
+
