@@ -3,7 +3,8 @@ export const REGISTRY = {
   hero: { base: '/modules/hero', lazy: false },
   features: { base: '/modules/features', lazy: false },
   textblock: { base: '/modules/textblock', lazy: false },
-  terminal: { base: '/modules/terminal', lazy: true },
+  // На лендинге не монтируем терминал
+  terminal: { base: '/modules/terminal', lazy: true, disabledOnLanding: true },
   auth: { base: '/modules/auth', lazy: true },
   faq: { base: '/modules/faq', lazy: false },
   footer: { base: '/modules/footer', lazy: false },
@@ -25,6 +26,7 @@ export function pathsOf(name) {
     js: `${base}/index.js`,
     css: `${base}/style.css`,
     html: `${base}/template.html`,
-    lazy: !!REGISTRY[name].lazy
+    lazy: !!REGISTRY[name].lazy,
+    disabledOnLanding: !!REGISTRY[name].disabledOnLanding
   };
 }

@@ -88,6 +88,13 @@ class ModuleManager {
         return;
       }
 
+      // Пропускаем отключенные для лендинга модули
+      const info = pathsOf(moduleName);
+      if (window.GENESIS_LANDING === true && info.disabledOnLanding) {
+        console.log(`[BOOTSTRAP] Пропуск модуля на лендинге: ${moduleName}`);
+        return;
+      }
+
       if (REGISTRY[moduleName].lazy) {
         // Ленивая загрузка через IntersectionObserver
         this.intersectionObserver.observe(element);
