@@ -47,7 +47,8 @@
                 try {
                     // Платформа
                     const platform = navigator.platform || 'Unknown';
-                    document.getElementById('device-platform').textContent = platform;
+                    const platformEl = document.getElementById('device-platform');
+                    if (platformEl) platformEl.textContent = platform;
                     
                     // Операционная система
                     const userAgent = navigator.userAgent;
@@ -294,8 +295,10 @@
                     
                 } catch (error) {
                     console.error('Error fetching network info:', error);
-                    document.getElementById('network-ip').textContent = 'N/A';
-                    document.getElementById('network-location').textContent = 'Unknown';
+                    const ipEl = document.getElementById('network-ip');
+                    if (ipEl) ipEl.textContent = 'N/A';
+                    const locationEl = document.getElementById('network-location');
+                    if (locationEl) locationEl.textContent = 'Unknown';
                 }
             },
             
