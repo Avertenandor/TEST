@@ -33,7 +33,7 @@ class ModuleManager {
       await this.loadCSS(paths.css);
 
       // Загружаем и монтируем модуль
-      const module = await import(paths.js);
+      const module = await import(/* @vite-ignore */ paths.js);
 
       // Проверяем наличие default export и метода mount
       if (!module.default) {
