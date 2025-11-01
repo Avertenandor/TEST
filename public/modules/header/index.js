@@ -13,6 +13,15 @@ export default {
         
         // Инициализируем функциональность
         this.initHeader(root);
+
+        // Устанавливаем корректный отступ под шапку
+        const applyHeaderOffset = () => {
+            const headerEl = root.querySelector('.genesis-header') || root;
+            const h = (headerEl && headerEl.offsetHeight) ? headerEl.offsetHeight : 80;
+            document.documentElement.style.setProperty('--header-height', h + 'px');
+        };
+        applyHeaderOffset();
+        window.addEventListener('resize', applyHeaderOffset);
         
         console.log('[HEADER] Модуль header успешно смонтирован');
         
@@ -20,6 +29,7 @@ export default {
         return () => {
             console.log('[HEADER] Размонтирование модуля header');
             this.cleanup(root);
+            window.removeEventListener('resize', applyHeaderOffset);
         };
     },
     
