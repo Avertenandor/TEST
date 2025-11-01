@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('[PROD] Landing readiness', () => {
   test('loader disappears and content becomes visible <= 8s', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
 
     // Wait for either the app to be visible or the loader to be hidden
     const app = page.locator('#genesis-app');
@@ -21,7 +21,7 @@ test.describe('[PROD] Landing readiness', () => {
   });
 
   test('right click is not blocked', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.addInitScript(() => {
       (window as any).__ctx = { prevented: undefined };
       document.addEventListener('contextmenu', (e) => {
@@ -35,7 +35,7 @@ test.describe('[PROD] Landing readiness', () => {
   });
 
   test('key sections are present and visible', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.waitForSelector('#genesis-app', { timeout: 8000 });
     await expect(page.locator('#genesis-auth-section')).toBeVisible();
     await expect(page.getByText('GENESIS 1.1')).toBeVisible();
@@ -46,7 +46,7 @@ test.describe('[PROD] Landing readiness', () => {
     page.on('console', (msg) => {
       if (msg.type() === 'error') errors.push(msg.text());
     });
-    await page.goto('/');
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.waitForSelector('#genesis-app', { timeout: 8000 });
     expect(errors.join('\n')).not.toMatch(/Error|TypeError|ReferenceError/i);
   });
