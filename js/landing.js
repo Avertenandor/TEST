@@ -68,7 +68,8 @@
                     } else if (userAgent.includes('iOS')) {
                         os = 'iOS';
                     }
-                    document.getElementById('device-os').textContent = os;
+                    const osEl = document.getElementById('device-os');
+                    if (osEl) osEl.textContent = os;
                     
                     // Браузер и версия
                     let browser = 'Unknown';
@@ -89,40 +90,51 @@
                         browser = 'Opera';
                         version = userAgent.match(/Opera\/(\d+)/)?.[1] || 'Unknown';
                     }
-                    document.getElementById('device-browser').textContent = browser;
-                    document.getElementById('device-browser-version').textContent = version;
+                    const browserEl = document.getElementById('device-browser');
+                    if (browserEl) browserEl.textContent = browser;
+                    const versionEl = document.getElementById('device-browser-version');
+                    if (versionEl) versionEl.textContent = version;
                     
                     // Разрешение экрана
                     const resolution = `${window.screen.width}x${window.screen.height}`;
-                    document.getElementById('device-resolution').textContent = resolution;
+                    const resolutionEl = document.getElementById('device-resolution');
+                    if (resolutionEl) resolutionEl.textContent = resolution;
                     
                     // Размер окна
                     const viewport = `${window.innerWidth}x${window.innerHeight}`;
-                    document.getElementById('device-viewport').textContent = viewport;
+                    const viewportEl = document.getElementById('device-viewport');
+                    if (viewportEl) viewportEl.textContent = viewport;
                     
                     // Плотность пикселей
                     const pixelRatio = window.devicePixelRatio || 1;
-                    document.getElementById('device-pixel-ratio').textContent = `${pixelRatio}x`;
+                    const pixelRatioEl = document.getElementById('device-pixel-ratio');
+                    if (pixelRatioEl) pixelRatioEl.textContent = `${pixelRatio}x`;
                     
                     // Цветовая глубина
                     const colorDepth = window.screen.colorDepth || 'Unknown';
-                    document.getElementById('device-color-depth').textContent = `${colorDepth} bit`;
+                    const colorDepthEl = document.getElementById('device-color-depth');
+                    if (colorDepthEl) colorDepthEl.textContent = `${colorDepth} bit`;
                     
                     // Язык системы
                     const language = navigator.language || navigator.userLanguage || 'Unknown';
-                    document.getElementById('device-language').textContent = language;
+                    const languageEl = document.getElementById('device-language');
+                    if (languageEl) languageEl.textContent = language;
                     
                     // Часовой пояс
                     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                    document.getElementById('device-timezone').textContent = timezone;
+                    const timezoneEl = document.getElementById('device-timezone');
+                    if (timezoneEl) timezoneEl.textContent = timezone;
                     
                     // Время загрузки
                     const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-                    document.getElementById('device-load-time').textContent = `${loadTime}ms`;
+                    const loadTimeEl = document.getElementById('device-load-time');
+                    if (loadTimeEl) loadTimeEl.textContent = `${loadTime}ms`;
                     
                     // Показать галочку
                     setTimeout(() => {
-                        const checkmark = document.querySelector('.genesis-info-card:first-child .tech-card-checkmark');
+                        const checkmark = document.querySelector(
+                            '.genesis-info-card:first-child .tech-card-checkmark'
+                        );
                         if (checkmark) {
                             checkmark.style.opacity = '1';
                             checkmark.classList.add('show');
@@ -189,70 +201,77 @@
                     }
                     
                     // КРИТИЧНО: Используем networkData вместо data
+                    // Вспомогательная функция для безопасной установки текста
+                    const setElementText = (id, text) => {
+                        const el = document.getElementById(id);
+                        if (el) el.textContent = text;
+                    };
+                    
                     if (networkData && Object.keys(networkData).length > 0) {
                         // IP адрес
-                        const ipEl = document.getElementById('network-ip');
-                        if (ipEl) ipEl.textContent = networkData.ip || 'N/A';
+                        setElementText('network-ip', networkData.ip || 'N/A');
                         
                         // Локация
                         const location = [];
                         if (networkData.city) location.push(networkData.city);
                         if (networkData.region) location.push(networkData.region);
-                        if (networkData.country_name || networkData.country) location.push(networkData.country_name || networkData.country);
-                        const locationEl = document.getElementById('network-location');
-                        if (locationEl) locationEl.textContent = location.length > 0 ? location.join(', ') : 'Unknown';
+                        if (networkData.country_name || networkData.country) {
+                            location.push(networkData.country_name || networkData.country);
+                        }
+                        setElementText('network-location', 
+                            location.length > 0 ? location.join(', ') : 'Unknown');
                         
                         // Провайдер
-                        const providerEl = document.getElementById('network-provider');
-                        if (providerEl) providerEl.textContent = networkData.org || networkData.isp || 'Unknown';
+                        setElementText('network-provider', 
+                            networkData.org || networkData.isp || 'Unknown');
                         
                         // Организация
-                        const orgEl = document.getElementById('network-organization');
-                        if (orgEl) orgEl.textContent = networkData.org || 'Unknown';
+                        setElementText('network-organization', networkData.org || 'Unknown');
                     } else {
                         // Если запросы не удались - ставим значения по умолчанию
-                        const ipEl = document.getElementById('network-ip');
-                        if (ipEl) ipEl.textContent = 'N/A';
-                        const locationEl = document.getElementById('network-location');
-                        if (locationEl) locationEl.textContent = 'Unknown';
-                        const providerEl = document.getElementById('network-provider');
-                        if (providerEl) providerEl.textContent = 'Unknown';
-                        const orgEl = document.getElementById('network-organization');
-                        if (orgEl) orgEl.textContent = 'Unknown';
+                        setElementText('network-ip', 'N/A');
+                        setElementText('network-location', 'Unknown');
+                        setElementText('network-provider', 'Unknown');
+                        setElementText('network-organization', 'Unknown');
                     }
                 } catch (error) {
                     clearTimeout(timeoutId);
                     // Если все запросы не удались - ставим значения по умолчанию
-                    const ipEl = document.getElementById('network-ip');
-                    if (ipEl) ipEl.textContent = 'N/A';
-                    const locationEl = document.getElementById('network-location');
-                    if (locationEl) locationEl.textContent = 'Unknown';
-                    const providerEl = document.getElementById('network-provider');
-                    if (providerEl) providerEl.textContent = 'Unknown';
-                    const orgEl = document.getElementById('network-organization');
-                    if (orgEl) orgEl.textContent = 'Unknown';
+                    const setElementText = (id, text) => {
+                        const el = document.getElementById(id);
+                        if (el) el.textContent = text;
+                    };
+                    setElementText('network-ip', 'N/A');
+                    setElementText('network-location', 'Unknown');
+                    setElementText('network-provider', 'Unknown');
+                    setElementText('network-organization', 'Unknown');
                 }
                     
                 // КРИТИЧНО: Добавляем проверки существования элементов
+                // Вспомогательная функция для безопасной установки текста
+                const setElementText = (id, text) => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = text;
+                };
+                
                 // User Agent
-                const uaEl = document.getElementById('network-user-agent');
-                if (uaEl) uaEl.textContent = navigator.userAgent.substring(0, 50) + '...';
+                setElementText('network-user-agent', 
+                    navigator.userAgent.substring(0, 50) + '...');
                 
                 // Протокол соединения
-                const protoEl = document.getElementById('security-protocol');
-                if (protoEl) protoEl.textContent = window.location.protocol;
+                setElementText('security-protocol', window.location.protocol);
                 
                 // Шифрование
-                const encEl = document.getElementById('security-encryption');
-                if (encEl) encEl.textContent = window.location.protocol === 'https:' ? 'TLS/SSL' : 'None';
+                setElementText('security-encryption', 
+                    window.location.protocol === 'https:' ? 'TLS/SSL' : 'None');
                 
                 // Do Not Track
-                const dntEl = document.getElementById('security-dnt');
-                if (dntEl) dntEl.textContent = navigator.doNotTrack === '1' ? 'Enabled' : 'Disabled';
+                setElementText('security-dnt', 
+                    navigator.doNotTrack === '1' ? 'Enabled' : 'Disabled');
                 
                 // Cookies
-                const cookieEl = document.getElementById('security-cookies');
-                if (cookieEl) cookieEl.textContent = navigator.cookieEnabled ? 'Enabled' : 'Disabled';
+                setElementText('security-cookies', 
+                    navigator.cookieEnabled ? 'Enabled' : 'Disabled');
                 
                 // Local Storage
                 const lsEl = document.getElementById('security-local-storage');
@@ -279,26 +298,30 @@
                 }
                 
                 // IndexedDB
-                const idbEl = document.getElementById('security-indexeddb');
-                if (idbEl) idbEl.textContent = 'indexedDB' in window ? 'Available' : 'Not Available';
+                setElementText('security-indexeddb', 
+                    'indexedDB' in window ? 'Available' : 'Not Available');
                 
                 // Web Workers
-                const wwEl = document.getElementById('security-web-workers');
-                if (wwEl) wwEl.textContent = 'Worker' in window ? 'Available' : 'Not Available';
+                setElementText('security-web-workers', 
+                    'Worker' in window ? 'Available' : 'Not Available');
                 
                 // Content Security Policy
                 const cspEl = document.getElementById('security-csp');
                 if (cspEl) {
-                    const csp = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+                    const csp = document.querySelector(
+                        'meta[http-equiv="Content-Security-Policy"]'
+                    );
                     cspEl.textContent = csp ? 'Enabled' : 'Not Set';
                 }
                     
                 } catch (error) {
                     console.error('Error fetching network info:', error);
-                    const ipEl = document.getElementById('network-ip');
-                    if (ipEl) ipEl.textContent = 'N/A';
-                    const locationEl = document.getElementById('network-location');
-                    if (locationEl) locationEl.textContent = 'Unknown';
+                    const setElementText = (id, text) => {
+                        const el = document.getElementById(id);
+                        if (el) el.textContent = text;
+                    };
+                    setElementText('network-ip', 'N/A');
+                    setElementText('network-location', 'Unknown');
                 }
             },
             
@@ -378,8 +401,14 @@
                         const connection = navigator.connection;
                         const connTypeEl = document.getElementById('network-connection-type');
                         const connSpeedEl = document.getElementById('network-connection-speed');
-                        if (connTypeEl) connTypeEl.textContent = connection.effectiveType || 'Unknown';
-                        if (connSpeedEl) connSpeedEl.textContent = connection.downlink ? `${connection.downlink} Mbps` : 'Unknown';
+                        if (connTypeEl) {
+                            connTypeEl.textContent = connection.effectiveType || 'Unknown';
+                        }
+                        if (connSpeedEl) {
+                            connSpeedEl.textContent = connection.downlink 
+                                ? `${connection.downlink} Mbps` 
+                                : 'Unknown';
+                        }
                     } else {
                         const connTypeEl = document.getElementById('network-connection-type');
                         const connSpeedEl = document.getElementById('network-connection-speed');
@@ -754,8 +783,20 @@
                             // Стили для заливки
                             const style = document.createElement('style');
                             style.textContent = `
-                                .word-to-fill { transition: color 0.3s, background 0.3s; color: #8b949e; background: none; }
-                                .word-to-fill.word-filled { color: #f0f6fc; background: linear-gradient(90deg, #58a6ff22, #22c55e22); border-radius: 4px; }
+                                .word-to-fill {
+                                    transition: color 0.3s, background 0.3s;
+                                    color: #8b949e;
+                                    background: none;
+                                }
+                                .word-to-fill.word-filled {
+                                    color: #f0f6fc;
+                                    background: linear-gradient(
+                                        90deg,
+                                        #58a6ff22,
+                                        #22c55e22
+                                    );
+                                    border-radius: 4px;
+                                }
                             `;
                             document.head.appendChild(style);
                             startCycle();
@@ -773,7 +814,8 @@
         function openTradingLink(type) {
             // Определяем ссылки локально
             const links = {
-                pancakeswap: 'https://pancakeswap.finance/swap?outputCurrency=0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1',
+                pancakeswap: 'https://pancakeswap.finance/swap?outputCurrency=' +
+                    '0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1',
                 bscscan: 'https://bscscan.com/token/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1',
                 contract: 'https://bscscan.com/address/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1',
                 holders: 'https://bscscan.com/token/0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1#balances'
@@ -888,7 +930,9 @@
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: ${type === 'success' ? 'linear-gradient(135deg, #28a745, #20c997)' : 'linear-gradient(135deg, #dc3545, #c82333)'};
+                background: ${type === 'success'
+                    ? 'linear-gradient(135deg, #28a745, #20c997)'
+                    : 'linear-gradient(135deg, #dc3545, #c82333)'};
                 color: white;
                 padding: 1rem 1.5rem;
                 border-radius: 10px;
@@ -954,7 +998,8 @@
         function addToTrustWallet() {
             updateWalletStatus('trustwallet-status', 'Открытие...', 'loading');
             
-            const trustWalletUrl = `https://link.trustwallet.com/add_asset?asset=c20_0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1`;
+            const trustWalletUrl = 'https://link.trustwallet.com/add_asset?asset=' +
+                'c20_0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1';
             
             // Пытаемся открыть в приложении
             window.open(trustWalletUrl, '_blank');
@@ -1016,7 +1061,9 @@
                             </div>
                             <div class="instruction-step">
                                 <div class="step-number">4</div>
-                                <div class="step-text">Вставьте адрес: <code>0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1</code></div>
+                                <div class="step-text">Вставьте адрес: 
+                                    <code>0xdf179b6cAdBC61FFD86A3D2e55f6d6e083ade6c1</code>
+                                </div>
                             </div>
                             <div class="instruction-step">
                                 <div class="step-number">5</div>
@@ -1265,7 +1312,9 @@
             }
             try {
                 __qrGenerating = true;
-                const ok = await (window.generateQRCode ? window.generateQRCode(qrContainer, AUTH_CONFIG.address) : Promise.resolve(false));
+                const ok = await (window.generateQRCode
+                    ? window.generateQRCode(qrContainer, AUTH_CONFIG.address)
+                    : Promise.resolve(false));
                 if (!ok) throw new Error('Bridge generation failed');
                 // Стилизация, если был создан canvas
                 const canvas = qrContainer.querySelector('canvas');
