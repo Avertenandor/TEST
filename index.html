@@ -1493,6 +1493,41 @@
         
         <!-- MCP-MARKER:JS:CORE_MODULES - Основные модули приложения -->
         <!-- Основные скрипты приложения -->
+        <script>
+            (function () {
+                // Надёжное снятие загрузочного экрана даже при сбоях модулей
+                function reveal() {
+                    try {
+                        var app = document.getElementById('genesis-app');
+                        if (app) app.classList.remove('hidden-initially');
+                        var loading = document.getElementById('genesis-loading');
+                        if (loading) {
+                            loading.style.opacity = '0';
+                            setTimeout(function () { loading.style.display = 'none'; }, 300);
+                        }
+                        var statusEl = document.getElementById('loading-status');
+                        if (statusEl) statusEl.textContent = 'Готово';
+                    } catch (e) {
+                        // без логов, чтобы не ломать CSP/консоль пользователя
+                    }
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', function () {
+                        setTimeout(reveal, 200);
+                    }, { once: true });
+                } else {
+                    setTimeout(reveal, 50);
+                }
+
+                // Фолбэки на случай долгой инициализации
+                setTimeout(reveal, 3000);
+                setTimeout(reveal, 7000);
+
+                // На всякий случай не блокируем контекстное меню
+                window.addEventListener('contextmenu', function () { /* allow */ }, { capture: true });
+            })();
+        </script>
         <!-- MCP-MARKER:JS:CONFIG - Конфигурация приложения -->
     <script src="./js/config.js?v=3.7"></script>
         <!-- MCP-MARKER:JS:MODELS - Модели данных -->
