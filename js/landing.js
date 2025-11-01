@@ -604,11 +604,15 @@
                 });
             }, observerOptions);
 
-            // Наблюдаем за всеми карточками
+            // КРИТИЧНО: НЕ скрываем карточки по умолчанию - они должны быть видны сразу
+            // Анимация применяется только когда элемент входит в viewport
             document.querySelectorAll('.genesis-info-card, .unified-card, .instruction-card').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
+                // НЕ устанавливаем opacity: 0 - карточки должны быть видны
+                // Только добавляем transition для плавной анимации при появлении
                 card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                // Убеждаемся что карточка видна
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
                 observer.observe(card);
             });
         });

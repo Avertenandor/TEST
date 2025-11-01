@@ -225,6 +225,10 @@ a:hover {
     padding: 4rem 0;
     position: relative;
     margin-bottom: 3rem;
+    /* КРИТИЧНО: Гарантируем что секции видны */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .genesis-section::before {
@@ -1216,6 +1220,10 @@ body[data-terminal-theme="neon"] .genesis-terminal {
     transition: all var(--transition-base);
     position: relative;
     overflow: hidden;
+    /* КРИТИЧНО: Карточки должны быть видны */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .genesis-info-card::before, .stats-card::before {
