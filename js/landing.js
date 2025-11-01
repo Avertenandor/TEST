@@ -135,8 +135,19 @@
             // Получение IP и сетевой информации
             fetchNetworkInfo: async function() {
                 try {
+                    // КРИТИЧНО: На лендинге НЕ делаем тяжелые сетевые запросы - они блокируют загрузку
+                    if (window.GENESIS_LANDING) {
+                        console.log('🌐 Лендинг: пропускаем сетевые запросы для быстрой загрузки');
+                        // Устанавливаем дефолтные значения
+                        const ipEl = document.getElementById('network-ip');
+                        if (ipEl) ipEl.textContent = 'N/A (на лендинге)';
+                        const locationEl = document.getElementById('network-location');
+                        if (locationEl) locationEl.textContent = 'Unknown';
+                        return;
+                    }
+                    
                     // КРИТИЧНО: Добавляем таймаут чтобы не блокировать страницу
-                    const timeoutMs = 3000; // 3 секунды максимум
+                    const timeoutMs = 2000; // Уменьшили до 2 секунд максимум
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
                     
@@ -155,7 +166,8 @@
                                 fetch(api, { 
                                     signal: controller.signal,
                                     method: 'GET',
-                                    cache: 'no-store'
+                                    cache: 'no-store',
+                                    mode: 'cors' // КРИТИЧНО: явно указываем cors
                                 }),
                                 new Promise((_, reject) => 
                                     setTimeout(() => reject(new Error('Timeout')), timeoutMs)
@@ -291,10 +303,15 @@
                     const renderTimeEl = document.getElementById('performance-render-time');
                     if (renderTimeEl) renderTimeEl.textContent = `${renderTime}ms`;
                     
-                    // FPS (кадры в секунду) - НЕ блокируем
-                    setTimeout(() => {
-                        this.startFPSMonitoring();
-                    }, 1000);
+                    // FPS (кадры в секунду) - только если НЕ на лендинге
+                    if (!window.GENESIS_LANDING) {
+                        setTimeout(() => {
+                            this.startFPSMonitoring();
+                        }, 1000);
+                    } else {
+                        const fpsEl = document.getElementById('performance-fps');
+                        if (fpsEl) fpsEl.textContent = 'N/A (лендинг)';
+                    }
 
                     // WebGL поддержка
                     const canvas = document.createElement('canvas');
@@ -340,18 +357,27 @@
                         }
                     }
                     
-                    // КРИТИЧНО: Тяжелые сетевые операции делаем асинхронно с задержкой
-                    setTimeout(() => {
-                        // Пинг до BSC
-                        this.measureBSCPing().catch(err => {
-                            console.warn('Ошибка измерения BSC ping:', err);
-                        });
+                    // КРИТИЧНО: Тяжелые сетевые операции делаем асинхронно с большой задержкой или НЕ делаем на лендинге
+                    if (!window.GENESIS_LANDING) {
+                        // Только если НЕ на лендинге - делаем через 3 секунды после загрузки
+                        setTimeout(() => {
+                            // Пинг до BSC
+                            this.measureBSCPing().catch(err => {
+                                console.warn('Ошибка измерения BSC ping:', err);
+                            });
 
-                        // Задержка сети
-                        this.measureNetworkLatency().catch(err => {
-                            console.warn('Ошибка измерения latency:', err);
-                        });
-                    }, 1000); // Через 1 секунду после быстрых операций
+                            // Задержка сети
+                            this.measureNetworkLatency().catch(err => {
+                                console.warn('Ошибка измерения latency:', err);
+                            });
+                        }, 3000); // Увеличили задержку до 3 секунд
+                    } else {
+                        // На лендинге - сразу устанавливаем N/A
+                        const pingEl = document.getElementById('network-bsc-ping');
+                        if (pingEl) pingEl.textContent = 'N/A (лендинг)';
+                        const latencyEl = document.getElementById('network-latency');
+                        if (latencyEl) latencyEl.textContent = 'N/A (лендинг)';
+                    }
 
                 } catch (error) {
                     console.warn('Error updating performance info:', error);
@@ -361,6 +387,13 @@
             
             // Мониторинг FPS
             startFPSMonitoring: function() {
+                // КРИТИЧНО: На лендинге НЕ запускаем FPS мониторинг - может тормозить
+                if (window.GENESIS_LANDING) {
+                    const fpsEl = document.getElementById('performance-fps');
+                    if (fpsEl) fpsEl.textContent = 'N/A (лендинг)';
+                    return;
+                }
+                
                 let frameCount = 0;
                 let lastTime = performance.now();
                 
@@ -370,7 +403,8 @@
                     
                     if (currentTime - lastTime >= 1000) {
                         const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
-                        document.getElementById('performance-fps').textContent = `${fps} FPS`;
+                        const fpsEl = document.getElementById('performance-fps');
+                        if (fpsEl) fpsEl.textContent = `${fps} FPS`;
                         frameCount = 0;
                         lastTime = currentTime;
                     }
@@ -378,14 +412,24 @@
                     requestAnimationFrame(measureFPS);
                 };
                 
-                requestAnimationFrame(measureFPS);
+                // КРИТИЧНО: Запускаем только после небольшой задержки
+                setTimeout(() => {
+                    requestAnimationFrame(measureFPS);
+                }, 500);
             },
             
             // Измерение пинга до BSC
             measureBSCPing: async function() {
+                // КРИТИЧНО: На лендинге НЕ делаем - блокирует загрузку
+                if (window.GENESIS_LANDING) {
+                    const pingEl = document.getElementById('network-bsc-ping');
+                    if (pingEl) pingEl.textContent = 'N/A (лендинг)';
+                    return;
+                }
+                
                 try {
-                    // КРИТИЧНО: Таймаут 2 секунды - не блокируем страницу
-                    const timeoutMs = 2000;
+                    // КРИТИЧНО: Таймаут 1.5 секунды - еще меньше
+                    const timeoutMs = 1500;
                     const startTime = performance.now();
                     const url = 'https://bsc-dataseed.binance.org/?_=' + Date.now();
                     
@@ -408,9 +452,16 @@
 
             // Измерение задержки сети
             measureNetworkLatency: async function() {
+                // КРИТИЧНО: На лендинге НЕ делаем - блокирует загрузку
+                if (window.GENESIS_LANDING) {
+                    const latencyEl = document.getElementById('network-latency');
+                    if (latencyEl) latencyEl.textContent = 'N/A (лендинг)';
+                    return;
+                }
+                
                 try {
-                    // КРИТИЧНО: Таймаут 2 секунды - не блокируем страницу
-                    const timeoutMs = 2000;
+                    // КРИТИЧНО: Таймаут 1.5 секунды - еще меньше
+                    const timeoutMs = 1500;
                     const startTime = performance.now();
                     const url = 'https://ipapi.co/json/?_=' + Date.now();
                     
@@ -523,19 +574,34 @@
             // Инициализация
             // MCP-MARKER:METHOD:GENESIS_TECH_INIT - Метод инициализации технических данных
             init: function() {
-                // КРИТИЧНО: Сначала показываем быстрые данные синхронно
-                this.updateDeviceInfo(); // Быстрое - синхронное
-                this.updateSystemInfo(); // Быстрое - синхронное
-                this.updateStats(); // Быстрое - синхронное
+                // КРИТИЧНО: На лендинге только быстрые операции
+                if (window.GENESIS_LANDING) {
+                    console.log('🌐 Лендинг: инициализация только быстрых операций');
+                    // Только быстрые методы
+                    this.updateDeviceInfo();
+                    this.updateSystemInfo();
+                    this.updateStats();
+                    
+                    // Периодическое обновление статистики (легкое) - реже на лендинге
+                    setInterval(() => {
+                        this.updateStats();
+                    }, 10000); // Увеличили интервал до 10 секунд на лендинге
+                    
+                    // НЕ запускаем тяжелые сетевые операции на лендинге
+                    return;
+                }
                 
-                // КРИТИЧНО: Тяжелые сетевые операции делаем асинхронно с задержкой
-                // чтобы не блокировать загрузку страницы
+                // Обновить все данные (только если НЕ на лендинге)
+                this.updateDeviceInfo();
+                this.updateSystemInfo();
+                this.updateStats();
+                
+                // Сетевые операции только после задержки
                 setTimeout(() => {
-                    // Отложенные тяжелые операции
                     this.fetchNetworkInfo().catch(err => {
                         console.warn('Ошибка получения сетевой информации:', err);
                     });
-                    this.updatePerformanceInfo(); // Включает measureBSCPing и measureNetworkLatency
+                    this.updatePerformanceInfo();
                 }, 2000); // Запускаем через 2 секунды после загрузки
                 
                 // Периодическое обновление статистики (легкое)
