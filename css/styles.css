@@ -1210,7 +1210,7 @@ body[data-terminal-theme="neon"] .genesis-terminal {
 }
 
 /* MCP-MARKER:STYLE:CARDS - Карточки */
-.genesis-info-card, .stats-card {
+.genesis-info-card, .stats-card, .unified-card, .instruction-card {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -1220,7 +1220,7 @@ body[data-terminal-theme="neon"] .genesis-terminal {
     transition: all var(--transition-base);
     position: relative;
     overflow: hidden;
-    /* КРИТИЧНО: Карточки должны быть видны */
+    /* КРИТИЧНО: Все карточки должны быть видны по умолчанию */
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
