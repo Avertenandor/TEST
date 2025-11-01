@@ -1575,7 +1575,7 @@
     <script src="./js/services/transaction.js?v=3.7" defer></script>
     <!-- MCP-MARKER:JS:CABINET - Кабинет пользователя -->
     <!-- ОТКЛЮЧЕНО: кабинет не должен инициализироваться на главной
-    <script src="./js/services/cabinet.js?v=3.7"></script>
+    <script src="./js/services/cabinet.js?v=3.7" defer></script>
     -->
         <!-- MCP-MARKER:JS:TECH_INFO - Техническая информация -->
     <script src="./js/services/techInfo.js?v=3.7" defer></script>
@@ -1599,7 +1599,7 @@
         <!-- MCP-MARKER:QR:GENERATION - Генерация QR кодов -->
         <!-- JavaScript для QR кода -->
         <!-- Script moved to js/landing-extracted.js -->
-    <script src="./shared/services/qr-generator.js?v=3.7"></script>
+    <script src="./shared/services/qr-generator.js?v=3.7" defer></script>
 
     <!-- Удалён старый встроенный терминал v2.1: используется модульный через bootstrap.js -->
 
@@ -1677,16 +1677,16 @@
     </script>
     <script src="./js/force-remove-loading.js?v=1"></script>
 
-    <!-- Универсальный Terminal Bootstrap для лендинга -->
-    <script src="./shared/components/terminal/bootstrap.js?v=1"></script>
+    <!-- Универсальный Terminal Bootstrap для лендинга (загружается асинхронно) -->
+    <script src="./shared/components/terminal/bootstrap.js?v=1" defer></script>
 
     <!-- MCP-MARKER:DOCUMENT:END_BODY - Конец тела документа -->
     <!-- Landing JS Modules -->
-    <script src="js/landing.js"></script>
+    <script src="js/landing.js" defer></script>
 
     <!-- MCP-MARKER:ENHANCED_INTERACTIONS - Улучшенные интерактивные эффекты -->
     <!-- Enhanced Interactions - 3D эффекты, паралакс, магнитные кнопки, частицы -->
-    <script src="./js/enhanced-interactions.js?v=4.0"></script>
+    <script src="./js/enhanced-interactions.js?v=4.0" defer></script>
 
     <!-- MCP-MARKER:UI_UX_ENHANCEMENTS_JS - JavaScript для улучшений UI/UX -->
     <!-- SVG Icon Library -->
