@@ -245,7 +245,8 @@ a:hover {
 
 /* MCP-MARKER:SECTION:UTILITIES - Утилиты */
 /* Утилиты */
-.hidden, .hidden-initially {
+/* КРИТИЧНО: hidden-initially больше не скрывает контент */
+.hidden {
     display: none !important;
 }
 
