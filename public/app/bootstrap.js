@@ -30,21 +30,43 @@ class ModuleManager {
       const paths = pathsOf(moduleName);
 
       // Подключаем CSS
-      await this.loadCSS(paths.css);
-
-      // Загружаем и монтируем модуль
-      const module = await import(/* @vite-ignore */ paths.js);
-
-      // Проверяем наличие default export и метода mount
-      if (!module.default) {
-        throw new Error(`Модуль ${moduleName} не имеет default export`);
+      try {
+        await this.loadCSS(paths.css);
+      } catch (_) {
+        // Фолбэк: для окружений, где public/ сервится как корень
+        const fallbackCss = paths.css.replace('/public/', '/');
+        await this.loadCSS(fallbackCss);
       }
 
-      if (typeof module.default.mount !== 'function') {
+      // Загружаем и монтируем модуль
+      let module;
+      try {
+        module = await import(/* @vite-ignore */ paths.js);
+      } catch (e) {
+        // Фолбэк: /public → /
+        const fallbackJs = paths.js.replace('/public/', '/');
+        module = await import(/* @vite-ignore */ fallbackJs);
+      }
+
+      // Проверяем наличие default export и метода mount
+      let exported = module.default;
+      if (!exported && typeof window !== 'undefined') {
+        // Фолбэк на глобальные объекты (старые модули могут вешаться в window)
+        const globalName = String(moduleName).includes('/')
+          ? String(moduleName).split('/').pop()
+          : moduleName;
+        const candidate = window[`${globalName.charAt(0).toUpperCase()}${globalName.slice(1)}Module`];
+        if (candidate) {
+          exported = candidate;
+        }
+      }
+      if (!exported) throw new Error(`Модуль ${moduleName} не имеет default export`);
+
+      if (typeof exported.mount !== 'function') {
         throw new Error(`Модуль ${moduleName} не имеет метода mount`);
       }
 
-      const unmount = await module.default.mount(element, CONFIG);
+      const unmount = await exported.mount(element, CONFIG);
 
       this.mountedModules.set(moduleName, { element, unmount });
 
@@ -69,7 +91,7 @@ class ModuleManager {
       link.rel = 'stylesheet';
       link.href = cssPath;
       link.onload = resolve;
-      link.onerror = reject;
+      link.onerror = () => reject(new Error(`CSS 404: ${cssPath}`));
       document.head.appendChild(link);
     });
   }
