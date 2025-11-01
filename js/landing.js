@@ -192,21 +192,29 @@
                         console.warn('Не удалось получить сетевую информацию - используем дефолтные значения');
                     }
                     
-                    // IP адрес
-                    document.getElementById('network-ip').textContent = networkData.ip || 'N/A';
-                    
-                    // Локация
-                    const location = [];
-                    if (networkData.city) location.push(networkData.city);
-                    if (networkData.region) location.push(networkData.region);
-                    if (networkData.country_name || networkData.country) location.push(networkData.country_name || networkData.country);
-                    document.getElementById('network-location').textContent = location.length > 0 ? location.join(', ') : 'Unknown';
-                    
-                    // Провайдер
-                    document.getElementById('network-provider').textContent = networkData.org || networkData.isp || 'Unknown';
-                    
-                    // Организация
-                    document.getElementById('network-organization').textContent = networkData.org || 'Unknown';
+                        // IP адрес
+                        document.getElementById('network-ip').textContent = data.ip || 'N/A';
+                        
+                        // Локация
+                        const location = [];
+                        if (data.city) location.push(data.city);
+                        if (data.region) location.push(data.region);
+                        if (data.country_name || data.country) location.push(data.country_name || data.country);
+                        document.getElementById('network-location').textContent = location.length > 0 ? location.join(', ') : 'Unknown';
+                        
+                        // Провайдер
+                        document.getElementById('network-provider').textContent = data.org || data.isp || 'Unknown';
+                        
+                        // Организация
+                        document.getElementById('network-organization').textContent = data.org || 'Unknown';
+                    } catch (error) {
+                        clearTimeout(timeoutId);
+                        // Если запрос не удался - ставим значения по умолчанию
+                        document.getElementById('network-ip').textContent = 'N/A';
+                        document.getElementById('network-location').textContent = 'Unknown';
+                        document.getElementById('network-provider').textContent = 'Unknown';
+                        document.getElementById('network-organization').textContent = 'Unknown';
+                    }
                     
                     // User Agent
                     document.getElementById('network-user-agent').textContent = navigator.userAgent.substring(0, 50) + '...';
@@ -1595,13 +1603,16 @@
         }
         
         // MCP-MARKER:INIT:ANIMATION_INITIALIZATION - Инициализация анимации
-        // Инициализация анимации при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ждем загрузки всех элементов
-            setTimeout(() => {
-                initAuthInstructionAnimation();
-            }, 2000);
-        });
+            // Инициализация анимации при загрузке страницы - КРИТИЧНО: только если нужно
+            document.addEventListener('DOMContentLoaded', function() {
+                // На лендинге можем отключить эту анимацию если она тяжелая
+                if (!window.GENESIS_LANDING) {
+                    // Ждем загрузки всех элементов
+                    setTimeout(() => {
+                        initAuthInstructionAnimation();
+                    }, 2000);
+                }
+            });
         
         // Добавляем функцию в глобальную область
         window.initAuthInstructionAnimation = initAuthInstructionAnimation;

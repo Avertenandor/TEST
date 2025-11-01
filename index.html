@@ -63,31 +63,27 @@
                 killLoadingScreen();
             }
             
-            // Fallback каждые 100мс в течение 5 секунд
+            // КРИТИЧНО: Оптимизированное удаление - меньше таймеров для производительности
+            // Fallback каждые 200мс в течение 2 секунд (было каждые 100мс в течение 5 секунд)
             var attempts = 0;
             var interval = setInterval(function() {
                 attempts++;
-                if (killLoadingScreen() || attempts > 50) {
+                if (killLoadingScreen() || attempts > 10) { // Было 50, стало 10
                     clearInterval(interval);
                 }
-            }, 100);
+            }, 200); // Было 100мс, стало 200мс
             
-            // Экстренное удаление при ЛЮБОМ событии
-            ['click', 'mousedown', 'mouseup', 'contextmenu', 'touchstart', 'touchend', 'keydown', 'keypress', 'keyup'].forEach(function(type) {
+            // Экстренное удаление при ЛЮБОМ событии - оставляем но с once: true для производительности
+            ['click', 'mousedown', 'mouseup', 'contextmenu', 'touchstart'].forEach(function(type) {
                 document.addEventListener(type, function() {
                     killLoadingScreen();
-                }, { capture: true, passive: true, once: false });
+                }, { capture: true, passive: true, once: true }); // once: true - удаляем после первого события
             });
             
-            // Удаляем через определенное время
-            setTimeout(killLoadingScreen, 50);
+            // КРИТИЧНО: Уменьшили количество setTimeout - оставили только критичные
             setTimeout(killLoadingScreen, 100);
-            setTimeout(killLoadingScreen, 200);
             setTimeout(killLoadingScreen, 500);
-            setTimeout(killLoadingScreen, 1000);
             setTimeout(killLoadingScreen, 2000);
-            setTimeout(killLoadingScreen, 3000);
-            setTimeout(killLoadingScreen, 5000);
         })();
     </script>
     
