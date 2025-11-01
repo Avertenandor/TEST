@@ -1,3 +1,8 @@
+/* Глобальные переменные компоновки */
+:root {
+    --header-height: 72px; /* базовая высота шапки */
+}
+
 /**
  * GENESIS 1.1 - Основные стили
  * MCP-MARKER:MODULE:MAIN_STYLES - Основные стили
@@ -368,13 +373,27 @@ a:hover {
     padding: 1rem 0;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .genesis-header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* Отступ под фиксированной шапкой, чтобы контент не "слипался" */
+.genesis-app {
+    padding-top: var(--header-height);
+}
+
+/* Комфортные отступы между модулями и корректная прокрутка к якорям */
+[data-module] {
+    scroll-margin-top: calc(var(--header-height) + 8px);
+}
+
+[data-module] + [data-module] {
+    margin-top: 48px;
 }
 
 .genesis-logo {
