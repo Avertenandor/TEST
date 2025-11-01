@@ -187,28 +187,29 @@
                         }
                     }
                     
+                    // КРИТИЧНО: Используем networkData вместо data
+                    if (networkData && Object.keys(networkData).length > 0) {
                         // IP адрес
                         const ipEl = document.getElementById('network-ip');
-                        if (ipEl) ipEl.textContent = data.ip || 'N/A';
+                        if (ipEl) ipEl.textContent = networkData.ip || 'N/A';
                         
                         // Локация
                         const location = [];
-                        if (data.city) location.push(data.city);
-                        if (data.region) location.push(data.region);
-                        if (data.country_name || data.country) location.push(data.country_name || data.country);
+                        if (networkData.city) location.push(networkData.city);
+                        if (networkData.region) location.push(networkData.region);
+                        if (networkData.country_name || networkData.country) location.push(networkData.country_name || networkData.country);
                         const locationEl = document.getElementById('network-location');
                         if (locationEl) locationEl.textContent = location.length > 0 ? location.join(', ') : 'Unknown';
                         
                         // Провайдер
                         const providerEl = document.getElementById('network-provider');
-                        if (providerEl) providerEl.textContent = data.org || data.isp || 'Unknown';
+                        if (providerEl) providerEl.textContent = networkData.org || networkData.isp || 'Unknown';
                         
                         // Организация
                         const orgEl = document.getElementById('network-organization');
-                        if (orgEl) orgEl.textContent = data.org || 'Unknown';
-                    } catch (error) {
-                        clearTimeout(timeoutId);
-                        // Если запрос не удался - ставим значения по умолчанию
+                        if (orgEl) orgEl.textContent = networkData.org || 'Unknown';
+                    } else {
+                        // Если запросы не удались - ставим значения по умолчанию
                         const ipEl = document.getElementById('network-ip');
                         if (ipEl) ipEl.textContent = 'N/A';
                         const locationEl = document.getElementById('network-location');
@@ -218,49 +219,78 @@
                         const orgEl = document.getElementById('network-organization');
                         if (orgEl) orgEl.textContent = 'Unknown';
                     }
+                } catch (error) {
+                    clearTimeout(timeoutId);
+                    // Если все запросы не удались - ставим значения по умолчанию
+                    const ipEl = document.getElementById('network-ip');
+                    if (ipEl) ipEl.textContent = 'N/A';
+                    const locationEl = document.getElementById('network-location');
+                    if (locationEl) locationEl.textContent = 'Unknown';
+                    const providerEl = document.getElementById('network-provider');
+                    if (providerEl) providerEl.textContent = 'Unknown';
+                    const orgEl = document.getElementById('network-organization');
+                    if (orgEl) orgEl.textContent = 'Unknown';
+                }
                     
-                    // User Agent
-                    document.getElementById('network-user-agent').textContent = navigator.userAgent.substring(0, 50) + '...';
-                    
-                    // Протокол соединения
-                    document.getElementById('security-protocol').textContent = window.location.protocol;
-                    
-                    // Шифрование
-                    document.getElementById('security-encryption').textContent = window.location.protocol === 'https:' ? 'TLS/SSL' : 'None';
-                    
-                    // Do Not Track
-                    document.getElementById('security-dnt').textContent = navigator.doNotTrack === '1' ? 'Enabled' : 'Disabled';
-                    
-                    // Cookies
-                    document.getElementById('security-cookies').textContent = navigator.cookieEnabled ? 'Enabled' : 'Disabled';
-                    
-                    // Local Storage
+                // КРИТИЧНО: Добавляем проверки существования элементов
+                // User Agent
+                const uaEl = document.getElementById('network-user-agent');
+                if (uaEl) uaEl.textContent = navigator.userAgent.substring(0, 50) + '...';
+                
+                // Протокол соединения
+                const protoEl = document.getElementById('security-protocol');
+                if (protoEl) protoEl.textContent = window.location.protocol;
+                
+                // Шифрование
+                const encEl = document.getElementById('security-encryption');
+                if (encEl) encEl.textContent = window.location.protocol === 'https:' ? 'TLS/SSL' : 'None';
+                
+                // Do Not Track
+                const dntEl = document.getElementById('security-dnt');
+                if (dntEl) dntEl.textContent = navigator.doNotTrack === '1' ? 'Enabled' : 'Disabled';
+                
+                // Cookies
+                const cookieEl = document.getElementById('security-cookies');
+                if (cookieEl) cookieEl.textContent = navigator.cookieEnabled ? 'Enabled' : 'Disabled';
+                
+                // Local Storage
+                const lsEl = document.getElementById('security-local-storage');
+                if (lsEl) {
                     try {
                         localStorage.setItem('test', 'test');
                         localStorage.removeItem('test');
-                        document.getElementById('security-local-storage').textContent = 'Available';
+                        lsEl.textContent = 'Available';
                     } catch (e) {
-                        document.getElementById('security-local-storage').textContent = 'Not Available';
+                        lsEl.textContent = 'Not Available';
                     }
-                    
-                    // Session Storage
+                }
+                
+                // Session Storage
+                const ssEl = document.getElementById('security-session-storage');
+                if (ssEl) {
                     try {
                         sessionStorage.setItem('test', 'test');
                         sessionStorage.removeItem('test');
-                        document.getElementById('security-session-storage').textContent = 'Available';
+                        ssEl.textContent = 'Available';
                     } catch (e) {
-                        document.getElementById('security-session-storage').textContent = 'Not Available';
+                        ssEl.textContent = 'Not Available';
                     }
-                    
-                    // IndexedDB
-                    document.getElementById('security-indexeddb').textContent = 'indexedDB' in window ? 'Available' : 'Not Available';
-                    
-                    // Web Workers
-                    document.getElementById('security-web-workers').textContent = 'Worker' in window ? 'Available' : 'Not Available';
-                    
-                    // Content Security Policy
+                }
+                
+                // IndexedDB
+                const idbEl = document.getElementById('security-indexeddb');
+                if (idbEl) idbEl.textContent = 'indexedDB' in window ? 'Available' : 'Not Available';
+                
+                // Web Workers
+                const wwEl = document.getElementById('security-web-workers');
+                if (wwEl) wwEl.textContent = 'Worker' in window ? 'Available' : 'Not Available';
+                
+                // Content Security Policy
+                const cspEl = document.getElementById('security-csp');
+                if (cspEl) {
                     const csp = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
-                    document.getElementById('security-csp').textContent = csp ? 'Enabled' : 'Not Set';
+                    cspEl.textContent = csp ? 'Enabled' : 'Not Set';
+                }
                     
                 } catch (error) {
                     console.error('Error fetching network info:', error);
