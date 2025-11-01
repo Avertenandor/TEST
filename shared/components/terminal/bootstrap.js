@@ -44,8 +44,11 @@
       const l=document.createElement('link'); 
       l.rel='stylesheet'; 
       l.href=need; 
-      // Не блокируем инициализацию если CSS не загрузился
+      // КРИТИЧНО: Не блокируем инициализацию если CSS не загрузился
       l.onerror = () => { console.warn('Terminal styles not found, continuing without them'); };
+      // КРИТИЧНО: Загружаем CSS асинхронно
+      l.media = 'print';
+      l.onload = () => { l.media = 'all'; };
       document.head.appendChild(l);
     }
   };
@@ -113,7 +116,7 @@
   };
 
   // 3) Автоинициализация UI после готовности DOM (не блокирующая)
-  // Задержка инициализации чтобы не мешать основной загрузке страницы
+  // КРИТИЧНО: Увеличена задержка чтобы не мешать основной загрузке страницы
   const initTerminalDelayed = () => {
     setTimeout(() => {
       try {
@@ -122,7 +125,7 @@
       } catch(e) {
         console.warn('Delayed terminal init error (non-blocking):', e);
       }
-    }, 100);
+    }, 5000); // Увеличено с 100мс до 5 секунд - терминал загружается после основной страницы
   };
   
   if (document.readyState === 'loading'){

@@ -135,6 +135,11 @@
             // Получение IP и сетевой информации
             fetchNetworkInfo: async function() {
                 try {
+                    // КРИТИЧНО: Добавляем таймаут чтобы не блокировать страницу
+                    const timeoutMs = 3000; // 3 секунды максимум
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+                    
                     // Получаем информацию от нескольких API для надежности
                     const apis = [
                         'https://ipapi.co/json/',
@@ -146,13 +151,33 @@
                     
                     for (const api of apis) {
                         try {
-                            const response = await fetch(api);
+                            const response = await Promise.race([
+                                fetch(api, { 
+                                    signal: controller.signal,
+                                    method: 'GET',
+                                    cache: 'no-store'
+                                }),
+                                new Promise((_, reject) => 
+                                    setTimeout(() => reject(new Error('Timeout')), timeoutMs)
+                                )
+                            ]);
                             const data = await response.json();
+                            clearTimeout(timeoutId);
                             networkData = { ...networkData, ...data };
                             break; // Используем первый успешный ответ
                         } catch (error) {
-                            console.warn(`API ${api} недоступен:`, error);
+                            if (error.name === 'AbortError' || error.message === 'Timeout') {
+                                console.warn(`API ${api} timeout - пропускаем`);
+                                break; // Не пробуем другие если таймаут
+                            } else {
+                                console.warn(`API ${api} недоступен:`, error);
+                            }
                         }
+                    }
+                    
+                    // Если запросы не удались - просто показываем N/A
+                    if (!networkData || Object.keys(networkData).length === 0) {
+                        console.warn('Не удалось получить сетевую информацию - используем дефолтные значения');
                     }
                     
                     // IP адрес
@@ -224,15 +249,19 @@
             // Обновление информации о производительности
             updatePerformanceInfo: function() {
                 try {
+                    // КРИТИЧНО: Сначала быстрые операции синхронно
                     // Процессор (количество ядер)
                     const cpuCores = navigator.hardwareConcurrency || 'Unknown';
-                    document.getElementById('performance-cpu-cores').textContent = `${cpuCores} cores`;
+                    const cpuEl = document.getElementById('performance-cpu-cores');
+                    if (cpuEl) cpuEl.textContent = `${cpuCores} cores`;
                     
                     // Память устройства
                     if ('deviceMemory' in navigator) {
-                        document.getElementById('performance-device-memory').textContent = `${navigator.deviceMemory} GB`;
+                        const memEl = document.getElementById('performance-device-memory');
+                        if (memEl) memEl.textContent = `${navigator.deviceMemory} GB`;
                     } else {
-                        document.getElementById('performance-device-memory').textContent = 'Unknown';
+                        const memEl = document.getElementById('performance-device-memory');
+                        if (memEl) memEl.textContent = 'Unknown';
                     }
                     
                     // Память браузера
@@ -240,67 +269,93 @@
                         const memory = performance.memory;
                         const usedMB = Math.round(memory.usedJSHeapSize / 1024 / 1024);
                         const totalMB = Math.round(memory.totalJSHeapSize / 1024 / 1024);
-                        document.getElementById('performance-browser-memory').textContent = `${usedMB}MB / ${totalMB}MB`;
+                        const memBrowserEl = document.getElementById('performance-browser-memory');
+                        if (memBrowserEl) memBrowserEl.textContent = `${usedMB}MB / ${totalMB}MB`;
                     } else {
-                        document.getElementById('performance-browser-memory').textContent = 'Not Available';
+                        const memBrowserEl = document.getElementById('performance-browser-memory');
+                        if (memBrowserEl) memBrowserEl.textContent = 'Not Available';
                     }
                     
                     // Время загрузки страницы
                     const pageLoad = performance.timing.loadEventEnd - performance.timing.navigationStart;
-                    document.getElementById('performance-page-load').textContent = `${pageLoad}ms`;
+                    const pageLoadEl = document.getElementById('performance-page-load');
+                    if (pageLoadEl) pageLoadEl.textContent = `${pageLoad}ms`;
                     
                     // Время DOM
                     const domTime = performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart;
-                    document.getElementById('performance-dom-time').textContent = `${domTime}ms`;
+                    const domTimeEl = document.getElementById('performance-dom-time');
+                    if (domTimeEl) domTimeEl.textContent = `${domTime}ms`;
                     
                     // Время рендеринга
                     const renderTime = performance.timing.loadEventEnd - performance.timing.domContentLoadedEventEnd;
-                    document.getElementById('performance-render-time').textContent = `${renderTime}ms`;
+                    const renderTimeEl = document.getElementById('performance-render-time');
+                    if (renderTimeEl) renderTimeEl.textContent = `${renderTime}ms`;
                     
-                    // FPS (кадры в секунду)
-                    this.startFPSMonitoring();
-                    
+                    // FPS (кадры в секунду) - НЕ блокируем
+                    setTimeout(() => {
+                        this.startFPSMonitoring();
+                    }, 1000);
+
                     // WebGL поддержка
                     const canvas = document.createElement('canvas');
                     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-                    document.getElementById('performance-webgl').textContent = gl ? 'Supported' : 'Not Supported';
+                    const webglEl = document.getElementById('performance-webgl');
+                    if (webglEl) webglEl.textContent = gl ? 'Supported' : 'Not Supported';
                     
                     // WebRTC поддержка
-                    document.getElementById('performance-webrtc').textContent = 
+                    const webrtcEl = document.getElementById('performance-webrtc');
+                    if (webrtcEl) webrtcEl.textContent = 
                         'RTCPeerConnection' in window ? 'Supported' : 'Not Supported';
                     
                     // Service Workers поддержка
-                    document.getElementById('performance-service-workers').textContent = 
+                    const swEl = document.getElementById('performance-service-workers');
+                    if (swEl) swEl.textContent = 
                         'serviceWorker' in navigator ? 'Supported' : 'Not Supported';
                     
                     // Тип соединения
                     if ('connection' in navigator) {
                         const connection = navigator.connection;
-                        document.getElementById('network-connection-type').textContent = connection.effectiveType || 'Unknown';
-                        document.getElementById('network-connection-speed').textContent = connection.downlink ? `${connection.downlink} Mbps` : 'Unknown';
+                        const connTypeEl = document.getElementById('network-connection-type');
+                        const connSpeedEl = document.getElementById('network-connection-speed');
+                        if (connTypeEl) connTypeEl.textContent = connection.effectiveType || 'Unknown';
+                        if (connSpeedEl) connSpeedEl.textContent = connection.downlink ? `${connection.downlink} Mbps` : 'Unknown';
                     } else {
-                        document.getElementById('network-connection-type').textContent = 'Unknown';
-                        document.getElementById('network-connection-speed').textContent = 'Unknown';
+                        const connTypeEl = document.getElementById('network-connection-type');
+                        const connSpeedEl = document.getElementById('network-connection-speed');
+                        if (connTypeEl) connTypeEl.textContent = 'Unknown';
+                        if (connSpeedEl) connSpeedEl.textContent = 'Unknown';
                     }
                     
                     // RPC Endpoint
-                    document.getElementById('network-rpc-endpoint').textContent = 'https://bsc-dataseed.binance.org/';
+                    const rpcEl = document.getElementById('network-rpc-endpoint');
+                    if (rpcEl) rpcEl.textContent = 'https://bsc-dataseed.binance.org/';
                     
                     // Статус Web3
-                    if (typeof window.ethereum !== 'undefined') {
-                        document.getElementById('network-web3-status').textContent = '✅ Connected';
-                    } else {
-                        document.getElementById('network-web3-status').textContent = '❌ Not Available';
+                    const web3El = document.getElementById('network-web3-status');
+                    if (web3El) {
+                        if (typeof window.ethereum !== 'undefined') {
+                            web3El.textContent = '✅ Connected';
+                        } else {
+                            web3El.textContent = '❌ Not Available';
+                        }
                     }
                     
-                    // Пинг до BSC
-                    this.measureBSCPing();
+                    // КРИТИЧНО: Тяжелые сетевые операции делаем асинхронно с задержкой
+                    setTimeout(() => {
+                        // Пинг до BSC
+                        this.measureBSCPing().catch(err => {
+                            console.warn('Ошибка измерения BSC ping:', err);
+                        });
 
-                    // Задержка сети
-                    this.measureNetworkLatency();
+                        // Задержка сети
+                        this.measureNetworkLatency().catch(err => {
+                            console.warn('Ошибка измерения latency:', err);
+                        });
+                    }, 1000); // Через 1 секунду после быстрых операций
 
                 } catch (error) {
-                    console.error('Error updating performance info:', error);
+                    console.warn('Error updating performance info:', error);
+                    // Не критично - продолжаем работу
                 }
             },
             
@@ -329,28 +384,50 @@
             // Измерение пинга до BSC
             measureBSCPing: async function() {
                 try {
+                    // КРИТИЧНО: Таймаут 2 секунды - не блокируем страницу
+                    const timeoutMs = 2000;
                     const startTime = performance.now();
-            const url = 'https://bsc-dataseed.binance.org/?_=' + Date.now();
-            await fetch(url, { method: 'GET', mode: 'no-cors', cache: 'no-store' });
+                    const url = 'https://bsc-dataseed.binance.org/?_=' + Date.now();
+                    
+                    await Promise.race([
+                        fetch(url, { method: 'GET', mode: 'no-cors', cache: 'no-store' }),
+                        new Promise((_, reject) => 
+                            setTimeout(() => reject(new Error('Timeout')), timeoutMs)
+                        )
+                    ]);
+                    
                     const endTime = performance.now();
                     const ping = Math.round(endTime - startTime);
-                    document.getElementById('network-bsc-ping').textContent = `${ping}ms`;
+                    const pingEl = document.getElementById('network-bsc-ping');
+                    if (pingEl) pingEl.textContent = `${ping}ms`;
                 } catch (error) {
-            document.getElementById('network-bsc-ping').textContent = 'n/a';
+                    const pingEl = document.getElementById('network-bsc-ping');
+                    if (pingEl) pingEl.textContent = 'n/a';
                 }
             },
 
             // Измерение задержки сети
             measureNetworkLatency: async function() {
                 try {
+                    // КРИТИЧНО: Таймаут 2 секунды - не блокируем страницу
+                    const timeoutMs = 2000;
                     const startTime = performance.now();
                     const url = 'https://ipapi.co/json/?_=' + Date.now();
-                    await fetch(url, { method: 'HEAD', mode: 'cors', cache: 'no-store' });
+                    
+                    await Promise.race([
+                        fetch(url, { method: 'HEAD', mode: 'cors', cache: 'no-store' }),
+                        new Promise((_, reject) => 
+                            setTimeout(() => reject(new Error('Timeout')), timeoutMs)
+                        )
+                    ]);
+                    
                     const endTime = performance.now();
                     const latency = Math.round(endTime - startTime);
-                    document.getElementById('network-latency').textContent = `${latency}ms`;
+                    const latencyEl = document.getElementById('network-latency');
+                    if (latencyEl) latencyEl.textContent = `${latency}ms`;
                 } catch (error) {
-                    document.getElementById('network-latency').textContent = 'n/a';
+                    const latencyEl = document.getElementById('network-latency');
+                    if (latencyEl) latencyEl.textContent = 'n/a';
                 }
             },
             
@@ -446,36 +523,57 @@
             // Инициализация
             // MCP-MARKER:METHOD:GENESIS_TECH_INIT - Метод инициализации технических данных
             init: function() {
-                // Обновить все данные
-                this.updateDeviceInfo();
-                this.fetchNetworkInfo();
-                this.updatePerformanceInfo();
-                this.updateSystemInfo();
-                this.updateStats();
+                // КРИТИЧНО: Сначала показываем быстрые данные синхронно
+                this.updateDeviceInfo(); // Быстрое - синхронное
+                this.updateSystemInfo(); // Быстрое - синхронное
+                this.updateStats(); // Быстрое - синхронное
                 
-                // Периодическое обновление статистики
+                // КРИТИЧНО: Тяжелые сетевые операции делаем асинхронно с задержкой
+                // чтобы не блокировать загрузку страницы
+                setTimeout(() => {
+                    // Отложенные тяжелые операции
+                    this.fetchNetworkInfo().catch(err => {
+                        console.warn('Ошибка получения сетевой информации:', err);
+                    });
+                    this.updatePerformanceInfo(); // Включает measureBSCPing и measureNetworkLatency
+                }, 2000); // Запускаем через 2 секунды после загрузки
+                
+                // Периодическое обновление статистики (легкое)
                 setInterval(() => {
                     this.updateStats();
                 }, 5000);
                 
-                // Периодическое обновление сетевой информации
+                // Периодическое обновление сетевой информации (тяжелое - реже)
                 setInterval(() => {
-                    this.fetchNetworkInfo();
-                }, 30000); // Каждые 30 секунд
+                    this.fetchNetworkInfo().catch(err => {
+                        console.warn('Ошибка периодического обновления сети:', err);
+                    });
+                }, 60000); // Каждые 60 секунд (было 30)
                 
-                // Периодическое обновление производительности
+                // Периодическое обновление производительности (тяжелое - реже)
                 setInterval(() => {
                     this.updatePerformanceInfo();
-                }, 10000); // Каждые 10 секунд
+                }, 30000); // Каждые 30 секунд (было 10)
             }
         };
         
         // Запуск при загрузке
         // MCP-MARKER:EVENT:DOM_CONTENT_LOADED_INIT - Инициализация при загрузке DOM
+        // КРИТИЧНО: Откладываем инициализацию тяжелых операций после полной загрузки
         document.addEventListener('DOMContentLoaded', () => {
+            // Быстрые операции сразу
+            if (window.GenesisTechData) {
+                // Сначала быстрые методы
+                window.GenesisTechData.updateDeviceInfo();
+                window.GenesisTechData.updateSystemInfo();
+            }
+            
+            // Тяжелые операции откладываем
             setTimeout(() => {
-                window.GenesisTechData.init();
-            }, 1000);
+                if (window.GenesisTechData) {
+                    window.GenesisTechData.init();
+                }
+            }, 3000); // 3 секунды после DOMContentLoaded
         });
 
 // ===== Script Block 3 =====
@@ -1191,22 +1289,31 @@
         }
         
         // Инициализация при загрузке страницы (однократная)
+        // КРИТИЧНО: Откладываем генерацию QR кода чтобы не блокировать загрузку
         document.addEventListener('DOMContentLoaded', function() {
             if (window.__qrInit) return;
             window.__qrInit = true;
-            console.log('🚀 Инициализация QR кода');
+            console.log('🚀 Инициализация QR кода (отложенная)');
             
-            // Ждем загрузки библиотек
+            // КРИТИЧНО: Ждем дольше перед генерацией QR - не блокируем загрузку страницы
             setTimeout(() => {
-                // Генерируем начальный QR код
-                generateQRCode();
+                // Генерируем начальный QR код асинхронно
+                generateQRCode().catch(err => {
+                    console.warn('Ошибка генерации QR кода (не критично):', err);
+                    // Показываем fallback если основная генерация не удалась
+                    showFallbackQR();
+                });
                 
                 // Автообновление QR кода каждые 5 минут
                 if (!window.__qrIntervalStarted) {
                     window.__qrIntervalStarted = true;
-                    setInterval(generateQRCode, 300000);
+                    setInterval(() => {
+                        generateQRCode().catch(err => {
+                            console.warn('Ошибка автообновления QR:', err);
+                        });
+                    }, 300000);
                 }
-            }, 1000);
+            }, 3000); // Увеличено с 1 до 3 секунд
         });
         
         // MCP-MARKER:FUNCTION:GENERATE_QR_CODE_ALTERNATIVE - Альтернативная генерация QR
