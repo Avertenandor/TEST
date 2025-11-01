@@ -1,5 +1,7 @@
 // playwright.config.js
 const { defineConfig, devices } = require('@playwright/test');
+const PROD_URL = process.env.PROD_URL || 'http://localhost:3000';
+const USE_REMOTE = !!process.env.PROD_URL && !/localhost|127\.0\.0\.1/.test(PROD_URL);
 
 module.exports = defineConfig({
   testDir: './tests/e2e',
@@ -9,7 +11,7 @@ module.exports = defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: PROD_URL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -29,7 +31,7 @@ module.exports = defineConfig({
     },
   ],
 
-  webServer: {
+  webServer: USE_REMOTE ? undefined : {
     command: 'npm run dev',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
