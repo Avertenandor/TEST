@@ -1811,17 +1811,16 @@
                     if (appEl) appEl.classList.remove('hidden-initially');
                     const loading = document.getElementById('genesis-loading');
                     if (loading){
-                        // КРИТИЧНО: Полностью отключаем pointer-events перед скрытием
-                        loading.style.pointerEvents = 'none';
-                        loading.style.opacity = '0';
-                        setTimeout(() => { 
-                            loading.style.display = 'none';
-                            loading.classList.add('hidden');
-                            // Дополнительная гарантия - удаляем элемент если он все еще блокирует
+                        // КРИТИЧНО: АГРЕССИВНОЕ удаление - НЕ показываем loading screen вообще
+                        loading.style.cssText = 'display: none !important; pointer-events: none !important; opacity: 0 !important; z-index: -9999 !important; visibility: hidden !important;';
+                        loading.classList.add('hidden');
+                        loading.classList.remove('show-loading');
+                        // Удаляем элемент немедленно
+                        setTimeout(() => {
                             if (loading.parentNode) {
                                 loading.remove();
                             }
-                        }, 300);
+                        }, 50);
                     }
                     const statusEl = document.getElementById('loading-status');
                     if (statusEl) statusEl.textContent = 'Готово';
