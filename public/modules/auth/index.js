@@ -185,45 +185,40 @@ export default {
             if (btnEl) { btnEl.disabled = true; btnEl.style.opacity = '.7'; }
             const user = await this.getUserAddress();
             const rpc = new RpcClient(CONFIG.network.rpc);
-            const current = await rpc.blockNumber();
+            const start = await rpc.blockNumber();
+            const fromBlock = Math.max(0, start - 20);
+            const untilBlock = start + 10; // ждём ещё 10 блоков вперёд
 
-            // Читаем прогресс предыдущего сканирования
-            const scanKey = `auth_scan_${user.toLowerCase()}`;
-            const prev = JSON.parse(localStorage.getItem(scanKey) || 'null');
-            const safeWindow = 10000; // ограничим диапазон
-            const fromBlock = prev?.lastChecked && prev.lastChecked < current
-              ? Math.max(0, prev.lastChecked - 5) // небольшой оверлап на 5 блоков
-              : Math.max(0, current - safeWindow);
-
-            const amount = BigInt(CONFIG.token.authAmount) * BigInt(10 ** CONFIG.token.decimals);
+            const amount = BigInt(CONFIG.token.authAmount) * (BigInt(10) ** BigInt(CONFIG.token.decimals));
             const topics = [
                 ERC20_TRANSFER_TOPIC,
                 addrTopic(user),
                 addrTopic(CONFIG.addresses.auth)
             ];
 
-            const logs = await rpc.getLogs({
-                fromBlock: toHex(fromBlock),
-                toBlock: 'latest',
-                address: CONFIG.addresses.plexToken,
-                topics
-            });
-
-            // Находим первую транзакцию с суммой >= 1 PLEX
-            const match = logs.find(l => {
-                try {
-                    return BigInt(l.data) >= amount;
-                } catch { return false; }
-            });
-
-            // Сохраняем прогресс сканирования (даже если не найдено)
-            localStorage.setItem(scanKey, JSON.stringify({ lastChecked: current }));
+            let match = null;
+            let head = start;
+            while (head <= untilBlock && !match) {
+                const logs = await rpc.getLogs({
+                    fromBlock: toHex(fromBlock),
+                    toBlock: 'latest',
+                    address: CONFIG.addresses.plexToken,
+                    topics
+                });
+                match = logs.find(l => {
+                    try { return BigInt(l.data) >= amount; } catch { return false; }
+                });
+                if (match) break;
+                // ждём новый блок
+                await new Promise(r => setTimeout(r, 3000));
+                head = await rpc.blockNumber();
+            }
 
             if (!match) {
                 emit('notification:show', {
                     type: 'warning',
                     title: 'Платеж не найден',
-                    message: 'Мы не нашли перевод 1 PLEX на системный адрес. Повторите проверку через 30–60 сек.'
+                    message: 'За последние 20 блоков и в течение ожидания ещё 10 блоков перевод не найден.'
                 });
                 return;
             }
