@@ -20,5 +20,11 @@ export const CONFIG = {
     decimals: 9,
     authAmount: "1"
   },
+  coin: {
+    // Укажите реальный CoinGecko ID вашей монеты (например: 'bitcoin').
+    // Я оставил временное значение, замените на фактический ID вашей монеты.
+    coingeckoId: "bitcoin",
+    currency: "usd"
+  },
   flags: { debug: false }
 };

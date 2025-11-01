@@ -1,0 +1,8 @@
+.coin-section { padding: 3rem 0; }
+.coin-title { margin: 0 0 1rem; font-size: 2rem; }
+.coin-stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.coin-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1rem; }
+.coin-card .label { opacity: .8; font-size: .9rem; margin-bottom: .25rem; }
+.coin-card .value { font-size: 1.2rem; font-weight: 600; }
+.coin-chart { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: .5rem; }
+

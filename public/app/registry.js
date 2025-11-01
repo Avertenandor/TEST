@@ -3,6 +3,7 @@ export const REGISTRY = {
   header:   { base: '/public/modules/header',   lazy: false },
   hero:     { base: '/public/modules/hero',     lazy: false },
   features: { base: '/public/modules/features', lazy: false },
+  coin:     { base: '/public/modules/coin',     lazy: false },
   textblock:{ base: '/public/modules/textblock',lazy: false },
   // На лендинге не монтируем терминал
   terminal: { base: '/public/modules/terminal', lazy: true, disabledOnLanding: true },
