@@ -4,11 +4,15 @@ export class RpcClient {
     this.endpoints = Array.isArray(endpoints) ? endpoints : [endpoints];
     this.nextId = 1;
     this.timeoutMs = 12000;
+    this._idx = 0; // текущий успешный endpoint
   }
 
   async call(method, params = []) {
     let lastErr;
-    for (const url of this.endpoints) {
+    // начинаем с последнего успешного endpoint'а, затем пробуем остальные
+    for (let i = 0; i < this.endpoints.length; i++) {
+      const pos = (this._idx + i) % this.endpoints.length;
+      const url = this.endpoints[pos];
       try {
         const ctrl = new AbortController();
         const timer = setTimeout(() => ctrl.abort(), this.timeoutMs);
@@ -21,9 +25,13 @@ export class RpcClient {
         clearTimeout(timer);
         const json = await res.json();
         if (json.error) throw new Error(json.error.message || 'RPC Error');
+        // Запоминаем удачный endpoint
+        this._idx = pos;
         return json.result;
       } catch (e) {
         lastErr = e;
+        // небольшой джиттер, чтобы не бить все endpoint'ы разом
+        await new Promise(r => setTimeout(r, 50));
         continue;
       }
     }

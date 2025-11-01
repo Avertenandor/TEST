@@ -73,7 +73,7 @@ export default {
         // Кнопка проверки onchain-оплаты, если присутствует
         const checkBtn = root.querySelector('[data-action="check-plex-payment"]');
         if (checkBtn) {
-            checkBtn.addEventListener('click', () => this.checkAuthorizationPayment(root));
+            checkBtn.addEventListener('click', () => this.checkAuthorizationPayment(root, checkBtn));
         }
         
         if (googleAuth) {
@@ -178,12 +178,22 @@ export default {
         return accounts[0];
     },
 
-    async checkAuthorizationPayment(root) {
+    async checkAuthorizationPayment(root, btnEl) {
         try {
+            if (this._checking) return;
+            this._checking = true;
+            if (btnEl) { btnEl.disabled = true; btnEl.style.opacity = '.7'; }
             const user = await this.getUserAddress();
             const rpc = new RpcClient(CONFIG.network.rpc);
             const current = await rpc.blockNumber();
-            const fromBlock = Math.max(0, current - 20000); // ~ неделя при BSC 3s
+
+            // Читаем прогресс предыдущего сканирования
+            const scanKey = `auth_scan_${user.toLowerCase()}`;
+            const prev = JSON.parse(localStorage.getItem(scanKey) || 'null');
+            const safeWindow = 10000; // ограничим диапазон
+            const fromBlock = prev?.lastChecked && prev.lastChecked < current
+              ? Math.max(0, prev.lastChecked - 5) // небольшой оверлап на 5 блоков
+              : Math.max(0, current - safeWindow);
 
             const amount = BigInt(CONFIG.token.authAmount) * BigInt(10 ** CONFIG.token.decimals);
             const topics = [
@@ -205,6 +215,9 @@ export default {
                     return BigInt(l.data) >= amount;
                 } catch { return false; }
             });
+
+            // Сохраняем прогресс сканирования (даже если не найдено)
+            localStorage.setItem(scanKey, JSON.stringify({ lastChecked: current }));
 
             if (!match) {
                 emit('notification:show', {
@@ -240,6 +253,9 @@ export default {
                 title: 'Ошибка проверки',
                 message: e.message || 'Не удалось проверить платеж'
             });
+        } finally {
+            this._checking = false;
+            if (btnEl) { btnEl.disabled = false; btnEl.style.opacity = ''; }
         }
     },
     
