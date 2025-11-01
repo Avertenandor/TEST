@@ -5,7 +5,7 @@ export default {
         console.log('[FOOTER] Монтирование модуля footer');
         
         // Загружаем шаблон
-        const response = await fetch('./modules/footer/template.html');
+        const response = await fetch('/public/modules/footer/template.html');
         const template = await response.text();
         
         // Вставляем шаблон в корневой элемент

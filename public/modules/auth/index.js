@@ -4,7 +4,7 @@ export default {
     async mount(root, config) {
         console.log('[AUTH] Монтирование модуля auth');
         
-        const response = await fetch('./modules/auth/template.html');
+        const response = await fetch('/public/modules/auth/template.html');
         const template = await response.text();
         root.innerHTML = template;
         

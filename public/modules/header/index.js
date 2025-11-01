@@ -5,7 +5,7 @@ export default {
         console.log('[HEADER] Монтирование модуля header');
         
         // Загружаем шаблон
-        const response = await fetch('./modules/header/template.html');
+        const response = await fetch('/public/modules/header/template.html');
         const template = await response.text();
         
         // Вставляем шаблон в корневой элемент
@@ -26,7 +26,7 @@ export default {
     initHeader(root) {
         // Элементы
         const mobileMenuBtn = root.querySelector('[data-action="mobile-menu"]');
-        const mobileMenu = root.querySelector('[data-mobile-menu"]');
+        const mobileMenu = root.querySelector('[data-mobile-menu]');
         const authBtn = root.querySelector('[data-action="auth"]');
         const registerBtn = root.querySelector('[data-action="register"]');
         const scrollLinks = root.querySelectorAll('[data-scroll-to]');

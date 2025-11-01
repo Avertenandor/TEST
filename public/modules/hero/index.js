@@ -5,7 +5,7 @@ export default {
         console.log('[HERO] Монтирование модуля hero');
         
         // Загружаем шаблон
-        const response = await fetch('./modules/hero/template.html');
+        const response = await fetch('/public/modules/hero/template.html');
         const template = await response.text();
         
         // Вставляем шаблон в корневой элемент
