@@ -204,6 +204,16 @@ a:hover {
 .genesis-container {
     position: relative;
     margin-bottom: 2rem;
+    /* КРИТИЧНО: Контейнеры должны быть видны */
+    display: block !important;
+    visibility: visible !important;
+}
+
+.genesis-app {
+    /* КРИТИЧНО: Главное приложение должно быть видно */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .genesis-container::before {
