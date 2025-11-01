@@ -8,7 +8,7 @@
  */
 
 // MCP-MARKER:SECTION:CACHE_CONFIG - Конфигурация кэша
-const CACHE_NAME = 'genesis-v1.1.1';
+const CACHE_NAME = 'genesis-v1.1.2';
 const urlsToCache = [
     '/',
     '/index.html',

@@ -28,6 +28,17 @@ export default {
         const forgotPassword = root.querySelector('[data-action="forgot-password"]');
         const connectWallet = root.querySelector('[data-action="connect-wallet"]');
         const googleAuth = root.querySelector('[data-action="google-auth"]');
+        const isLanding = !!window.GENESIS_LANDING;
+
+        // На лендинге скрываем email/пароль и оставляем только кошелёк + ончейн‑проверку
+        if (isLanding) {
+            const lf = root.querySelector('[data-auth-form="login"]');
+            const rf = root.querySelector('[data-auth-form="register"]');
+            if (lf) lf.classList.add('genesis-auth-form-hidden');
+            if (rf) rf.classList.add('genesis-auth-form-hidden');
+            const alt = root.querySelector('.genesis-auth-alternatives');
+            if (alt) alt.style.marginTop = '0';
+        }
         
         if (loginForm) {
             loginForm.addEventListener('submit', (e) => {
