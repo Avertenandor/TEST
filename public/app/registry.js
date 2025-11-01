@@ -1,23 +1,24 @@
 export const REGISTRY = {
-  header: { base: '/modules/header', lazy: false },
-  hero: { base: '/modules/hero', lazy: false },
-  features: { base: '/modules/features', lazy: false },
-  textblock: { base: '/modules/textblock', lazy: false },
+  // В продакшене файлы лежат в /public/modules/*, поэтому базовые пути указываем с этим префиксом
+  header:   { base: '/public/modules/header',   lazy: false },
+  hero:     { base: '/public/modules/hero',     lazy: false },
+  features: { base: '/public/modules/features', lazy: false },
+  textblock:{ base: '/public/modules/textblock',lazy: false },
   // На лендинге не монтируем терминал
-  terminal: { base: '/modules/terminal', lazy: true, disabledOnLanding: true },
-  auth: { base: '/modules/auth', lazy: true },
-  faq: { base: '/modules/faq', lazy: false },
-  footer: { base: '/modules/footer', lazy: false },
+  terminal: { base: '/public/modules/terminal', lazy: true, disabledOnLanding: true },
+  auth:     { base: '/public/modules/auth',     lazy: true },
+  faq:      { base: '/public/modules/faq',      lazy: false },
+  footer:   { base: '/public/modules/footer',   lazy: false },
 
-  'cabinet/shell': { base: '/modules/cabinet/shell', lazy: false },
-  'cabinet/auth': { base: '/modules/cabinet/auth', lazy: true },
-  'cabinet/profile': { base: '/modules/cabinet/profile', lazy: true },
-  'cabinet/balances': { base: '/modules/cabinet/balances', lazy: true },
-  'cabinet/deposits': { base: '/modules/cabinet/deposits', lazy: true },
-  'cabinet/rewards': { base: '/modules/cabinet/rewards', lazy: true },
-  'cabinet/referrals': { base: '/modules/cabinet/referrals', lazy: true },
-  'cabinet/transactions': { base: '/modules/cabinet/transactions', lazy: true },
-  'cabinet/settings': { base: '/modules/cabinet/settings', lazy: true },
+  'cabinet/shell':         { base: '/public/modules/cabinet/shell',         lazy: false },
+  'cabinet/auth':          { base: '/public/modules/cabinet/auth',          lazy: true },
+  'cabinet/profile':       { base: '/public/modules/cabinet/profile',       lazy: true },
+  'cabinet/balances':      { base: '/public/modules/cabinet/balances',      lazy: true },
+  'cabinet/deposits':      { base: '/public/modules/cabinet/deposits',      lazy: true },
+  'cabinet/rewards':       { base: '/public/modules/cabinet/rewards',       lazy: true },
+  'cabinet/referrals':     { base: '/public/modules/cabinet/referrals',     lazy: true },
+  'cabinet/transactions':  { base: '/public/modules/cabinet/transactions',  lazy: true },
+  'cabinet/settings':      { base: '/public/modules/cabinet/settings',      lazy: true },
 };
 
 export function pathsOf(name) {
