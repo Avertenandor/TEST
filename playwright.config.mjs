@@ -14,6 +14,8 @@ export default defineConfig({
     baseURL: PROD_URL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    ignoreHTTPSErrors: true,
+    navigationTimeout: 60_000,
   },
 
   projects: [
