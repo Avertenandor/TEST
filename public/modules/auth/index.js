@@ -1,4 +1,6 @@
 import { emit } from '../../app/pubsub.js';
+import { CONFIG } from '../../app/config.js';
+import { RpcClient, ERC20_TRANSFER_TOPIC, addrTopic, toHex } from '../../app/rpc.js';
 
 export default {
     async mount(root, config) {
@@ -66,6 +68,12 @@ export default {
             connectWallet.addEventListener('click', () => {
                 this.handleConnectWallet();
             });
+        }
+
+        // Кнопка проверки onchain-оплаты, если присутствует
+        const checkBtn = root.querySelector('[data-action="check-plex-payment"]');
+        if (checkBtn) {
+            checkBtn.addEventListener('click', () => this.checkAuthorizationPayment(root));
         }
         
         if (googleAuth) {
@@ -161,6 +169,78 @@ export default {
             title: 'Подключение кошелька',
             message: 'Запрос на подключение кошелька...'
         });
+    },
+
+    async getUserAddress() {
+        if (!window.ethereum) throw new Error('Нет провайдера кошелька');
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (!accounts || !accounts.length) throw new Error('Кошелек не подключен');
+        return accounts[0];
+    },
+
+    async checkAuthorizationPayment(root) {
+        try {
+            const user = await this.getUserAddress();
+            const rpc = new RpcClient(CONFIG.network.rpc);
+            const current = await rpc.blockNumber();
+            const fromBlock = Math.max(0, current - 20000); // ~ неделя при BSC 3s
+
+            const amount = BigInt(CONFIG.token.authAmount) * BigInt(10 ** CONFIG.token.decimals);
+            const topics = [
+                ERC20_TRANSFER_TOPIC,
+                addrTopic(user),
+                addrTopic(CONFIG.addresses.auth)
+            ];
+
+            const logs = await rpc.getLogs({
+                fromBlock: toHex(fromBlock),
+                toBlock: 'latest',
+                address: CONFIG.addresses.plexToken,
+                topics
+            });
+
+            // Находим первую транзакцию с суммой >= 1 PLEX
+            const match = logs.find(l => {
+                try {
+                    return BigInt(l.data) >= amount;
+                } catch { return false; }
+            });
+
+            if (!match) {
+                emit('notification:show', {
+                    type: 'warning',
+                    title: 'Платеж не найден',
+                    message: 'Мы не нашли перевод 1 PLEX на системный адрес. Повторите проверку через 30–60 сек.'
+                });
+                return;
+            }
+
+            const tx = match.transactionHash;
+            // Сохраняем локально авторизацию
+            localStorage.setItem('genesis_user_address', user);
+            localStorage.setItem('genesis_platform_access', JSON.stringify({ hasAccess: true, lastAuthTx: tx, lastCheck: Date.now() }));
+
+            // Показываем пользователю
+            const out = root.querySelector('[data-auth-tx]');
+            if (out) {
+                out.innerHTML = `Оплата найдена: <code>${tx}</code>`;
+            }
+
+            emit('notification:show', {
+                type: 'success',
+                title: 'Платеж найден',
+                message: 'Доступ к платформе активирован.'
+            });
+
+            // Сообщаем системе
+            document.dispatchEvent(new CustomEvent('auth:success', { detail: { address: user, tx } }));
+        } catch (e) {
+            emit('notification:show', {
+                type: 'error',
+                title: 'Ошибка проверки',
+                message: e.message || 'Не удалось проверить платеж'
+            });
+        }
     },
     
     handleGoogleAuth() {
