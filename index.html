@@ -1542,6 +1542,39 @@
     <!-- Script moved to js/landing-extracted.js -->
 
     <!-- КРИТИЧНО: Принудительное удаление блокирующего loading screen -->
+    <script>
+        // INLINE: Немедленное удаление loading screen при загрузке
+        (function() {
+            function forceRemoveLoading() {
+                const loading = document.getElementById('genesis-loading');
+                if (loading) {
+                    loading.style.pointerEvents = 'none';
+                    loading.style.opacity = '0';
+                    loading.style.display = 'none';
+                    loading.classList.add('hidden');
+                    setTimeout(() => {
+                        if (loading.parentNode) loading.remove();
+                    }, 100);
+                }
+            }
+            
+            // Удаляем сразу
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', forceRemoveLoading, { once: true });
+            } else {
+                forceRemoveLoading();
+            }
+            
+            // Fallback через 2-5 секунд
+            setTimeout(forceRemoveLoading, 2000);
+            setTimeout(forceRemoveLoading, 5000);
+            
+            // Экстренное удаление при взаимодействии
+            ['click', 'contextmenu', 'mousedown', 'touchstart'].forEach(type => {
+                document.addEventListener(type, forceRemoveLoading, { once: true, passive: true });
+            });
+        })();
+    </script>
     <script src="./js/force-remove-loading.js?v=1"></script>
 
     <!-- Универсальный Terminal Bootstrap для лендинга -->
