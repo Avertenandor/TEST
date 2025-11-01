@@ -137,6 +137,13 @@ function prepareDeploy() {
         }
     }
     
+    // КРИТИЧНО: Создаем .nojekyll для GitHub Pages
+    const nojekyllPath = path.join(distDir, '.nojekyll');
+    if (!fs.existsSync(nojekyllPath)) {
+        fs.writeFileSync(nojekyllPath, '', 'utf8');
+        console.log('✅ Создан .nojekyll файл для отключения Jekyll');
+    }
+    
     console.log('\n✅ Подготовка завершена! Файлы в папке dist/ готовы к деплою.');
     console.log(`📊 Статистика: ${countFiles(distDir)} файлов подготовлено`);
 }
