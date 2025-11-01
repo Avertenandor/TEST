@@ -1595,11 +1595,13 @@
                 }
             }
             
-            // Запускаем анимацию
-            setInterval(animateWords, 800);
-            
-            // Запускаем сразу
-            animateWords();
+            // КРИТИЧНО: На лендинге можем отключить эту анимацию если она тяжелая
+            if (!window.GENESIS_LANDING) {
+                // Запускаем анимацию только в приложении
+                setInterval(animateWords, 800);
+                // Запускаем сразу
+                animateWords();
+            }
         }
         
         // MCP-MARKER:INIT:ANIMATION_INITIALIZATION - Инициализация анимации
