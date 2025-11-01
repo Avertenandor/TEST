@@ -187,33 +187,36 @@
                         }
                     }
                     
-                    // Если запросы не удались - просто показываем N/A
-                    if (!networkData || Object.keys(networkData).length === 0) {
-                        console.warn('Не удалось получить сетевую информацию - используем дефолтные значения');
-                    }
-                    
                         // IP адрес
-                        document.getElementById('network-ip').textContent = data.ip || 'N/A';
+                        const ipEl = document.getElementById('network-ip');
+                        if (ipEl) ipEl.textContent = data.ip || 'N/A';
                         
                         // Локация
                         const location = [];
                         if (data.city) location.push(data.city);
                         if (data.region) location.push(data.region);
                         if (data.country_name || data.country) location.push(data.country_name || data.country);
-                        document.getElementById('network-location').textContent = location.length > 0 ? location.join(', ') : 'Unknown';
+                        const locationEl = document.getElementById('network-location');
+                        if (locationEl) locationEl.textContent = location.length > 0 ? location.join(', ') : 'Unknown';
                         
                         // Провайдер
-                        document.getElementById('network-provider').textContent = data.org || data.isp || 'Unknown';
+                        const providerEl = document.getElementById('network-provider');
+                        if (providerEl) providerEl.textContent = data.org || data.isp || 'Unknown';
                         
                         // Организация
-                        document.getElementById('network-organization').textContent = data.org || 'Unknown';
+                        const orgEl = document.getElementById('network-organization');
+                        if (orgEl) orgEl.textContent = data.org || 'Unknown';
                     } catch (error) {
                         clearTimeout(timeoutId);
                         // Если запрос не удался - ставим значения по умолчанию
-                        document.getElementById('network-ip').textContent = 'N/A';
-                        document.getElementById('network-location').textContent = 'Unknown';
-                        document.getElementById('network-provider').textContent = 'Unknown';
-                        document.getElementById('network-organization').textContent = 'Unknown';
+                        const ipEl = document.getElementById('network-ip');
+                        if (ipEl) ipEl.textContent = 'N/A';
+                        const locationEl = document.getElementById('network-location');
+                        if (locationEl) locationEl.textContent = 'Unknown';
+                        const providerEl = document.getElementById('network-provider');
+                        if (providerEl) providerEl.textContent = 'Unknown';
+                        const orgEl = document.getElementById('network-organization');
+                        if (orgEl) orgEl.textContent = 'Unknown';
                     }
                     
                     // User Agent
