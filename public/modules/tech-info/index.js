@@ -1,6 +1,6 @@
 export default {
   async mount(root) {
-    const r = await fetch('/public/modules/tech-info/template.html');
+    const r = await fetch('/modules/tech-info/template.html');
     root.innerHTML = await r.text();
     this.initTechInfo(root);
     return () => { root.innerHTML = ''; };

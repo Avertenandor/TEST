@@ -5,7 +5,7 @@ export default {
         console.log('[FEATURES] Монтирование модуля features');
         
         // Загружаем шаблон
-        const response = await fetch('/public/modules/features/template.html');
+        const response = await fetch('/modules/features/template.html');
         const template = await response.text();
         
         // Вставляем шаблон в корневой элемент

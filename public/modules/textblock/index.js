@@ -5,7 +5,7 @@ export default {
         console.log('[TEXTBLOCK] Монтирование модуля textblock');
         
         // Загружаем шаблон
-        const response = await fetch('/public/modules/textblock/template.html');
+        const response = await fetch('/modules/textblock/template.html');
         const template = await response.text();
         
         // Вставляем шаблон в корневой элемент

@@ -6,7 +6,7 @@ export default {
 
         try {
             // Загружаем HTML шаблон
-            const response = await fetch('/public/modules/terminal/template.html');
+            const response = await fetch('/modules/terminal/template.html');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

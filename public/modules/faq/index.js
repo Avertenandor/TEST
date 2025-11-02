@@ -5,7 +5,7 @@ export default {
         console.log('[FAQ] Монтирование модуля faq');
         
         // Загружаем шаблон
-        const response = await fetch('/public/modules/faq/template.html');
+        const response = await fetch('/modules/faq/template.html');
         const template = await response.text();
         
         // Вставляем шаблон в корневой элемент

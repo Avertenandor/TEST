@@ -1,2 +1,2 @@
-export default { async mount(root){ const r=await fetch('/public/modules/pwa-install/template.html'); root.innerHTML=await r.text(); this.initPWA(root); return ()=>{root.innerHTML='';}; },
+export default { async mount(root){ const r=await fetch('/modules/pwa-install/template.html'); root.innerHTML=await r.text(); this.initPWA(root); return ()=>{root.innerHTML='';}; },
 initPWA(root) { const btn = root.querySelector('[data-action="install-pwa"]'); if(btn) btn.addEventListener('click', ()=>{ if(window.deferredPrompt) { window.deferredPrompt.prompt(); window.deferredPrompt.userChoice.then(r=>console.log('PWA install:',r.outcome)); window.deferredPrompt=null; } }); } };

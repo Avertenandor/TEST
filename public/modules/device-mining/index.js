@@ -1,1 +1,1 @@
-export default { async mount(root){ const r=await fetch('/public/modules/device-mining/template.html'); root.innerHTML=await r.text(); return ()=>{root.innerHTML='';}; } };
+export default { async mount(root){ const r=await fetch('/modules/device-mining/template.html'); root.innerHTML=await r.text(); return ()=>{root.innerHTML='';}; } };

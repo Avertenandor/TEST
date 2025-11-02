@@ -5,7 +5,7 @@ export default {
         console.log('[HEADER] Монтирование модуля header');
         
         // Загружаем шаблон
-        const response = await fetch('/public/modules/header/template.html');
+        const response = await fetch('/modules/header/template.html');
         const template = await response.text();
         
         // Вставляем шаблон в корневой элемент

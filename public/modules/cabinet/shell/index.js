@@ -4,7 +4,7 @@ export default {
     async mount(root, config) {
         console.log('[CABINET/SHELL] Монтирование модуля cabinet/shell');
         
-        const response = await fetch('/public/modules/cabinet/shell/template.html');
+        const response = await fetch('/modules/cabinet/shell/template.html');
         const template = await response.text();
         root.innerHTML = template;
         
