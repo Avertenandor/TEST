@@ -11,6 +11,7 @@ export const REGISTRY = {
   security: { base: '/public/modules/security', lazy: false },
   'platform-access': { base: '/public/modules/platform-access', lazy: false },
   'deposits-overview': { base: '/public/modules/deposits-overview', lazy: false },
+  referral: { base: '/public/modules/referral', lazy: false },
   team: { base: '/public/modules/team', lazy: false },
   'final-cta': { base: '/public/modules/final-cta', lazy: false },
   textblock:{ base: '/public/modules/textblock',lazy: false },

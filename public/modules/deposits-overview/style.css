@@ -1,6 +1,25 @@
 .dep { padding: 3rem 0; }
-.dep-title { text-align:center; margin:0 0 1.5rem; font-size:2rem; }
-.dep-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
-.dep-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:1rem; }
-.dep-card h4{ margin:.25rem 0 .5rem; }
+.dep-title { text-align:center; margin:0 0 1rem; font-size:2rem; }
+.dep-subtitle { text-align:center; margin:0 0 2rem; opacity:.9; font-size:1.1rem; }
+.income-types { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; margin-bottom:3rem; }
+.income-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:2rem; }
+.income-card.passive { border-left:4px solid #4caf50; }
+.income-card.active { border-left:4px solid #ff9800; }
+.card-header { display:flex; align-items:center; gap:.5rem; margin-bottom:1rem; }
+.card-header .icon { font-size:1.5rem; }
+.card-header h3 { margin:0; }
+.features { list-style:none; padding:0; margin:1rem 0 0; }
+.features li { padding:.25rem 0; opacity:.9; }
+.plans-section { margin-bottom:3rem; }
+.plans-section h3 { text-align:center; margin:0 0 1.5rem; }
+.plans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; }
+.plan-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:1.5rem; text-align:center; }
+.plan-card.featured { border:2px solid var(--primary-color); }
+.plan-card h4 { margin:0 0 .5rem; }
+.plan-card .price { font-size:1.5rem; font-weight:700; color:var(--primary-color); margin:.5rem 0 1rem; }
+.mev-info { text-align:center; background:rgba(255,255,255,.02); border-radius:12px; padding:2rem; }
+.mev-info h3 { margin:0 0 1rem; }
+.mev-cost { font-size:1.1rem; margin:1rem 0; }
+.mev-features { list-style:none; padding:0; margin:1rem 0 0; display:inline-block; text-align:left; }
+.mev-features li { padding:.25rem 0; opacity:.9; }
 
