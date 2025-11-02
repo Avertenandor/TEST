@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background-primary: #0B0F14;
+    --background-secondary: #10151C;
+    --background-tertiary: #161B22;
+    --accent-teal: #14B8A6;
+    --accent-gold: #C8A962;
+    --text-primary: #E6EDF3;
+    --text-secondary: #A9B4BE;
+    --text-muted: #7D8590;
+    --border-primary: #30363D;
+    --border-secondary: #21262D;
+  }
+
+  * {
+    @apply border-border-primary;
+  }
+
+  body {
+    @apply bg-background-primary text-text-primary;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .genesis-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .genesis-btn {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-medium transition-all duration-200;
+  }
+
+  .genesis-btn-primary {
+    @apply bg-accent-teal text-white hover:bg-accent-teal/90 focus:ring-2 focus:ring-accent-teal/50;
+  }
+
+  .genesis-btn-secondary {
+    @apply bg-background-tertiary text-text-primary border border-border-primary hover:bg-background-secondary;
+  }
+
+  .genesis-card {
+    @apply bg-background-secondary/50 border border-border-primary rounded-xl p-6 backdrop-blur-sm;
+  }
+
+  .genesis-section {
+    @apply py-16 lg:py-24;
+  }
+}
