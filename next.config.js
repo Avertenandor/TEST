@@ -5,11 +5,6 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/crypto-processing.net' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/crypto-processing.net' : '',
-  experimental: {
-    appDir: true
-  }
 }
 
-module.exports = nextConfig
+export default nextConfig
