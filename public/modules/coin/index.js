@@ -2,10 +2,15 @@ import { CONFIG } from '../../app/config.js';
 
 export default {
   async mount(root) {
-    const id = CONFIG.coin?.coingeckoId || 'bitcoin';
+    const id = CONFIG.coin?.coingeckoId;
     root.innerHTML = await this.template(id);
-    this.loadWidget();
-    this.loadData(id, CONFIG.coin?.currency || 'usd');
+    if (id) {
+      this.loadWidget();
+      this.loadData(id, CONFIG.coin?.currency || 'usd');
+    } else {
+      // Показываем статичную информацию без внешних API
+      this.showStaticInfo(root);
+    }
     return () => { root.innerHTML = ''; };
   },
 
@@ -57,7 +62,7 @@ export default {
           
           <!-- График -->
           <div class="coin-chart">
-            <coingecko-coin-price-chart-widget coin-id="${id}" currency="usd" height="300" locale="ru"></coingecko-coin-price-chart-widget>
+            ${id ? `<coingecko-coin-price-chart-widget coin-id="${id}" currency="usd" height="300" locale="ru"></coingecko-coin-price-chart-widget>` : '<div class="chart-placeholder">График будет доступен после настройки CoinGecko ID</div>'}
           </div>
         </div>
       </section>
@@ -91,6 +96,15 @@ export default {
     } catch (e) {
       console.warn('[COIN] Failed to load data:', e);
     }
+  },
+
+  showStaticInfo(root) {
+    // Показываем базовую информацию без внешних API
+    const bySel = (sel) => root.querySelector(sel);
+    if (bySel('[data-coin-price]')) bySel('[data-coin-price]').textContent = 'Настройте CoinGecko ID';
+    if (bySel('[data-coin-mcap]')) bySel('[data-coin-mcap]').textContent = '—';
+    if (bySel('[data-coin-vol]')) bySel('[data-coin-vol]').textContent = '—';
+    if (bySel('[data-coin-chg]')) bySel('[data-coin-chg]').textContent = '—';
   }
 };
 

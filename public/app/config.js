@@ -21,9 +21,8 @@ export const CONFIG = {
     authAmount: "1"
   },
   coin: {
-    // Укажите реальный CoinGecko ID вашей монеты (например: 'bitcoin').
-    // Я оставил временное значение, замените на фактический ID вашей монеты.
-    coingeckoId: "bitcoin",
+    // Временно отключаем CoinGecko для стабильности
+    coingeckoId: null,
     currency: "usd"
   },
   flags: { debug: false }

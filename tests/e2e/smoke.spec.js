@@ -9,7 +9,7 @@ test.describe('GENESIS Smoke Tests', () => {
     await expect(page).toHaveTitle(/GENESIS/i);
     await expect(page.locator('#genesis-app')).toBeVisible({ timeout: 10000 });
     // Достаточно проверить, что основной контейнер показан и бренд есть
-    await expect(page.getByText('GENESIS', { exact: false })).toBeVisible();
+      await expect(page.locator('.genesis-logo-text').first()).toBeVisible();
   });
 
   test('should not hang on loader', async ({ page }) => {
