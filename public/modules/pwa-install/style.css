@@ -1,0 +1,8 @@
+.pwa-install { padding: 3rem 0; }
+.pwa-title { text-align:center; margin:0 0 1rem; font-size:2rem; }
+.pwa-subtitle { text-align:center; margin:0 0 2rem; opacity:.9; font-size:1.1rem; }
+.pwa-content { text-align:center; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:2rem; }
+.pwa-features { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin:1.5rem 0; }
+.pwa-feature { background:rgba(255,255,255,.02); border-radius:8px; padding:1rem; }
+.pwa-feature .icon { font-size:2rem; margin-bottom:.5rem; }
+.pwa-feature h4 { margin:0 0 .5rem; font-size:1rem; }

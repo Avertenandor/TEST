@@ -1,0 +1,11 @@
+.tax-model { padding: 3rem 0; }
+.tax-title { text-align:center; margin:0 0 1rem; font-size:2rem; }
+.tax-subtitle { text-align:center; margin:0 0 2rem; opacity:.9; font-size:1.1rem; }
+.tax-explanation { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:2rem; margin-bottom:2rem; }
+.tax-benefits { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin-bottom:2rem; }
+.tax-benefit { background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.5rem; }
+.tax-benefit h4 { margin:0 0 .5rem; color:var(--primary-color); }
+.tax-features { list-style:none; padding:0; margin:1rem 0 0; }
+.tax-features li { padding:.25rem 0; opacity:.9; }
+.tax-disclaimer { text-align:center; background:rgba(255,193,7,.1); border:1px solid rgba(255,193,7,.3); border-radius:12px; padding:1.5rem; }
+.tax-disclaimer h4 { margin:0 0 .5rem; color:#ffc107; }

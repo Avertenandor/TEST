@@ -1,0 +1,14 @@
+.tech-info { padding: 3rem 0; }
+.tech-title { text-align:center; margin:0 0 1rem; font-size:2rem; }
+.tech-subtitle { text-align:center; margin:0 0 2rem; opacity:.9; font-size:1.1rem; }
+.tech-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin-bottom:2rem; }
+.tech-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:1.5rem; }
+.tech-card h3 { margin:0 0 1rem; display:flex; align-items:center; gap:.5rem; }
+.info-item { display:flex; justify-content:space-between; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.05); }
+.info-item:last-child { border-bottom:none; }
+.info-label { opacity:.8; }
+.info-value { font-weight:600; color:var(--primary-color); }
+.privacy-notice { text-align:center; background:rgba(255,255,255,.02); border-radius:12px; padding:2rem; }
+.privacy-notice h3 { margin:0 0 1rem; }
+.privacy-features { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
+.privacy-feature { background:rgba(76,175,80,.1); padding:.5rem 1rem; border-radius:20px; font-size:.9rem; }
