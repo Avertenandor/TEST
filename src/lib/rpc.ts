@@ -9,7 +9,7 @@ export class RpcClient {
     this.endpoints = Array.isArray(endpoints) ? endpoints : [endpoints]
   }
 
-  async call(method: string, params: any[] = []): Promise<any> {
+  async call(method: string, params: unknown[] = []): Promise<unknown> {
     let lastErr: Error | null = null
     
     // начинаем с последнего успешного endpoint'а
@@ -55,12 +55,12 @@ export class RpcClient {
   }
 
   async blockNumber(): Promise<number> {
-    const hex = await this.call('eth_blockNumber')
+    const hex = await this.call('eth_blockNumber') as string
     return parseInt(hex, 16)
   }
 
-  async getLogs(filter: any): Promise<any[]> {
-    return await this.call('eth_getLogs', [filter])
+  async getLogs(filter: Record<string, unknown>): Promise<unknown[]> {
+    return await this.call('eth_getLogs', [filter]) as unknown[]
   }
 }
 

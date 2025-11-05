@@ -18,7 +18,7 @@ export function TechInfo() {
     // Определяем характеристики устройства
     const platform = navigator.platform || 'Unknown'
     const cores = navigator.hardwareConcurrency || 4
-    const memory = (navigator as any).deviceMemory || 4
+    const memory = (navigator as unknown as Record<string, unknown>).deviceMemory as number || 4
     const userAgent = navigator.userAgent
     
     let browser = 'Unknown'
@@ -27,14 +27,15 @@ export function TechInfo() {
     else if (userAgent.includes('Safari')) browser = 'Safari'
     else if (userAgent.includes('Edge')) browser = 'Edge'
 
-    const connection = (navigator as any).connection?.effectiveType || 'Unknown'
+    const connection = (navigator as unknown as Record<string, unknown>).connection as Record<string, unknown> | undefined
+    const effectiveType = connection?.effectiveType as string || 'Unknown'
 
     setTechData({
       platform,
       cores: cores.toString(),
       memory: `${memory} GB`,
       browser,
-      connection,
+      connection: effectiveType,
       ip: 'Определяется...',
       isp: 'Определяется...',
       location: 'Определяется...'

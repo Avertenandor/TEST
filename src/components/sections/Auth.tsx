@@ -17,7 +17,7 @@ export function Auth() {
       
       const accounts = await window.ethereum.request({ 
         method: 'eth_requestAccounts' 
-      })
+      }) as string[]
       
       if (accounts && accounts.length > 0) {
         setUserAddress(accounts[0])
@@ -51,7 +51,7 @@ export function Auth() {
         addrTopic(CONFIG.addresses.auth)
       ]
 
-      let match = null
+      let match: { transactionHash: string } | null = null
       let head = start
 
       while (head <= untilBlock && !match) {
@@ -62,13 +62,18 @@ export function Auth() {
           topics
         })
         
-        match = logs.find(l => {
+        const foundLog = logs.find((l: unknown) => {
+          const log = l as { data: string }
           try { 
-            return BigInt(l.data) >= amount 
+            return BigInt(log.data) >= amount 
           } catch { 
             return false 
           }
         })
+        
+        if (foundLog) {
+          match = foundLog as { transactionHash: string }
+        }
         
         if (match) break
         

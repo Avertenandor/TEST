@@ -15,7 +15,7 @@ export function DeviceMining() {
     // Определяем характеристики устройства
     const platform = navigator.platform || 'Unknown'
     const cores = navigator.hardwareConcurrency || 4
-    const memory = (navigator as any).deviceMemory || 4
+    const memory = (navigator as unknown as Record<string, unknown>).deviceMemory as number || 4
     const userAgent = navigator.userAgent
     
     let browser = 'Unknown'
